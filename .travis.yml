@@ -6,6 +6,10 @@ rvm:
 services:
   - postgresql
 
+before_script:
+  - createdb test_vgbot
+  - bundle exec rake db:migrate
+
 env:
   global:
     RAILS_ENV: test
