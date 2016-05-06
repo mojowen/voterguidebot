@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  user: <%= ENV['DB_USER'] || 'postgres' %>
+  pool: 5
+  timeout: 5000
+  database: <%= ENV['DB_USER'] || 'vgbot' %>
+  password: <%= ENV['DB_PASS'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: <%= ENV['DB_TEST'] || 'test_vgbot' %>
+
+production:
+  <<: *default

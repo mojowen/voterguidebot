@@ -1,0 +1,16 @@
+language: ruby
+
+rvm:
+  - 2.2.1
+
+services:
+  - postgresql
+
+env:
+  global:
+    RAILS_ENV: test
+    TRAVIS: true
+
+sudo: false
+cache: bundler
+

@@ -1,0 +1,46 @@
+@import url('//fonts.googleapis.com/css?family=Roboto:300,400,500,700')
+@import url('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css')
+
+body
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial
+
+
+h1 
+  color: $emphasis
+  font-weight: bold
+  text-align: center
+  text-transform: uppercase
+  text-shadow: $second-emphasis -1px 1px 1px
+  &.big
+    text-shadow: white -2px 2px 2px
+    font-size: 100px
+    margin-bottom: 10px
+    line-height: 1em
+
+h2
+  color: lighten($second-emphasis, 20%)
+  font-size: 1.5em
+  font-weight: 300
+
+h3
+  color: $emphasis
+  text-transform: uppercase
+
+h4, h5
+  font-weight: bold
+h1, h2, h3, h4, p
+  margin-bottom: 0.75em
+ul
+  list-style: disc
+  margin: 10px 0 0 20px
+
+div
+  position: relative
+  box-sizing: border-box
+p, li
+  line-height: 1.5em
+
+em
+  font-style: italic
+strong
+  font-weight: bold

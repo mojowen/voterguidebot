@@ -1,0 +1,2 @@
+Fabricator(:permission) do
+end

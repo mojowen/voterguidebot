@@ -1,0 +1,50 @@
+require 'rails_helper'
+
+RSpec.describe GuidesController, active_mocker: true do
+  let(:user) { Fabricate :user }
+  before(:each) { sign_in user }
+
+  describe '#new' do
+    render_views
+    it 'returns successfully' do
+      get :new
+      expect(response).to be_success
+    end
+  end
+
+  describe '#create' do
+    let(:guide_params) {{ guide: { name: 'What a great guide' }}}
+    it 'creates a new guide' do
+      expect{ post :create, guide_params }.to change{ Guide.count }.by(1)
+    end
+    it 'redirects to edit' do
+      post :create, guide_params
+      expect(response).to be_redirect
+    end
+    it 'assigns the creating user permission' do
+      post :create, guide_params
+      expect(assigns(:guide).users).to include(user)
+    end
+    context 'with views' do
+      render_views
+      it 'renders new with errors' do
+        post :create, { guide: { foo: 2 }}
+        expect(response).to render_template(:new)
+        expect(assigns(:guide).errors.messages).to eq(name: ["can't be blank"])
+      end
+    end
+  end
+
+  describe '#edit' do
+    render_views
+    let(:guide) { Fabricate :guide, users: [user] }
+
+    it 'renders successfully' do
+      get :edit, { id: guide.id }
+      expect(response).to be_success
+    end
+  end
+  describe '#update'
+
+  describe '#show'
+end

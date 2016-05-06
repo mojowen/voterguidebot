@@ -1,0 +1,8 @@
+= content_for :outside do
+  .mui--text-center{ style: 'max-width: 600px; margin: 0 auto;' }
+    %h1.big
+      Voter Guide
+      = image_tag 'robot.png'
+    .mui-panel
+      %p This website creates voter guides. Want to make one?
+      = button_link_to 'Get Started', user_omniauth_authorize_path(:google_oauth2)

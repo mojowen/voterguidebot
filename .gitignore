@@ -1,0 +1,14 @@
+# Ignore bundler config.
+/.bundle
+
+# Node Modules
+/node_modules
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+
+# Ignore env file
+.env
+**DS_Store

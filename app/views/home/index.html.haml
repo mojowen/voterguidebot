@@ -1,0 +1,14 @@
+.mui--text-center
+  = image_tag 'robot.png'
+  %p Welcome to the Voter Guide Builder, let's get started.
+
+.mui-row
+  .mui-col-md-6.mui--text-center
+    %h2 Build a Voter Guide
+    %p Get started on your Voter Guide
+    = button_link_to 'Create a Guide', new_guide_path
+  .mui-col-md-6.mui--text-center
+    %h2 Invite Your Team
+    %p Invite your teammates to collaborate
+    = button_link_to 'Invite Your Teammates', 'mailto:?subject=Hey checkout this voter guide thing'
+

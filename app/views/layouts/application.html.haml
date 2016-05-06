@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %title VoterGuideBot
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    - if current_user
+      #header.mui-appbar
+        .mui-container
+          %table{ width: '100%' }
+            %tr.mui--appbar-height
+              %td
+                = link_to image_tag('robot.png'), root_path
+              %td.mui--text-right
+                = link_to edit_user_password_path do
+                  %span{ style: 'margin: 10px' }
+                    Hey
+                    = current_user.first_name
+                  = image_tag current_user.pic
+
+    #content
+      .mui-container
+        - if content_for :outside
+          = yield :outside
+        -else
+          .mui-panel= yield
+
+
+    = render 'layouts/alert'
