@@ -8,7 +8,7 @@ class GuidesController < ApplicationController
     @guide.users << current_user
 
     if @guide.save
-      redirect_to edit_guide_path(@guide)
+      redirect_to guide_path(@guide)
     else
       render :new
     end

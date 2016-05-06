@@ -35,13 +35,22 @@ RSpec.describe GuidesController, active_mocker: true do
     end
   end
 
-  describe '#edit' do
-    render_views
+  context 'with a guide' do
     let(:guide) { Fabricate :guide, users: [user] }
 
-    it 'renders successfully' do
-      get :edit, { id: guide.id }
-      expect(response).to be_success
+    describe '#show' do
+      render_views
+      it 'renders successfully' do
+        get :show, { id: guide.id }
+        expect(response).to be_success
+      end
+    end
+    describe '#edit' do
+      render_views
+      it 'renders successfully' do
+        get :edit, { id: guide.id }
+        expect(response).to be_success
+      end
     end
   end
   describe '#update'

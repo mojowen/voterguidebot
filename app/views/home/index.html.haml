@@ -12,3 +12,20 @@
     %p Invite your teammates to collaborate
     = button_link_to 'Invite Your Teammates', 'mailto:?subject=Hey checkout this voter guide thing'
 
+.mui-row
+  .mui-col-md-3
+  .mui-col-md-6
+    %h2 Your Guides
+
+    %table.mui-table
+      %thead
+        %tr
+          %th Guide name
+          %th
+          %th
+      %tbody
+      - current_user.guides.each do |guide|
+        %tr
+          %td= link_to guide.name.capitalize, guide_path(guide)
+          %td= button_link_to 'View', edit_guide_path(guide), { class: 'mui-btn--small' }
+          %td= button_link_to 'Edit', edit_guide_path(guide), { class: 'mui-btn--small' }

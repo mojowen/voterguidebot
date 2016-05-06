@@ -1,0 +1,23 @@
+.mui-row
+  .mui-col-md-4
+  .mui-col-md-4
+    %h2= @guide.name.capitalize
+
+.mui-row
+  .mui-col-md-3
+    %button.mui-button.mui-button-accent Manage Fields
+    %p Edit the descriptive fields that will explain how to vote and what your guide is all about.
+
+  .mui-col-md-3
+    %button.mui-button.mui-button-accent Manage Contests 
+    %p Contests are where candiate details and questions are managed.
+
+  .mui-col-md-3
+    %button.mui-button.mui-button-accent Manage Ballot Measures
+    %p Ballot Mea
+
+  .mui-col-md-3
+    = button_link_to edit_guide_path(@guide) do
+      %i.fa.fa-gears
+      Manage Guide
+    %p Invite other users to edit your guide.

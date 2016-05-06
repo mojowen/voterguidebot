@@ -4,23 +4,16 @@
       %p= error
 
 .mui-row
-  .mui-col-md-4
-  .mui-col-md-4
-    %h2= @guide.name.capitalize
-
-.mui-row
   .mui-col-md-3
-    %button.mui-button.mui-button-accent Manage Fields
-    %p Edit the descriptive fields that will explain how to vote and what your guide is all about.
+  .mui-col-md-6
+    %h2 Edit #{@guide.name.capitalize}
+    = form_for(@guide) do |frm|
+      .mui-textfield
+        = frm.label :name
+        = frm.text_field :name, placeholder: 'The Best Little Voter Guide in Texas'
+      .mui-textfield
+        = label_tag 'Invite Collaborators'
+        = text_field_tag :collaborator, nil, placeholder: 'Enter the email of collaborators'
 
-  .mui-col-md-3
-    %button.mui-button.mui-button-accent Manage Contests 
-    %p Contests are where candiate details and questions are managed.
-
-  .mui-col-md-3
-    %button.mui-button.mui-button-accent Manage Ballot Measures
-    %p Ballot Mea
-
-  .mui-col-md-3
-    %button.mui-button.mui-button-accent Invite Collaborators
-    %p Invite other users to edit your guide.
+      .mui--pull-right
+        = frm.submit 'Save', class: 'mui-btn mui-btn--raised mui-btn--primary'
