@@ -10,5 +10,7 @@ module VoterGuideBot
     config.before_configuration { env_loader('.env', Rails.root) }
     config.generators{ |g| g.test_framework :rspec, fixture: true }
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|  html_tag }
+    config.react.variant = :production
+    config.react.addons  = true
   end
 end

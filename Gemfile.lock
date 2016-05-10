@@ -67,6 +67,8 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.5)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -127,6 +129,14 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
+    guard-jasmine (2.0.6)
+      childprocess (~> 0.5)
+      guard (~> 2.8)
+      guard-compat (~> 1.2)
+      jasmine (~> 2.2)
+      multi_json (~> 1.1)
+      thor (~> 0.19)
+      tilt
     guard-livereload (2.5.2)
       em-websocket (~> 0.5)
       guard (~> 2.8)
@@ -142,6 +152,11 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     ice_nine (0.11.2)
+    jasmine (2.4.0)
+      jasmine-core (~> 2.4)
+      phantomjs
+      rack (>= 1.2.1)
+      rake
     jasmine-core (2.4.1)
     jasmine-rails (0.12.4)
       jasmine-core (>= 1.3, < 3.0)
@@ -337,9 +352,11 @@ DEPENDENCIES
   devise
   exception_notification
   fabrication-rails
+  guard-jasmine
   guard-livereload (~> 2.5)
   guard-rspec
   haml
+  jasmine
   jasmine-rails
   jbuilder (~> 2.0)
   mui-sass
