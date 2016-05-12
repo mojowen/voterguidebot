@@ -13,11 +13,11 @@ class GuideMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { permissions: nil }.merge(super)
+      @associations ||= { permissions: nil, users: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Permission" => { has_many: [:permissions] } }.merge(super)
+      @associations_by_class ||= { "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] } }.merge(super)
     end
 
     def mocked_class
@@ -86,6 +86,16 @@ class GuideMock < ActiveMocker::Base
 
   def permissions=(val)
     write_association(:permissions, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Permission"), source: ""))
+  end
+
+  def users
+    read_association(:users, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "user_id", foreign_id: self.id, relation_class: classes("User"), source: "")
+    end)
+  end
+
+  def users=(val)
+    write_association(:users, ActiveMocker::HasMany.new(val, foreign_key: "user_id", foreign_id: self.id, relation_class: classes("User"), source: ""))
   end
 
   # _scopes.erb

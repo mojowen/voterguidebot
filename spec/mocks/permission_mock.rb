@@ -13,11 +13,11 @@ class PermissionMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= {}.merge(super)
+      @associations ||= { guide: nil, user: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= {}.merge(super)
+      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "User" => { belongs_to: [:user] } }.merge(super)
     end
 
     def mocked_class
@@ -85,6 +85,63 @@ class PermissionMock < ActiveMocker::Base
   end
 
   # _associations.erb
+  # belongs_to
+  def guide
+    read_association(:guide) || write_association(:guide, classes("Guide").try do |k|
+      k.find_by(id: guide_id)
+    end)
+  end
+
+  def guide=(val)
+    write_association(:guide, val)
+    ActiveMocker::BelongsTo.new(val, child_self: self, foreign_key: :guide_id).item
+  end
+
+  def build_guide(attributes = {}, &block)
+    association = classes("Guide").try(:new, attributes, &block)
+    unless association.nil?
+      write_association(:guide, association)
+    end
+
+  end
+
+  def create_guide(attributes = {}, &block)
+    association = classes("Guide").try(:create, attributes, &block)
+    unless association.nil?
+      write_association(:guide, association)
+    end
+
+  end
+
+  alias_method(:create_guide!, :create_guide)
+  def user
+    read_association(:user) || write_association(:user, classes("User").try do |k|
+      k.find_by(id: user_id)
+    end)
+  end
+
+  def user=(val)
+    write_association(:user, val)
+    ActiveMocker::BelongsTo.new(val, child_self: self, foreign_key: :user_id).item
+  end
+
+  def build_user(attributes = {}, &block)
+    association = classes("User").try(:new, attributes, &block)
+    unless association.nil?
+      write_association(:user, association)
+    end
+
+  end
+
+  def create_user(attributes = {}, &block)
+    association = classes("User").try(:create, attributes, &block)
+    unless association.nil?
+      write_association(:user, association)
+    end
+
+  end
+
+  alias_method(:create_user!, :create_user)
   # _scopes.erb
   module Scopes
     include(ActiveMocker::Base::Scopes)
