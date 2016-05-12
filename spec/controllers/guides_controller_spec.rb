@@ -53,7 +53,28 @@ RSpec.describe GuidesController, active_mocker: true do
       end
     end
   end
+
   describe '#update'
+
+  describe '#invite' do
+    render_views
+    let(:guide) { Fabricate :guide, users: [user] }
+    before(:each) { get :invite, { id: guide.id } }
+    it 'renders successfully' do
+      expect(response).to be_success
+    end
+  end
+
+  describe '#users' do
+    let(:guide) { Fabricate :guide, users: [user] }
+    let(:email) { 'bob@example.com' }
+    it 'adds a user to the guide' do
+      expect(User).to receive(:invite)
+                        .with(email, guide)
+                        .and_return(instance_double(User, valid?: true))
+      post :users, { id: guide.id, email: email }
+    end
+  end
 
   describe '#show'
 end

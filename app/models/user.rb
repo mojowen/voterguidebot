@@ -21,4 +21,19 @@ class User < ActiveRecord::Base
     admin? || guides.include?(guide)
   end
 
+  def promote
+  end
+
+  def self.invite(email, guide)
+    user = find_or_initialize_by email: email
+
+    if user.new_record?
+      user.password = Devise.friendly_token[0,20]
+    end
+
+    user.guides << guide
+    user.save!
+    user
+  end
+
 end
