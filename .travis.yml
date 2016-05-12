@@ -2,6 +2,7 @@ language: ruby
 
 rvm:
   - 2.2.1
+cache: bundler
 
 services:
   - postgresql
@@ -10,12 +11,15 @@ before_script:
   - createdb test_vgbot
   - bundle exec rake db:migrate
 
-script: rake spec && bundle exec guard-jasmine
+script: bundle exec rake spec && bundle exec guard-jasmine
 
 env:
   global:
     RAILS_ENV: test
     TRAVIS: true
+
+addons:
+  postgresql: 9.3
 
 sudo: false
 cache: bundler
