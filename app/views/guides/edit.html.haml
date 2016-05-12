@@ -11,9 +11,6 @@
       .mui-textfield
         = frm.label :name
         = frm.text_field :name, placeholder: 'The Best Little Voter Guide in Texas'
-      .mui-textfield
-        = label_tag 'Invite Collaborators'
-        = text_field_tag :collaborator, nil, placeholder: 'Enter the email of collaborators'
 
       .mui--pull-right
         = frm.submit 'Save', class: 'mui-btn mui-btn--raised mui-btn--primary'

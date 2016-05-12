@@ -1,16 +1,18 @@
 .mui--text-center
   = image_tag 'robot.png'
-  %p Welcome to the Voter Guide Builder, let's get started.
+  - if current_user.guides.empty?
+    %p Welcome to the Voter Guide Builder, let's get started.
 
-.mui-row
-  .mui-col-md-6.mui--text-center
-    %h2 Build a Voter Guide
-    %p Get started on your Voter Guide
-    = button_link_to 'Create a Guide', new_guide_path
-  .mui-col-md-6.mui--text-center
-    %h2 Invite Your Team
-    %p Invite your teammates to collaborate
-    = button_link_to 'Invite Your Teammates', 'mailto:?subject=Hey checkout this voter guide thing'
+- if current_user.guides.empty?
+  .mui-row
+    .mui-col-md-6.mui--text-center
+      %h2 Build a Voter Guide
+      %p Get started on your Voter Guide
+      = button_link_to 'Create a Guide', new_guide_path
+    .mui-col-md-6.mui--text-center
+      %h2 Invite Your Team
+      %p Invite your teammates to collaborate
+      = button_link_to 'Invite Your Teammates', '/invite'
 
 .mui-row
   .mui-col-md-3
@@ -27,5 +29,7 @@
       - current_user.guides.each do |guide|
         %tr
           %td= link_to guide.name.capitalize, guide_path(guide)
-          %td= button_link_to 'View', edit_guide_path(guide), { class: 'mui-btn--small' }
+          %td= button_link_to 'View', guide_path(guide), { class: 'mui-btn--small' }
           %td= button_link_to 'Edit', edit_guide_path(guide), { class: 'mui-btn--small' }
+
+    = button_link_to 'Create a Guide', new_guide_path
