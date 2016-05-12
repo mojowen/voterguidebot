@@ -10,6 +10,9 @@ before_script:
   - createdb test_vgbot
   - bundle exec rake db:migrate
 
+script:
+  - bundle exec rake && bundle exec rake jasmine:ci
+
 env:
   global:
     RAILS_ENV: test
