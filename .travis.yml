@@ -4,14 +4,12 @@ rvm:
   - 2.2.1
 cache: bundler
 
-services:
-  - postgresql
-
 before_script:
   - createdb test_vgbot
   - bundle exec rake db:migrate
+  - bundle exec rake assets:precompile
 
-script: bundle exec rake spec && bundle exec guard-jasmine
+script: bundle exec rake spec && bundle exec rake jasmine:ci
 
 env:
   global:
