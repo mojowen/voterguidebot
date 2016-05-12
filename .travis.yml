@@ -7,9 +7,8 @@ cache: bundler
 before_script:
   - createdb test_vgbot
   - bundle exec rake db:migrate
-  - bundle exec rake assets:precompile
 
-script: bundle exec rake spec && bundle exec rake jasmine:ci
+script: bundle exec rake spec && bundle exec rake jasmine:ci[random]
 
 env:
   global:
