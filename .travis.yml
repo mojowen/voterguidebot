@@ -21,3 +21,5 @@ addons:
 sudo: false
 cache: bundler
 
+notifications:
+  slack: busfederation:1Hb671VROTSfF6YcCJAGjwWU
