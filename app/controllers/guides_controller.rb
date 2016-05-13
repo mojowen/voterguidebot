@@ -20,7 +20,7 @@ class GuidesController < ApplicationController
   end
 
   def users
-    user = User.invite(invite_params, @guide)
+    user = User.invite(invite_params, @guide, current_user.first_name)
     render json: { state: user.valid? ? 'success' : 'error' }
   end
 

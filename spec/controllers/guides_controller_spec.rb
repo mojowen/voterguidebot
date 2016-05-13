@@ -70,8 +70,9 @@ RSpec.describe GuidesController, active_mocker: true do
     let(:email) { 'bob@example.com' }
     it 'adds a user to the guide' do
       expect(User).to receive(:invite)
-                        .with(email, guide)
-                        .and_return(instance_double(User, valid?: true))
+                      .with(email, guide, user.first_name)
+                      .and_return(instance_double(User, valid?: true))
+
       post :users, { id: guide.id, email: email }
     end
   end

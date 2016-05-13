@@ -1,0 +1,16 @@
+%h2 Welcome #{@user.first_name},
+
+%p You can now log-in and create a voter guide. Get started now!
+
+%p{ style: 'text-align: center; margin: 20px' }
+  = email_button 'Create a Guide', new_guide_url
+
+%p Once you create a guide you'll be able to invite collaborators, and create  contests, candidates, and ballot measures - and do it all in many languages.
+
+%p Any questions - don't hesitate to get in touch.
+
+%p
+  %em - Your Friends at the Bus Federation
+
+- content_for :preview do
+  Welcome to the Voter Guide! ou can now log-in and create a voter guide. Get started now!

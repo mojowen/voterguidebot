@@ -1,0 +1,33 @@
+- if @user.last_sign_in_at
+  %h2 Hey #{@user.first_name}!
+- else
+  %h2 Hey!
+
+%p
+  You've been invited to collaborate on the voter guide
+  %strong= @guide.name.split.map(&:capitalize).join(' ')
+  by
+  = @invitee
+
+%p{ style: 'text-align: center; margin: 20px' }
+  = email_button 'Check it out!', guide_url(@guide)
+
+- if @user.last_sign_in_at
+  %p Well what're you waiting for - go already,
+  %br
+
+- else
+  %p What's a Voter Guide? Why it's a wonderful tool to spread the word about upcoming elections. And this website helps folks create print and web guides - for free!
+
+  %p
+    This service is provided by the
+    = link_to 'Bus Federation', 'http://busfedaction.org/'
+    a nonprofit commited to volunteer-driven democracy for our young people.
+  %br
+
+
+%p
+  %em - Your Friends at the Bus Federation
+
+- content_for :preview do
+  Welcome to the Voter Guide! ou can now log-in and create a voter guide. Get started now!

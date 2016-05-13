@@ -50,11 +50,11 @@ RSpec.describe User, active_mocker: true do
       let(:email) { 'bob@example.com' }
 
       it 'creates a user if they don not exist' do
-        expect{ described_class.invite(email, guide) }.to change{ User.count }.by(1)
+        expect{ described_class.invite(email, guide, 'Jimbo') }.to change{ User.count }.by(1)
       end
 
       it 'gives user permission to access guide' do
-        user = described_class.invite(email, guide)
+        user = described_class.invite(email, guide, 'Jimbo')
         user.can_edit? guide
       end
     end
@@ -62,11 +62,18 @@ RSpec.describe User, active_mocker: true do
     context 'with user already existing' do
       let(:user) { Fabricate :user  }
       it 'reuses existing user' do
-        expect(described_class.invite(user.email, guide)).to eq(user)
+        expect(described_class.invite(user.email, guide, 'Jimbo')).to eq(user)
       end
       it 'gives user permission' do
-        described_class.invite(user.email, guide)
+        described_class.invite(user.email, guide, 'Jimbo')
         user.can_edit? guide
+      end
+      it 'sends invite email' do
+        expect(UserMailer).to receive(:invite)
+                              .with(user, guide, 'Jimbo')
+                              .and_return(double(deliver_now: true))
+
+        described_class.invite(user.email, guide, 'Jimbo')
       end
     end
   end
