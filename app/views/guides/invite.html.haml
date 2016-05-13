@@ -6,4 +6,4 @@
       Invite folks to Voter Guide
       = image_tag 'robot.png', width: 16, style: 'vertical-align: middle'
       they will need a Google account.
-    = react_component :InviteForm
+    = react_component :InviteForm, { url: edit_guide_path(@guide) }

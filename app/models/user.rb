@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
     admin? || guides.include?(guide)
   end
 
-  def promote
+  def promote!(promoter)
+    return unless promoter.admin
+    update_attributes admin: true
+    UserMailer.promote(self, promoter)
+    true
   end
 
   def self.invite(email, guide, invitee)

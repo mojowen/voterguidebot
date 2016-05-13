@@ -34,4 +34,22 @@ RSpec.describe UserMailer, type: :mailer do
       expect(subject.to).to eq([user.email])
     end
   end
+  describe '#welcome' do
+    let(:user) { Fabricate :user, first_name: 'Blob' }
+    let(:admins) { [Fabricate(:user, admin: true), Fabricate(:user, admin: true)] }
+
+    subject { described_class.promote(user, admins.first) }
+
+    it 'renders promote template' do
+      expect(subject.body.encoded).to match(user.first_name)
+    end
+
+    it 'sends to user' do
+      expect(subject.to).to eq([user.email])
+    end
+
+    it 'ccs admin' do
+      expect(subject.cc).to eq(admins.map(&:email))
+    end
+  end
 end

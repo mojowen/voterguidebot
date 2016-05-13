@@ -1,0 +1,17 @@
+.mui-row
+  .mui-col-md-3
+  .mui-col-md-6
+    %h2 Select UsersUsers
+    %p
+      %em
+        Select a user and click
+        %strong.mui--text-accent Promote
+        to create an admin.
+    %br
+    - User.all.each do |user|
+      = render layout: 'layouts/user', locals: { user: user } do
+        - if user.admin?
+          %strong.mui--text-accent Admin
+        - else
+          = button_link_to 'Promote', admin_promote_path(user: user.id), method: :post
+

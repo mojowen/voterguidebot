@@ -8,6 +8,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'mui-sass'
 gem 'react-rails'
+gem 'vanilla-ujs'
 gem 'haml'
 
 gem 'unicorn'

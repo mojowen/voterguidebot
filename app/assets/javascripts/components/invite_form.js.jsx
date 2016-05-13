@@ -19,12 +19,13 @@ var InviteForm = React.createClass({
     var that = this
 
     superagent
-      .post('/invite')
+      .post(this.props.url)
       .send(email_obj)
       .set('Accept', 'application/json')
       .end(function(err, res) {
         var emails = that.state.emails,
-            index = emails.map(function(el) { return el.email }).indexOf(email_obj.email)
+            index = emails.map(function(el) { return el.email })
+                          .indexOf(email_obj.email)
 
         emails[index].state = res.body.state
         that.setState({emails: emails})

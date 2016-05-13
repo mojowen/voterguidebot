@@ -12,6 +12,5 @@ module VoterGuideBot
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|  html_tag }
     config.react.variant = :production
     config.react.addons  = true
-    config.action_controller.asset_host = 'http://build.americanvoterguide.org'
   end
 end

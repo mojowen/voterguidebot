@@ -1,0 +1,13 @@
+%h2 Hey #{@user.first_name}!
+
+%p #{@promoter} has made you an admin! That means you can edit any voter guide, template, ban users, approve guides, etc.
+
+%p Just remember what Uncle Ben told Peter Parker: "Don't ever, ever, let me die"
+
+%p
+  %em - Your Friends at the Bus Federation
+
+= image_tag 'wazard.gif'
+
+- content_for :preview do
+  Holly smokes you're an admin!

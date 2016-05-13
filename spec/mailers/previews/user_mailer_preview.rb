@@ -5,6 +5,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.welcome(User.first)
   end
 
+  def promote
+    UserMailer.promote(User.first, User.last)
+  end
+
   def invite_existing
     UserMailer.invite(User.first, Guide.first, 'Jimmy')
   end

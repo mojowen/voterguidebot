@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'home#index', as: :authenticated_root
+
+    get '/settings' => 'admin#settings', as: 'admin_settings'
+    post '/promote' => 'admin#promote', as: 'admin_promote'
+
     resources :guides do
       member do
         get 'invite'
@@ -10,6 +14,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
   unauthenticated :user do
     root 'home#welcome'
   end

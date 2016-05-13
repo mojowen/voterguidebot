@@ -2,25 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, active_mocker: true do
 
-  describe '.from_omniauth' do
-    let(:email) { 'john@arizona.org' }
-    let(:user_data) {
-      { 'first_name': 'John',
-        'last_name': 'McCain',
-        'image': 'http://some-image',
-        'email': email }.with_indifferent_access
-    }
-    let(:google_auth) { instance_double(OmniAuth::Strategies::GoogleOauth2, info: user_data) }
-    context 'for a user that already exists' do
-      let!(:user) { Fabricate :user, email: email }
-      it 'signs a user in based on their email' do
-        expect(described_class.from_omniauth(google_auth).id).to eq user.id
-      end
-    end
-    it 'creates a new user if they cannot be found' do
-      expect{ described_class.from_omniauth(google_auth) }.to change{ User.count }.by(1)
-    end
-  end
+  # Instance Methods
 
   describe '#can_edit' do
     let(:guide) { Fabricate :guide }
@@ -42,6 +24,38 @@ RSpec.describe User, active_mocker: true do
       end
     end
   end
+
+  describe '#promote' do
+    subject { Fabricate :user }
+
+    context 'with an admin' do
+      let(:admin) { Fabricate :user, admin: true }
+      it 'promotes the user' do
+        subject.promote! admin
+        expect(subject.admin).to be_truthy
+      end
+      it 'sends a notice' do
+        expect(UserMailer).to receive(:promote)
+                              .with(subject, admin)
+                              .and_return(double(deliver_now: true))
+        subject.promote! admin
+      end
+    end
+
+    context 'without an admin' do
+      let(:admin) { Fabricate :user }
+      it 'promotes the user' do
+        subject.promote! admin
+        expect(subject.admin).to be_falsey
+      end
+      it 'does not send a notice' do
+        expect(UserMailer).to_not receive(:promote)
+        subject.promote! admin
+      end
+    end
+  end
+
+  # Class Methods
 
   describe '.invite' do
     let(:guide) { Fabricate :guide }
@@ -72,9 +86,29 @@ RSpec.describe User, active_mocker: true do
         expect(UserMailer).to receive(:invite)
                               .with(user, guide, 'Jimbo')
                               .and_return(double(deliver_now: true))
-
         described_class.invite(user.email, guide, 'Jimbo')
       end
     end
   end
+
+  describe '.from_omniauth' do
+    let(:email) { 'john@arizona.org' }
+    let(:user_data) {
+      { 'first_name': 'John',
+        'last_name': 'McCain',
+        'image': 'http://some-image',
+        'email': email }.with_indifferent_access
+    }
+    let(:google_auth) { instance_double(OmniAuth::Strategies::GoogleOauth2, info: user_data) }
+    context 'for a user that already exists' do
+      let!(:user) { Fabricate :user, email: email }
+      it 'signs a user in based on their email' do
+        expect(described_class.from_omniauth(google_auth).id).to eq user.id
+      end
+    end
+    it 'creates a new user if they cannot be found' do
+      expect{ described_class.from_omniauth(google_auth) }.to change{ User.count }.by(1)
+    end
+  end
+
 end

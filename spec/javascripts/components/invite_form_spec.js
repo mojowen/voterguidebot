@@ -3,7 +3,7 @@ describe('InviteForm', function() {
   var component, element
   
   beforeEach(function() {
-    element = React.createElement(InviteForm, {})
+    element = React.createElement(InviteForm, { url: '/invite' })
     component = Utils.renderIntoDocument(element)
     jasmine.Ajax.install()
   })

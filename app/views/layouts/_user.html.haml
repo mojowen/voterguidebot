@@ -1,0 +1,11 @@
+.mui-row
+  .mui-col-md-3
+    = image_tag user.pic, width: '100%', style: 'max-width: 240px;'
+  .mui-col-md-6
+    %p
+      = user.first_name
+      = user.last_name
+    %p
+      %em= link_to user.email, "mailto:#{user.email}"
+  .mui-col-md-3
+    = yield
