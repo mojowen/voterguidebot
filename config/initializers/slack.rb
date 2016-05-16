@@ -1,17 +1,17 @@
 require 'slack-notifier'
 
 module Slack
-  def self.post(message)
+  def self.post(message, attachment=[])
     return unless ENV['SLACK_GENERAL'] 
-    client.ping message
+    client.ping message, attachment
   end
 
   def self.post_user(user)
     return unless ENV['SLACK_GENERAL'] 
 
-    client.ping(
+    post(
       'New User Signup!',
-      attachment: {
+      [{
         fallback: "#{user.first_name} Signed up!",
         color: "#BBDEFB",
         pretext: "New Signup#{ user.guides.empty? ? '' : ' from an Invite' }!",
@@ -28,7 +28,7 @@ module Slack
               short: false
             }
         ],
-      })
+      }])
   end
 
   def self.client
