@@ -1,42 +1,66 @@
-.mui-row
-  .mui-col-md-12
-    %h2 Get Started on Your Voter Guide
-
-.guide-options
+.dashboard
   .mui-row
-    .mui-col-md-4
-      = button_link_to edit_guide_path(@guide) do
-        %i.fa.fa-map-signs
-        Fields
-      %p Edit the descriptive fields that will explain how to vote and what your guide is all about.
-
-    .mui-col-md-4
-      = button_link_to edit_guide_path(@guide) do
-        %i.fa.fa-users
-        Contests
-      %p Contests are where candiate details and questions are managed.
-
-    .mui-col-md-4
-      = button_link_to edit_guide_path(@guide) do
-        %i.fa.fa-file-text
-        Ballot Measures
-      %p Manage Ballot Measures
-
-  .mui-row
-    .mui-col-md-4
+    .mui-col-md-3.mui--pull-right
       = button_link_to edit_guide_path(@guide) do
         %i.fa.fa-gears
-        Manage Guide
-      %p Invite other users to edit your guide.
-
-    .mui-col-md-4
       = button_link_to edit_guide_path(@guide) do
         %i.fa.fa-language
-        Manage Languages
-      %p Invite other users to edit your guide.
-
-    .mui-col-md-4
       = button_link_to invite_guide_path(@guide) do
         %i.fa.fa-user-plus
-        Invite Collaborators
-      %p Invite other users to edit your guide.
+
+    .mui-col-md-12
+      %h2 Get Started on Your Voter Guide
+      %p Create your Voter Guide by editing the following sections. When your guide is approved and ready to publish you'll be able to preview the PDF and the website and request publication.
+
+  .mui-row
+    .mui-col-md-2
+      %strong GUIDE STATUS
+    .mui-col-md-2
+      %strong
+        %i.fa-desktop.fa
+        Online Guide
+    .mui-col-md-2
+      %em.mui--text-dark-hint Unapproved
+    .mui-col-md-2
+      %strong
+        %i.fa-newspaper-o.fa
+        Print Guide
+    .mui-col-md-2
+      %em.mui--text-dark-hint Unapproved
+
+  .mui-row
+    .mui-col-md-4.box
+      %h3 Fields
+      %h1.big
+        %span.mui--text-dark 0
+        %span.mui--text-dark-hint /
+        %span.mui--text-dark-hint= @guide.template.fields.count
+      = button_link_to edit_guide_path(@guide) do
+        %i.fa.fa-map-signs
+        Edit Fields
+      %p
+        %em Edit the descriptive fields that will explain how to vote and what your guide is all about.
+
+    .mui-col-md-4.box
+      %h3 Contests
+      %h1.big
+        %span.mui--text-dark 0
+        %span.mui--text-dark-hint /
+        %span.mui--text-dark-hint= @guide.template.contests
+      = button_link_to edit_guide_path(@guide) do
+        %i.fa.fa-users
+        Edit Contests
+      %p
+        %em Contests are where candiate details and questions are managed.
+
+    .mui-col-md-4.box
+      %h3 Ballot Measures
+      %h1.big
+        %span.mui--text-dark 0
+        %span.mui--text-dark-hint /
+        %span.mui--text-dark-hint= @guide.template.ballot_measures
+      = button_link_to edit_guide_path(@guide) do
+        %i.fa.fa-file-text
+        Edit Ballot Measures
+      %p
+        %em Manage Ballot Measures

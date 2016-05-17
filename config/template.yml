@@ -1,0 +1,55 @@
+
+name: Default Voter Guide
+
+contests: 4
+candidates: 4
+questions: 7
+endorsements: 3
+ballot_measures: 4
+
+fields:
+  -
+    name: Title Page Header
+    example: 2016 [Your state / region] Voter Guide
+    type: text
+    limit: 40
+  -
+    name: Title Page Subheader
+    example: Be Sure to Vote By November 8th
+    type: text
+    limit: 40
+  -
+    name: Title Page Subheader
+    example: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
+    type: paragraph
+    limit: 120
+  -
+    name: About Us Section
+    example: New Era Colorado Action Fund is a local non-partisan, non-profit organization reinventing politics for our generation through innovative social and political action. We inspire young Coloradans to move our state forward, engaging our generation in our city- and state-level democracy. New Era Colorado Action Fund is a 501(c)4 non-profit organization. You can learn more or sign up to volunteer at NewEraColoradoAction.org.
+    type: paragraph
+    limit: 320
+  -
+    name: Logo
+    example: example_logo.png
+    type: image
+  -
+    name: What You've Got to Bring To Vote
+    example: To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some form of identification. Options for what you can bring to prove identity and residency.
+    type: paragraph
+    limit: 230
+  -
+    name: Where You've Got To Go
+    example: From February 29 through March 12, all 51 Early Voting sites will be open Monday through Saturday from 9am - 5pm. Go to chicagoelections.com to find a location near you. Please bring a government photo ID during early voting. For both “Grace Period” and “Early Voting” you will register and vote in the same day. To find polling locations for Election Day or early voting go to chicagoelections.com
+    type: paragraph
+    limit: 275
+  -
+    name: Find Out More
+    example: This independent voter guide is designed to give you the quickest, most important information on what you’re facing on your ballot and why it’s important to vote. But obviously there’s a lot more  information out there. If you’re looking to read more, we highly encourage checking out our bigger, online guide
+    type: paragraph
+    limit: 350
+  -
+    name: Partners
+    example: Also, lots more good info from our partners
+    type: paragraph
+    limit: 50
+

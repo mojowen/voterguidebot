@@ -3,4 +3,8 @@ class Guide < ActiveRecord::Base
   has_many :users, through: :permissions
 
   validates :name, presence: true
+
+  def template
+    @template ||= Template.default
+  end
 end

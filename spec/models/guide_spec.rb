@@ -13,4 +13,10 @@ RSpec.describe Guide, active_mocker: true do
       expect(subject.users).to eq(users)
     end
   end
+
+  context '#template' do
+    it 'returns the default teplate' do
+      expect(subject.template).to eq(Template.default)
+    end 
+  end
 end
