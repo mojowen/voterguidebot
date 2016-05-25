@@ -7,4 +7,8 @@ class Guide < ActiveRecord::Base
   def template
     @template ||= Template.default
   end
+
+  def fields
+    template.fields
+  end
 end

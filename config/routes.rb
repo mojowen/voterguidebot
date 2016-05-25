@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :guides do
       member do
         get 'invite'
+        get 'fields'
         post 'users'
       end
     end

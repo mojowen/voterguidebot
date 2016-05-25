@@ -19,11 +19,13 @@
       %strong
         %i.fa-desktop.fa
         Online Guide
+      &nbsp;
       %em.mui--text-dark-hint Unapproved
     .mui-col-md-3
       %strong
         %i.fa-newspaper-o.fa
         Print Guide
+      &nbsp;
       %em.mui--text-dark-hint Unapproved
 
   .mui-row
@@ -33,7 +35,7 @@
         %span.mui--text-dark 0
         %span.mui--text-dark-hint /
         %span.mui--text-dark-hint= @guide.template.fields.count
-      = button_link_to edit_guide_path(@guide) do
+      = button_link_to fields_guide_path(@guide) do
         %i.fa.fa-map-signs
         Edit Fields
       %p

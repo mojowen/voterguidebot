@@ -30,9 +30,9 @@ RSpec.describe Template do
 
   describe '#fields' do
     describe 'each field' do
-      it 'has a name' do
+      it 'has a label' do
         subject.fields.each do |field|
-          expect(field[:name]).to_not be_falsey
+          expect(field[:label]).to_not be_falsey
         end
       end
       it 'has an example' do
@@ -46,9 +46,9 @@ RSpec.describe Template do
           expect(field[:limit]).to_not be_falsey
         end
       end
-      it 'has a type' do
+      it 'has an element' do
         subject.fields.each do |field|
-          expect(field[:type]).to_not be_falsey
+          expect(field[:element]).to_not be_falsey
         end
       end
     end

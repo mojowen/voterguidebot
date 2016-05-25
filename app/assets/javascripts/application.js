@@ -2,5 +2,8 @@
 //= require react
 //= require react_ujs
 //= require vanilla-ujs
-//= require superagent.min
+//= require underscore
+//= require superagent
+//= require dropzone
+//= require_tree ./mixins
 //= require_tree ./components

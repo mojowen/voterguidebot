@@ -9,47 +9,71 @@ ballot_measures: 4
 
 fields:
   -
-    name: Title Page Header
-    example: 2016 [Your state / region] Voter Guide
-    type: text
+    label: Title Page Header
+    placeholder: The title that will appear on the front page of your guide
+    element: input
+    example: 2016 Chicago Voter Guide
+    example_elem: h1
     limit: 40
+    name: title_page_header
   -
-    name: Title Page Subheader
+    label: Title Page Subheader
+    placeholder: The line right below the title, usually reminds people to vote
     example: Be Sure to Vote By November 8th
-    type: text
+    element: input
+    example_elem: h2
     limit: 40
+    name: title_page_subheader
   -
-    name: Title Page Subheader
+    label: Title Page Blurb
+    placeholder: A little bit about voting and the guide
     example: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
-    type: paragraph
+    element: textarea
     limit: 120
+    name: title_page_blurb
   -
-    name: About Us Section
+    label: About Us Blurb
+    placeholder: A note about your organization and what you do
     example: New Era Colorado Action Fund is a local non-partisan, non-profit organization reinventing politics for our generation through innovative social and political action. We inspire young Coloradans to move our state forward, engaging our generation in our city- and state-level democracy. New Era Colorado Action Fund is a 501(c)4 non-profit organization. You can learn more or sign up to volunteer at NewEraColoradoAction.org.
-    type: paragraph
+    element: textarea
     limit: 320
+    name: about_us_blurb
   -
-    name: Logo
-    example: example_logo.png
-    type: image
+    label: Logo
+    placeholder: Your logo - will need to work up to 200px
+    example: /assets/example_logo.png
+    example_elem: img
+    example_attr: src
+    example_props:
+        width: 120px
+    element: ImageComponent
+    name: about_us_logo
   -
-    name: What You've Got to Bring To Vote
+    label: What You've Got to Bring To Vote
+    placeholder: A paragraph explaining what you need to bring to vote
     example: To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some form of identification. Options for what you can bring to prove identity and residency.
-    type: paragraph
+    element: textarea
     limit: 230
+    name: what_you_got_to_bring
   -
-    name: Where You've Got To Go
+    label: Where You've Got To Go
+    placeholder: A paragraph explaining where you need to go to vote
     example: From February 29 through March 12, all 51 Early Voting sites will be open Monday through Saturday from 9am - 5pm. Go to chicagoelections.com to find a location near you. Please bring a government photo ID during early voting. For both “Grace Period” and “Early Voting” you will register and vote in the same day. To find polling locations for Election Day or early voting go to chicagoelections.com
-    type: paragraph
+    element: textarea
     limit: 275
+    name: where_you_got_to_go
   -
-    name: Find Out More
+    label: Find Out More
+    placeholder: A paragraph explaining the guide and pointing to more information
     example: This independent voter guide is designed to give you the quickest, most important information on what you’re facing on your ballot and why it’s important to vote. But obviously there’s a lot more  information out there. If you’re looking to read more, we highly encourage checking out our bigger, online guide
-    type: paragraph
+    element: textarea
     limit: 350
+    name: find_out_more
   -
-    name: Partners
+    label: Partners
+    placeholder: Thank the people and organizations the made this happen
     example: Also, lots more good info from our partners
-    type: paragraph
+    element: input
     limit: 50
+    name: partners_list
 

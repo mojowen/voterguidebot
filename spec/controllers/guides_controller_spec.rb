@@ -45,6 +45,13 @@ RSpec.describe GuidesController, active_mocker: true do
         expect(response).to be_success
       end
     end
+    describe '#fields' do
+      render_views
+      it 'renders successfully' do
+        get :fields, { id: guide.id }
+        expect(response).to be_success
+      end
+    end
     describe '#edit' do
       render_views
       it 'renders successfully' do
