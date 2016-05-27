@@ -32,7 +32,7 @@
     .mui-col-md-4.box
       %h3 Fields
       %h1.big
-        %span.mui--text-dark 0
+        %span.mui--text-dark= @guide.fields.map(&:value).reject(&:nil?).count
         %span.mui--text-dark-hint /
         %span.mui--text-dark-hint= @guide.template.fields.count
       = button_link_to fields_guide_path(@guide) do

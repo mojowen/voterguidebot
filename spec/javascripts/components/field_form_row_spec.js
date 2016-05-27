@@ -1,18 +1,22 @@
 describe('FieldFormRow', function() {
-
   beforeEach(function() {
-    var props = {
+    this.props = {
       name: 'Great Field',
       element: 'textarea',
       example: '2016 Denver Voter Guide',
       limit: 40,
-      id: 'title_page_subheader'
+      name: 'title_page_subheader'
     }
-    this.setUpComponent(FieldFormRow, props)
+    this.setUpComponent(FieldFormRow, this.props)
   })
 
   it('creates inputs for the guides', function() {
     expect(this.dom.querySelectorAll('textarea').length).toEqual(1)
+  })
+
+  it('empty if no value passed', function() {
+    expect(this.dom.querySelector('textarea').value).toEqual('')
+    expect(this.component.state.value).toEqual('')
   })
 
   it('shows remaining characters', function() {
@@ -25,6 +29,31 @@ describe('FieldFormRow', function() {
   it('renders the previews', function() {
     this.component.updateValue('update_preview')
     expect(this.component.refs.preview.innerText).toEqual('update_preview')
+  })
+
+  describe('if a value is passed as prop', function() {
+    beforeEach(function() {
+      this.props = {
+        name: 'Great Field',
+        element: 'textarea',
+        example: '2016 Denver Voter Guide',
+        limit: 40,
+        name: 'title_page_subheader',
+        value: 'what'
+      }
+      this.setUpComponent(FieldFormRow, this.props)
+    })
+    it('assigns a value if passed', function() {
+      expect(this.dom.querySelector('textarea').value).toEqual(this.props.value)
+      expect(this.component.state.value).toEqual(this.props.value)
+    })
+    it('shows remaining characters', function() {
+      expect(parseInt(this.component.refs.remaining.innerText)).toEqual(
+        this.component.props.limit - this.props.value.length)
+    })
+    it('renders the previews', function() {
+      expect(this.component.refs.preview.innerText).toEqual(this.props.value)
+    })
   })
 
   describe('with an image field', function() {

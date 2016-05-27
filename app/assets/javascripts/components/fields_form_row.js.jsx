@@ -5,7 +5,7 @@ var FieldFormRow = React.createClass({
              limit: false }
   },
   getInitialState: function() {
-    return { value: '' }
+    return { value: this.props.value || '' }
   },
   getPreviewText: function() {
     return this.state.value.length > 0 ? this.state.value : this.props.example
@@ -14,12 +14,16 @@ var FieldFormRow = React.createClass({
     this.setState({ value: value })
     return true
   },
+  isValid: function() {
+    return this.state.value.length <= this.props.limit
+  },
   afterClass: function() {
+    if( this.isValid() ) return 'mui--text-accent'
+
     var remaining = this.props.limit - this.state.value.length
     if( remaining >= 15 ) return 'mui--text-dark-hint'
     else if( remaining < 15 && remaining >= 5 ) return 'mui--text-dark-secondary'
     else if( remaining < 5 && remaining >= 0 ) return 'mui--text-dark'
-    return 'mui--text-accent'
   },
   render: function() {
     if( this.props.example_attr ) {
@@ -45,8 +49,7 @@ var FieldFormRow = React.createClass({
                         onChangeCallback={this.updateValue}
                         {...this.props} />
       </div>
-      <div className='mui-col-md-1'></div>
-      <div className='mui-col-md-5 mui-textfield preview--field'>
+      <div className='mui-col-md-5 md-offset-1 mui-textfield preview--field'>
         <label>Preview:</label>
         { preview }
       </div>

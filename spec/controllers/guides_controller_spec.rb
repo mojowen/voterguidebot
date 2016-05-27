@@ -61,7 +61,22 @@ RSpec.describe GuidesController, active_mocker: true do
     end
   end
 
-  describe '#update'
+  describe '#update' do
+    let(:guide) { Fabricate :guide, users: [user] }
+
+    describe 'updating fields' do
+      let(:guide_params) do
+        {
+          id: guide.id,
+          guide: { fields: { title_page_header: 'what' } }
+        }
+      end
+      it 'creates a field that is missing' do
+        post :update, guide_params
+        expect(guide.fields.first.value).to eq('what')
+      end
+    end
+  end
 
   describe '#invite' do
     render_views

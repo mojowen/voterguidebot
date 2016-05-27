@@ -13,11 +13,11 @@ class GuideMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { permissions: nil, users: nil }.merge(super)
+      @associations ||= { audits: nil, permissions: nil, users: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] } }.merge(super)
+      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] } }.merge(super)
     end
 
     def mocked_class
@@ -78,6 +78,16 @@ class GuideMock < ActiveMocker::Base
 
   # _associations.erb
   # has_many
+  def audits
+    read_association(:audits, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: "")
+    end)
+  end
+
+  def audits=(val)
+    write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
+  end
+
   def permissions
     read_association(:permissions, lambda do
       ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Permission"), source: "")
@@ -116,6 +126,14 @@ class GuideMock < ActiveMocker::Base
   # _recreate_class_method_calls.erb
   def self.attribute_aliases
     @attribute_aliases ||= {}.merge(super)
+  end
+
+  def fields
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def template
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
 end

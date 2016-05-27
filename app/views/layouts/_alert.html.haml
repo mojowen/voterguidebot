@@ -1,6 +1,6 @@
-- if alert.present? || notice.present? || content_for(:errors)
-  #alert.mui-container
-    .mui-panel
-      = notice
-      = alert
-      = yield :errors if content_for :errors
+#alert.mui-container{ style: (alert.present? || notice.present? || content_for(:errors) ? '' : 'display: none') }
+  .mui-panel
+    = notice
+    = alert
+    = yield :errors if content_for :errors
+

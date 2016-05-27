@@ -19,12 +19,27 @@ class GuidesController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    @guide.update_attributes guide_params
+    @guide.template_fields = field_params if field_params
+    saved = @guide.save
+
+    respond_to do |format|
+      format.json { render status: saved ? 200 : 400, json: '' }
+      format.html { redirect_to guide_path(@guide), notice: saved ? 'That worked' : 'Whoops' }
+    end
+  end
+
   def users
     user = User.invite(invite_params, @guide, current_user.first_name)
     render json: { state: user.valid? ? 'success' : 'error' }
   end
 
   private
+
+  def field_params
+    params.require(:guide).permit(fields: @guide.template_field_names)[:fields]
+  end
 
   def guide_params
     params.require(:guide).permit(:name)
