@@ -5,32 +5,35 @@ var InputComponent = React.createClass({
       type: 'text',
       value: null,
       placeholder: null,
-      onChangeCallback: function() { return true }
+      fa: null,
+      handleChange: function() { return true }
     }
   },
-  getInitialState: function() {
-    return { value: this.props.value }
-  },
   handleChange: function(event) {
-    var value = event.target.value
-    if( this.props.onChangeCallback(value) ) this.setState({ value: value })
+    this.props.handleChange(event.target.value)
   },
   render: function() {
     var label = this.props.label ? <label>{ this.props.label }</label> : '',
         input = <this.props.element ref="input"
                                     onChange={ this.handleChange }
                                     { ...this.props }
-                                    value={ this.state.value } />
+                                    value={ this.props.value } />,
+        font_awesome = ''
+
+    if( this.props.fa !== null ) {
+      font_awesome = <i className={'fa fa-'+this.props.fa} />
+    }
     if( this.props.element === 'ImageComponent' ) {
         input = <ImageComponent ref="input"
                                 onChange={ this.handleChange }
                                 { ...this.props }
-                                value={ this.state.value } />
+                                value={ this.props.value } />
     }
 
-    return <div className="mui-textfield">
+    return <div className={'mui-textfield ' + (this.props.fa ? 'fa-prefix' : '')}>
       { label }
       { this.props.afterLabel }
+      { font_awesome }
       { input }
       { this.props.after }
     </div>

@@ -1,0 +1,10 @@
+.mui-row
+  .mui-col-md-12
+    %h2 Your Contests
+    -# - @guide.contests.each do |contest|
+    -#   = contest.name
+    -#   = button_link_to contest.name, edit_guide_contest(@guide, contest)
+
+  .mui-row
+  .mui-col-md-12
+    = button_link_to 'New Contest', new_guide_contest_path(@guide)

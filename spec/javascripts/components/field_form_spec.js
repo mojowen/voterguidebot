@@ -32,18 +32,17 @@ describe('FieldsForm', function() {
     expect(this.component.refs.great_textarea.state.value).toEqual(this.fields[1].value)
   })
 
-  it('submit sends to fields', function() {
-    spyOn(this.component, 'sendFields')
+  it('submit updates guide', function() {
+    spyOn(this.component, 'updateGuide')
     this.component.refs.great_input.setState({ value: 'whatt' })
     Utils.Simulate.submit(this.component.refs.form_wrapper)
-    expect(this.component.sendFields).toHaveBeenCalledWith({
-      great_input: 'whatt',
-      great_textarea: 'someone wrote something'
-    })
+    expect(this.component.updateGuide).toHaveBeenCalledWith(
+      this.url,
+      { fields: { great_input: 'whatt', great_textarea: 'someone wrote something'}})
   })
 
   it('sends ajax request', function() {
-    this.component.sendFields({ great_input: 'whatt' })
+    this.component.updateGuide(this.url, { fields: { great_input: 'whatt' }})
     request = jasmine.Ajax.requests.mostRecent()
     expect(request.url).toBe(this.url)
     expect(request.method).toBe('PATCH')
@@ -52,7 +51,7 @@ describe('FieldsForm', function() {
 
   it('notifies on a success', function() {
     spyOn(this.component, 'notify')
-    this.component.sendFields({})
+    this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
     request.respondWith({  responseText: '', status: 200 })
     expect(this.component.notify).toHaveBeenCalledWith('success')
@@ -60,7 +59,7 @@ describe('FieldsForm', function() {
 
   it('notifies on an error', function() {
     spyOn(this.component, 'notify')
-    this.component.sendFields({})
+    this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
     request.respondWith({  responseText: '', status: 500 })
     expect(this.component.notify).toHaveBeenCalledWith('Something went wrong saving')

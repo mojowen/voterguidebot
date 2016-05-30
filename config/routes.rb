@@ -13,6 +13,8 @@ Rails.application.routes.draw do
         get 'fields'
         post 'users'
       end
+      resources :contests
+
     end
   end
 

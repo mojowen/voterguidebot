@@ -16,8 +16,9 @@ describe('ImageComponent', function() {
   it('handles thumbnail by processing data', function() {
     this.dropzone._callbacks.thumbnail[1].call(this.dropzone, fakeFile, transparentGif)
     expect(this.component.state.value).toEqual(transparentGif)
-
   })
+
+  it('loads existing value if passed as param')
 
   describe('with a callback', function() {
     beforeEach(function() {

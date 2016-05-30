@@ -1,7 +1,8 @@
 textarea
   resize: vertical
 
-.form--row
+.form--row,
+.candidate--form
   .preview--field
     white-space: pre-line
     word-wrap: break-word
@@ -11,6 +12,14 @@ textarea
 
   .mui-textfield
     padding-top: 20px
+    &.fa-prefix
+      i
+        position: absolute
+        bottom: 8px
+      input,
+      textarea,
+      select
+        padding-left: 20px
 
   .image--field
     width: 100%
@@ -45,3 +54,74 @@ textarea
       color: #ccc
       font-weight: normal
       font-size: 80%
+
+.questions--form,
+.candidate--form
+  .remove
+    position: absolute
+    bottom: -2px
+    color: $mui-accent-color-light
+    &:hover
+      color: $mui-accent-color-dark
+
+  .social
+    .mui-textfield
+      width: 32%
+      display: inline-block
+      margin-right: 4px
+      font-size: 10px
+      i
+        bottom: 4px
+      input
+        font-size: 10px
+        padding-left: 12px
+        height: 20px
+        &:focus
+          height: 20px
+
+  .add--endorsements
+    float: right
+  ul
+    &, li
+      list-style: none
+      margin: 0
+      padding: 0
+      .mui-textfield
+        padding-top: 4px
+        margin: 0 0 4px 4px
+        width: 90%
+        .remove
+          right: -20px
+        input
+          font-size: 12px
+          height: 20px
+  .profile
+    @include frame(40px)
+    &.unknown
+      background-image: asset-url('unknown.jpg')
+
+
+.mui-textfield > input:focus,
+.mui-select > select:focus
+  height: 32px
+
+.candidate--form
+  margin-right: 15px
+  height: 500px
+  .remove--candidate
+    top: 10px
+    right: 10px
+    position: absolute
+    color: $mui-accent-color-light
+    &:hover
+      color: $mui-accent-color-dark
+    cursor: pointer
+
+.questions--form
+  th em
+    font-weight: normal
+  .question
+    .mui-textfield
+      width: 450px
+    .remove
+      left: -20px
