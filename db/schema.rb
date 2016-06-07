@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525222627) do
+ActiveRecord::Schema.define(version: 20160530033138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_translations", force: :cascade do |t|
+    t.integer  "answer_id",  null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "text"
+  end
+
+  add_index "answer_translations", ["answer_id"], name: "index_answer_translations_on_answer_id", using: :btree
+  add_index "answer_translations", ["locale"], name: "index_answer_translations_on_locale", using: :btree
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.integer  "question_id"
+    t.string   "text"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
@@ -39,6 +58,79 @@ ActiveRecord::Schema.define(version: 20160525222627) do
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
+  create_table "candidate_translations", force: :cascade do |t|
+    t.integer  "candidate_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.text     "bio"
+  end
+
+  add_index "candidate_translations", ["candidate_id"], name: "index_candidate_translations_on_candidate_id", using: :btree
+  add_index "candidate_translations", ["locale"], name: "index_candidate_translations_on_locale", using: :btree
+
+  create_table "candidates", force: :cascade do |t|
+    t.integer  "contest_id"
+    t.string   "photo"
+    t.string   "name"
+    t.text     "bio"
+    t.string   "facebook"
+    t.string   "website"
+    t.string   "twitter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contest_translations", force: :cascade do |t|
+    t.integer  "contest_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
+    t.string   "title"
+  end
+
+  add_index "contest_translations", ["contest_id"], name: "index_contest_translations_on_contest_id", using: :btree
+  add_index "contest_translations", ["locale"], name: "index_contest_translations_on_locale", using: :btree
+
+  create_table "contests", force: :cascade do |t|
+    t.integer  "guide_id"
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "publish"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "endorsement_translations", force: :cascade do |t|
+    t.integer  "endorsement_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "endorser"
+  end
+
+  add_index "endorsement_translations", ["endorsement_id"], name: "index_endorsement_translations_on_endorsement_id", using: :btree
+  add_index "endorsement_translations", ["locale"], name: "index_endorsement_translations_on_locale", using: :btree
+
+  create_table "endorsements", force: :cascade do |t|
+    t.integer  "candidate_id"
+    t.string   "endorser"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "field_translations", force: :cascade do |t|
+    t.integer  "field_id",   null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "value"
+  end
+
+  add_index "field_translations", ["field_id"], name: "index_field_translations_on_field_id", using: :btree
+  add_index "field_translations", ["locale"], name: "index_field_translations_on_locale", using: :btree
+
   create_table "fields", force: :cascade do |t|
     t.integer  "guide_id",       null: false
     t.text     "value"
@@ -58,6 +150,25 @@ ActiveRecord::Schema.define(version: 20160525222627) do
   create_table "permissions", force: :cascade do |t|
     t.integer  "guide_id"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_translations", force: :cascade do |t|
+    t.integer  "question_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "text"
+  end
+
+  add_index "question_translations", ["locale"], name: "index_question_translations_on_locale", using: :btree
+  add_index "question_translations", ["question_id"], name: "index_question_translations_on_question_id", using: :btree
+
+  create_table "questions", force: :cascade do |t|
+    t.integer  "contest_id"
+    t.string   "text"
+    t.boolean  "publish"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

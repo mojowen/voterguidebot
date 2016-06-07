@@ -3,31 +3,51 @@ var Contest = React.createClass({
   getDefaultProps: function() {
     return { candidates: [],
              questions: [],
-             name: '',
-             description: '',
-             print: false }
+             answers: [],
+             title: '',
+             description: '' }
   },
   componentDidMount: function() {
     var candidates = this.state.candidates,
         questions = this.state.questions
 
-    if( candidates.length === 0 ) candidates.push(this.newObject('candidate'))
-    if( questions.length === 0 ) questions.push(this.newObject('question'))
+    if( candidates.length === 0 ) {
+      candidates.push(this.newObject('candidate'))
+    }
 
     this.setState({ candidates: candidates, questions: questions })
   },
   getInitialState: function() {
-    return { candidates: this.props.candidates,
-             questions: this.props.questions,
-             name: this.props.name,
-             description: this.props.description,
-             print: this.props.print }
+    var questions = _.map(this.props.questions, function(question) {
+      var answer_obj = _.reduce(question.answers, function(obj, answer){
+        obj[answer.candidate_id] = answer.text
+        return obj }, {})
+      return _.extend(question, answer_obj)
+    })
+
+    var candidates = _.map(this.props.candidates, function(candidate) {
+        candidate.endorsements = _.pluck(candidate.endorsements, 'endorser')
+        return candidate
+      })
+
+    return { candidates: candidates,
+             _candidates: [],
+             questions: questions,
+             _questions: [],
+             answers: this.props.answers,
+             title: this.props.title,
+             description: this.props.description }
   },
   handleClickToAddCandidate: function(event) {
     var candidates = this.state.candidates
     candidates.push(this.newObject('candidate', { endorsements: [] }))
     this.setState({ candidates: candidates })
     event.preventDefault()
+  },
+  handleChange: function(event) {
+    var new_state = {}
+    new_state[event.currentTarget.name] = event.currentTarget.value
+    this.setState(new_state)
   },
   handleCandidateChange: function(id, key, value) {
     var index = _.map(this.state.candidates,'id').indexOf(id),
@@ -43,7 +63,14 @@ var Contest = React.createClass({
         name = candidate.name || 'this candidate'
 
     if( confirm('Are you sure you want to remove '+ name +'?') ) {
-      this.setState({ candidates: _.without(candidates, candidate) })
+      var destroyed = this.state._candidates
+
+      if( !candidate.new ) destroyed.push({ id: candidate.id, _destroy: true })
+
+      this.setState({
+        candidates: _.without(candidates, candidate),
+        _candidates: destroyed
+      })
     }
   },
   handleClickToAddQuestion: function(event) {
@@ -52,11 +79,11 @@ var Contest = React.createClass({
     this.setState({ questions: questions })
     event.preventDefault()
   },
-  handleQuestionChange: function(id, value) {
+  handleQuestionChange: function(id, key, value) {
     var index = _.map(this.state.questions,'id').indexOf(id),
         questions = this.state.questions
 
-    questions[index].question = value
+    questions[index][key] = value
     this.setState({ questions: questions })
   },
   handleQuestionRemove: function(id) {
@@ -66,7 +93,14 @@ var Contest = React.createClass({
         name = question.question || 'this question'
 
     if( confirm('Are you sure you want to remove '+ name +'?') ) {
-      this.setState({ questions: _.without(questions, question) })
+      var destroyed = this.state._questions
+
+      if( !question.new ) destroyed.push({ id: question.id, _destroy: true })
+
+      this.setState({
+        questions: _.without(questions, question),
+        _questions: destroyed
+      })
     }
   },
   render: function() {
@@ -91,6 +125,7 @@ var Contest = React.createClass({
         }, this)
         questions = _.map(this.state.questions, function(question) {
           return <Question {...question}
+                           answers={this.state.answers}
                            candidates={this.state.candidates}
                            key={question.id}
                            handleChange={this.handleQuestionChange}
@@ -104,33 +139,41 @@ var Contest = React.createClass({
 
     return <div className="mui-col-md-12">
       <div className="contest mui-row">
-          <h2>Details</h2>
-          <InputComponent name="name"
-                          ref="name"
-                          label="Name"
-                          placeholder="Mayor of Gotham City" />
+          <h3>Details</h3>
+          <InputComponent name="title"
+                          label="title"
+                          placeholder="Mayor of Gotham City"
+                          ref='title'
+                          value={ this.state.title }
+                          onChange={ this.handleChange } />
           <InputComponent name="description"
                           element="textarea"
                           ref='description'
                           label="Description"
-                          placeholder="Responsible for running the city of Gotham - avoiding capture, etc." />
+                          placeholder="Responsible for running the city of Gotham - avoiding capture, etc."
+                          value={ this.state.description }
+                          onChange={ this.handleChange } />
       </div>
-      <div className="mui-row"><h2>Candidates</h2></div>
+      <div className="mui-row"><h3>Candidates</h3></div>
       <div className="mui-row">{ candidates }</div>
       <div className="mui-row">
-        <a onClick={ this.handleClickToAddCandidate }
-            className="mui-btn mui-btn--accent">
-          <i className="fa fa-plus-circle" /> Add Candidate
-        </a>
+        <div className="mui--pull-right">
+          <a onClick={ this.handleClickToAddCandidate }
+              className="mui-btn mui-btn--accent">
+            <i className="fa fa-plus-circle" /> Add Candidate
+          </a>
+        </div>
       </div>
       <div className="questions--form">
-        <div className="mui-row"><h2>Questions</h2></div>
+        <div className="mui-row"><h3>Questions</h3></div>
         <div className="mui-row">{ questions_table }</div>
         <div className="mui-row">
-          <a onClick={ this.handleClickToAddQuestion }
-              className="mui-btn mui-btn--accent">
-            <i className="fa fa-plus-circle" /> Add Question
-          </a>
+          <div className="mui--pull-right">
+            <a onClick={ this.handleClickToAddQuestion }
+                className="mui-btn mui-btn--accent">
+              <i className="fa fa-plus-circle" /> Add Question
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -1,15 +1,38 @@
 describe('Contest', function() {
   beforeEach(function() {
-    this.props = {}
+    this.props = {
+      candidates: [],
+      questions: []
+    }
     this.setUpComponent(Contest, this.props)
   })
 
-  it('initializes a new contest if empty props')
-  it('has a district field')
-  it('has a description of office field')
-  it('has a print toggle')
-  it('fills in contest data from props')
-  it('fills in candidates from props')
-  it('fills in questions from props')
+  it('initializes a new contest if empty props if null', function() {
+    expect(this.component.state.candidates.length).toEqual(1)
+  })
+
+  describe('the title field', function() {
+    it('is set by props')
+    it('updates when changed')
+  })
+
+  describe('the description field', function() {
+    it('is set by props')
+    it('updates when changed')
+  })
+
+  describe('tracks candidates', function(){
+    it('updates when changed')
+    it('adds new candidates')
+    it('deletes candidates')
+  })
+
+  describe('tracks questions', function(){
+    it('updates when changed')
+    it('adds new candidates')
+    it('deletes candidates')
+  })
+
+
 })
 

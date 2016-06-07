@@ -1,5 +1,5 @@
 var FieldsForm = React.createClass({
-  mixins: [GuideForm],
+  mixins: [FormBase],
   getDefaultProps: function() {
     return { fields: [] }
   },
@@ -15,7 +15,7 @@ var FieldsForm = React.createClass({
       fields_request[name] =  elem.state.value
     }
 
-    this.updateGuide(this.props.url, { fields: fields_request })
+    this.updateGuide(this.props.url, { guide: { fields: fields_request }})
     event.preventDefault()
   },
   render: function() {

@@ -1,16 +1,33 @@
-describe('Contest', function() {
+describe('Candidate', function() {
   beforeEach(function() {
-    this.props = {}
-    this.setUpComponent(Contest, this.props)
+    this.props = {
+      name: 'Billy Bob',
+      bio: 'Dated Angelina Jolie',
+      photo: '/smiling-guy',
+      endorsements: ['Cowyboy Guy'],
+      handleChange: function() { },
+      handleRemove: function() { },
+    }
+    spyOn(this.props, 'handleChange')
+    spyOn(this.props, 'handleRemove')
+    this.setUpComponent(Candidate, this.props)
   })
 
-  it('initializes a new candidate if empty')
-  it('has space for name')
-  it('has space for photo')
-  it('has space for endorsers')
-  it('has space for facebook')
-  it('has space for website')
-  it('has space for twitter')
-  it('has space for bio')
+  it('initializes name')
+  it('initializes photo')
+  it('initializes bio')
+  it('initializes facebook')
+  it('initializes website')
+  it('initializes twitter')
+
+  it('handles change to name')
+  it('handles change to photo')
+  it('handles change to endorsers')
+  it('handles adding endorsers')
+  it('handles change to facebook')
+  it('handles change to website')
+  it('handles change to twitter')
+  it('handles change to bio')
+  it('handles removal')
 })
 

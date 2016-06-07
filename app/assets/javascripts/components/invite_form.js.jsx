@@ -1,19 +1,21 @@
 var InviteForm = React.createClass({
   getInitialState: function() {
-    return { emails: [] }
+    return { emails: [], email: '' }
   },
   handleSubmit: function(event) {
-    var email = this.refs.email_input.state.value,
-        emails = this.state.emails
+    var emails = this.state.emails
 
     if( event.target.checkValidity() ) {
-      var email_obj = { state: 'sending', email: email }
+      var email_obj = { state: 'sending', email: this.state.email }
       emails.push(email_obj)
       this.sendEmail(email_obj)
-      this.setState({ emails: emails })
+      this.setState({ emails: emails, email: '' })
       this.refs.email_input.setState({ value: null })
     }
     event.preventDefault()
+  },
+  handleChange: function(event) {
+    this.setState({ email: event.currentTarget.value })
   },
   sendEmail: function(email_obj) {
     var that = this
@@ -32,8 +34,8 @@ var InviteForm = React.createClass({
       })
   },
   render: function() {
-    var email_props = { type: 'email', placeholder: "Add Email" }
-        email_inputs = this.state.emails.map(function(email) { 
+    var email_props = { type: 'email', placeholder: "Add Email", value: this.state.email }
+        email_inputs = this.state.emails.map(function(email) {
           var state_class = (email.state === 'sending' ? 'fa-circle-o-notch fa-spin' : 'check-circle-o')
           return <p key={email}>{email.email}<i className={'fa fa-pull-right '+state_class}></i></p>}),
         button = <button style={{ marginTop: '-40px', float: 'right'}}
@@ -41,7 +43,7 @@ var InviteForm = React.createClass({
 
     return <form ref="form_wrapper" onSubmit={this.handleSubmit} >
       { email_inputs }
-      <InputComponent ref="email_input" after={button} {...email_props} />
+      <InputComponent onChange={this.handleChange} ref="email_input" after={button} {...email_props} />
     </form>
   }
 })

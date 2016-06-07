@@ -4,7 +4,7 @@ class Guide < ActiveRecord::Base
 
   has_many :permissions
   has_many :users, through: :permissions
-  # has_many :contests
+  has_many :contests
 
   has_many :fields
 
@@ -41,6 +41,6 @@ class Guide < ActiveRecord::Base
   private
 
   def find_field(template_name)
-    fields.find{ |field| field.field_template == template_name  }
+    fields.find { |field| field.field_template == template_name  }
   end
 end

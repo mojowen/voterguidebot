@@ -38,11 +38,11 @@ describe('FieldsForm', function() {
     Utils.Simulate.submit(this.component.refs.form_wrapper)
     expect(this.component.updateGuide).toHaveBeenCalledWith(
       this.url,
-      { fields: { great_input: 'whatt', great_textarea: 'someone wrote something'}})
+      { guide: { fields: { great_input: 'whatt', great_textarea: 'someone wrote something'}}})
   })
 
   it('sends ajax request', function() {
-    this.component.updateGuide(this.url, { fields: { great_input: 'whatt' }})
+    this.component.updateGuide(this.url, { guide: { fields: { great_input: 'whatt' }}})
     request = jasmine.Ajax.requests.mostRecent()
     expect(request.url).toBe(this.url)
     expect(request.method).toBe('PATCH')
@@ -54,7 +54,7 @@ describe('FieldsForm', function() {
     this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
     request.respondWith({  responseText: '', status: 200 })
-    expect(this.component.notify).toHaveBeenCalledWith('success')
+    expect(this.component.notify).toHaveBeenCalledWith('Success!')
   })
 
   it('notifies on an error', function() {
@@ -62,7 +62,7 @@ describe('FieldsForm', function() {
     this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
     request.respondWith({  responseText: '', status: 500 })
-    expect(this.component.notify).toHaveBeenCalledWith('Something went wrong saving')
+    expect(this.component.notify).toHaveBeenCalledWith('Something went wrong')
   })
 
 })

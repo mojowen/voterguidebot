@@ -1,5 +1,5 @@
 class CreateFields < ActiveRecord::Migration
-  def change
+  def up
     create_table :fields do |t|
       t.references :guide, null: false
       t.text :value
@@ -7,5 +7,11 @@ class CreateFields < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    Field.create_translation_table! value: :text
+  end
+
+  def down
+    drop_table :fields
+    Field.drop_translation_table!
   end
 end

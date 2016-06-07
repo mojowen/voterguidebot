@@ -1,0 +1,2 @@
+Fabricator(:candidate) do
+end

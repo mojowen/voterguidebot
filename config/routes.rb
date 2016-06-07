@@ -13,8 +13,7 @@ Rails.application.routes.draw do
         get 'fields'
         post 'users'
       end
-      resources :contests
-
+      resources :contests, except: :show
     end
   end
 

@@ -1,0 +1,2 @@
+Fabricator(:answer) do
+end

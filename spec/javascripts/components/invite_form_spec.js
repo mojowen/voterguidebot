@@ -1,5 +1,5 @@
 describe('InviteForm', function() {
-  
+
   beforeEach(function() {
     this.setUpComponent(InviteForm, { url: '/invite' })
     jasmine.Ajax.install()
@@ -25,11 +25,12 @@ describe('InviteForm', function() {
 
   it('does not add bad emails', function() {
     spyOn(this.component, 'sendEmail')
-    this.component.refs.email_input.setState({ value: 'dude' })
+    this.component.handleChange({ currentTarget: { value: 'dude' }})
+
     Utils.Simulate.submit(this.component.refs.form_wrapper)
 
     expect(ReactDOM.findDOMNode(this.component).querySelectorAll('p').length).toEqual(0)
-    expect(this.component.refs.email_input.state.value).toEqual('dude')
+    expect(this.component.state.email).toEqual('dude')
     expect(this.component.sendEmail).not.toHaveBeenCalledWith()
   })
 

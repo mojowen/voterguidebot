@@ -1,0 +1,2 @@
+Fabricator(:endorsement) do
+end

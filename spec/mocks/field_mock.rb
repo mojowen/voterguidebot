@@ -13,11 +13,11 @@ class FieldMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { guide: nil, audits: nil }.merge(super)
+      @associations ||= { guide: nil, audits: nil, translations: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] } }.merge(super)
+      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Field::Translation" => { has_many: [:translations] } }.merge(super)
     end
 
     def mocked_class
@@ -131,6 +131,16 @@ class FieldMock < ActiveMocker::Base
 
   def audits=(val)
     write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
+  end
+
+  def translations
+    read_association(:translations, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "field_id", foreign_id: self.id, relation_class: classes("Field::Translation"), source: "")
+    end)
+  end
+
+  def translations=(val)
+    write_association(:translations, ActiveMocker::HasMany.new(val, foreign_key: "field_id", foreign_id: self.id, relation_class: classes("Field::Translation"), source: ""))
   end
 
   # _scopes.erb

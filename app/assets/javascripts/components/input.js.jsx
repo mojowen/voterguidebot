@@ -10,7 +10,7 @@ var InputComponent = React.createClass({
     }
   },
   handleChange: function(event) {
-    this.props.handleChange(event.target.value)
+    this.props.handleChange(event)
   },
   render: function() {
     var label = this.props.label ? <label>{ this.props.label }</label> : '',

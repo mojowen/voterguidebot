@@ -1,17 +1,13 @@
 var Question = React.createClass({
   getDefaultProps: function() {
     return { candidates: [],
-             question: '',
+             text: '',
              id: null,
              handleRemove: function() {  },
              handleChange: function() {  } }
   },
-  getInitialState: function() {
-    return { question: this.props.question,
-             publish: this.props.publish }
-  },
   handleChange: function(event) {
-    this.props.handleChange(this.props.id, change)
+    this.props.handleChange(this.props.id, event.target.name, event.target.value)
   },
   handleRemove: function(event) {
     this.props.handleRemove(this.props.id)
@@ -19,7 +15,7 @@ var Question = React.createClass({
   render: function() {
     var candidates = _.map(this.props.candidates, function(candidate) {
       return <td key={candidate.id}><div className="mui-select">
-          <select name={candidate.id} onChange={this.handleChange} >
+          <select name={candidate.id} value={this.props[candidate.id]} onChange={this.handleChange} >
             <option value="N/A">N/A</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
@@ -32,8 +28,8 @@ var Question = React.createClass({
 
     return <tr>
       <td className="question">
-        <InputComponent value={this.props.question}
-                        name="question"
+        <InputComponent value={this.props.text}
+                        name="text"
                         placeholder="Add Your Question"
                         handleChange={this.handleChange}
                         afterLabel={after} />

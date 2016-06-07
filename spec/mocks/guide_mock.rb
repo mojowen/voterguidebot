@@ -13,11 +13,11 @@ class GuideMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { audits: nil, permissions: nil, users: nil }.merge(super)
+      @associations ||= { audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, fields: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] } }.merge(super)
+      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Field" => { has_many: [:fields] } }.merge(super)
     end
 
     def mocked_class
@@ -88,6 +88,16 @@ class GuideMock < ActiveMocker::Base
     write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
   end
 
+  def associated_audits
+    read_association(:associated_audits, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "associated_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: "")
+    end)
+  end
+
+  def associated_audits=(val)
+    write_association(:associated_audits, ActiveMocker::HasMany.new(val, foreign_key: "associated_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
+  end
+
   def permissions
     read_association(:permissions, lambda do
       ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Permission"), source: "")
@@ -106,6 +116,26 @@ class GuideMock < ActiveMocker::Base
 
   def users=(val)
     write_association(:users, ActiveMocker::HasMany.new(val, foreign_key: "user_id", foreign_id: self.id, relation_class: classes("User"), source: ""))
+  end
+
+  def contests
+    read_association(:contests, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Contest"), source: "")
+    end)
+  end
+
+  def contests=(val)
+    write_association(:contests, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Contest"), source: ""))
+  end
+
+  def fields
+    read_association(:fields, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Field"), source: "")
+    end)
+  end
+
+  def fields=(val)
+    write_association(:fields, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Field"), source: ""))
   end
 
   # _scopes.erb
@@ -128,12 +158,20 @@ class GuideMock < ActiveMocker::Base
     @attribute_aliases ||= {}.merge(super)
   end
 
-  def fields
+  def template
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
-  def template
+  def template_field_names
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def template_fields
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def template_fields=(fields_obj)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [fields_obj])
   end
 
 end

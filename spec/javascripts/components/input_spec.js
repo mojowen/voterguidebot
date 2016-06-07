@@ -4,13 +4,6 @@ describe('InputComponent', function() {
     this.setUpComponent(InputComponent, {})
   })
 
-  it('updates value on change', function() {
-    var node = this.component.refs.input
-    node.value = 'values'
-    Utils.Simulate.change(node)
-    expect(this.component.state.value).toEqual('values')
-  })
-
   describe('with initial value', function(){
     beforeEach(function() {
       this.setUpComponent(InputComponent, { value: 'init' })
@@ -32,16 +25,13 @@ describe('InputComponent', function() {
     beforeEach(function() {
       this.myCallback = function() { return false }
       spyOn(this, 'myCallback')
-      this.setUpComponent(InputComponent, { onChangeCallback: this.myCallback })
+      this.setUpComponent(InputComponent, { onChange: this.myCallback })
       this.component.refs.input.value = 'values'
       Utils.Simulate.change(this.component.refs.input)
     })
 
     it('runs value callback on change', function() {
-      expect(this.myCallback).toHaveBeenCalledWith('values')
-    })
-    it('does not update value if return false', function() {
-      expect(this.myCallback.value).not.toEqual('values')
+      expect(this.myCallback).toHaveBeenCalled()
     })
   })
 

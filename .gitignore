@@ -13,3 +13,4 @@
 # Ignore env file
 .env
 **DS_Store
+.byebug_history

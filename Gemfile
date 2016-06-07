@@ -10,8 +10,9 @@ gem 'mui-sass'
 gem 'react-rails'
 gem 'vanilla-ujs'
 gem 'haml'
-gem "audited", "~> 4.0"
-gem "audited-activerecord", "~> 4.0"
+gem 'audited', '~> 4.0'
+gem 'audited-activerecord', '~> 4.0'
+gem 'globalize'
 
 gem 'unicorn'
 gem 'devise'

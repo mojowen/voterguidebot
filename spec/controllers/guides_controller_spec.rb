@@ -59,45 +59,44 @@ RSpec.describe GuidesController, active_mocker: true do
         expect(response).to be_success
       end
     end
-  end
-
-  describe '#update' do
-    let(:guide) { Fabricate :guide, users: [user] }
-
-    describe 'updating fields' do
-      let(:guide_params) do
-        {
-          id: guide.id,
-          guide: { fields: { title_page_header: 'what' } }
-        }
-      end
-      it 'creates a field that is missing' do
-        post :update, guide_params
-        expect(guide.fields.first.value).to eq('what')
+    describe '#update' do
+      describe 'updating fields' do
+        let(:guide_params) do
+          {
+            id: guide.id,
+            guide: { fields: { title_page_header: 'what' } }
+          }
+        end
+        it 'creates a field that is missing' do
+          post :update, guide_params
+          expect(guide.fields.first.value).to eq('what')
+        end
       end
     end
-  end
+    describe '#invite' do
+      render_views
+      before(:each) { get :invite, { id: guide.id } }
+      it 'renders successfully' do
+        expect(response).to be_success
+      end
+    end
+    describe '#users' do
+      let(:email) { 'bob@example.com' }
+      it 'adds a user to the guide' do
+        expect(User).to receive(:invite)
+                        .with(email, guide, user.first_name)
+                        .and_return(instance_double(User, valid?: true))
 
-  describe '#invite' do
-    render_views
-    let(:guide) { Fabricate :guide, users: [user] }
-    before(:each) { get :invite, { id: guide.id } }
-    it 'renders successfully' do
-      expect(response).to be_success
+        post :users, { id: guide.id, email: email }
+      end
+    end
+    describe '#show' do
+      render_views
+      it 'renders successfully' do
+        get :show, { id: guide.id }
+        expect(response).to be_success
+      end
     end
   end
 
-  describe '#users' do
-    let(:guide) { Fabricate :guide, users: [user] }
-    let(:email) { 'bob@example.com' }
-    it 'adds a user to the guide' do
-      expect(User).to receive(:invite)
-                      .with(email, guide, user.first_name)
-                      .and_return(instance_double(User, valid?: true))
-
-      post :users, { id: guide.id, email: email }
-    end
-  end
-
-  describe '#show'
 end

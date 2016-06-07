@@ -42,7 +42,7 @@ RSpec.describe Template do
       end
       it 'has a limit if not image' do
         subject.fields.each do |field|
-          next if field[:type] == 'image'
+          next if field[:element] == 'ImageComponent'
           expect(field[:limit]).to_not be_falsey
         end
       end
