@@ -58,6 +58,7 @@ var Candidate = React.createClass({
                       element="ImageComponent"
                       value={this.props.photo}
                       name="photo"
+                      preview={true}
                       onChange={this.handleChange} />
 
       <InputComponent label="Name"

@@ -13,11 +13,11 @@ class EndorsementMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { translations: nil }.merge(super)
+      @associations ||= { candidate: nil, translations: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Endorsement::Translation" => { has_many: [:translations] } }.merge(super)
+      @associations_by_class ||= { "Candidate" => { belongs_to: [:candidate] }, "Endorsement::Translation" => { has_many: [:translations] } }.merge(super)
     end
 
     def mocked_class
@@ -85,6 +85,35 @@ class EndorsementMock < ActiveMocker::Base
   end
 
   # _associations.erb
+  # belongs_to
+  def candidate
+    read_association(:candidate) || write_association(:candidate, classes("Candidate").try do |k|
+      k.find_by(id: candidate_id)
+    end)
+  end
+
+  def candidate=(val)
+    write_association(:candidate, val)
+    ActiveMocker::BelongsTo.new(val, child_self: self, foreign_key: :candidate_id).item
+  end
+
+  def build_candidate(attributes = {}, &block)
+    association = classes("Candidate").try(:new, attributes, &block)
+    unless association.nil?
+      write_association(:candidate, association)
+    end
+
+  end
+
+  def create_candidate(attributes = {}, &block)
+    association = classes("Candidate").try(:create, attributes, &block)
+    unless association.nil?
+      write_association(:candidate, association)
+    end
+
+  end
+
+  alias_method(:create_candidate!, :create_candidate)
   # has_many
   def translations
     read_association(:translations, lambda do

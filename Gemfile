@@ -13,6 +13,7 @@ gem 'haml'
 gem 'audited', '~> 4.0'
 gem 'audited-activerecord', '~> 4.0'
 gem 'globalize'
+gem "paperclip", "~> 5.0.0.beta1"
 
 gem 'unicorn'
 gem 'devise'

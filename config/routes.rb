@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       end
       resources :contests, except: :show
     end
+
+    resources :uploads, only: [:create]
   end
 
   unauthenticated :user do

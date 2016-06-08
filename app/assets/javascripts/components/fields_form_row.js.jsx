@@ -8,14 +8,15 @@ var FieldFormRow = React.createClass({
     return { value: this.props.value || '' }
   },
   getPreviewText: function() {
-    return this.state.value.length > 0 ? this.state.value : this.props.example
+    return (this.state.value && this.state.value.length > 0 ? this.state.value :
+                                                              this.props.example)
   },
-  updateValue: function(value) {
-    this.setState({ value: value })
+  updateValue: function(event) {
+    this.setState({ value: event.target.value })
     return true
   },
   isValid: function() {
-    return this.state.value.length <= this.props.limit
+    return this.props.limit ? this.state.value.length <= this.props.limit : true
   },
   afterClass: function() {
     if( this.isValid() ) return 'mui--text-accent'
@@ -46,7 +47,7 @@ var FieldFormRow = React.createClass({
     return <div className='mui-row form--row' >
       <div className='mui-col-md-6'>
         <InputComponent after={this.props.limit ? after : ''}
-                        onChangeCallback={this.updateValue}
+                        handleChange={this.updateValue}
                         {...this.props} />
       </div>
       <div className='mui-col-md-5 md-offset-1 mui-textfield preview--field'>

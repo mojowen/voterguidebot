@@ -21,13 +21,13 @@ describe('FieldFormRow', function() {
 
   it('shows remaining characters', function() {
     var typed = 'what what what'
-    this.component.updateValue(typed)
+    this.component.updateValue({ target: { value: typed }})
     expect(parseInt(this.component.refs.remaining.innerText)).toEqual(
       this.component.props.limit - typed.length)
   })
 
   it('renders the previews', function() {
-    this.component.updateValue('update_preview')
+    this.component.updateValue({ target: { value: 'update_preview' }})
     expect(this.component.refs.preview.innerText).toEqual('update_preview')
   })
 

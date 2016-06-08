@@ -1,0 +1,2 @@
+Fabricator(:upload) do
+end

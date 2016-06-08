@@ -22,19 +22,25 @@ textarea
         padding-left: 20px
 
   .image--field
-    width: 100%
-    height: 60px
-    margin-bottom: 30px
-    border: 1px dashed $mui-text-dark-hint
-    cursor: pointer
-    &:after
-      content: 'Click or Drag File to Upload an Image'
-      color: $mui-text-dark-hint
-      text-align: center
-      left: 0%
-      right: 0%
-      top: 20%
-      position: absolute
+    img
+      max-width: 60%
+      margin: 5px auto
+      display: block
+      max-height: 200px
+    .drop--zone
+      width: 100%
+      height: 60px
+      margin-bottom: 30px
+      border: 1px dashed $mui-text-dark-hint
+      cursor: pointer
+      &:after
+        content: 'Click or Drag File to Upload an Image'
+        color: $mui-text-dark-hint
+        text-align: center
+        left: 0%
+        right: 0%
+        top: 20%
+        position: absolute
 
   input,
   textarea
@@ -57,6 +63,10 @@ textarea
 
 .questions--form,
 .candidate--form
+  .image--field
+    img
+      @include frame(120px)
+      margin: 0 auto 10px
   .remove
     position: absolute
     bottom: -2px

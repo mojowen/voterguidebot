@@ -44,7 +44,7 @@
     .mui-col-md-4.box
       %h3 Contests
       %h1.big
-        %span.mui--text-dark 0
+        %span.mui--text-dark= @guide.contests.length
         %span.mui--text-dark-hint /
         %span.mui--text-dark-hint= @guide.template.contests
       = button_link_to guide_contests_path(@guide) do

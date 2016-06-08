@@ -62,7 +62,8 @@ describe('FieldsForm', function() {
     this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
     request.respondWith({  responseText: '', status: 500 })
-    expect(this.component.notify).toHaveBeenCalledWith('Something went wrong')
+    expect(this.component.notify)
+      .toHaveBeenCalledWith('Something went wrong saving')
   })
 
 })

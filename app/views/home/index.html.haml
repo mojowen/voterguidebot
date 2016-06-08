@@ -3,20 +3,14 @@
   - if current_user.guides.empty?
     %p Welcome to the Voter Guide Builder, let's get started.
 
-- if current_user.guides.empty?
-  .mui-row
-    .mui-col-md-6.mui--text-center
-      %h2 Build a Voter Guide
-      %p Get started on your Voter Guide
-      = button_link_to 'Create a Guide', new_guide_path
-    .mui-col-md-6.mui--text-center
-      %h2 Invite Your Team
-      %p Invite your teammates to collaborate
-      = button_link_to 'Invite Your Teammates', '/invite'
+.mui-row
+  .mui-col-md-6.mui-col-md-offset-3
+    %h2 Build a Voter Guide
+    %p Get started on your Voter Guide
+    = button_link_to 'Create a Guide', new_guide_path
 
 .mui-row
-  .mui-col-md-3
-  .mui-col-md-6
+  .mui-col-md-6.mui-col-md-offset-3
     %h2 Your Guides
 
     %table.mui-table
@@ -24,12 +18,8 @@
         %tr
           %th Guide name
           %th
-          %th
       %tbody
       - current_user.guides.each do |guide|
         %tr
           %td= link_to guide.name.capitalize, guide_path(guide)
           %td= button_link_to 'View', guide_path(guide), { class: 'mui-btn--small' }
-          %td= button_link_to 'Edit', edit_guide_path(guide), { class: 'mui-btn--small' }
-
-    = button_link_to 'Create a Guide', new_guide_path

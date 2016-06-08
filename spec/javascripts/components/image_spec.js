@@ -10,7 +10,7 @@ describe('ImageComponent', function() {
   })
 
   it('it renders successfully', function() {
-    expect(this.dom.className).toEqual('image--field dz-clickable')
+    expect(this.dom.querySelector('.dz-clickable')).not.toEqual(null)
   })
 
   it('handles thumbnail by processing data', function() {
@@ -24,7 +24,7 @@ describe('ImageComponent', function() {
     beforeEach(function() {
       this.callback = function() {}
       spyOn(this, 'callback')
-      this.setUpComponent(ImageComponent, { onChangeCallback: this.callback })
+      this.setUpComponent(ImageComponent, { onChange: this.callback })
       this.dropzone = this.component.dropzone
     })
 

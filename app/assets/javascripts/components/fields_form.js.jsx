@@ -4,19 +4,23 @@ var FieldsForm = React.createClass({
     return { fields: [] }
   },
   handleSubmit: function(event) {
+    event.preventDefault()
+
     var fields_request = {}
 
     for (var i = 0; i < this.props.fields.length; i++) {
       var name = this.props.fields[i].name,
           elem = this.refs[name]
 
-      if( !elem.isValid() ) return this.handleError('not all fields are valid')
+      if( !elem.isValid() ) {
+        debugger
+        return this.handleError('not all fields are valid')
+      }
 
       fields_request[name] =  elem.state.value
     }
 
     this.updateGuide(this.props.url, { guide: { fields: fields_request }})
-    event.preventDefault()
   },
   render: function() {
     var fields = _.map(this.props.fields, function(field) {

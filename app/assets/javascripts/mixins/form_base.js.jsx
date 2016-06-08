@@ -2,13 +2,13 @@ var FormBase = {
   getInitialState: function() {
     return { icon: 'fa-save', method: 'patch' }
   },
-  handleError: function(res) {
+  handleError: function(res, message) {
     this.setState({ icon: 'fa-exclamation-triangle' })
-    this.notify('Something went wrong')
+    this.notify(message || 'Something went wrong saving')
   },
-  handleSuccess: function(res) {
+  handleSuccess: function(res, message) {
     this.setState({ icon: 'fa-check-square' })
-    this.notify('Success!')
+    this.notify(message || 'Success!')
     if( res && res.body && res.body.path ) {
       history.pushState({}, '', res.body.path)
     }
