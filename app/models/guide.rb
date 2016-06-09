@@ -5,7 +5,7 @@ class Guide < ActiveRecord::Base
   has_many :permissions
   has_many :users, through: :permissions
   has_many :contests
-
+  has_many :languages
   has_many :fields
 
   validates :name, presence: true
@@ -16,7 +16,7 @@ class Guide < ActiveRecord::Base
 
   def template_fields
     template.fields.map do |template_field|
-      template_field[:value] = find_field(template_field[:name]).try(:value)
+      template_field[:value] = field_value template_field
       template_field
     end
   end
@@ -42,5 +42,15 @@ class Guide < ActiveRecord::Base
 
   def find_field(template_name)
     fields.find { |field| field.field_template == template_name  }
+  end
+
+  def universal_field(field)
+    Globalize.with_locale(:en) { field.try(:value) }
+  end
+
+  def field_value(template_field)
+    field = find_field(template_field[:name])
+    return universal_field(field) if template_field[:element] == 'ImageComponent'
+    field.try(:value)
   end
 end

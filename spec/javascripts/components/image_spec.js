@@ -10,7 +10,7 @@ describe('ImageComponent', function() {
   })
 
   it('it renders successfully', function() {
-    expect(this.dom.querySelector('.dz-clickable')).not.toEqual(null)
+    expect(this.dom.className.search('.dz-clickable')).not.toEqual(-1)
   })
 
   it('handles thumbnail by processing data', function() {

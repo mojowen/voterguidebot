@@ -46,9 +46,8 @@ var ImageComponent = React.createClass({
       preview = <img src={this.state.value} />
     }
 
-    return <div className='image--field'>
+    return <div ref="dropzone" className='drop--zone image--field'>
       { preview }
-      <div ref="dropzone" className='drop--zone'></div>
     </div>
   }
 })

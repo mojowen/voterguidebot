@@ -13,11 +13,11 @@ class GuideMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, fields: nil }.merge(super)
+      @associations ||= { audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, languages: nil, fields: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Field" => { has_many: [:fields] } }.merge(super)
+      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Language" => { has_many: [:languages] }, "Field" => { has_many: [:fields] } }.merge(super)
     end
 
     def mocked_class
@@ -126,6 +126,16 @@ class GuideMock < ActiveMocker::Base
 
   def contests=(val)
     write_association(:contests, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Contest"), source: ""))
+  end
+
+  def languages
+    read_association(:languages, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Language"), source: "")
+    end)
+  end
+
+  def languages=(val)
+    write_association(:languages, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Language"), source: ""))
   end
 
   def fields

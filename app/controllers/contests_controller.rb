@@ -1,5 +1,6 @@
 class ContestsController < ApplicationController
-  before_filter :find_guide
+  include GuideFinder
+
   before_filter :init_contest, only: [:new, :create]
   before_filter :find_contest, except: [:new, :create, :index]
 
@@ -21,11 +22,6 @@ class ContestsController < ApplicationController
       path: guide_contest_path(@guide, @contest),
       state: { contest: @contest.reload, url: guide_contest_path(@guide, @contest) }
     }
-  end
-
-  def find_guide
-    @guide = Guide.find params[:guide_id]
-    redirect_to guides_path unless current_user.can_edit?(@guide)
   end
 
   def init_contest

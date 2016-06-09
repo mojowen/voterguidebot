@@ -111,18 +111,16 @@ var Contest = React.createClass({
                             handleRemove={this.handleCandidateRemove}  />
         }, this),
         questions_headers = _.map(this.state.candidates, function(candidate, index) {
-          if( !_.isEmpty(candidate.name) || !_.isEmpty(candidate.photo) ) {
-            return <th key={'candidate_'+index} >
-              <div className="profile" ></div>
-              <span>{ candidate.name }</span>
+          var has_photo = candidate.photo && !_.isEmpty(candidate.photo),
+              bgImg = has_photo ? 'url('+candidate.photo+')' : '',
+              className = 'profile'
+          if( !has_photo ) className += ' unknown'
+          return <th key={'candidate_'+index} >
+                  <div className={className}
+                       style={{ backgroundImage: bgImg }} ></div>
+              <span>{ candidate.name || 'Candidate Name' }</span>
             </th>
-          } else {
-            return <th key={'candidate_'+index} >
-              <div className="profile unknown" ></div>
-              <em>Candidate Name</em>
-            </th>
-          }
-        }, this)
+          }, this)
         questions = _.map(this.state.questions, function(question) {
           return <Question {...question}
                            answers={this.state.answers}
@@ -132,12 +130,12 @@ var Contest = React.createClass({
                            handleRemove={this.handleQuestionRemove} />
         }, this),
         questions_table = this.state.questions.length > 0 ? <table className="questions">
-            <thead><tr><th></th>{ questions_headers }</tr></thead>
+            <thead><tr><th></th><th></th>{ questions_headers }</tr></thead>
             <tbody>{ questions }</tbody>
           </table> : ''
 
 
-    return <div className="mui-col-md-12">
+    return <div className="mui-col-md-11">
       <div className="contest mui-row">
           <h3>Details</h3>
           <InputComponent name="title"
@@ -164,16 +162,18 @@ var Contest = React.createClass({
           </a>
         </div>
       </div>
-      <div className="questions--form">
-        <div className="mui-row"><h3>Questions</h3></div>
-        <div className="mui-row">{ questions_table }</div>
-        <div className="mui-row">
-          <div className="mui--pull-right">
-            <a onClick={ this.handleClickToAddQuestion }
-                className="mui-btn mui-btn--accent">
-              <i className="fa fa-plus-circle" /> Add Question
-            </a>
-          </div>
+      <div className="mui-row">
+        <div className="questions--form">
+          <h3>Questions</h3>
+          { questions_table }
+        </div>
+      </div>
+      <div className="mui-row">
+        <div className="mui--pull-right">
+          <a onClick={ this.handleClickToAddQuestion }
+              className="mui-btn mui-btn--accent">
+            <i className="fa fa-plus-circle" /> Add Question
+          </a>
         </div>
       </div>
     </div>

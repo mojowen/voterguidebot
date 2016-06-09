@@ -1,9 +1,11 @@
+= render 'guides/breadcrumb'
+
 .dashboard
   .mui-row
-    .mui-col-md-3.mui--pull-right
+    .mui-col-md-12.mui--text-right
       = button_link_to edit_guide_path(@guide) do
         %i.fa.fa-gears
-      = button_link_to edit_guide_path(@guide) do
+      = button_link_to guide_languages_path(@guide) do
         %i.fa.fa-language
       = button_link_to invite_guide_path(@guide) do
         %i.fa.fa-user-plus

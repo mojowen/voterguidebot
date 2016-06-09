@@ -23,24 +23,22 @@ textarea
 
   .image--field
     img
-      max-width: 60%
       margin: 5px auto
       display: block
-      max-height: 200px
-    .drop--zone
-      width: 100%
-      height: 60px
-      margin-bottom: 30px
-      border: 1px dashed $mui-text-dark-hint
-      cursor: pointer
-      &:after
-        content: 'Click or Drag File to Upload an Image'
-        color: $mui-text-dark-hint
-        text-align: center
-        left: 0%
-        right: 0%
-        top: 20%
-        position: absolute
+      max-height: 80px
+    height: 100px
+    margin-bottom: 10px
+    border: 1px dashed $mui-text-dark-hint
+    cursor: pointer
+    padding: 10px 0 20px
+    &:after
+      content: 'Click or Drag File to Upload an Image'
+      color: $mui-text-dark-hint
+      text-align: center
+      left: 0%
+      right: 0%
+      bottom: 4px
+      position: absolute
 
   input,
   textarea
@@ -65,10 +63,12 @@ textarea
 .candidate--form
   .image--field
     img
-      @include frame(120px)
+      @include frame(60px)
       margin: 0 auto 10px
+
   .remove
     position: absolute
+    z-index: 10
     bottom: -2px
     color: $mui-accent-color-light
     &:hover
@@ -108,30 +108,46 @@ textarea
   .profile
     @include frame(40px)
     &.unknown
-      background-image: asset-url('unknown.jpg')
-
+      background-image: asset-url('unknown.png')
 
 .mui-textfield > input:focus,
 .mui-select > select:focus
   height: 32px
 
 .candidate--form
-  margin-right: 15px
-  height: 500px
+  height: 520px
+  overflow-y: auto
   .remove--candidate
     top: 10px
     right: 10px
     position: absolute
     color: $mui-accent-color-light
+    font-size: 16px
     &:hover
       color: $mui-accent-color-dark
     cursor: pointer
 
 .questions--form
-  th em
-    font-weight: normal
+  overflow-y: auto
+  table
+    width: 100%
+  th
+    text-align: center
+    max-width: 120px
+    vertical-align: bottom
+    em
+      font-weight: normal
   .question
     .mui-textfield
-      width: 450px
-    .remove
-      left: -20px
+      max-width: 450px
+      min-width: 250px
+      input
+        text-align: left
+  td
+    input
+      text-align: center
+  .remove
+    position: relative
+    cursor: pointer
+    margin-right: 20px
+

@@ -1,0 +1,36 @@
+= render 'guides/breadcrumb'
+
+.mui-row
+  .mui-col-md-3
+  .mui-col-md-6
+    %h2 Add Languages
+    %p Guides can be translated into many different languages - certain fields can store multiple versions of the same information.
+    %p A print guide will be created for every languge with complete information and visitors
+    - unless @guide.languages.empty?
+      %h3 Active Languages
+      %table.mui-table
+        %thead
+          %tr
+            %th Language
+            %th
+            %th
+        %tbody
+          %tr
+            %td English
+            %td
+              .mui--pull-right= button_link_to 'Activate', guide_path(@guide, { locale: :en } ), { class: params[:locale] == 'en' ? 'mui--is-disabled' : '' }
+            %td
+
+          - @guide.languages.each do |language|
+            %tr
+              %td= language.name
+              %td
+                .mui--pull-right= button_link_to 'Activate', guide_path(@guide, { locale: language.code } ), { class: params[:locale] == language.code ? 'mui--is-disabled' : '' }
+              %td
+                .mui--pull-right= button_link_to 'Delete', guide_language_path(@guide, language), method: :delete, confirm: 'Are you sure?'
+
+    = form_for(@guide.languages.new, method: :post, url: guide_languages_path(@guide)) do |form|
+      .mui-select
+        = form.select :code, options_for_select(Language.available_languages(@guide).map{ |k,v| [v,k] })
+      .mui--pull-right
+        = form.submit 'Add', class: 'mui-btn mui-btn--raised mui-btn--accent '

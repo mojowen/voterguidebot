@@ -1,4 +1,6 @@
 class Answer < ActiveRecord::Base
+  audited associated_with: :question
+
   translates :text
 
   belongs_to :candidate

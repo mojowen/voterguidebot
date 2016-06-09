@@ -7,3 +7,20 @@
   display: block
   margin: 0 auto
 
+
+$sm-width: 544px
+$md-width: 769
+$lg-width: 992px
+$xl-width: 1200px
+
+@mixin sm
+  @media (min-width: #{$sm-width})
+    @content
+
+@mixin md
+  @media (min-width: #{$md-width})
+    @content
+
+@mixin lg
+  @media (min-width: #{$lg-width})
+    @content

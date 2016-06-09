@@ -1,0 +1,6 @@
+- content_for :breadcrumb do
+  - if @guide
+    .tick
+    = link_to @guide.name.try(:humanize) || 'My Guide', guide_path(@guide)
+    = yield
+

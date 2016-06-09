@@ -1,10 +1,27 @@
-.mui-row
-  .mui-col-md-12
-    %h2 Your Contests
-    - @guide.contests.each do |contest|
-      = contest.title
-      = button_link_to contest.title, edit_guide_contest_path(@guide, contest)
 
-  .mui-row
-  .mui-col-md-12
+= render 'guides/breadcrumb'
+
+.mui-row
+  .mui-col-md-6.mui-col-md-offset-2
+    %h2 Your Contests
+  .mui-col-md-4
     = button_link_to 'New Contest', new_guide_contest_path(@guide)
+
+.mui-row
+  .mui-col-md-10.mui-col-md-offset-2
+    %table.mui-table
+      %thead
+        %tr
+          %th Title
+          %th Description
+          %th Candidates
+          %th Questions
+          %th
+      %tbody
+      - @guide.contests.each do |contest|
+        %tr
+          %td= contest.title
+          %td= contest.description
+          %td= contest.candidates.map(&:name).join(', ')
+          %td= contest.questions.map(&:text).join(', ')
+          %td= button_link_to 'Edit', edit_guide_contest_path(@guide, contest)

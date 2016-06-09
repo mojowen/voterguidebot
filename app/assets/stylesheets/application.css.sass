@@ -29,6 +29,22 @@ body
   img
     height: 30px
 
+  .breadcrumbs
+    margin: 4px 0 0 30px
+    display: inline-block
+    a
+      opacity: 0.8
+      display: inline-block
+      position: relative
+      margin-left: 14px
+      &:before
+        content: '/'
+        margin-left: -14px
+        text-decoration: none
+        position: absolute
+        color: $mui-text-light-hint
+        opacity: 1
+
 .dashboard
   .mui-row
     margin-top: 30px
@@ -47,7 +63,9 @@ body
   z-index: 10
   position: absolute
   top: 20px
+  pointer-events: none
   .mui-panel
+    pointer-events: auto
     max-width: 400px
     min-width: 200px
     margin: 0 auto
@@ -55,5 +73,12 @@ body
 
 .fixed--menu
   position: fixed
-  top: 120px
-  left: 10%
+  bottom: 0
+  right: 15px
+  width: 200px
+
+  @include lg
+    top: 120px
+    bottom: auto
+    left: 15px
+    right: auto

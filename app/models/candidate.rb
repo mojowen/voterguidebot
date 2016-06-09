@@ -1,4 +1,6 @@
 class Candidate < ActiveRecord::Base
+  audited associated_with: :contest
+
   translates :bio
   belongs_to :contest
 

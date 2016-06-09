@@ -13,6 +13,8 @@
             %tr.mui--appbar-height
               %td
                 = link_to image_tag('robot.png'), root_path
+                - if content_for :breadcrumb
+                  .breadcrumbs= yield :breadcrumb
               %td.mui--text-right
                 = link_to edit_user_password_path do
                   %span{ style: 'margin: 10px' }

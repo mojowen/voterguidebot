@@ -52,7 +52,7 @@ var Candidate = React.createClass({
       addEndorsement = <a className="add--endorsements" onClick={this.addEndorsement}><i className="fa fa-plus-square" /></a>
     }
 
-    return <div className="candidate--form mui-col-md-5 mui-panel">
+    return <div className="candidate--form mui-col-md-5 mui-col-md-offset-1 mui-panel">
       <i className="fa fa-times remove--candidate" onClick={ this.handleRemove } />
       <InputComponent label="photo"
                       element="ImageComponent"

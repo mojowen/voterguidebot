@@ -1,3 +1,5 @@
+= render 'guides/breadcrumb'
+
 - unless @guide.errors.empty?
   - content_for :errors do
     - @guide.errors.full_messages.each do |error|

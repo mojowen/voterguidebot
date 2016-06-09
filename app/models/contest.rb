@@ -1,5 +1,7 @@
 class Contest < ActiveRecord::Base
   audited associated_with: :guide
+  has_associated_audits
+
   translates :description, :title
 
   belongs_to :guide
