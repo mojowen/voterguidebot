@@ -1,5 +1,7 @@
 class Upload < ActiveRecord::Base
-  has_attached_file :file, default_url: "/images/:style/missing.png"
+  has_attached_file :file, default_url: "/images/unknown.png"
+
+
   belongs_to :user
 
   validates_attachment :file, content_type: {

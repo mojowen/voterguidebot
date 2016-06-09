@@ -11,8 +11,10 @@ Rails.application.routes.draw do
       member do
         get 'invite'
         get 'fields'
+        get 'measures'
         post 'users'
       end
+      resources :languages, only: [:index, :create, :destroy]
       resources :contests, except: :show
     end
 

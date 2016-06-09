@@ -9,9 +9,11 @@
 !/log/.keep
 /tmp
 /public/assets
-/public/system
+/public/uploads
 
 # Ignore env file
 .env
+google_key.json
+
 **DS_Store
 .byebug_history

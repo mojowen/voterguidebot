@@ -88,5 +88,17 @@ Rails.application.configure do
       channel: '#vg',
       additional_parameters: { mrkdwn: true }}
 
- config.action_controller.asset_host = 'http://build.americanvoterguide.org'
+  config.action_controller.asset_host = 'http://build.americanvoterguide.org'
+  config.paperclip_defaults = {
+    storage: :fog,
+    fog_credentials: {
+      provider: 'Google',
+      google_project: 'the-ballot',
+      google_client_email: 'voter-guide-bot@the-ballot.iam.gserviceaccount.com',
+      google_json_key_location: 'google_key.json'
+    },
+    fog_directory: 'voterguidebot_uploads',
+    path: "uploads/:hash.:extension",
+    hash_secret: ENV['PAPERCLIP_HASH']
+  }
 end
