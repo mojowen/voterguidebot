@@ -13,9 +13,30 @@ RSpec.describe GuidesController, active_mocker: true do
   end
 
   describe '#create' do
-    let(:guide_params) {{ guide: { name: 'What a great guide' }}}
+    let(:guide_params) do
+      {
+        guide: {
+          name: 'What a great guide',
+          location_attributes: {
+            address: 'Atlanta, GA',
+            city: 'Atlanta',
+            state: 'GA',
+            lat: 47.000,
+            lng: -135.000,
+            north: 47.000,
+            south: -135.000,
+            east: 47.000,
+            west: -135.000
+          }
+        }
+      }
+    end
     it 'creates a new guide' do
       expect{ post :create, guide_params }.to change{ Guide.count }.by(1)
+    end
+    it 'creates a new location' do
+      expect{ post :create, guide_params }.to change(Location, :count).by(1)
+      expect(assigns(:guide).location).to be_truthy
     end
     it 'redirects to edit' do
       post :create, guide_params
@@ -30,7 +51,7 @@ RSpec.describe GuidesController, active_mocker: true do
       it 'renders new with errors' do
         post :create, { guide: { foo: 2 }}
         expect(response).to render_template(:new)
-        expect(assigns(:guide).errors.messages).to eq(name: ["can't be blank"])
+        expect(assigns(:guide).errors.messages).to include(name: ["can't be blank"])
       end
     end
   end
@@ -64,12 +85,39 @@ RSpec.describe GuidesController, active_mocker: true do
         let(:guide_params) do
           {
             id: guide.id,
-            guide: { fields: { title_page_header: 'what' } }
+            guide: { fields: { title_page_header: 'what' } },
           }
         end
         it 'creates a field that is missing' do
           post :update, guide_params
           expect(guide.fields.first.value).to eq('what')
+        end
+      end
+      describe 'updating guides' do
+        let(:location) { Fabricate :location, guide: guide, city: 'Portland' }
+        let(:city) { 'Atlanta' }
+        let(:guide_params) do
+          {
+            id: guide.id,
+            guide: {
+              name: 'What a great guide',
+              location_attributes: {
+                address: 'Atlanta, GA',
+                city: city,
+                state: 'GA',
+                lat: 47.000,
+                lng: -135.000,
+                north: 47.000,
+                south: -135.000,
+                east: 47.000,
+                west: -135.000
+              }
+            }
+          }
+        end
+        it 'updates the location' do
+          post :create, guide_params
+          expect(assigns(:guide).location.city).to eq(city)
         end
       end
     end

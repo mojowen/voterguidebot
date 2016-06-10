@@ -13,11 +13,11 @@ class CandidateMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { contest: nil, translations: nil, answers: nil, endorsements: nil }.merge(super)
+      @associations ||= { contest: nil, audits: nil, translations: nil, answers: nil, endorsements: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Candidate::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] }, "Endorsement" => { has_many: [:endorsements] } }.merge(super)
+      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Candidate::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] }, "Endorsement" => { has_many: [:endorsements] } }.merge(super)
     end
 
     def mocked_class
@@ -155,6 +155,16 @@ class CandidateMock < ActiveMocker::Base
 
   alias_method(:create_contest!, :create_contest)
   # has_many
+  def audits
+    read_association(:audits, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: "")
+    end)
+  end
+
+  def audits=(val)
+    write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
+  end
+
   def translations
     read_association(:translations, lambda do
       ActiveMocker::HasMany.new([], foreign_key: "candidate_id", foreign_id: self.id, relation_class: classes("Candidate::Translation"), source: "")

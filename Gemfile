@@ -13,9 +13,9 @@ gem 'haml'
 gem 'audited', '~> 4.0'
 gem 'audited-activerecord', '~> 4.0'
 gem 'globalize'
-gem "paperclip", "~> 5.0.0.beta1"
-gem 'fog-local'
+gem 'paperclip', '~> 5.0.0.beta1'
 gem 'fog-google'
+gem 'fog-local'
 gem 'google-api-client', '~> 0.8.6'
 
 gem 'unicorn'

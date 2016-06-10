@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Guide, active_mocker: true do
-  subject { described_class.new name: 'My Test Name' }
+  subject { Fabricate :guide, name: 'My Test Name' }
 
   context 'with users' do
     let(:users) { [Fabricate(:user), Fabricate(:user)] }

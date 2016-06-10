@@ -1,0 +1,33 @@
+:javascript
+  if( typeof window.google === 'undefined' ) {
+    var script = document.createElement('script')
+    script.src = "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API']}&callback=initMap"
+    document.head.appendChild(script)
+  }
+
+  function initMap() {
+    var search_input = document.getElementById('location_box')
+    if( search_input ) {
+      var event = document.createEvent("HTMLEvents")
+      event.initEvent("change", false, true)
+      search_input.dispatchEvent(event)
+    }
+  }
+
+- unless guide.errors.empty?
+  - content_for :errors do
+    - guide.errors.full_messages.each do |error|
+      %p= error
+
+= form_for(guide, html: { autocomplete: :off }) do |frm|
+  .mui-textfield
+    = frm.label :name
+    = frm.text_field :name, placeholder: 'The Best Little Voter Guide in Texas'
+  %h2
+    %i.fa.fa-map-marker
+    Edit Location
+  .mui-textfield
+    = react_component :LocationSearch, guide.location
+  .mui--pull-right
+    = frm.submit 'Save', class: 'mui-btn mui-btn--raised mui-btn--primary'
+

@@ -6,7 +6,7 @@ var InputComponent = React.createClass({
       value: null,
       placeholder: null,
       fa: null,
-      handleChange: function() { return true }
+      onChange: function() { }
     }
   },
   handleChange: function(event) {
@@ -15,7 +15,6 @@ var InputComponent = React.createClass({
   render: function() {
     var label = this.props.label ? <label>{ this.props.label }</label> : '',
         input = <this.props.element ref="input"
-                                    onChange={ this.handleChange }
                                     { ...this.props }
                                     value={ this.props.value } />,
         font_awesome = ''
@@ -25,7 +24,6 @@ var InputComponent = React.createClass({
     }
     if( this.props.element === 'ImageComponent' ) {
         input = <ImageComponent ref="input"
-                                onChange={ this.handleChange }
                                 { ...this.props }
                                 value={ this.props.value } />
     }

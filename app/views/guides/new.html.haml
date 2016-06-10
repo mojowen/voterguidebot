@@ -1,15 +1,5 @@
-- unless @guide.errors.empty?
-  - content_for :errors do
-    - @guide.errors.full_messages.each do |error|
-      %p= error
-
 .mui-row
   .mui-col-md-3
   .mui-col-md-6
     %h2 Create a New Guide
-    = form_for(@guide) do |frm|
-      .mui-textfield
-        = frm.label :name
-        = frm.text_field :name, placeholder: 'The Best Little Voter Guide in Texas'
-      .mui--pull-right
-        = frm.submit 'Get Started', class: 'mui-btn mui-btn--raised mui-btn--primary'
+    = render 'form', { guide: @guide }

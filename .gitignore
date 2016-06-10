@@ -8,8 +8,8 @@
 /log/*
 !/log/.keep
 /tmp
-/public/assets
-/public/uploads
+/public/assets/
+/public/system/
 
 # Ignore env file
 .env

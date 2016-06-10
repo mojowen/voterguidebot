@@ -47,8 +47,10 @@ var FieldFormRow = React.createClass({
     return <div className='mui-row form--row' >
       <div className='mui-col-md-6'>
         <InputComponent after={this.props.limit ? after : ''}
-                        handleChange={this.updateValue}
-                        {...this.props} />
+                        ref="input"
+                        onChange={this.updateValue}
+                        {...this.props}
+                        value={this.state.value} />
       </div>
       <div className='mui-col-md-5 md-offset-1 mui-textfield preview--field'>
         <label>Preview:</label>

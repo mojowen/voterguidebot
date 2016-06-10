@@ -7,8 +7,12 @@ class Guide < ActiveRecord::Base
   has_many :contests
   has_many :languages
   has_many :fields
+  has_one :location
+
+  accepts_nested_attributes_for :location
 
   validates :name, presence: true
+  validates :location, presence: true
 
   def template
     @template ||= Template.default

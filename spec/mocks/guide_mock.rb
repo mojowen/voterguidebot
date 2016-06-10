@@ -13,11 +13,11 @@ class GuideMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, languages: nil, fields: nil }.merge(super)
+      @associations ||= { location: nil, audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, languages: nil, fields: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Language" => { has_many: [:languages] }, "Field" => { has_many: [:fields] } }.merge(super)
+      @associations_by_class ||= { "Location" => { has_one: [:location] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Language" => { has_many: [:languages] }, "Field" => { has_many: [:fields] } }.merge(super)
     end
 
     def mocked_class
@@ -77,6 +77,31 @@ class GuideMock < ActiveMocker::Base
   end
 
   # _associations.erb
+  # has_one
+  def location
+    read_association(:location)
+  end
+
+  def location=(val)
+    write_association(:location, val)
+    ActiveMocker::HasOne.new(val, child_self: self, foreign_key: "guide_id").item
+  end
+
+  def build_location(attributes = {}, &block)
+    if classes("Location")
+      write_association(:location, classes("Location").new(attributes, &block))
+    end
+
+  end
+
+  def create_location(attributes = {}, &block)
+    if classes("Location")
+      write_association(:location, classes("Location").new(attributes, &block))
+    end
+
+  end
+
+  alias_method(:create_location!, :create_location)
   # has_many
   def audits
     read_association(:audits, lambda do

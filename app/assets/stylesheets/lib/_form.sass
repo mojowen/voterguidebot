@@ -110,9 +110,11 @@ textarea
     &.unknown
       background-image: asset-url('unknown.png')
 
-.mui-textfield > input:focus,
-.mui-select > select:focus
-  height: 32px
+.mui-textfield > input,
+.mui-select > select
+  &, &:focus
+    height: 32px
+    margin-bottom: 0
 
 .candidate--form
   height: 520px
@@ -151,3 +153,17 @@ textarea
     cursor: pointer
     margin-right: 20px
 
+
+.location--search
+  .fa-check
+    position: absolute
+    right: 0
+    top: 2.5rem
+    color: $mui-accent-color-dark
+  ul
+    top: 100%
+    list-style: none
+    position: absolute
+    margin: 0
+    width: 100%
+    z-index: 10

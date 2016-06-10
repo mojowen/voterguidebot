@@ -47,6 +47,11 @@ describe('FieldFormRow', function() {
       expect(this.dom.querySelector('textarea').value).toEqual(this.props.value)
       expect(this.component.state.value).toEqual(this.props.value)
     })
+    it('updates passed value', function() {
+      expect(this.dom.querySelector('textarea').value).toEqual(this.props.value)
+      this.component.refs.input.props.onChange({ target: { value: 'new value' }})
+      expect(this.component.state.value).toEqual('new value')
+    })
     it('shows remaining characters', function() {
       expect(parseInt(this.component.refs.remaining.innerText)).toEqual(
         this.component.props.limit - this.props.value.length)

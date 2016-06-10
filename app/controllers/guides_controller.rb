@@ -26,7 +26,7 @@ class GuidesController < ApplicationController
 
     respond_to do |format|
       format.json { render status: saved ? 200 : 400, json: '' }
-      format.html { redirect_to guide_path(@guide), notice: saved ? 'That worked' : 'Whoops' }
+      format.html { redirect_to guide_path(@guide), notice: saved ? 'Guide saved!' : 'Could not save!' }
     end
   end
 
@@ -42,7 +42,10 @@ class GuidesController < ApplicationController
   end
 
   def guide_params
-    params.require(:guide).permit(:name)
+    params.require(:guide).permit(
+        :name,
+        location_attributes: [:city, :state, :address, :lat, :lng,
+                              :north, :south, :east, :west])
   end
 
   def invite_params

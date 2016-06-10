@@ -1,33 +1,32 @@
 require("active_mocker/mock")
-class LanguageMock < ActiveMocker::Base
+class LocationMock < ActiveMocker::Base
   created_with("2.2.2")
   # _modules_constants.erb
-  LANGUAGES = { ar: "Arabic", zh: "Chinese", de: "German", ja: "Japanese", ko: "Korean", es: "Spanish", vi: "Vietnamese" }
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "code" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "address" => nil, "city" => nil, "state" => nil, "lat" => nil, "lng" => nil, "west" => nil, "east" => nil, "north" => nil, "south" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, code: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, address: String, city: String, state: String, lat: BigDecimal, lng: BigDecimal, west: BigDecimal, east: BigDecimal, north: BigDecimal, south: BigDecimal, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
     end
 
     def associations
-      @associations ||= { guide: nil, audits: nil }.merge(super)
+      @associations ||= { guide: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] } }.merge(super)
+      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] } }.merge(super)
     end
 
     def mocked_class
-      "Language"
+      "Location"
     end
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "guide_id", "code", "created_at", "updated_at"] | super)
+      @attribute_names ||= (["id", "guide_id", "address", "city", "state", "lat", "lng", "west", "east", "north", "south", "created_at", "updated_at"] | super)
     end
 
     def primary_key
@@ -39,7 +38,7 @@ class LanguageMock < ActiveMocker::Base
     end
 
     def table_name
-      "languages" || super
+      "locations" || super
     end
 
   end
@@ -61,12 +60,76 @@ class LanguageMock < ActiveMocker::Base
     write_attribute(:guide_id, val)
   end
 
-  def code
-    read_attribute(:code)
+  def address
+    read_attribute(:address)
   end
 
-  def code=(val)
-    write_attribute(:code, val)
+  def address=(val)
+    write_attribute(:address, val)
+  end
+
+  def city
+    read_attribute(:city)
+  end
+
+  def city=(val)
+    write_attribute(:city, val)
+  end
+
+  def state
+    read_attribute(:state)
+  end
+
+  def state=(val)
+    write_attribute(:state, val)
+  end
+
+  def lat
+    read_attribute(:lat)
+  end
+
+  def lat=(val)
+    write_attribute(:lat, val)
+  end
+
+  def lng
+    read_attribute(:lng)
+  end
+
+  def lng=(val)
+    write_attribute(:lng, val)
+  end
+
+  def west
+    read_attribute(:west)
+  end
+
+  def west=(val)
+    write_attribute(:west, val)
+  end
+
+  def east
+    read_attribute(:east)
+  end
+
+  def east=(val)
+    write_attribute(:east, val)
+  end
+
+  def north
+    read_attribute(:north)
+  end
+
+  def north=(val)
+    write_attribute(:north, val)
+  end
+
+  def south
+    read_attribute(:south)
+  end
+
+  def south=(val)
+    write_attribute(:south, val)
   end
 
   def created_at
@@ -115,17 +178,6 @@ class LanguageMock < ActiveMocker::Base
   end
 
   alias_method(:create_guide!, :create_guide)
-  # has_many
-  def audits
-    read_association(:audits, lambda do
-      ActiveMocker::HasMany.new([], foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: "")
-    end)
-  end
-
-  def audits=(val)
-    write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
-  end
-
   # _scopes.erb
   module Scopes
     include(ActiveMocker::Base::Scopes)
@@ -133,29 +185,17 @@ class LanguageMock < ActiveMocker::Base
 
   extend(Scopes)
   class ScopeRelation < ActiveMocker::Association
-    include(LanguageMock::Scopes)
+    include(LocationMock::Scopes)
   end
 
   def self.__new_relation__(collection)
-    LanguageMock::ScopeRelation.new(collection)
+    LocationMock::ScopeRelation.new(collection)
   end
 
   private_class_method(:__new_relation__)
   # _recreate_class_method_calls.erb
   def self.attribute_aliases
     @attribute_aliases ||= {}.merge(super)
-  end
-
-  def as_json(options = nil)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
-  end
-
-  def name
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
-  end
-
-  def self.available_languages(guide = nil)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [guide])
   end
 
 end
