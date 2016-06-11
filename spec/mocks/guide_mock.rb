@@ -5,11 +5,11 @@ class GuideMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "name" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "name" => nil, "created_at" => nil, "updated_at" => nil, "election_date" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, name: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class GuideMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "name", "created_at", "updated_at"] | super)
+      @attribute_names ||= (["id", "name", "created_at", "updated_at", "election_date"] | super)
     end
 
     def primary_key
@@ -74,6 +74,14 @@ class GuideMock < ActiveMocker::Base
 
   def updated_at=(val)
     write_attribute(:updated_at, val)
+  end
+
+  def election_date
+    read_attribute(:election_date)
+  end
+
+  def election_date=(val)
+    write_attribute(:election_date, val)
   end
 
   # _associations.erb

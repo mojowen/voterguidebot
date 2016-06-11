@@ -44,6 +44,7 @@ class GuidesController < ApplicationController
   def guide_params
     params.require(:guide).permit(
         :name,
+        :election_date,
         location_attributes: [:city, :state, :address, :lat, :lng,
                               :north, :south, :east, :west])
   end

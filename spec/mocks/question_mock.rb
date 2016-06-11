@@ -13,11 +13,11 @@ class QuestionMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { contest: nil, translations: nil, answers: nil }.merge(super)
+      @associations ||= { contest: nil, guide: nil, audits: nil, translations: nil, answers: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Question::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] } }.merge(super)
+      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Guide" => { has_one: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Question::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] } }.merge(super)
     end
 
     def mocked_class
@@ -122,7 +122,42 @@ class QuestionMock < ActiveMocker::Base
   end
 
   alias_method(:create_contest!, :create_contest)
+  # has_one
+  def guide
+    read_association(:guide)
+  end
+
+  def guide=(val)
+    write_association(:guide, val)
+    ActiveMocker::HasOne.new(val, child_self: self, foreign_key: "guide_id").item
+  end
+
+  def build_guide(attributes = {}, &block)
+    if classes("Guide")
+      write_association(:guide, classes("Guide").new(attributes, &block))
+    end
+
+  end
+
+  def create_guide(attributes = {}, &block)
+    if classes("Guide")
+      write_association(:guide, classes("Guide").new(attributes, &block))
+    end
+
+  end
+
+  alias_method(:create_guide!, :create_guide)
   # has_many
+  def audits
+    read_association(:audits, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: "")
+    end)
+  end
+
+  def audits=(val)
+    write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
+  end
+
   def translations
     read_association(:translations, lambda do
       ActiveMocker::HasMany.new([], foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Question::Translation"), source: "")

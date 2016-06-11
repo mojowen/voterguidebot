@@ -23,9 +23,12 @@
   .mui-textfield
     = frm.label :name
     = frm.text_field :name, placeholder: 'The Best Little Voter Guide in Texas'
+  .mui-textfield
+    = frm.label :election_date
+    = frm.date_field :election_date
   %h2
     %i.fa.fa-map-marker
-    Edit Location
+    Location
   .mui-textfield
     = react_component :LocationSearch, guide.location
   .mui--pull-right

@@ -13,11 +13,11 @@ class CandidateMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { contest: nil, audits: nil, translations: nil, answers: nil, endorsements: nil }.merge(super)
+      @associations ||= { contest: nil, guide: nil, audits: nil, translations: nil, answers: nil, endorsements: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Candidate::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] }, "Endorsement" => { has_many: [:endorsements] } }.merge(super)
+      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Guide" => { has_one: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Candidate::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] }, "Endorsement" => { has_many: [:endorsements] } }.merge(super)
     end
 
     def mocked_class
@@ -154,6 +154,31 @@ class CandidateMock < ActiveMocker::Base
   end
 
   alias_method(:create_contest!, :create_contest)
+  # has_one
+  def guide
+    read_association(:guide)
+  end
+
+  def guide=(val)
+    write_association(:guide, val)
+    ActiveMocker::HasOne.new(val, child_self: self, foreign_key: "guide_id").item
+  end
+
+  def build_guide(attributes = {}, &block)
+    if classes("Guide")
+      write_association(:guide, classes("Guide").new(attributes, &block))
+    end
+
+  end
+
+  def create_guide(attributes = {}, &block)
+    if classes("Guide")
+      write_association(:guide, classes("Guide").new(attributes, &block))
+    end
+
+  end
+
+  alias_method(:create_guide!, :create_guide)
   # has_many
   def audits
     read_association(:audits, lambda do

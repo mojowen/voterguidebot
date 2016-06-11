@@ -13,11 +13,11 @@ class LocationMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { guide: nil }.merge(super)
+      @associations ||= { guide: nil, audits: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] } }.merge(super)
+      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] } }.merge(super)
     end
 
     def mocked_class
@@ -178,6 +178,17 @@ class LocationMock < ActiveMocker::Base
   end
 
   alias_method(:create_guide!, :create_guide)
+  # has_many
+  def audits
+    read_association(:audits, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: "")
+    end)
+  end
+
+  def audits=(val)
+    write_association(:audits, ActiveMocker::HasMany.new(val, foreign_key: "auditable_id", foreign_id: self.id, relation_class: classes("Audited::Adapters::ActiveRecord::Audit"), source: ""))
+  end
+
   # _scopes.erb
   module Scopes
     include(ActiveMocker::Base::Scopes)

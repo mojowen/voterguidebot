@@ -17,6 +17,7 @@ RSpec.describe GuidesController, active_mocker: true do
       {
         guide: {
           name: 'What a great guide',
+          election_date: '11/8/2016',
           location_attributes: {
             address: 'Atlanta, GA',
             city: 'Atlanta',

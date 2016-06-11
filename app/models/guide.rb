@@ -13,6 +13,7 @@ class Guide < ActiveRecord::Base
 
   validates :name, presence: true
   validates :location, presence: true
+  validates :election_date, presence: true
 
   def template
     @template ||= Template.default
