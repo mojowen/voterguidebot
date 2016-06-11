@@ -20,7 +20,8 @@ class Guide < ActiveRecord::Base
   end
 
   def template_fields
-    template.fields.clone.map do |template_field|
+    template.fields.map do |template_field|
+      template_field = template_field.clone
       template_field[:value] = field_value template_field
       template_field
     end
