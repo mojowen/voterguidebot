@@ -1,4 +1,6 @@
 class Location < ActiveRecord::Base
+  audited associated_with: :guide
+
   belongs_to :guide
 
   validates :lat, presence: true
