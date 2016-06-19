@@ -1,0 +1,4 @@
+.mui-row
+  .mui-col-md-2 &nbsp;
+  .mui-col-md-10{ style: 'margin-top: 30px' }
+    = react_component :ContestForm, measure: measure, url: measure.new_record? ? guide_contests_path(guide) : guide_measure_path(guide, measure), languages: guide.languages

@@ -1,0 +1,2 @@
+Fabricator(:measure) do
+end

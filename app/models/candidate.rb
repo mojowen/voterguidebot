@@ -6,5 +6,5 @@ class Candidate < ActiveRecord::Base
   has_one :guide, through: :contest
 
   has_many :answers, dependent: :destroy
-  has_many :endorsements, dependent: :destroy
+  has_many :endorsements, as: :endorsing, dependent: :destroy
 end

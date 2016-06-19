@@ -19,7 +19,8 @@ var ContestForm = React.createClass({
                          .map(function(candidate) {
                             return _.chain(candidate.endorsements)
                                     .map(function(endorser) {
-                                      return [ { candidate_id: candidate.id,
+                                      return [ { endorsing_id: candidate.id,
+                                                 endorsing_type: 'candidate',
                                                  endorser: endorser }] })
                                     .value() })
                          .flatten()

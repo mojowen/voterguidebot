@@ -43,37 +43,38 @@ RSpec.describe Contest, type: :model do
     end
 
     context 'with endorsers' do
-      let(:candidate_id) { 'candidate2' }
+      let(:endorsing_id) { 'candidate2' }
       let(:endorsement) do
-        { candidate_id: candidate_id,
+        { endorsing_id: endorsing_id,
+          endorsing_type: 'candidate',
           endorser: 'Dudes for Dude Stuff' }
       end
       let(:raw_obj) do
-        { candidates: [{ id: candidate_id }],
+        { candidates: [{ id: endorsing_id }],
           endorsements: [endorsement] }
       end
 
       it 'creates new endorsers' do
         subject.assign_associates raw_obj
-        expect(subject.endorsements.first.candidate).to eq(
+        expect(subject.endorsements.first.endorsing).to eq(
           subject.candidates.first)
       end
       context 'with existing candidate' do
         let!(:candidate) { Fabricate :candidate, contest: subject }
-        let(:candidate_id) { candidate.id }
+        let(:endorsing_id) { candidate.id }
         it 'associates with existing candidate' do
           subject.assign_associates raw_obj
-          expect(subject.endorsements.first.candidate).to eq(candidate)
+          expect(subject.endorsements.first.endorsing).to eq(candidate)
         end
       end
       context 'with existing candidate' do
         let(:candidate) { Fabricate :candidate, contest: subject }
-        let(:candidate_id) { candidate.id }
-        let!(:existing_endorsement) { Fabricate :endorsement, candidate: candidate, endorser: 'what' }
+        let(:endorsing_id) { candidate.id }
+        let!(:existing_endorsement) { Fabricate :endorsement, endorsing: candidate, endorser: 'what' }
         it 'updates endorsers' do
           subject.assign_associates raw_obj
           expect(subject.endorsements.first.id).to eq(existing_endorsement.id)
-          expect(subject.endorsements.first.endorser).to eq(endorsement[:endorser])
+          expect(subject.reload.endorsements.first.endorser).to eq(endorsement[:endorser])
         end
         it 'deletes unused endorsers' do
           subject.assign_associates raw_obj.update(endorsements: [])

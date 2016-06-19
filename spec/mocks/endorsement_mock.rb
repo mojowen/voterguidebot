@@ -5,19 +5,19 @@ class EndorsementMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "candidate_id" => nil, "endorser" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "endorsing_id" => nil, "endorsing_type" => nil, "endorser" => nil, "created_at" => nil, "updated_at" => nil, "stance" => 0).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, candidate_id: Fixnum, endorser: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, endorsing_id: Fixnum, endorsing_type: String, endorser: String, created_at: DateTime, updated_at: DateTime, stance: Fixnum }, method(:build_type)).merge(super)
     end
 
     def associations
-      @associations ||= { candidate: nil, guide: nil, audits: nil, translations: nil }.merge(super)
+      @associations ||= { audits: nil, translations: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Candidate" => { belongs_to: [:candidate] }, "Guide" => { has_one: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Endorsement::Translation" => { has_many: [:translations] } }.merge(super)
+      @associations_by_class ||= { "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Endorsement::Translation" => { has_many: [:translations] } }.merge(super)
     end
 
     def mocked_class
@@ -26,7 +26,7 @@ class EndorsementMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "candidate_id", "endorser", "created_at", "updated_at"] | super)
+      @attribute_names ||= (["id", "endorsing_id", "endorsing_type", "endorser", "created_at", "updated_at", "stance"] | super)
     end
 
     def primary_key
@@ -52,12 +52,20 @@ class EndorsementMock < ActiveMocker::Base
     write_attribute(:id, val)
   end
 
-  def candidate_id
-    read_attribute(:candidate_id)
+  def endorsing_id
+    read_attribute(:endorsing_id)
   end
 
-  def candidate_id=(val)
-    write_attribute(:candidate_id, val)
+  def endorsing_id=(val)
+    write_attribute(:endorsing_id, val)
+  end
+
+  def endorsing_type
+    read_attribute(:endorsing_type)
+  end
+
+  def endorsing_type=(val)
+    write_attribute(:endorsing_type, val)
   end
 
   def endorser
@@ -84,61 +92,15 @@ class EndorsementMock < ActiveMocker::Base
     write_attribute(:updated_at, val)
   end
 
+  def stance
+    read_attribute(:stance)
+  end
+
+  def stance=(val)
+    write_attribute(:stance, val)
+  end
+
   # _associations.erb
-  # belongs_to
-  def candidate
-    read_association(:candidate) || write_association(:candidate, classes("Candidate").try do |k|
-      k.find_by(id: candidate_id)
-    end)
-  end
-
-  def candidate=(val)
-    write_association(:candidate, val)
-    ActiveMocker::BelongsTo.new(val, child_self: self, foreign_key: :candidate_id).item
-  end
-
-  def build_candidate(attributes = {}, &block)
-    association = classes("Candidate").try(:new, attributes, &block)
-    unless association.nil?
-      write_association(:candidate, association)
-    end
-
-  end
-
-  def create_candidate(attributes = {}, &block)
-    association = classes("Candidate").try(:create, attributes, &block)
-    unless association.nil?
-      write_association(:candidate, association)
-    end
-
-  end
-
-  alias_method(:create_candidate!, :create_candidate)
-  # has_one
-  def guide
-    read_association(:guide)
-  end
-
-  def guide=(val)
-    write_association(:guide, val)
-    ActiveMocker::HasOne.new(val, child_self: self, foreign_key: "guide_id").item
-  end
-
-  def build_guide(attributes = {}, &block)
-    if classes("Guide")
-      write_association(:guide, classes("Guide").new(attributes, &block))
-    end
-
-  end
-
-  def create_guide(attributes = {}, &block)
-    if classes("Guide")
-      write_association(:guide, classes("Guide").new(attributes, &block))
-    end
-
-  end
-
-  alias_method(:create_guide!, :create_guide)
   # has_many
   def audits
     read_association(:audits, lambda do
@@ -178,6 +140,10 @@ class EndorsementMock < ActiveMocker::Base
   # _recreate_class_method_calls.erb
   def self.attribute_aliases
     @attribute_aliases ||= {}.merge(super)
+  end
+
+  def guide
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
 end

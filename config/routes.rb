@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       end
       resources :languages, only: [:index, :create, :destroy]
       resources :contests, except: :show
+      resources :measures, except: :show
     end
 
     resources :uploads, only: [:create]

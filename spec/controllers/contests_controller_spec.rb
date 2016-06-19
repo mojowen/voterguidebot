@@ -53,7 +53,8 @@ RSpec.describe ContestsController, active_mocker: true do
       end
       let(:endorsements) do
         [{ 'endorser' => 'Ben and Jerrys',
-           'candidate_id' => '5' }]
+           'endorsing_id' => '5',
+           'endorsing_type' => 'candidate' }]
       end
       let(:contest_params) do
         { guide_id: guide.id,

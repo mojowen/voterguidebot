@@ -13,11 +13,11 @@ class AnswerMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { candidate: nil, question: nil, audits: nil, translations: nil }.merge(super)
+      @associations ||= { candidate: nil, question: nil, contest: nil, guide: nil, audits: nil, translations: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Candidate" => { belongs_to: [:candidate] }, "Question" => { belongs_to: [:question] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Answer::Translation" => { has_many: [:translations] } }.merge(super)
+      @associations_by_class ||= { "Candidate" => { belongs_to: [:candidate] }, "Question" => { belongs_to: [:question] }, "Contest" => { has_one: [:contest] }, "Guide" => { has_one: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Answer::Translation" => { has_many: [:translations] } }.merge(super)
     end
 
     def mocked_class
@@ -150,6 +150,55 @@ class AnswerMock < ActiveMocker::Base
   end
 
   alias_method(:create_question!, :create_question)
+  # has_one
+  def contest
+    read_association(:contest)
+  end
+
+  def contest=(val)
+    write_association(:contest, val)
+    ActiveMocker::HasOne.new(val, child_self: self, foreign_key: "contest_id").item
+  end
+
+  def build_contest(attributes = {}, &block)
+    if classes("Contest")
+      write_association(:contest, classes("Contest").new(attributes, &block))
+    end
+
+  end
+
+  def create_contest(attributes = {}, &block)
+    if classes("Contest")
+      write_association(:contest, classes("Contest").new(attributes, &block))
+    end
+
+  end
+
+  alias_method(:create_contest!, :create_contest)
+  def guide
+    read_association(:guide)
+  end
+
+  def guide=(val)
+    write_association(:guide, val)
+    ActiveMocker::HasOne.new(val, child_self: self, foreign_key: "guide_id").item
+  end
+
+  def build_guide(attributes = {}, &block)
+    if classes("Guide")
+      write_association(:guide, classes("Guide").new(attributes, &block))
+    end
+
+  end
+
+  def create_guide(attributes = {}, &block)
+    if classes("Guide")
+      write_association(:guide, classes("Guide").new(attributes, &block))
+    end
+
+  end
+
+  alias_method(:create_guide!, :create_guide)
   # has_many
   def audits
     read_association(:audits, lambda do

@@ -1,7 +1,7 @@
 class CreateEndorsements < ActiveRecord::Migration
   def up
     create_table :endorsements do |t|
-      t.references :candidate
+      t.references :endorsing, polymorphic: true, index: true
       t.string :endorser
 
       t.timestamps null: false

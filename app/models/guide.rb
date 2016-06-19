@@ -5,6 +5,7 @@ class Guide < ActiveRecord::Base
   has_many :permissions
   has_many :users, through: :permissions
   has_many :contests
+  has_many :measures
   has_many :languages
   has_many :fields
   has_one :location

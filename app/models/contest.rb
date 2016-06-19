@@ -51,12 +51,13 @@ class Contest < ActiveRecord::Base
   end
 
   def reassign_ids(association, old_id, new_id)
-    association = "#{association.to_s.singularize}_id"
+    as_key = "#{association.to_s.singularize}_id"
+
     %w{answers endorsements}.each do |sub_association|
       next unless associates_obj[sub_association]
       associates_obj[sub_association].map! do |sub_obj|
-        sub_obj = sub_obj
-        sub_obj.update({ association => new_id }) if sub_obj[association] == old_id
+        foreign_key = sub_association == 'endorsements' ? :endorsing_id : as_key
+        sub_obj.update({ foreign_key => new_id }) if sub_obj[foreign_key] == old_id
       end
     end
   end
@@ -67,7 +68,8 @@ class Contest < ActiveRecord::Base
 
     associates_obj[:endorsements].each do |raw_endorsement|
       endorsement = endorsements.find_or_initialize_by(
-        candidate_id: raw_endorsement[:candidate_id])
+        endorsing_id: raw_endorsement[:endorsing_id],
+        endorsing_type: raw_endorsement[:endorsing_type])
 
       endorsement.endorser = raw_endorsement[:endorser]
       next unless endorsement.valid?

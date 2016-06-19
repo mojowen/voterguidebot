@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611153453) do
+ActiveRecord::Schema.define(version: 20160619155721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,11 +114,15 @@ ActiveRecord::Schema.define(version: 20160611153453) do
   add_index "endorsement_translations", ["locale"], name: "index_endorsement_translations_on_locale", using: :btree
 
   create_table "endorsements", force: :cascade do |t|
-    t.integer  "candidate_id"
+    t.integer  "endorsing_id"
+    t.string   "endorsing_type"
     t.string   "endorser"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "stance",         default: 0
   end
+
+  add_index "endorsements", ["endorsing_type", "endorsing_id"], name: "index_endorsements_on_endorsing_type_and_endorsing_id", using: :btree
 
   create_table "field_translations", force: :cascade do |t|
     t.integer  "field_id",   null: false
@@ -168,6 +172,30 @@ ActiveRecord::Schema.define(version: 20160611153453) do
     t.decimal  "south"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "measure_translations", force: :cascade do |t|
+    t.integer  "measure_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
+    t.string   "title"
+    t.text     "yes_means"
+    t.text     "no_means"
+  end
+
+  add_index "measure_translations", ["locale"], name: "index_measure_translations_on_locale", using: :btree
+  add_index "measure_translations", ["measure_id"], name: "index_measure_translations_on_measure_id", using: :btree
+
+  create_table "measures", force: :cascade do |t|
+    t.integer  "guide_id"
+    t.string   "title"
+    t.text     "description"
+    t.text     "yes_means"
+    t.text     "no_means"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "permissions", force: :cascade do |t|

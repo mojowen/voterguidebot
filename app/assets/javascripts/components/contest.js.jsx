@@ -5,7 +5,8 @@ var Contest = React.createClass({
              questions: [],
              answers: [],
              title: '',
-             description: '' }
+             description: '',
+             changed: false }
   },
   componentDidMount: function() {
     var candidates = this.state.candidates,
@@ -38,23 +39,27 @@ var Contest = React.createClass({
              title: this.props.title,
              description: this.props.description }
   },
+  setChangedState: function(new_state) {
+    new_state.changed = true
+    this.setState(new_state)
+  },
   handleClickToAddCandidate: function(event) {
     var candidates = this.state.candidates
     candidates.push(this.newObject('candidate', { endorsements: [] }))
-    this.setState({ candidates: candidates })
+    this.setChangedState({ candidates: candidates })
     event.preventDefault()
   },
   handleChange: function(event) {
     var new_state = {}
     new_state[event.currentTarget.name] = event.currentTarget.value
-    this.setState(new_state)
+    this.setChangedState(new_state)
   },
   handleCandidateChange: function(id, key, value) {
     var index = _.map(this.state.candidates,'id').indexOf(id),
         candidates = this.state.candidates
 
     candidates[index][key] = value
-    this.setState({ candidates: candidates })
+    this.setChangedState({ candidates: candidates })
   },
   handleCandidateRemove: function(id) {
     var index = _.map(this.state.candidates,'id').indexOf(id),
@@ -67,7 +72,7 @@ var Contest = React.createClass({
 
       if( !candidate.new ) destroyed.push({ id: candidate.id, _destroy: true })
 
-      this.setState({
+      this.setChangedState({
         candidates: _.without(candidates, candidate),
         _candidates: destroyed
       })
@@ -76,7 +81,7 @@ var Contest = React.createClass({
   handleClickToAddQuestion: function(event) {
     var questions = this.state.questions
     questions.push(this.newObject('question'))
-    this.setState({ questions: questions })
+    this.setChangedState({ questions: questions })
     event.preventDefault()
   },
   handleQuestionChange: function(id, key, value) {
@@ -84,7 +89,7 @@ var Contest = React.createClass({
         questions = this.state.questions
 
     questions[index][key] = value
-    this.setState({ questions: questions })
+    this.setChangedState({ questions: questions })
   },
   handleQuestionRemove: function(id) {
     var index = _.map(this.state.questions,'id').indexOf(id),
@@ -97,7 +102,7 @@ var Contest = React.createClass({
 
       if( !question.new ) destroyed.push({ id: question.id, _destroy: true })
 
-      this.setState({
+      this.setChangedState({
         questions: _.without(questions, question),
         _questions: destroyed
       })
