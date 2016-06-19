@@ -14,7 +14,9 @@ var ContestForm = React.createClass({
           description: contest.state.description,
           candidates: _.map(contest.state.candidates, function(candidate) {
                         return _.omit(candidate, ['endorsements']) })
-                      .concat(contest.state._candidates),
+                      .concat(_.map(contest.state._candidates, function(id) {
+                        return { id: id, _destroy: true }
+                      })),
           endorsements: _.chain(contest.state.candidates)
                          .map(function(candidate) {
                             return _.chain(candidate.endorsements)
@@ -27,7 +29,9 @@ var ContestForm = React.createClass({
                          .value(),
           questions: _.map(contest.state.questions, function(question){
                         return _.pick(question, ['text','id']) })
-                      .concat(contest.state._questions),
+                      .concat(_.map(contest.state._questions, function(id) {
+                        return { id: id, _destroy: true }
+                      })),
           answers: _.chain(contest.state.questions)
                     .map(function(question) {
                         return _.chain(question)

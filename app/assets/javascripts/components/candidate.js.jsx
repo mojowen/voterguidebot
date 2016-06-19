@@ -31,7 +31,7 @@ var Candidate = React.createClass({
   },
   removeEndorsement: function(event) {
     var endorsements = _.without(this.props.endorsements,
-                                 event.currentTarget.getAttribute('data-endorsement'))
+                                 event.target.getAttribute('data-endorsement'))
     this.props.handleChange(this.props.id, 'endorsements', endorsements)
     event.preventDefault()
   },
@@ -75,13 +75,13 @@ var Candidate = React.createClass({
       <strong>Links</strong>
       <div className="social">
         <InputComponent placeholder="http://candidate-website.pizza"
-                        value={this.props.website} name="website"
+                        value={this.props.website} name="website" type="url"
                         onChange={this.handleChange} fa="link" />
         <InputComponent placeholder="http://facebook.com/candidate-name"
-                        value={this.props.facebook} name="facebook"
+                        value={this.props.facebook} name="facebook" type="url"
                         onChange={this.handleChange} fa="facebook-square" />
         <InputComponent placeholder="http://twitter.com/the-real-candidate"
-                        value={this.props.twitter} name="twitter"
+                        value={this.props.twitter} name="twitter" type="url"
                         onChange={this.handleChange} fa="twitter-square" />
       </div>
       <div className="endorsements">

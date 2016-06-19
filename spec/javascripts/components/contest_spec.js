@@ -1,8 +1,8 @@
 describe('Contest', function() {
   beforeEach(function() {
     this.props = {
-      candidates: [],
-      questions: []
+      title: 'This Contest',
+      description: 'Mike Well Made It'
     }
     this.setUpComponent(Contest, this.props)
   })
@@ -11,28 +11,104 @@ describe('Contest', function() {
     expect(this.component.state.candidates.length).toEqual(1)
   })
 
-  describe('the title field', function() {
-    it('is set by props')
-    it('updates when changed')
+  it('title set by props', function() {
+    expect(this.dom.querySelector('[name=title]').value).toEqual(this.props.title)
+    expect(this.component.state.changed).toEqual(false)
+  })
+  it('title updates when changed', function() {
+    this.component.handleChange({ target: { name: 'title', value: 'New Title'}})
+    expect(this.component.state.title).toEqual('New Title')
+    expect(this.component.state.changed).toEqual(true)
   })
 
-  describe('the description field', function() {
-    it('is set by props')
-    it('updates when changed')
+  it('description set by props', function() {
+    expect(this.dom.querySelector('[name=description]').value).toEqual(this.props.description)
+  })
+  it('description updates when changed', function() {
+    this.component.handleChange({ target: { name: 'description', value: 'New description'}})
+    expect(this.component.state.description).toEqual('New description')
+    expect(this.component.state.changed).toEqual(true)
   })
 
   describe('tracks candidates', function(){
-    it('updates when changed')
-    it('adds new candidates')
-    it('deletes candidates')
+    beforeEach(function() {
+      this.candidate = {
+        name: 'Katherine Hegel',
+        bio: 'The greatest',
+        photo: '/my/photo',
+        id: 5,
+        endorsements: ['Cool Dudes Inc']
+      }
+      this.props = { candidates: [this.candidate] }
+      this.setUpComponent(Contest, this.props)
+    })
+
+    it('updates when changed', function() {
+      this.component.handleCandidateChange(this.candidate.id, 'name', 'Seth Rogan')
+      expect(this.component.state.candidates[0].name).toEqual('Seth Rogan')
+      expect(this.component.state.changed).toEqual(true)
+    })
+    it('adds new candidates', function() {
+      this.component.handleClickToAddCandidate({ preventDefault: function() {}})
+      expect(this.component.state.candidates.length).toEqual(2)
+      expect(this.component.state.changed).toEqual(true)
+    })
+    it('deletes candidates', function() {
+      spyOn(window, 'confirm').and.returnValue(true)
+      this.component.handleCandidateRemove(this.candidate.id)
+      expect(this.component.state.candidates.length).toEqual(0)
+      expect(this.component.state._candidates).toEqual([this.candidate.id])
+      expect(this.component.state.changed).toEqual(true)
+    })
   })
 
   describe('tracks questions', function(){
-    it('updates when changed')
-    it('adds new candidates')
-    it('deletes candidates')
+    beforeEach(function() {
+      this.candidate = {
+        name: 'Katherine Hegel',
+        bio: 'The greatest',
+        photo: '/my/photo',
+        id: 5,
+        endorsements: ['Cool Dudes Inc']
+      }
+      this.question = {
+        text: 'WHAT ARE THOSE',
+        id: 8
+      }
+      this.props = {
+        candidates: [this.candidate],
+        questions: [this.question]
+      }
+      this.setUpComponent(Contest, this.props)
+    })
+
+    it('updates when changed', function() {
+      this.component.handleQuestionChange(this.question.id, 'text', 'LOVE ME?')
+      expect(this.component.state.questions[0].text).toEqual('LOVE ME?')
+      expect(this.component.state.changed).toEqual(true)
+    })
+    it('adds new questions', function() {
+      this.component.handleClickToAddQuestion({ preventDefault: function() {}})
+      expect(this.component.state.questions.length).toEqual(2)
+      expect(this.component.state.changed).toEqual(true)
+    })
+    it('deletes questions', function() {
+      spyOn(window, 'confirm').and.returnValue(true)
+      this.component.handleQuestionRemove(this.question.id)
+      expect(this.component.state.questions.length).toEqual(0)
+      expect(this.component.state._questions).toEqual([this.question.id])
+      expect(this.component.state.changed).toEqual(true)
+    })
+    it('adds new candidates to questions', function() {
+      expect(this.dom.querySelectorAll('th').length).toEqual(3)
+      this.component.handleClickToAddCandidate({ preventDefault: function() {}})
+      expect(this.dom.querySelectorAll('th').length).toEqual(4)
+    })
+    it('removes candidates from questions', function() {
+      spyOn(window, 'confirm').and.returnValue(true)
+      this.component.handleCandidateRemove(this.candidate.id)
+      expect(this.component.state.changed).toEqual(true)
+    })
   })
-
-
 })
 
