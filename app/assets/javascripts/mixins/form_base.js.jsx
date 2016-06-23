@@ -16,7 +16,7 @@ var FormBase = {
       history.pushState({}, '', res.body.path)
     }
   },
-  notify: function(message) { alert(message) },
+  notify: function(message) { swal(message) },
   updateGuide: function(url, data, callback) {
     this.setState({ icon: 'fa-circle-o-notch fa-spin' })
 

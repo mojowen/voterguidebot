@@ -49,10 +49,11 @@ var Contest = React.createClass({
   handleCandidateRemove: function(id) {
     var index = _.map(this.state.candidates,'id').indexOf(id),
         candidates = this.state.candidates,
-        candidate = candidates[index],
-        name = candidate.name || 'this candidate'
+        candidate = candidates[index]
 
-    if( confirm('Are you sure you want to remove '+ name +'?') ) {
+    vgConfirm('Are you sure you want to remove this candidate?', function(confirmed) {
+      if( !confirmed ) return
+
       var destroyed = this.state._candidates
 
       if( !candidate.new ) destroyed.push(candidate.id)
@@ -61,7 +62,7 @@ var Contest = React.createClass({
         candidates: _.without(candidates, candidate),
         _candidates: destroyed
       })
-    }
+    }, this)
   },
   handleClickToAddQuestion: function(event) {
     var questions = this.state.questions
@@ -79,10 +80,11 @@ var Contest = React.createClass({
   handleQuestionRemove: function(id) {
     var index = _.map(this.state.questions,'id').indexOf(id),
         questions = this.state.questions,
-        question = questions[index],
-        name = question.question || 'this question'
+        question = questions[index]
 
-    if( confirm('Are you sure you want to remove '+ name +'?') ) {
+    vgConfirm('Are you sure you want to remove this question?', function(confirmed) {
+      if( !confirmed ) return
+
       var destroyed = this.state._questions
 
       if( !question.new ) destroyed.push(question.id)
@@ -91,7 +93,7 @@ var Contest = React.createClass({
         questions: _.without(questions, question),
         _questions: destroyed
       })
-    }
+    }, this)
   },
   render: function() {
     var candidates = _.map(this.state.candidates, function(candidate) {

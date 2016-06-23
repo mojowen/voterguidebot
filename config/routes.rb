@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         get 'fields'
         post 'users'
       end
-      resources :languages, only: [:index, :create, :destroy]
+      resources :languages, only: [:index, :create, :destroy, :show]
       resources :contests, except: :show
       resources :measures, except: :show
     end

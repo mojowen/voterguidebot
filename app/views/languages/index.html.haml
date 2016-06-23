@@ -18,16 +18,16 @@
           %tr
             %td English
             %td
-              .mui--pull-right= button_link_to 'Activate', guide_path(@guide, { locale: :en } ), { class: params[:locale] == 'en' ? 'mui--is-disabled' : '' }
+              .mui--pull-right= button_link_to 'Activate', guide_language_path(@guide, :en), { class: params[:locale] == 'en' ? 'mui--is-disabled' : '' }
             %td
 
           - @guide.languages.each do |language|
             %tr
               %td= language.name
               %td
-                .mui--pull-right= button_link_to 'Activate', guide_path(@guide, { locale: language.code } ), { class: params[:locale] == language.code ? 'mui--is-disabled' : '' }
+                .mui--pull-right= button_link_to 'Activate', guide_language_path(@guide, language), { class: params[:locale] == language.code ? 'mui--is-disabled' : '' }
               %td
-                .mui--pull-right= button_link_to 'Delete', guide_language_path(@guide, language), method: :delete, confirm: 'Are you sure?'
+                .mui--pull-right= button_link_to 'Delete', guide_language_path(@guide, language), data: { method: :delete, confirm: 'Are you sure?'}
 
     = form_for(@guide.languages.new, method: :post, url: guide_languages_path(@guide)) do |form|
       .mui-select

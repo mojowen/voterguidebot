@@ -54,8 +54,8 @@ describe('Contest', function() {
       expect(this.component.state.changed).toEqual(true)
     })
     it('deletes candidates', function() {
-      spyOn(window, 'confirm').and.returnValue(true)
       this.component.handleCandidateRemove(this.candidate.id)
+      swalSpy.confirmLast(true)
       expect(this.component.state.candidates.length).toEqual(0)
       expect(this.component.state._candidates).toEqual([this.candidate.id])
       expect(this.component.state.changed).toEqual(true)
@@ -93,8 +93,8 @@ describe('Contest', function() {
       expect(this.component.state.changed).toEqual(true)
     })
     it('deletes questions', function() {
-      spyOn(window, 'confirm').and.returnValue(true)
       this.component.handleQuestionRemove(this.question.id)
+      swalSpy.confirmLast(true)
       expect(this.component.state.questions.length).toEqual(0)
       expect(this.component.state._questions).toEqual([this.question.id])
       expect(this.component.state.changed).toEqual(true)
@@ -105,8 +105,8 @@ describe('Contest', function() {
       expect(this.dom.querySelectorAll('th').length).toEqual(4)
     })
     it('removes candidates from questions', function() {
-      spyOn(window, 'confirm').and.returnValue(true)
       this.component.handleCandidateRemove(this.candidate.id)
+      swalSpy.confirmLast(true)
       expect(this.component.state.changed).toEqual(true)
     })
   })
