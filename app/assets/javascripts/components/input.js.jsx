@@ -5,6 +5,7 @@ var InputComponent = React.createClass({
       type: 'text',
       value: null,
       placeholder: null,
+      className: '',
       fa: null,
       onChange: function() { }
     }
@@ -17,9 +18,11 @@ var InputComponent = React.createClass({
         input = <this.props.element ref="input"
                                     { ...this.props }
                                     value={ this.props.value } />,
-        font_awesome = ''
+        font_awesome = '',
+        className = ['mui-textfield',this.props.className]
 
     if( this.props.fa !== null ) {
+      className.push('fa-prefix')
       font_awesome = <i className={'fa fa-'+this.props.fa} />
     }
     if( this.props.element === 'ImageComponent' ) {
@@ -28,7 +31,7 @@ var InputComponent = React.createClass({
                                 value={ this.props.value } />
     }
 
-    return <div className={'mui-textfield ' + (this.props.fa ? 'fa-prefix' : '')}>
+    return <div className={className.join(' ')}>
       { label }
       { this.props.afterLabel }
       { font_awesome }

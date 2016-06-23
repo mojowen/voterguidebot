@@ -45,6 +45,6 @@ class ContestsController < ApplicationController
       candidates: [:id, :_destroy, :name, :bio, :photo, :facebook,
                    :twitter, :website ],
       answers: [:text, :candidate_id, :question_id],
-      endorsements: [:endorser, :endorsing_id, :endorsing_type])
+      endorsements: [:endorser, :endorsing_id, :endorsing_type, :stance])
   end
 end

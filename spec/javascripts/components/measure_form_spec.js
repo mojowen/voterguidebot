@@ -1,11 +1,11 @@
-describe('ContestForm', function() {
+describe('MeasureForm', function() {
 
   describe('for a new contest', function() {
     beforeEach(function() {
-      this.setUpComponent(ContestForm, {})
+      this.setUpComponent(MeasureForm, {})
     })
-    it('initializes a new contest', function() {
-      expect(this.dom.querySelectorAll('.contest').length).toEqual(1)
+    it('initializes a new measure', function() {
+      expect(this.dom.querySelectorAll('.measure').length).toEqual(1)
     })
     it('sets method to post', function() {
       expect(this.component.state.method).toEqual('post')
@@ -14,7 +14,7 @@ describe('ContestForm', function() {
 
   beforeEach(function() {
     this.contests = {}
-    this.setUpComponent(ContestForm, { contest: this.contests })
+    this.setUpComponent(MeasureForm, { contest: this.contests })
     jasmine.Ajax.install()
   })
 
@@ -22,33 +22,32 @@ describe('ContestForm', function() {
     jasmine.Ajax.uninstall()
   });
 
-  it('submit updates contest', function() {
+  it('submit updates measure', function() {
     spyOn(this.component, 'updateGuide')
-    this.component.refs.contest.setState({candidates: [], questions: []})
+
     Utils.Simulate.submit(this.component.refs.form_wrapper)
     expect(this.component.updateGuide).toHaveBeenCalledWith(
       document.location.pathname,
-      { contest: { title: '',
+      { measure: { title: '',
                    description: '',
-                   candidates: [],
-                   questions: [],
-                   endorsements: [],
-                   answers: [] }},
+                   yes_means: '',
+                   no_means: '',
+                   endorsements: [] }},
       jasmine.any(Function))
   })
 
   it('updates the state with a new object', function() {
-    var contest = { candidates: [{ id: 5 }] }
+    var measure = { title: 'new' }
     Utils.Simulate.submit(this.component.refs.form_wrapper)
     request = jasmine.Ajax.requests.mostRecent()
     spyOn(this.component, 'notify')
     expect(request.method).toBe('POST')
     request.respondWith({
-      responseText: JSON.stringify({ state: { contest: contest }}),
+      responseText: JSON.stringify({ state: { measure: measure }}),
       status: 200
     })
-    expect(this.component.refs.contest.state.candidates).toEqual(
-      contest.candidates)
+    expect(this.component.refs.measure.state.title).toEqual(
+      measure.title)
   })
 
 })

@@ -23,14 +23,14 @@ describe('ImageComponent', function() {
   describe('with a callback', function() {
     beforeEach(function() {
       this.callback = function() {}
-      spyOn(this, 'callback')
+      spyOn(this, 'callback')
       this.setUpComponent(ImageComponent, { onChange: this.callback })
       this.dropzone = this.component.dropzone
     })
 
     it('propagates values with an onChange', function() {
       this.dropzone._callbacks.thumbnail[1].call(this.dropzone, fakeFile, transparentGif)
-      expect(this.callback).toHaveBeenCalled()
+      expect(this.callback).toHaveBeenCalled()
     })
   })
 })

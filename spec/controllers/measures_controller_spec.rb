@@ -14,13 +14,30 @@ RSpec.describe MeasuresController, active_mocker: true do
   end
 
   describe '#create' do
+    let(:against_endorsements) do
+      {
+        endorser: "someone against",
+        endorsing_type: "measure",
+        endorsing_id: false,
+        stance: "against"
+      }
+    end
+    let(:for_endorsements) do
+      {
+        endorser: "someone for",
+        endorsing_type: "measure",
+        endorsing_id: false,
+        stance: "for"
+      }
+    end
     let(:measure_params) do
       { guide_id: guide.id,
         measure: {
           title: 'Sweet',
           description: 'Baller',
           yes_means: 'Straight creeping',
-          no_means: 'No creapin'
+          no_means: 'No creapin',
+          endorsements: [for_endorsements, against_endorsements]
         }}
     end
     it 'creates contests' do
@@ -43,6 +60,11 @@ RSpec.describe MeasuresController, active_mocker: true do
     it 'assigns no_means' do
       post :create, measure_params
       expect(assigns(:measure).no_means).to eq('No creapin')
+    end
+    it 'assigns endorsements' do
+      post :create, measure_params
+      expect(assigns(:measure).endorsements.map(&:endorser)).to include(against_endorsements[:endorser])
+      expect(assigns(:measure).endorsements.map(&:endorser)).to include(for_endorsements[:endorser])
     end
   end
 

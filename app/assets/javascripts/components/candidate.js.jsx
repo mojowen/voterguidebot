@@ -12,46 +12,15 @@ var Candidate = React.createClass({
     var field = event.target.name,
         value = event.target.value
 
-    if( field.match(/endorsement/) ) {
-      var value = this.props.endorsements
-      value[ parseInt(field.split('_')[1]) ] = event.target.value
-      field = 'endorsements'
-    }
-
+    this.props.handleChange(this.props.id, field, value)
+  },
+  handleEndorsementChange: function(field, value) {
     this.props.handleChange(this.props.id, field, value)
   },
   handleRemove: function(event) {
     this.props.handleRemove(this.props.id)
   },
-  addEndorsement: function(event) {
-    var endorsements = this.props.endorsements
-    if( endorsements.length < 3 ) endorsements.push(null)
-    this.props.handleChange(this.props.id, 'endorsements', endorsements)
-    event.preventDefault()
-  },
-  removeEndorsement: function(event) {
-    var endorsements = _.without(this.props.endorsements,
-                                 event.target.getAttribute('data-endorsement'))
-    this.props.handleChange(this.props.id, 'endorsements', endorsements)
-    event.preventDefault()
-  },
   render: function() {
-    var endorsements = _.map(this.props.endorsements, function(endorsement, index) {
-          var after = <a className="remove" onClick={this.removeEndorsement} data-endorsement={endorsement} >
-                        <i className="fa fa-times" />
-                      </a>
-          return <li key={'endorsement_'+index} >
-                  <InputComponent value={endorsement}
-                                  name={'endorsement_'+index}
-                                  onChange={this.handleChange}
-                                  after={after} />
-                 </li>
-        }, this),
-        addEndorsement = ''
-    if( this.props.endorsements.length < 3 ) {
-      addEndorsement = <a className="add--endorsements" onClick={this.addEndorsement}><i className="fa fa-plus-square" /></a>
-    }
-
     return <div className="candidate--form mui-col-md-5 mui-col-md-offset-1 mui-panel">
       <i className="fa fa-times remove--candidate" onClick={ this.handleRemove } />
       <InputComponent label="photo"
@@ -84,11 +53,11 @@ var Candidate = React.createClass({
                         value={this.props.twitter} name="twitter" type="url"
                         onChange={this.handleChange} fa="twitter-square" />
       </div>
-      <div className="endorsements">
-        <strong>Endorsements</strong>{ addEndorsement }
-
-        <ul>{ endorsements }</ul>
-      </div>
+      <Endorsements ref="endorsements"
+                    endorsements={this.props.endorsements}
+                    handleChange={this.handleEndorsementChange}
+                    endorsing_type='candidate'
+                    endorsing_id={this.props.id} />
     </div>
   }
 })

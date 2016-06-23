@@ -15,11 +15,11 @@ class MeasuresController < ApplicationController
   private
 
   def update_measure
-    @measure.assign_attributes guide_params
+    @measure.assign_attributes measure_param
     @measure.save
     {
       path: guide_contest_path(@guide, @measure),
-      state: { measure: @measure.reload, url: guide_contest_path(@guide, @measure) }
+      state: { measure: @measure.reload, url: edit_guide_measure_path(@guide, @measure) }
     }
   end
 
@@ -31,8 +31,9 @@ class MeasuresController < ApplicationController
     @measure = @guide.measures.find(params[:id])
   end
 
-  def guide_params
+  def measure_param
     params.require(:measure).permit(:title, :description, :yes_means, :no_means,
-                                    endorsements: [:endorser, :endorsing_id])
+                                    endorsements: [:endorser, :endorsing_id,
+                                                   :endorsing_type, :stance])
   end
 end

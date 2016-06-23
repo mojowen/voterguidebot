@@ -14,13 +14,13 @@ describe('InviteForm', function() {
   })
 
   it('adds emails', function() {
-    spyOn(this.component, 'sendEmail')
+    spyOn(this.component, 'sendEmail')
     this.component.refs.email_input.setState({ value: 'dude@example.com' })
     Utils.Simulate.submit(this.component.refs.form_wrapper)
 
     expect(ReactDOM.findDOMNode(this.component).querySelectorAll('p').length).toEqual(1)
     expect(this.component.refs.email_input.state.value).toEqual(null)
-    expect(this.component.sendEmail).toHaveBeenCalled()
+    expect(this.component.sendEmail).toHaveBeenCalled()
   })
 
   it('does not add bad emails', function() {
@@ -31,7 +31,7 @@ describe('InviteForm', function() {
 
     expect(ReactDOM.findDOMNode(this.component).querySelectorAll('p').length).toEqual(0)
     expect(this.component.state.email).toEqual('dude')
-    expect(this.component.sendEmail).not.toHaveBeenCalledWith()
+    expect(this.component.sendEmail).not.toHaveBeenCalledWith()
   })
 
 

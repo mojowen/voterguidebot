@@ -19,12 +19,7 @@ var ContestForm = React.createClass({
                       })),
           endorsements: _.chain(contest.state.candidates)
                          .map(function(candidate) {
-                            return _.chain(candidate.endorsements)
-                                    .map(function(endorser) {
-                                      return [ { endorsing_id: candidate.id,
-                                                 endorsing_type: 'candidate',
-                                                 endorser: endorser }] })
-                                    .value() })
+                            return candidate.endorsements })
                          .flatten()
                          .value(),
           questions: _.map(contest.state.questions, function(question){

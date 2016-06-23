@@ -1,5 +1,5 @@
 var Contest = React.createClass({
-  mixins: [NewObject],
+  mixins: [NewObject, HandleChange],
   getDefaultProps: function() {
     return { candidates: [],
              questions: [],
@@ -25,34 +25,19 @@ var Contest = React.createClass({
       return _.extend(question, answer_obj)
     })
 
-    var candidates = _.map(this.props.candidates, function(candidate) {
-        candidate.endorsements = _.pluck(candidate.endorsements, 'endorser')
-        return candidate
-      })
-
-    return { candidates: candidates,
+    return { candidates: this.props.candidates,
              _candidates: [],
              questions: questions,
              _questions: [],
              answers: this.props.answers,
              title: this.props.title,
-             description: this.props.description,
-             changed: false }
-  },
-  setChangedState: function(new_state) {
-    new_state.changed = true
-    this.setState(new_state)
+             description: this.props.description }
   },
   handleClickToAddCandidate: function(event) {
     var candidates = this.state.candidates
     candidates.push(this.newObject('candidate', { endorsements: [] }))
     this.setChangedState({ candidates: candidates })
     event.preventDefault()
-  },
-  handleChange: function(event) {
-    var new_state = {}
-    new_state[event.target.name] = event.target.value
-    this.setChangedState(new_state)
   },
   handleCandidateChange: function(id, key, value) {
     var index = _.map(this.state.candidates,'id').indexOf(id),

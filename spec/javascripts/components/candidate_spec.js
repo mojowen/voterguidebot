@@ -8,7 +8,7 @@ describe('Candidate', function() {
       twitter: 'Twitter',
       website: 'Website',
       facebook: 'Facebook',
-      endorsements: ['Cowyboy Guy'],
+      endorsements: [{ endorser: 'Cowyboy Guy', stance: 'for' }],
       handleChange: function() { },
       handleRemove: function() { },
     }
@@ -24,7 +24,7 @@ describe('Candidate', function() {
   })
   it('handles change to name', function() {
     this.component.handleChange({ target: { name: 'name', value: 'New Name'} })
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'name', 'New Name')
   })
 
@@ -35,7 +35,7 @@ describe('Candidate', function() {
   })
   it('handles change to bio', function() {
     this.component.handleChange({ target: { name: 'bio', value: 'New bio'} })
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'bio', 'New bio')
   })
 
@@ -46,7 +46,7 @@ describe('Candidate', function() {
   })
   it('handles change to facebook', function() {
     this.component.handleChange({ target: { name: 'facebook', value: 'New facebook'} })
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'facebook', 'New facebook')
   })
 
@@ -57,7 +57,7 @@ describe('Candidate', function() {
   })
   it('handles change to website', function() {
     this.component.handleChange({ target: { name: 'website', value: 'New website'} })
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'website', 'New website')
   })
 
@@ -68,7 +68,7 @@ describe('Candidate', function() {
   })
   it('handles change to twitter', function() {
     this.component.handleChange({ target: { name: 'twitter', value: 'New twitter'} })
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'twitter', 'New twitter')
   })
 
@@ -77,26 +77,33 @@ describe('Candidate', function() {
   })
   it('handles change to photo', function() {
     this.component.handleChange({ target: { name: 'photo', value: '/new/photo'} })
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'photo', '/new/photo')
   })
 
   it('handles adding endorsers', function() {
-    this.component.addEndorsement({ preventDefault: function() { }})
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
-      this.props.id, 'endorsements', ['Cowyboy Guy', null])
+    this.component.refs.endorsements.addEndorsement({ preventDefault: function() { }})
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+      this.props.id, 'endorsements',
+      [
+        { endorser: 'Cowyboy Guy', stance: 'for', },
+        { endorser: '',
+          stance: 'for',
+          endorsing_type: 'candidate',
+          endorsing_id: this.props.id }])
   })
   it('handles change to endorsers', function() {
-    var event = { target: { name: 'endorsement_0', value: 'Diff Endorser'} }
-    this.component.handleChange(event)
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
-      this.props.id, 'endorsements', ['Diff Endorser'])
+    var elem = this.dom.querySelector('ul input')
+    elem.value = 'Diff Endorser'
+    this.component.refs.endorsements.handleChange({ target: elem })
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+      this.props.id, 'endorsements', [{ endorser: 'Diff Endorser', stance: 'for' }])
   })
   it('handles remove endorsers', function(){
-    var event = { target: this.dom.querySelector('ul .remove'),
+    var event = { currentTarget: this.dom.querySelector('ul .remove'),
                   preventDefault: function() { } }
-    this.component.removeEndorsement(event)
-    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+    this.component.refs.endorsements.removeEndorsement(event)
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'endorsements', [])
   })
 

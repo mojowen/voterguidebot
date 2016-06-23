@@ -33,10 +33,10 @@ describe('FieldsForm', function() {
   })
 
   it('submit updates guide', function() {
-    spyOn(this.component, 'updateGuide')
+    spyOn(this.component, 'updateGuide')
     this.component.refs.great_input.setState({ value: 'whatt' })
     Utils.Simulate.submit(this.component.refs.form_wrapper)
-    expect(this.component.updateGuide).toHaveBeenCalledWith(
+    expect(this.component.updateGuide).toHaveBeenCalledWith(
       this.url,
       { guide: { fields: { great_input: 'whatt', great_textarea: 'someone wrote something'}}})
   })

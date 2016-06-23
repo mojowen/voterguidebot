@@ -31,7 +31,7 @@ describe('InputComponent', function() {
     })
 
     it('runs value callback on change', function() {
-      expect(this.myCallback).toHaveBeenCalled()
+      expect(this.myCallback).toHaveBeenCalled()
     })
   })
 

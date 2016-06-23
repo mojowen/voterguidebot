@@ -69,10 +69,9 @@ class Contest < ActiveRecord::Base
     associates_obj[:endorsements].each do |raw_endorsement|
       endorsement = endorsements.find_or_initialize_by(
         endorsing_id: raw_endorsement[:endorsing_id],
-        endorsing_type: raw_endorsement[:endorsing_type])
+        endorsing_type: raw_endorsement[:endorsing_type],
+        endorser: raw_endorsement[:endorser])
 
-      endorsement.endorser = raw_endorsement[:endorser]
-      next unless endorsement.valid?
       endorsement.save
       saved_endorsements.push(endorsement.id)
     end
