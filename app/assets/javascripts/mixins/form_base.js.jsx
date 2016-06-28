@@ -16,7 +16,10 @@ var FormBase = {
       history.pushState({}, '', res.body.path)
     }
   },
-  notify: function(message) { swal(message) },
+  notify: function(message, is_error) {
+    if( is_error ) return swal({ title: 'Uh Oh!', text: message })
+    swal({ title: message, timer: 500 })
+  },
   updateGuide: function(url, data, callback) {
     this.setState({ icon: 'fa-circle-o-notch fa-spin' })
 

@@ -22,11 +22,15 @@ class GuidesController < ApplicationController
   def update
     @guide.update_attributes guide_params
     @guide.template_fields = field_params if field_params
-    saved = @guide.save
 
     respond_to do |format|
-      format.json { render status: saved ? 200 : 400, json: '' }
-      format.html { redirect_to guide_path(@guide), notice: saved ? 'Guide saved!' : 'Could not save!' }
+      format.html do
+        redirect_to guide_path(@guide), notice: 'Guide saved!' if @guide.save
+        render :edit
+      end
+      format.json do
+        render json: '', status: @guide.save ? 200 : 400
+      end
     end
   end
 

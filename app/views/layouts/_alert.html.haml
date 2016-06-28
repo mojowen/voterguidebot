@@ -1,9 +1,9 @@
 - if notice.present?
   :javascript
-    swal({ text: #{notice.to_json}, timer: 2000 })
+    swal({ title: #{notice.to_json}, timer: 4000 })
 - if alert.present?
   :javascript
-    swal({ title: "Uh Oh!", text: #{alert.to_json}, timer: 5000 })
-- if content_for(:alert)
+    swal({ title: "Uh Oh!", text: #{alert.to_json} })
+- if content_for(:errors)
   :javascript
-    swal({ title: "Uh Oh!", text:"#{yield :errors}", timer: 5000 })
+    swal({ title: "Uh Oh!", text:#{(yield :errors).to_json}, html: true })
