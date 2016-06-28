@@ -41,7 +41,7 @@ var FieldFormRow = React.createClass({
 
     var after = <span ref="remaining"
                       className={'remaining '+this.afterClass()}>
-                  { this.props.limit - this.state.value.length}
+                  { this.props.limit - (this.state.value || '').length}
                 </span>
 
     return <div className='mui-row form--row' >
@@ -49,6 +49,7 @@ var FieldFormRow = React.createClass({
         <InputComponent after={this.props.limit ? after : ''}
                         ref="input"
                         onChange={this.updateValue}
+                        preview={true}
                         {...this.props}
                         value={this.state.value} />
       </div>

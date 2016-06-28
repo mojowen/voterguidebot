@@ -18,9 +18,30 @@ describe('ImageComponent', function() {
     expect(this.component.state.value).toEqual(transparentGif)
   })
 
-  it('loads existing value if passed as param')
+  describe('with an existing image', function() {
+    beforeEach(function() {
+      this.props = {
+        value: transparentGif,
+        preview: true,
+        onChange: function() { }
+      }
 
-  it('can clear the current image')
+      spyOn(this.props, 'onChange')
+      this.setUpComponent(ImageComponent, this.props)
+      this.dropzone = this.component.dropzone
+    })
+
+    it('loads image', function() {
+      expect(this.component.state.value).toEqual(transparentGif)
+      expect(this.dom.querySelector('img').src).toEqual(transparentGif)
+    })
+
+    it('can clear the current image', function() {
+      this.component.handleClear({ preventDefault: function() {} })
+      expect(this.component.state.value).toEqual(null)
+      expect(this.props.onChange).toHaveBeenCalledWith({ target: { value: null, name: ''}})
+    })
+  })
 
   describe('with a callback', function() {
     beforeEach(function() {

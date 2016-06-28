@@ -17,10 +17,15 @@ var ImageComponent = React.createClass({
   },
   handleThumbnail: function(file, dataURL) { this.handleChange(dataURL) },
   handleSuccess: function(file) {
-    this.handleChange(JSON.parse(file.xhr.response).path) },
+    this.handleChange(JSON.parse(file.xhr.response).path)
+  },
   handleChange: function(url) {
     this.props.onChange({ target: { value: url, name: this.props.name } })
     this.setState({ value: url })
+  },
+  handleClear: function(event) {
+    this.handleChange(null)
+    event.preventDefault()
   },
   componentDidMount: function() {
     var domNode = ReactDOM.findDOMNode(this.refs.dropzone),
@@ -41,12 +46,21 @@ var ImageComponent = React.createClass({
     this.dropzone.on('error', this.handleError)
   },
   render: function() {
-    var preview =  ''
+    var preview =  '',
+        clear = ''
     if( this.props.preview && this.state.value ) {
       preview = <img src={this.state.value} />
     }
 
+    if( this.state.value ) {
+      var text = this.props.preview ? '' : ' Clear Image'
+      clear = <a href="#" className='remove' onClick={this.handleClear}>
+                <i className="fa fa-times" />{ text }
+              </a>
+    }
+
     return <div ref="dropzone" className='drop--zone image--field'>
+      { clear }
       { preview }
     </div>
   }
