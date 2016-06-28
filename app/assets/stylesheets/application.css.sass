@@ -22,6 +22,9 @@
 
 body
   background: $mui-primary-color-light asset-url('wrap.png')
+  margin-bottom: 200px
+  @include lg
+    margin-bottom: 0
 
 .mui-appbar
   background: $mui-primary-color-dark
@@ -62,10 +65,25 @@ body
   position: fixed
   bottom: 0
   right: 15px
-  width: 200px
+  width: auto
+
+  .mui-select
+    padding-top: 0
+
+  button, div
+    display: inline-block
+  button
+    margin: 0 8px
 
   @include lg
+    width: 200px
     top: 120px
     bottom: auto
     left: 15px
     right: auto
+    button
+      margin: 6px 0
+    div
+      display: block
+    .mui-select
+      padding-top: 15px

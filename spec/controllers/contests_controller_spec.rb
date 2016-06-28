@@ -39,22 +39,29 @@ RSpec.describe ContestsController, active_mocker: true do
            'photo' => '/pretty-picture',
            'facebook' => 'http://facebook.com/frank',
            'twitter' => 'http://twitter.com/frank',
-           'website' => 'http://franksplace.com' }]
+           'website' => 'http://franksplace.com',
+           'endorsements' => endorsements }]
       end
       let(:questions) do
         [{ 'id' => '1',
            '_destroy' => true,
-           'text' => 'WHAT ARE THOSE' }]
+           'text' => 'WHAT ARE THOSE',
+           'answers' => answers,
+           'tags' => tags }]
       end
       let(:answers) do
         [{ 'text' => 'Yes',
            'candidate_id' => '5',
            'question_id' => '5' }]
       end
+      let(:tags) do
+        [{ 'name' => 'LGBTQ',
+           'question_id' => '5' }]
+      end
       let(:endorsements) do
         [{ 'endorser' => 'Ben and Jerrys',
-           'endorsing_id' => '5',
-           'endorsing_type' => 'candidate',
+           'endorsed_id' => '5',
+           'endorsed_type' => 'candidate',
            'stance' => 'for' }]
       end
       let(:contest_params) do
@@ -64,9 +71,6 @@ RSpec.describe ContestsController, active_mocker: true do
             description: 'Baller',
             candidates: candidates,
             questions: questions,
-            answers: answers,
-            endorsements: endorsements,
-            text: answers
           }}
       end
       it 'is successful' do
@@ -77,12 +81,7 @@ RSpec.describe ContestsController, active_mocker: true do
       it 'assigns associations' do
         contest = instance_double(Contest, assign_attributes: true, save: true,
                                   reload: true)
-        expect(contest).to receive(:assign_associates).with({
-          'questions' => questions,
-          'candidates' => candidates,
-          'answers' => answers,
-          'endorsements' => endorsements
-        })
+        expect(contest).to receive(:assign_attributes).with(contest_params[:contest])
         allow(subject).to receive(:init_contest) do
           subject.instance_variable_set(:@contest, contest)
         end

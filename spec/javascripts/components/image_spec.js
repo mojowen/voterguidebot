@@ -20,6 +20,8 @@ describe('ImageComponent', function() {
 
   it('loads existing value if passed as param')
 
+  it('can clear the current image')
+
   describe('with a callback', function() {
     beforeEach(function() {
       this.callback = function() {}

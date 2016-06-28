@@ -68,7 +68,7 @@ describe('Measure', function() {
     it('handles adding endorsers', function() {
       this.component.refs.yes_endorsements.addEndorsement({ preventDefault: function() { }})
       expect(this.component.state.endorsements.reverse()[0]).toEqual(
-        { endorser: '', stance: 'for', endorsing_type: 'measure', endorsing_id: this.props.id })
+        { endorser: '', stance: 'for', endorsed_type: 'measure', endorsed_id: this.props.id })
     })
     it('handles change to endorsers', function() {
       var elem = this.dom.querySelector('ul input')

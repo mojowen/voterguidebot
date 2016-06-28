@@ -28,6 +28,10 @@ class Guide < ActiveRecord::Base
     end
   end
 
+  def template_question_tags
+    template.question_tags
+  end
+
   def template_field_names
     template.fields.map{ |template_field| template_field[:name] }
   end
@@ -43,7 +47,6 @@ class Guide < ActiveRecord::Base
       field.save!
     end
   end
-
 
   private
 

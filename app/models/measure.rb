@@ -2,7 +2,8 @@ class Measure < ActiveRecord::Base
   audited associated_with: :guide
   translates :title, :description, :yes_means, :no_means
 
-  has_many :endorsements, as: :endorsing, dependent: :destroy
+  include Endorsements
+
   belongs_to :guide
 
   def as_json(options = nil)
@@ -10,23 +11,7 @@ class Measure < ActiveRecord::Base
   end
 
   def assign_attributes(attributes)
-    @associates_obj = attributes
-    create_endorsements!
-    super(associates_obj)
+    create_endorsements!(attributes)
+    super(attributes)
   end
-
-  private
-
-  def create_endorsements!
-    return unless associates_obj[:endorsements]
-    associates_obj[:endorsements].map! do |raw_endorsement|
-      endorsements.find_or_initialize_by(
-        stance: raw_endorsement[:stance],
-        endorser: raw_endorsement[:endorser])
-    end
-  end
-
-
-  attr_accessor :associates_obj
-
 end

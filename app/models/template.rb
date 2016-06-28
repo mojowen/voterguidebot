@@ -1,6 +1,6 @@
 class Template
   attr_accessor :name, :fields, :contests, :candidates,
-                :ballot_measures, :endorsements, :questions
+                :ballot_measures, :endorsements, :questions, :question_tags
 
   def self.default
     @default ||= new YAML.load_file(Rails.root.join('config','template.yml'))
@@ -14,6 +14,7 @@ class Template
     @questions = attrs['questions']
     @endorsements = attrs['endorsements']
     @ballot_measures = attrs['ballot_measures']
+    @question_tags = attrs['question_tags']
   end
 
 end

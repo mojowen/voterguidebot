@@ -161,12 +161,12 @@ class MeasureMock < ActiveMocker::Base
 
   def endorsements
     read_association(:endorsements, lambda do
-      ActiveMocker::HasMany.new([], foreign_key: "endorsing_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: "")
+      ActiveMocker::HasMany.new([], foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: "")
     end)
   end
 
   def endorsements=(val)
-    write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsing_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
+    write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
   end
 
   # _scopes.erb
@@ -187,6 +187,14 @@ class MeasureMock < ActiveMocker::Base
   # _recreate_class_method_calls.erb
   def self.attribute_aliases
     @attribute_aliases ||= {}.merge(super)
+  end
+
+  def as_json(options = nil)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
+  end
+
+  def assign_attributes(attributes)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
   end
 
 end

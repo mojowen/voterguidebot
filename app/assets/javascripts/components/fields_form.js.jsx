@@ -13,7 +13,6 @@ var FieldsForm = React.createClass({
           elem = this.refs[name]
 
       if( !elem.isValid() ) {
-        debugger
         return this.handleError('not all fields are valid')
       }
 

@@ -13,11 +13,11 @@ class QuestionMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { contest: nil, guide: nil, audits: nil, translations: nil, answers: nil }.merge(super)
+      @associations ||= { contest: nil, guide: nil, audits: nil, translations: nil, answers: nil, tags: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Guide" => { has_one: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Question::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] } }.merge(super)
+      @associations_by_class ||= { "Contest" => { belongs_to: [:contest] }, "Guide" => { has_one: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Question::Translation" => { has_many: [:translations] }, "Answer" => { has_many: [:answers] }, "Tag" => { has_many: [:tags] } }.merge(super)
     end
 
     def mocked_class
@@ -176,6 +176,16 @@ class QuestionMock < ActiveMocker::Base
 
   def answers=(val)
     write_association(:answers, ActiveMocker::HasMany.new(val, foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Answer"), source: ""))
+  end
+
+  def tags
+    read_association(:tags, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
+    end)
+  end
+
+  def tags=(val)
+    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
   end
 
   # _scopes.erb

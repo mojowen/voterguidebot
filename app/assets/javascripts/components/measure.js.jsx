@@ -43,8 +43,8 @@ var Measure = React.createClass({
                       className="mui-col-md-5"
                       endorsements={this.state.endorsements}
                       handleChange={this.handleChange}
-                      endorsing_type='measure'
-                      endorsing_id={this.props.id}
+                      endorsed_type='measure'
+                      endorsed_id={this.props.id}
                       stance="for" />
       </div>
       <div className="mui-row mui-panel against--block">
@@ -59,8 +59,8 @@ var Measure = React.createClass({
                       className="mui-col-md-5"
                       endorsements={this.state.endorsements}
                       handleChange={this.handleChange}
-                      endorsing_type='measure'
-                      endorsing_id={this.props.id}
+                      endorsed_type='measure'
+                      endorsed_id={this.props.id}
                       stance="against" />
       </div>
     </div>

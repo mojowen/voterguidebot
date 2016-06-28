@@ -5,11 +5,11 @@ class EndorsementMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "endorsing_id" => nil, "endorsing_type" => nil, "endorser" => nil, "created_at" => nil, "updated_at" => nil, "stance" => 0).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "endorsed_id" => nil, "endorsed_type" => nil, "endorser" => nil, "stance" => 0, "created_at" => nil, "updated_at" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, endorsing_id: Fixnum, endorsing_type: String, endorser: String, created_at: DateTime, updated_at: DateTime, stance: Fixnum }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, endorsed_id: Fixnum, endorsed_type: String, endorser: String, stance: Fixnum, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class EndorsementMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "endorsing_id", "endorsing_type", "endorser", "created_at", "updated_at", "stance"] | super)
+      @attribute_names ||= (["id", "endorsed_id", "endorsed_type", "endorser", "stance", "created_at", "updated_at"] | super)
     end
 
     def primary_key
@@ -52,20 +52,20 @@ class EndorsementMock < ActiveMocker::Base
     write_attribute(:id, val)
   end
 
-  def endorsing_id
-    read_attribute(:endorsing_id)
+  def endorsed_id
+    read_attribute(:endorsed_id)
   end
 
-  def endorsing_id=(val)
-    write_attribute(:endorsing_id, val)
+  def endorsed_id=(val)
+    write_attribute(:endorsed_id, val)
   end
 
-  def endorsing_type
-    read_attribute(:endorsing_type)
+  def endorsed_type
+    read_attribute(:endorsed_type)
   end
 
-  def endorsing_type=(val)
-    write_attribute(:endorsing_type, val)
+  def endorsed_type=(val)
+    write_attribute(:endorsed_type, val)
   end
 
   def endorser
@@ -74,6 +74,14 @@ class EndorsementMock < ActiveMocker::Base
 
   def endorser=(val)
     write_attribute(:endorser, val)
+  end
+
+  def stance
+    read_attribute(:stance)
+  end
+
+  def stance=(val)
+    write_attribute(:stance, val)
   end
 
   def created_at
@@ -90,14 +98,6 @@ class EndorsementMock < ActiveMocker::Base
 
   def updated_at=(val)
     write_attribute(:updated_at, val)
-  end
-
-  def stance
-    read_attribute(:stance)
-  end
-
-  def stance=(val)
-    write_attribute(:stance, val)
   end
 
   # _associations.erb

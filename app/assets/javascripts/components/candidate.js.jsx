@@ -56,8 +56,8 @@ var Candidate = React.createClass({
       <Endorsements ref="endorsements"
                     endorsements={this.props.endorsements}
                     handleChange={this.handleEndorsementChange}
-                    endorsing_type='candidate'
-                    endorsing_id={this.props.id} />
+                    endorsed_type='candidate'
+                    endorsed_id={this.props.id} />
     </div>
   }
 })

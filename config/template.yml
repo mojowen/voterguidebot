@@ -77,3 +77,14 @@ fields:
     limit: 50
     name: partners_list
 
+question_tags:
+  - Climate
+  - Criminal Justice Reform
+  - Drug Policy
+  - Economy
+  - Education
+  - Healthcare
+  - Immigration
+  - LGBT
+  - Reproduction Rights
+  - Voting Rights

@@ -2,12 +2,11 @@ class Endorsement < ActiveRecord::Base
   audited associated_with: :guide
 
   translates :endorser
-  belongs_to :endorsing, polymorphic: true
+  belongs_to :endorsed, polymorphic: true
 
   enum stance: %w{for against}
 
   def guide
-    endorsing.try(:guide)
+    endorsed.try(:guide)
   end
-
 end

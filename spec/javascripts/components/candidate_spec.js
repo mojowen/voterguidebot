@@ -89,8 +89,8 @@ describe('Candidate', function() {
         { endorser: 'Cowyboy Guy', stance: 'for', },
         { endorser: '',
           stance: 'for',
-          endorsing_type: 'candidate',
-          endorsing_id: this.props.id }])
+          endorsed_type: 'candidate',
+          endorsed_id: this.props.id }])
   })
   it('handles change to endorsers', function() {
     var elem = this.dom.querySelector('ul input')

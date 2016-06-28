@@ -31,9 +31,7 @@ describe('ContestForm', function() {
       { contest: { title: '',
                    description: '',
                    candidates: [],
-                   questions: [],
-                   endorsements: [],
-                   answers: [] }},
+                   questions: [] }},
       jasmine.any(Function))
   })
 

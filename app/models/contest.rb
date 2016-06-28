@@ -5,97 +5,69 @@ class Contest < ActiveRecord::Base
   translates :description, :title
 
   belongs_to :guide
-  has_many :candidates
-  has_many :questions
+  has_many :candidates, autosave: true
+  has_many :questions, autosave: true
   has_many :answers, through: :questions
   has_many :endorsements, through: :candidates
+  has_many :tags, through: :questions
 
-  def assign_associates(associates_obj)
-    @associates_obj = associates_obj.with_indifferent_access
-    assign_association! :candidates
-    assign_association! :questions
-    create_endorsements!
-    create_answers!
+  def assign_attributes(attributes)
+    @candidate_ids = {}
+    create_candidates! attributes
+    create_questions! attributes
+    super attributes
   end
 
   def as_json(options = nil)
     super({
       include: { candidates: { include: :endorsements },
-                 questions: { include: :answers }}
-      }.update(options))
+                 questions: { include: [:answers, :tags] }}
+      }.update(options || {}))
   end
 
   private
 
-  attr_accessor :associates_obj
+  attr_accessor :candidate_ids
 
-  def assign_association!(association)
-    return unless associates_obj[association]
+  def create_candidates!(associates_obj)
+    return unless associates_obj[:candidates]
 
-    associates_obj[association].each do |raw_obj|
-      raw_id = raw_obj.delete :id
-      activerec_obj = send(association).find_by id: raw_id
+    associates_obj[:candidates].reject! do |raw_candidate|
+      raw_candidate[:_destroy]
+    end
 
-      if raw_obj.key? :_destroy
-        activerec_obj.destroy
-      else
-        if activerec_obj
-          activerec_obj.update_attributes raw_obj
-        else
-          activerec_obj = send(association).create! raw_obj
-          reassign_ids association, raw_id, activerec_obj.id
-        end
-        raw_obj[:id] = activerec_obj.id
-      end
+    associates_obj[:candidates].map! do |raw_candidate|
+      candidate = candidates.find_or_initialize_by(
+        id: raw_candidate[:id])
+      candidate_ids[raw_candidate[:id].to_s] = candidate
+      candidate.assign_attributes(raw_candidate)
+      candidate
     end
   end
 
-  def reassign_ids(association, old_id, new_id)
-    as_key = "#{association.to_s.singularize}_id"
+  def create_questions!(associates_obj)
+    return unless associates_obj[:questions]
 
-    %w{answers endorsements}.each do |sub_association|
-      next unless associates_obj[sub_association]
-      associates_obj[sub_association].map! do |sub_obj|
-        foreign_key = sub_association == 'endorsements' ? :endorsing_id : as_key
-        sub_obj.update({ foreign_key => new_id }) if sub_obj[foreign_key] == old_id
-      end
+    associates_obj[:questions].reject! do |raw_question|
+      raw_question[:_destroy]
+    end
+
+    associates_obj[:questions].map! do |raw_question|
+      question = questions.find_or_initialize_by(
+        id: raw_question[:id])
+
+      raw_answers = raw_question[:answers].clone if raw_question[:answers]
+      question.assign_attributes(raw_question)
+      update_candidates!(raw_answers, question) if raw_answers
+
+      question
     end
   end
 
-  def create_endorsements!
-    return unless associates_obj[:endorsements]
-    saved_endorsements = []
-
-    associates_obj[:endorsements].each do |raw_endorsement|
-      endorsement = endorsements.find_or_initialize_by(
-        endorsing_id: raw_endorsement[:endorsing_id],
-        endorsing_type: raw_endorsement[:endorsing_type],
-        endorser: raw_endorsement[:endorser])
-
-      endorsement.save
-      saved_endorsements.push(endorsement.id)
+  def update_candidates!(raw_answers, question)
+    raw_answers.each do |raw_answer|
+      answer = question.answers.find{ |answer| answer.text == raw_answer[:text] }
+      answer.candidate = candidate_ids[raw_answer[:candidate_id].to_s]
     end
-
-    endorsements.each do |endorsement|
-      endorsement.destroy unless saved_endorsements.include? endorsement.id
-    end
-  end
-
-  def create_answers!
-    return unless associates_obj[:answers]
-    saved_answers = []
-
-    associates_obj[:answers].each do |raw_answer|
-      answer = answers.find_or_initialize_by(
-        candidate_id: raw_answer[:candidate_id],
-        question_id: raw_answer[:question_id])
-
-      answer.text = raw_answer[:text]
-      next unless answer.valid?
-      answer.save
-      saved_answers.push(answer.id)
-    end
-
-    answers.reject{ |answer| saved_answers.include? answer.id }.each(&:destroy)
   end
 end

@@ -212,12 +212,12 @@ class CandidateMock < ActiveMocker::Base
 
   def endorsements
     read_association(:endorsements, lambda do
-      ActiveMocker::HasMany.new([], foreign_key: "endorsing_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: "")
+      ActiveMocker::HasMany.new([], foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: "")
     end)
   end
 
   def endorsements=(val)
-    write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsing_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
+    write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
   end
 
   # _scopes.erb

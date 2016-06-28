@@ -1,8 +1,9 @@
 class CreateEndorsements < ActiveRecord::Migration
   def up
     create_table :endorsements do |t|
-      t.references :endorsing, polymorphic: true, index: true
+      t.references :endorsed, polymorphic: true, index: true
       t.string :endorser
+      t.integer :stance, default: 0, index: true
 
       t.timestamps null: false
     end

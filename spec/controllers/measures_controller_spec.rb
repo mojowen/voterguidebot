@@ -17,16 +17,16 @@ RSpec.describe MeasuresController, active_mocker: true do
     let(:against_endorsements) do
       {
         endorser: "someone against",
-        endorsing_type: "measure",
-        endorsing_id: false,
+        endorsed_type: "measure",
+        endorsed_id: false,
         stance: "against"
       }
     end
     let(:for_endorsements) do
       {
         endorser: "someone for",
-        endorsing_type: "measure",
-        endorsing_id: false,
+        endorsed_type: "measure",
+        endorsed_id: false,
         stance: "for"
       }
     end

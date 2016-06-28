@@ -22,7 +22,7 @@ RSpec.describe Measure, type: :model do
       let(:endorsements) do
         [
           Fabricate.build(:endorsement, endorser: 'great', stance: 'for').as_json,
-          Fabricate(:endorsement, endorser: 'great', stance: 'for', endorsing: subject ).as_json
+          Fabricate(:endorsement, endorser: 'great', stance: 'for', endorsed: subject ).as_json
         ]
       end
       it 'assigns endorsements' do

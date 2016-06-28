@@ -2,7 +2,7 @@ var Endorsements = React.createClass({
   getDefaultProps: function() {
     return { endorsements: [],
              stance: 'for',
-             endorsing_id: false,
+             endorsed_id: false,
              endorsment_type: 'false',
              className: '',
              handleChange: function() { } }
@@ -17,8 +17,8 @@ var Endorsements = React.createClass({
     if( this.qualifyingEndorsements().length < 3 ) {
       endorsements.push({
         endorser: '',
-        endorsing_type: this.props.endorsing_type,
-        endorsing_id: this.props.endorsing_id,
+        endorsed_type: this.props.endorsed_type,
+        endorsed_id: this.props.endorsed_id,
         stance: this.props.stance
       })
       this.props.handleChange('endorsements', endorsements)

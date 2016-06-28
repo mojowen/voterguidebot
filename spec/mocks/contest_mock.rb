@@ -13,11 +13,11 @@ class ContestMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { guide: nil, audits: nil, associated_audits: nil, translations: nil, candidates: nil, questions: nil, answers: nil, endorsements: nil }.merge(super)
+      @associations ||= { guide: nil, audits: nil, associated_audits: nil, translations: nil, candidates: nil, questions: nil, answers: nil, endorsements: nil, tags: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Contest::Translation" => { has_many: [:translations] }, "Candidate" => { has_many: [:candidates] }, "Question" => { has_many: [:questions] }, "Answer" => { has_many: [:answers] }, "Endorsement" => { has_many: [:endorsements] } }.merge(super)
+      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Contest::Translation" => { has_many: [:translations] }, "Candidate" => { has_many: [:candidates] }, "Question" => { has_many: [:questions] }, "Answer" => { has_many: [:answers] }, "Endorsement" => { has_many: [:endorsements] }, "Tag" => { has_many: [:tags] } }.merge(super)
     end
 
     def mocked_class
@@ -193,12 +193,22 @@ class ContestMock < ActiveMocker::Base
 
   def endorsements
     read_association(:endorsements, lambda do
-      ActiveMocker::HasMany.new([], foreign_key: "endorsing_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: "")
+      ActiveMocker::HasMany.new([], foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: "")
     end)
   end
 
   def endorsements=(val)
-    write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsing_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
+    write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
+  end
+
+  def tags
+    read_association(:tags, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
+    end)
+  end
+
+  def tags=(val)
+    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
   end
 
   # _scopes.erb
@@ -225,8 +235,8 @@ class ContestMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
   end
 
-  def assign_associates(associates_obj)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [associates_obj])
+  def assign_attributes(attributes)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
   end
 
 end

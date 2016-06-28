@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619155721) do
+ActiveRecord::Schema.define(version: 20160624063408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,15 +114,16 @@ ActiveRecord::Schema.define(version: 20160619155721) do
   add_index "endorsement_translations", ["locale"], name: "index_endorsement_translations_on_locale", using: :btree
 
   create_table "endorsements", force: :cascade do |t|
-    t.integer  "endorsing_id"
-    t.string   "endorsing_type"
+    t.integer  "endorsed_id"
+    t.string   "endorsed_type"
     t.string   "endorser"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "stance",         default: 0
+    t.integer  "stance",        default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "endorsements", ["endorsing_type", "endorsing_id"], name: "index_endorsements_on_endorsing_type_and_endorsing_id", using: :btree
+  add_index "endorsements", ["endorsed_type", "endorsed_id"], name: "index_endorsements_on_endorsed_type_and_endorsed_id", using: :btree
+  add_index "endorsements", ["stance"], name: "index_endorsements_on_stance", using: :btree
 
   create_table "field_translations", force: :cascade do |t|
     t.integer  "field_id",   null: false
@@ -223,6 +224,17 @@ ActiveRecord::Schema.define(version: 20160619155721) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer  "tagged_id"
+    t.string   "tagged_type"
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+  add_index "tags", ["tagged_type", "tagged_id"], name: "index_tags_on_tagged_type_and_tagged_id", using: :btree
 
   create_table "uploads", force: :cascade do |t|
     t.integer  "user_id"

@@ -6,5 +6,10 @@ class Candidate < ActiveRecord::Base
   has_one :guide, through: :contest
 
   has_many :answers, dependent: :destroy
-  has_many :endorsements, as: :endorsing, dependent: :destroy
+  include Endorsements
+
+  def assign_attributes(attributes)
+    create_endorsements!(attributes)
+    super(attributes)
+  end
 end

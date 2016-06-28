@@ -227,4 +227,8 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [fields_obj])
   end
 
+  def template_question_tags
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
 end
