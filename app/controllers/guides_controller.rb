@@ -25,7 +25,7 @@ class GuidesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to guide_path(@guide), notice: 'Guide saved!' if @guide.save
+        return redirect_to guide_path(@guide), notice: 'Guide saved!' if @guide.save
         render :edit
       end
       format.json do

@@ -29,6 +29,9 @@ RSpec.describe Template do
     it 'has a question tags' do
       expect(subject.question_tags).to eq(config['question_tags'])
     end
+    it 'has a question seeds' do
+      expect(subject.question_seeds).to eq(config['question_seeds'])
+    end
   end
 
   describe '#fields' do

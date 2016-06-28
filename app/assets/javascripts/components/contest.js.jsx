@@ -4,6 +4,7 @@ var Contest = React.createClass({
     return { candidates: [],
              questions: [],
              template_tags: [],
+             template_questions: [],
              answers: [],
              title: '',
              description: '' }
@@ -21,7 +22,7 @@ var Contest = React.createClass({
   getInitialState: function() {
     return { candidates: this.props.candidates,
              _candidates: [],
-             questions: this.props.questions,
+             questions: this.props.questions.concat(this.props.template_questions),
              _questions: [],
              answers: this.props.answers,
              title: this.props.title,

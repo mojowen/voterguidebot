@@ -28,6 +28,14 @@ class Guide < ActiveRecord::Base
     end
   end
 
+  def template_questions
+    template.question_seeds.map.with_index do |question, index|
+      question = Question.new text: question['text'],
+                              tags: [ Tag.new(name: question['tag'] )]
+      question.as_json(include: :tags).update('id' => "question#{index}")
+    end
+  end
+
   def template_question_tags
     template.question_tags
   end

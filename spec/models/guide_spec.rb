@@ -20,6 +20,20 @@ RSpec.describe Guide, active_mocker: true do
     end
   end
 
+  context '#template_questions' do
+    it 'returns a list of question hashes' do
+      expect(subject.template_questions.length).to eq(
+        subject.template.question_seeds.length)
+    end
+    it 'returns a list of question with fake ids' do
+      expect(subject.template_questions.first['id']).to eq('question0')
+    end
+    it 'returns a list of questions with tags' do
+      expect(subject.template_questions.first['tags'].first['name']).to eq(
+        subject.template.question_seeds.first['tag'])
+    end
+  end
+
   context '.template_fields' do
     let(:field_template) { subject.template.fields.first[:name] }
     let(:field) { Fabricate :field, value: 'what', field_template: field_template }

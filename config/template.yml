@@ -77,6 +77,21 @@ fields:
     limit: 50
     name: partners_list
 
+question_seeds:
+  -
+    text: Do you support incentivizing local and state governments setting benchmarks for investments in women- and minority- owned business enterprises?
+    tag: Economy
+  -
+    text: Do you support introducing small dollar public financing to decrease the influence of money in politics?
+    tag: Voting Rights
+  -
+    text: Do you support eliminating domestic tax loopholes that reduce tax revenue that could fund infrastructure and education?
+    tag: Economy
+  -
+    text: Do you support lowering the voting age in local and municipal elections to 16?
+    tag: Voting Rights
+
+
 question_tags:
   - Climate
   - Criminal Justice Reform

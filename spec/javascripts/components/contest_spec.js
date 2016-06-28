@@ -110,5 +110,34 @@ describe('Contest', function() {
       expect(this.component.state.changed).toEqual(true)
     })
   })
+
+  describe('seed questions', function() {
+    beforeEach(function() {
+      this.candidate = {
+        name: 'Katherine Hegel',
+        bio: 'The greatest',
+        photo: '/my/photo',
+        id: 5,
+        endorsements: ['Cool Dudes Inc']
+      }
+      this.seed_question = {
+        text: 'WHAT ARE THOSE',
+        tags: [{ name: 'Economy' }],
+        id: 8
+      }
+      this.props = {
+        candidates: [this.candidate],
+        template_questions: [this.seed_question]
+      }
+      this.setUpComponent(Contest, this.props)
+    })
+
+    it('shows the seed question', function() {
+      expect(this.dom.querySelector('[name=text]').value).toEqual(this.seed_question.text)
+    })
+    it('shows the seed questions tags', function() {
+      expect(this.dom.querySelector('.tag span').innerText).toEqual(this.seed_question.tags[0].name)
+    })
+  })
 })
 
