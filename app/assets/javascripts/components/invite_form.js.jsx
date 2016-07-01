@@ -1,4 +1,5 @@
 var InviteForm = React.createClass({
+  mixins: [FormBase],
   getInitialState: function() {
     return { emails: [], email: '' }
   },
@@ -20,23 +21,19 @@ var InviteForm = React.createClass({
   sendEmail: function(email_obj) {
     var that = this
 
-    superagent
-      .post(this.props.url)
-      .send(email_obj)
-      .set('Accept', 'application/json')
-      .end(function(err, res) {
-        var emails = that.state.emails,
-            index = emails.map(function(el) { return el.email })
-                          .indexOf(email_obj.email)
+    this.updateGuide(this.props.url, email_obj, function(res) {
+      var emails = that.state.emails,
+          index = emails.map(function(el) { return el.email })
+                        .indexOf(email_obj.email)
 
-        emails[index].state = res.body.state
-        that.setState({emails: emails})
-      })
+      emails[index].state = res.body.state
+      that.setState({emails: emails})
+    })
   },
   render: function() {
     var email_props = { type: 'email', placeholder: "Add Email", value: this.state.email }
         email_inputs = this.state.emails.map(function(email) {
-          var state_class = (email.state === 'sending' ? 'fa-circle-o-notch fa-spin' : 'check-circle-o')
+          var state_class = (email.state === 'sending' ? 'fa-circle-o-notch fa-spin' : 'fa-check-circle-o')
           return <p key={email}>{email.email}<i className={'fa fa-pull-right '+state_class}></i></p>}),
         button = <button style={{ marginTop: '-40px', float: 'right'}}
                          className="mui-btn mui-btn--small mui-btn--accent">+</button>

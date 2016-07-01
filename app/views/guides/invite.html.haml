@@ -5,5 +5,10 @@
     %p
       Invite folks to Voter Guide
       = image_tag 'robot.png', width: 16, style: 'vertical-align: middle'
-      they will need a Google account.
-    = react_component :InviteForm, { url: edit_guide_path(@guide) }
+      \- they will need a Google account.
+    - @guide.users.each do |user|
+      - next if user == current_user
+      %p
+        = user.email
+        %i.fa.fa-pull-right.fa-check-circle-o
+    = react_component :InviteForm, { url: users_guide_path(@guide) }

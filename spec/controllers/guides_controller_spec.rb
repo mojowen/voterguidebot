@@ -136,7 +136,7 @@ RSpec.describe GuidesController, active_mocker: true do
                         .with(email, guide, user.first_name)
                         .and_return(instance_double(User, valid?: true))
 
-        post :users, { id: guide.id, email: email }
+        patch :users, { id: guide.id, email: email }
       end
     end
     describe '#show' do

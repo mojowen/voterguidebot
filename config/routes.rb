@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       member do
         get 'invite'
         get 'fields'
-        post 'users'
+        patch 'users'
       end
       resources :languages, only: [:index, :create, :destroy, :show]
       resources :contests, except: :show
