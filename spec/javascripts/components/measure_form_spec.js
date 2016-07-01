@@ -32,7 +32,8 @@ describe('MeasureForm', function() {
                    description: '',
                    yes_means: '',
                    no_means: '',
-                   endorsements: [] }},
+                   endorsements: [],
+                   tags: [] }},
       jasmine.any(Function))
   })
 

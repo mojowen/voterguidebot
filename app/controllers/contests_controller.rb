@@ -19,7 +19,7 @@ class ContestsController < ApplicationController
     @contest.save
     {
       path: guide_contest_path(@guide, @contest),
-      state: { contest: @contest.reload, url: guide_contest_path(@guide, @contest) }
+      state: { contest: @contest.reload, url: edit_guide_contest_path(@guide, @contest) }
     }
   end
 
@@ -39,7 +39,7 @@ class ContestsController < ApplicationController
       :title, :description,
       questions: [:id, :_destroy, :text,
         answers: [:text, :candidate_id, :question_id],
-        tags: [:name,:question_id]],
+        tags: [:name, :tagged_id, :tagged_type]],
       candidates: [:id, :_destroy, :name, :bio, :photo, :facebook,
                    :twitter, :website,
         endorsements: [:endorser, :endorsed_id, :endorsed_type, :stance]])

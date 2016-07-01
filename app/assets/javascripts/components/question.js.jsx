@@ -46,7 +46,7 @@ var Question = React.createClass({
   },
   addTag: function(tag) {
     var tags = this.props.tags
-    tags.push({ name: tag, question_id: this.props.id })
+    tags.push({ name: tag, tagged_id: this.props.id, tagged_type: 'question' })
     this.props.handleChange(this.props.id, 'tags', tags)
   },
   render: function() {
@@ -77,6 +77,7 @@ var Question = React.createClass({
         <Taggable tags={this.props.tags}
                   id={this.props.id}
                   template_tags={this.props.template_tags}
+                  tagged_type='Question'
                   removeTag={this.removeTag}
                   addTag={this.addTag} />
         </td>

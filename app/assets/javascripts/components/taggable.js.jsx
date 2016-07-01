@@ -33,13 +33,13 @@ var Taggable = React.createClass({
 
       var add_tags = <div className="tags--select mui-select">
         <select onChange={this.handleChange}>
-          <option>Tag Question &#187;</option>
+          <option>{['Tag',this.props.tagged_type,String.fromCharCode(187)].join(' ')}</option>
           { tag_options }
         </select>
       </div>
     }
 
-    return <div className="tags">
+    return <div className="taggable--form">
       <strong>Tags:</strong>
       { tags }
       { add_tags }

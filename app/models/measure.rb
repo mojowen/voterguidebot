@@ -3,15 +3,17 @@ class Measure < ActiveRecord::Base
   translates :title, :description, :yes_means, :no_means
 
   include Endorsements
+  include Tags
 
   belongs_to :guide
 
   def as_json(options = nil)
-    super({ include: :endorsements }.update(options))
+    super({ include: [:endorsements, :tags] }.update(options))
   end
 
   def assign_attributes(attributes)
-    create_endorsements!(attributes)
+    create_endorsements! attributes
+    create_tags! attributes
     super(attributes)
   end
 end

@@ -5,7 +5,8 @@ describe('Measure', function() {
       title: 'This Contest',
       description: 'Mike Well Made It',
       yes_means: 'Free cake',
-      no_means: 'Paid cake'
+      no_means: 'Paid cake',
+      tags: [{ name: 'LGBTQ' }, { name: 'Climate Change' }],
     }
     this.setUpComponent(Measure, this.props)
   })
@@ -83,5 +84,33 @@ describe('Measure', function() {
       expect(this.component.state.endorsements).toEqual([this.against_endorsement])
     })
   })
+
+  it('displays tags', function() {
+    expect(this.dom.querySelectorAll('.tag').length).toEqual(2)
+    expect(this.dom.querySelector('.tag span').innerText).toEqual('LGBTQ')
+  })
+  it('adds tags', function() {
+    this.component.addTag('Diff')
+    expect(this.component.state.tags).toEqual([
+      { name: 'LGBTQ' }, { name: 'Climate Change'},
+      { tagged_id: 5, name: 'Diff', tagged_type: 'measure' } ])
+  })
+  it('removes tags', function() {
+    this.component.removeTag('LGBTQ')
+    expect(this.component.state.tags).toEqual([{ name: 'Climate Change'}])
+  })
+
+  describe('with no tags', function() {
+    beforeEach(function() {
+      this.props.tags = []
+      this.setUpComponent(Measure, this.props)
+    })
+
+    it('adds tags', function() {
+    this.component.addTag('Diff')
+    expect(this.component.state.tags).toEqual([{ tagged_id: 5, name: 'Diff', tagged_type: 'measure' }])
+    })
+  })
+
 })
 

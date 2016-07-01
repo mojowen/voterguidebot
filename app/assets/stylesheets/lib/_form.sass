@@ -20,6 +20,35 @@ textarea
       top: 8px
       right: 8px
 
+  .taggable--form
+    font-size: 10px
+    strong
+      margin-right: 4px
+
+    .tags--select,
+    .tag
+      background: $mui-primary-color-dark
+      color: white
+      a
+        color: $mui-accent-color-light
+        margin-left: 8px
+      border-radius: 5px
+      padding: 4px
+      margin: 0 4px
+      width: auto
+      display: inline-block
+
+    .tags--select
+      background: transparent
+      border: 1px dashed $mui-primary-color-dark
+      margin: 0
+      width: 140px
+      select
+        height: 14px
+        width: 132px
+        font-size: 10px
+        border-bottom: none
+        display: inline-block
 
 .form--row,
 .candidate--form
@@ -173,39 +202,9 @@ textarea
       vertical-align: middle
     input
       text-align: center
-
-  .tags
+  .taggable--form
     margin-top: -15px
-    font-size: 10px
-    strong
-      margin-right: 4px
     position: absolute
-
-  .tags--select,
-  .tag
-    background: $mui-primary-color-dark
-    color: white
-    a
-      color: $mui-accent-color-light
-      margin-left: 8px
-    border-radius: 5px
-    padding: 4px
-    margin: 0 4px
-    width: auto
-    display: inline-block
-
-  .tags--select
-    background: transparent
-    border: 1px dashed $mui-primary-color-dark
-    margin: 0
-    width: 140px
-    select
-      height: 14px
-      width: 132px
-      font-size: 10px
-      border-bottom: none
-      display: inline-block
-
   .remove
     position: relative
     cursor: pointer
@@ -231,6 +230,8 @@ textarea
         right: auto
   .for--block::before
     background-image: asset-url('yes.png')
+  .taggable--form
+    margin: 20px 0
 
 .location--search
   .fa-check

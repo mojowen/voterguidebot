@@ -56,7 +56,8 @@ RSpec.describe ContestsController, active_mocker: true do
       end
       let(:tags) do
         [{ 'name' => 'LGBTQ',
-           'question_id' => '5' }]
+           'tagged_id' => '5',
+           'tagged_type' => 'question' }]
       end
       let(:endorsements) do
         [{ 'endorser' => 'Ben and Jerrys',

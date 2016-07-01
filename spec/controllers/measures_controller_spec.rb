@@ -30,6 +30,13 @@ RSpec.describe MeasuresController, active_mocker: true do
         stance: "for"
       }
     end
+    let(:tag) do
+      {
+        name: 'LGBTQ',
+        tagged_id: '5',
+        tagged_type: 'measure'
+      }
+    end
     let(:measure_params) do
       { guide_id: guide.id,
         measure: {
@@ -37,7 +44,8 @@ RSpec.describe MeasuresController, active_mocker: true do
           description: 'Baller',
           yes_means: 'Straight creeping',
           no_means: 'No creapin',
-          endorsements: [for_endorsements, against_endorsements]
+          endorsements: [for_endorsements, against_endorsements],
+          tags: [tag]
         }}
     end
     it 'creates contests' do
@@ -65,6 +73,10 @@ RSpec.describe MeasuresController, active_mocker: true do
       post :create, measure_params
       expect(assigns(:measure).endorsements.map(&:endorser)).to include(against_endorsements[:endorser])
       expect(assigns(:measure).endorsements.map(&:endorser)).to include(for_endorsements[:endorser])
+    end
+    it 'assigns tags' do
+      post :create, measure_params
+      expect(assigns(:measure).tags.map(&:name)).to include(tag[:name])
     end
   end
 

@@ -77,7 +77,7 @@ describe('Question', function() {
     this.component.addTag('Diff')
     expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'tags', [{ name: 'LGBTQ' }, { name: 'Climate Change'},
-                              { question_id: 5, name: 'Diff' } ])
+                              { tagged_id: 5, name: 'Diff', tagged_type: 'question' } ])
   })
   it('removes tags', function() {
     this.component.removeTag('LGBTQ')
@@ -102,7 +102,7 @@ describe('Question', function() {
     it('adds tags', function() {
     this.component.addTag('Diff')
     expect(this.component.props.handleChange).toHaveBeenCalledWith(
-      this.props.id, 'tags', [{ question_id: 5, name: 'Diff' }])
+      this.props.id, 'tags', [{ tagged_id: 5, name: 'Diff', tagged_type: 'question' }])
     })
   })
 

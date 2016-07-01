@@ -39,7 +39,7 @@ describe('InviteForm', function() {
     this.component.sendEmail({ email: 'what@example.com', state: 'sending' })
     request = jasmine.Ajax.requests.mostRecent()
     expect(request.url).toBe('/invite')
-    expect(request.method).toBe('POST')
+    expect(request.method).toBe('PATCH')
     expect(request.data()).toEqual({
       email: 'what@example.com',
       state: 'sending'
@@ -51,7 +51,10 @@ describe('InviteForm', function() {
     this.component.sendEmail(this.component.state.emails[0])
 
     request = jasmine.Ajax.requests.mostRecent()
-    request.respondWith({  responseText: JSON.stringify({ state: 'success' }) })
+    request.respondWith({
+      status: 200,
+      responseText: JSON.stringify({ state: 'success' })
+    })
     expect(this.component.state.emails[0].state).toEqual('success')
   })
 })

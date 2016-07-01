@@ -13,7 +13,7 @@ var FormBase = {
     this.setState({ icon: 'fa-check-square' })
     this.notify(message || 'Success!')
     if( res && res.body && res.body.path ) {
-      history.pushState({}, '', res.body.path)
+      history.pushState({}, '', res.body.url)
     }
   },
   notify: function(message, is_error) {

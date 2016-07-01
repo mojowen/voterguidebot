@@ -6,14 +6,26 @@ var Measure = React.createClass({
              description: '',
              yes_means: '',
              no_means: '',
-             endorsements: [] }
+             endorsements: [],
+             tags: [],
+             template_tags: [] }
+  },
+  removeTag: function(tag) {
+    var tags = _.without(this.props.tags, _.find(this.props.tags, { name: tag }))
+    this.setChangedState({ tags: tags })
+  },
+  addTag: function(tag) {
+    var tags = this.state.tags
+    tags.push({ name: tag, tagged_id: this.props.id, tagged_type: 'measure' })
+    this.setChangedState({ tags: tags })
   },
   getInitialState: function() {
     return { title: this.props.title,
              description: this.props.description,
              yes_means: this.props.yes_means,
              no_means: this.props.no_means,
-             endorsements: this.props.endorsements }
+             endorsements: this.props.endorsements,
+             tags: this.props.tags }
   },
   render: function() {
     return <div className="measure mui-col-md-11 measure--form">
@@ -30,6 +42,14 @@ var Measure = React.createClass({
                           label="Description of Measure"
                           value={ this.state.description }
                           onChange={ this.handleChange } />
+      </div>
+      <div className="mui-row">
+        <Taggable tags={this.state.tags}
+                  id={this.props.id}
+                  tagged_type='Ballot Measure'
+                  template_tags={this.props.template_tags}
+                  removeTag={this.removeTag}
+                  addTag={this.addTag} />
       </div>
       <div className="mui-row mui-panel for--block">
         <h4>In Favor</h4>

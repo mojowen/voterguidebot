@@ -7,8 +7,11 @@ RSpec.describe Measure, type: :model do
     let(:endorsements) do
       [Fabricate.build(:endorsement, endorser: 'great').as_json]
     end
+    let(:tags) do
+      [Fabricate.build(:tag, name: 'LGBTQ').as_json]
+    end
     let(:raw) do
-      { title: 'Title', endorsements: endorsements }.with_indifferent_access
+      { title: 'Title', endorsements: endorsements, tags: tags }.with_indifferent_access
     end
     it 'assigns regular attributes' do
       subject.assign_attributes raw
@@ -17,6 +20,10 @@ RSpec.describe Measure, type: :model do
     it 'assigns endorsements' do
       subject.assign_attributes raw
       expect(subject.endorsements.first.endorser).to eq(raw[:endorsements].first[:endorser])
+    end
+    it 'assigns endorsements' do
+      subject.assign_attributes raw
+      expect(subject.tags.first.name).to eq(raw[:tags].first[:name])
     end
     context 'with already existing endorsements' do
       let(:endorsements) do
@@ -32,6 +39,22 @@ RSpec.describe Measure, type: :model do
       it 'deletes missing endorsements' do
         subject.assign_attributes raw.update(endorsements: [endorsements.first]).with_indifferent_access
         expect(subject.endorsements.length).to eq(1)
+      end
+    end
+    context 'with already existing tags' do
+      let(:endorsements) do
+        [
+          Fabricate.build(:tag, name: 'LGBTQ').as_json,
+          Fabricate(:tag, name: 'Climate Change', tagged: subject ).as_json
+        ]
+      end
+      it 'assigns tags' do
+        subject.assign_attributes raw
+        expect(subject.tags.first.name).to eq(raw[:tags].first[:name])
+      end
+      it 'deletes missing tags' do
+        subject.assign_attributes raw.update(tags: [tags.first]).with_indifferent_access
+        expect(subject.tags.length).to eq(1)
       end
     end
   end
