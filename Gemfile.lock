@@ -378,7 +378,6 @@ GEM
       faraday (~> 0.9)
       jwt (~> 1.5)
       multi_json (~> 1.10)
-    slack-notifier (1.5.1)
     slop (3.6.0)
     spring (1.7.1)
     sprockets (3.6.0)
@@ -455,7 +454,6 @@ DEPENDENCIES
   react-rails
   rspec-rails
   sass-rails (~> 5.0)
-  slack-notifier
   spring
   sweetalert-rails
   turbolinks

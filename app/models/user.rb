@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
 
         UserMailer.welcome(user).deliver_now
       end
-      Slack.post_user(user) if user.last_sign_in_at.nil?
       user
   end
 

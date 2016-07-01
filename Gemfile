@@ -24,7 +24,6 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 
 gem 'exception_notification'
-gem 'slack-notifier'
 
 group :development do
   gem 'web-console', '~> 2.0'
