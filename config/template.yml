@@ -43,7 +43,7 @@ fields:
   -
     label: Logo
     placeholder: Your logo - will need to work up to 200px
-    example: /assets/example_logo.png
+    example: /example_logo.png
     example_elem: img
     example_attr: src
     example_props:
