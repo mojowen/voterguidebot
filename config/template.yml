@@ -1,6 +1,8 @@
 
 name: Default Voter Guide
 
+screenshot: default.png
+
 contests: 4
 candidates: 4
 questions: 7

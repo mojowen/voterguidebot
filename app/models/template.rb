@@ -1,7 +1,7 @@
 class Template
   attr_accessor :name, :fields, :contests, :candidates,
                 :ballot_measures, :endorsements, :questions, :question_tags,
-                :question_seeds
+                :question_seeds, :screenshot
 
   def self.default
     @default ||= new YAML.load_file(Rails.root.join('config','template.yml'))
@@ -9,6 +9,7 @@ class Template
 
   def initialize(attrs={})
     @name = attrs['name']
+    @screenshot = attrs['screenshot']
     @fields = attrs['fields'].map(&:with_indifferent_access)
     @contests = attrs['contests']
     @candidates = attrs['candidates']

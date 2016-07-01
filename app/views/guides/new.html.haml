@@ -1,5 +1,14 @@
 .mui-row
-  .mui-col-md-3
-  .mui-col-md-6
+  .mui-col-md-6.mui-col-md-offset-3
     %h2 Create a New Guide
-    = render 'form', { guide: @guide }
+    - if params[:template]
+      = render 'form', { guide: @guide }
+    - else
+      %h3 Select a template
+      .templates
+        - @templates.each do |template|
+          %a{ href: '?template=default' }
+            .mui-panel
+              %h4= template.name
+              = image_tag template.screenshot
+
