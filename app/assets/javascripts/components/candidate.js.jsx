@@ -1,6 +1,7 @@
 var Candidate = React.createClass({
   getDefaultProps: function() {
     return { name: '',
+             party: '',
              bio: '',
              photo: '',
              id: '',
@@ -29,11 +30,15 @@ var Candidate = React.createClass({
                       name="photo"
                       preview={true}
                       onChange={this.handleChange} />
-
       <InputComponent label="Name"
                       placeholder="Joe Smith"
                       value={this.props.name}
                       name="name"
+                      onChange={this.handleChange} />
+      <InputComponent label="Party"
+                      placeholder="Working Families Party"
+                      value={this.props.party}
+                      name="party"
                       onChange={this.handleChange} />
       <InputComponent label="Bio"
                       placeholder="Paper towel preserver, motorcycle rider, etc."

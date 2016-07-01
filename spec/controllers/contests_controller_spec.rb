@@ -40,6 +40,7 @@ RSpec.describe ContestsController, active_mocker: true do
            'facebook' => 'http://facebook.com/frank',
            'twitter' => 'http://twitter.com/frank',
            'website' => 'http://franksplace.com',
+           'party' => 'Democrat',
            'endorsements' => endorsements }]
       end
       let(:questions) do

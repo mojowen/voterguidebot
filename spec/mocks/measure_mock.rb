@@ -2,6 +2,8 @@ require("active_mocker/mock")
 class MeasureMock < ActiveMocker::Base
   created_with("2.2.2")
   # _modules_constants.erb
+  prepend(Endorsements)
+  prepend(Tags)
   #_class_methods.erb
   class << self
     def attributes
@@ -13,11 +15,11 @@ class MeasureMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { guide: nil, audits: nil, translations: nil, endorsements: nil }.merge(super)
+      @associations ||= { guide: nil, audits: nil, translations: nil, endorsements: nil, tags: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Measure::Translation" => { has_many: [:translations] }, "Endorsement" => { has_many: [:endorsements] } }.merge(super)
+      @associations_by_class ||= { "Guide" => { belongs_to: [:guide] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits] }, "Measure::Translation" => { has_many: [:translations] }, "Endorsement" => { has_many: [:endorsements] }, "Tag" => { has_many: [:tags] } }.merge(super)
     end
 
     def mocked_class
@@ -167,6 +169,16 @@ class MeasureMock < ActiveMocker::Base
 
   def endorsements=(val)
     write_association(:endorsements, ActiveMocker::HasMany.new(val, foreign_key: "endorsed_id", foreign_id: self.id, relation_class: classes("Endorsement"), source: ""))
+  end
+
+  def tags
+    read_association(:tags, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "tagged_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
+    end)
+  end
+
+  def tags=(val)
+    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "tagged_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
   end
 
   # _scopes.erb

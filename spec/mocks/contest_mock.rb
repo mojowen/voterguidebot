@@ -203,12 +203,12 @@ class ContestMock < ActiveMocker::Base
 
   def tags
     read_association(:tags, lambda do
-      ActiveMocker::HasMany.new([], foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
+      ActiveMocker::HasMany.new([], foreign_key: "tagged_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
     end)
   end
 
   def tags=(val)
-    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
+    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "tagged_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
   end
 
   # _scopes.erb

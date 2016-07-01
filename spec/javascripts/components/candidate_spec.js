@@ -3,6 +3,7 @@ describe('Candidate', function() {
     this.props = {
       id: 5,
       name: 'Billy Bob',
+      party: 'Democrat',
       bio: 'Dated Angelina Jolie',
       photo: '/smiling-guy',
       twitter: 'Twitter',
@@ -20,7 +21,6 @@ describe('Candidate', function() {
   it('initializes name', function() {
     var input = this.dom.querySelector('[name=name]')
     expect(input.value).toEqual(this.props.name)
-    expect(input.name).toEqual('name')
   })
   it('handles change to name', function() {
     this.component.handleChange({ target: { name: 'name', value: 'New Name'} })
@@ -28,10 +28,19 @@ describe('Candidate', function() {
       this.props.id, 'name', 'New Name')
   })
 
+  it('initializes party', function() {
+    var input = this.dom.querySelector('[name=party]')
+    expect(input.value).toEqual(this.props.party)
+  })
+  it('handles change to party', function() {
+    this.component.handleChange({ target: { name: 'party', value: 'Republican'} })
+    expect(this.component.props.handleChange).toHaveBeenCalledWith(
+      this.props.id, 'party', 'Republican')
+  })
+
   it('initializes bio', function() {
     var input = this.dom.querySelector('[name=bio]')
     expect(input.value).toEqual(this.props.bio)
-    expect(input.name).toEqual('bio')
   })
   it('handles change to bio', function() {
     this.component.handleChange({ target: { name: 'bio', value: 'New bio'} })
@@ -42,7 +51,6 @@ describe('Candidate', function() {
   it('initializes facebook', function() {
     var input = this.dom.querySelector('[name=facebook]')
     expect(input.value).toEqual(this.props.facebook)
-    expect(input.name).toEqual('facebook')
   })
   it('handles change to facebook', function() {
     this.component.handleChange({ target: { name: 'facebook', value: 'New facebook'} })
@@ -53,7 +61,6 @@ describe('Candidate', function() {
   it('initializes website', function() {
     var input = this.dom.querySelector('[name=website]')
     expect(input.value).toEqual(this.props.website)
-    expect(input.name).toEqual('website')
   })
   it('handles change to website', function() {
     this.component.handleChange({ target: { name: 'website', value: 'New website'} })
@@ -64,7 +71,6 @@ describe('Candidate', function() {
   it('initializes twitter', function() {
     var input = this.dom.querySelector('[name=twitter]')
     expect(input.value).toEqual(this.props.twitter)
-    expect(input.name).toEqual('twitter')
   })
   it('handles change to twitter', function() {
     this.component.handleChange({ target: { name: 'twitter', value: 'New twitter'} })

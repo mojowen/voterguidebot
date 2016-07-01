@@ -2,14 +2,15 @@ require("active_mocker/mock")
 class CandidateMock < ActiveMocker::Base
   created_with("2.2.2")
   # _modules_constants.erb
+  prepend(Endorsements)
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "photo" => nil, "name" => nil, "bio" => nil, "facebook" => nil, "website" => nil, "twitter" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "photo" => nil, "name" => nil, "bio" => nil, "facebook" => nil, "website" => nil, "twitter" => nil, "created_at" => nil, "updated_at" => nil, "party" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, photo: String, name: String, bio: String, facebook: String, website: String, twitter: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, photo: String, name: String, bio: String, facebook: String, website: String, twitter: String, created_at: DateTime, updated_at: DateTime, party: String }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +27,7 @@ class CandidateMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "contest_id", "photo", "name", "bio", "facebook", "website", "twitter", "created_at", "updated_at"] | super)
+      @attribute_names ||= (["id", "contest_id", "photo", "name", "bio", "facebook", "website", "twitter", "created_at", "updated_at", "party"] | super)
     end
 
     def primary_key
@@ -122,6 +123,14 @@ class CandidateMock < ActiveMocker::Base
 
   def updated_at=(val)
     write_attribute(:updated_at, val)
+  end
+
+  def party
+    read_attribute(:party)
+  end
+
+  def party=(val)
+    write_attribute(:party, val)
   end
 
   # _associations.erb
@@ -238,6 +247,10 @@ class CandidateMock < ActiveMocker::Base
   # _recreate_class_method_calls.erb
   def self.attribute_aliases
     @attribute_aliases ||= {}.merge(super)
+  end
+
+  def assign_attributes(attributes)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
   end
 
 end

@@ -2,6 +2,7 @@ require("active_mocker/mock")
 class QuestionMock < ActiveMocker::Base
   created_with("2.2.2")
   # _modules_constants.erb
+  prepend(Tags)
   #_class_methods.erb
   class << self
     def attributes
@@ -180,12 +181,12 @@ class QuestionMock < ActiveMocker::Base
 
   def tags
     read_association(:tags, lambda do
-      ActiveMocker::HasMany.new([], foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
+      ActiveMocker::HasMany.new([], foreign_key: "tagged_id", foreign_id: self.id, relation_class: classes("Tag"), source: "")
     end)
   end
 
   def tags=(val)
-    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "question_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
+    write_association(:tags, ActiveMocker::HasMany.new(val, foreign_key: "tagged_id", foreign_id: self.id, relation_class: classes("Tag"), source: ""))
   end
 
   # _scopes.erb
@@ -206,6 +207,10 @@ class QuestionMock < ActiveMocker::Base
   # _recreate_class_method_calls.erb
   def self.attribute_aliases
     @attribute_aliases ||= {}.merge(super)
+  end
+
+  def assign_attributes(attributes)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
   end
 
 end

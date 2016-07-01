@@ -7,11 +7,15 @@ RSpec.describe Candidate, type: :model do
       [Fabricate.build(:endorsement, endorser: 'great').as_json]
     end
     let(:raw) do
-      { name: 'Boby Shrum', endorsements: endorsements }.with_indifferent_access
+      { name: 'Boby Shrum', party: 'Democrat', endorsements: endorsements }.with_indifferent_access
     end
     it 'assigns regular attributes' do
       subject.assign_attributes raw
       expect(subject.name).to eq(raw[:name])
+    end
+    it 'assigns party' do
+      subject.assign_attributes raw
+      expect(subject.party).to eq(raw[:party])
     end
     it 'assigns endorsements' do
       subject.assign_attributes raw

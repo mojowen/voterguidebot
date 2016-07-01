@@ -41,7 +41,7 @@ class ContestsController < ApplicationController
         answers: [:text, :candidate_id, :question_id],
         tags: [:name, :tagged_id, :tagged_type]],
       candidates: [:id, :_destroy, :name, :bio, :photo, :facebook,
-                   :twitter, :website,
+                   :twitter, :website, :party,
         endorsements: [:endorser, :endorsed_id, :endorsed_type, :stance]])
   end
 end
