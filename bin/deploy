@@ -5,6 +5,9 @@ require 'pathname'
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
 
 Dir.chdir APP_ROOT do
+  puts "== Pulling Latest =="
+  system "git pull"
+
   puts "== Installing Ruby Dependencies =="
   system "gem install bundler --conservative"
   system "bundle check || bundle install"
@@ -25,5 +28,4 @@ Dir.chdir APP_ROOT do
 
   puts "\n== Restarting application server =="
   system "restart"
-
 end
