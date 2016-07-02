@@ -22,7 +22,7 @@ describe('FieldFormRow', function() {
   it('shows remaining characters', function() {
     var typed = 'what what what'
     this.component.updateValue({ target: { value: typed }})
-    expect(parseInt(this.component.refs.remaining.innerText)).toEqual(
+    expect(parseInt(this.dom.querySelector('.remaining').innerText)).toEqual(
       this.component.props.limit - typed.length)
   })
 
@@ -53,7 +53,7 @@ describe('FieldFormRow', function() {
       expect(this.component.state.value).toEqual('new value')
     })
     it('shows remaining characters', function() {
-      expect(parseInt(this.component.refs.remaining.innerText)).toEqual(
+      expect(parseInt(this.dom.querySelector('.remaining').innerText)).toEqual(
         this.component.props.limit - this.props.value.length)
     })
     it('renders the previews', function() {

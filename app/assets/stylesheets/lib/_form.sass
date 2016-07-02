@@ -14,6 +14,10 @@ textarea
     &:hover
       color: $mui-accent-color-dark
 
+  .remaining
+    font-size: 10px
+    position: absolute
+
   .image--field
     .remove
       bottom: auto
@@ -55,9 +59,6 @@ textarea
   .preview--field
     white-space: pre-line
     word-wrap: break-word
-
-  .remaining
-    font-size: 10px
 
   .mui-textfield
     padding-top: 20px
@@ -180,7 +181,6 @@ textarea
     cursor: pointer
 
 .questions--form
-  overflow-y: auto
   table
     width: 100%
   th
@@ -193,11 +193,21 @@ textarea
     .mui-textfield
       max-width: 450px
       min-width: 250px
-      input
+      textarea
         text-align: left
+        font-size: 12px
+        resize: none
+        height: auto
+      .remaining
+        right: 0
+        bottom: 0px
+        pointer-events: none
+  tbody tr td
+    padding-bottom: 10px
+
   td
     height: 80px
-    vertical-align: top
+    vertical-align: bottom
     &.remover
       vertical-align: middle
     input

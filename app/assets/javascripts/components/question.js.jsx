@@ -1,35 +1,28 @@
 var Question = React.createClass({
   getDefaultProps: function() {
     return { candidates: [],
-             answers: [],
-             tags: [],
+             answers: null,
+             tags: null,
              template_tags: [],
              text: '',
              id: null,
              handleRemove: function() {  },
              handleChange: function() {  } }
   },
-  answers: function() {
-    var answers = {}
-    for (var i = this.props.candidates.length - 1; i >= 0; i--) {
-      var answer = _.find(this.props.answers, function(answer) {
-        return answer.candidate_id == this.props.candidates[i].id
-      }, this)
-      answers[this.props.candidates[i].id] = answer
-    }
-    return answers
-  },
   handleAnswerChange: function(event) {
-    var answers = this.props.answers,
+    var answers = this.props.answers || [],
         text = event.target.value,
-        candidate_id = event.target.name,
-        answer = this.answers()[candidate_id]
+        index = event.target.name.split('_').reverse()[0],
+        candidate = this.props.candidates[index],
+        answer = _.find(this.props.answers, function(answer) {
+          return answer.candidate_id === candidate.id
+        })
 
     if( !answer ) {
-      answer = { candidate_id: candidate_id, question_id: this.props.id, text: text }
+      answer = { candidate_id: candidate.id, question_id: this.props.id, text: text }
       answers.push(answer)
     } else {
-      answers[_.indexOf(answers, answer)].text = text
+      answers[_.indexOf(this.props.answers, answer)].text = text
     }
 
     this.props.handleChange(this.props.id, 'answers', answers)
@@ -41,27 +34,27 @@ var Question = React.createClass({
     this.props.handleRemove(this.props.id)
   },
   removeTag: function(tag) {
-    var tags = _.without(this.props.tags, _.find(this.props.tags, { name: tag }))
+    var tags = _.without(this.props.tags || [], _.find(this.props.tags || [], { name: tag }))
     this.props.handleChange(this.props.id, 'tags', tags)
   },
   addTag: function(tag) {
-    var tags = this.props.tags
+    var tags = this.props.tags || []
     tags.push({ name: tag, tagged_id: this.props.id, tagged_type: 'question' })
     this.props.handleChange(this.props.id, 'tags', tags)
   },
   render: function() {
-    var candidates = _.map(this.props.candidates, function(candidate) {
-                      var answer = this.answers()[candidate.id],
-                          answer_text = answer ? answer.text : ''
+    var candidates = _.map(this.props.candidates, function(candidate, index) {
+                      var answer = _.find(this.props.answers || [], function(answer) {
+                                    return answer.candidate_id == candidate.id
+                                  })
 
                       return <td key={candidate.id}>
-                              <InputComponent name={'candidate_'+candidate.id}
-                                              value={answer_text}
+                              <InputComponent name={'candidate_'+index}
+                                              value={answer ? answer.text : ''}
                                               onChange={this.handleAnswerChange}
                                               placeholder="..." />
                             </td>
                     }, this)
-
 
     return <tr>
       <td className="remover">
@@ -72,8 +65,10 @@ var Question = React.createClass({
       <td className="question">
         <InputComponent value={this.props.text}
                         name="text"
+                        element="textarea"
+                        limit={140}
                         placeholder="Add Your Question"
-                        handleChange={this.handleChange} />
+                        onChange={this.handleChange} />
         <Taggable tags={this.props.tags}
                   id={this.props.id}
                   template_tags={this.props.template_tags}

@@ -77,8 +77,8 @@ var Contest = React.createClass({
         questions = this.state.questions,
         question = questions[index]
 
-    vgConfirm('Are you sure you want to remove this question?', function(confirmed) {
-      if( !confirmed ) return
+    vgConfirm('Are you sure you want to remove this question?', function(conf) {
+      if( !conf ) return
 
       var destroyed = this.state._questions
 

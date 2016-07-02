@@ -23,13 +23,13 @@ var QuestionsTable = React.createClass({
           }, this)
         questions = _.map(this.props.questions, function(question) {
           return <Question {...question}
+                           answers={question.answers}
                            candidates={this.props.candidates}
                            template_tags={this.props.template_tags}
                            key={question.id}
                            handleChange={this.props.handleChange}
                            handleRemove={this.props.handleRemove} />
         }, this)
-
 
     return <div>
       <div className="mui-row">
@@ -43,7 +43,7 @@ var QuestionsTable = React.createClass({
       </div>
       <div className="mui-row">
         <div className="mui--pull-right">
-          <a onClick={ this.handleAdd }
+          <a onClick={ this.props.handleAdd }
               className="mui-btn mui-btn--accent">
             <i className="fa fa-plus-circle" /> Add Question
           </a>

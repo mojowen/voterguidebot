@@ -26,7 +26,7 @@ RSpec.describe Guide, active_mocker: true do
         subject.template.question_seeds.length)
     end
     it 'returns a list of question with fake ids' do
-      expect(subject.template_questions.first['id']).to eq('question0')
+      expect(subject.template_questions.first['id']).to eq('0question')
     end
     it 'returns a list of questions with tags' do
       expect(subject.template_questions.first['tags'].first['name']).to eq(

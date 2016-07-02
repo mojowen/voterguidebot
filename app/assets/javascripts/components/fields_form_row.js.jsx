@@ -11,20 +11,12 @@ var FieldFormRow = React.createClass({
     return (this.state.value && this.state.value.length > 0 ? this.state.value :
                                                               this.props.example)
   },
+  isValid: function() {
+    return this.refs.input.isValid()
+  },
   updateValue: function(event) {
     this.setState({ value: event.target.value })
     return true
-  },
-  isValid: function() {
-    return this.props.limit ? this.state.value.length <= this.props.limit : true
-  },
-  afterClass: function() {
-    if( this.isValid() ) return 'mui--text-accent'
-
-    var remaining = this.props.limit - this.state.value.length
-    if( remaining >= 15 ) return 'mui--text-dark-hint'
-    else if( remaining < 15 && remaining >= 5 ) return 'mui--text-dark-secondary'
-    else if( remaining < 5 && remaining >= 0 ) return 'mui--text-dark'
   },
   render: function() {
     if( this.props.example_attr ) {
@@ -39,14 +31,9 @@ var FieldFormRow = React.createClass({
       </this.props.example_elem>
     }
 
-    var after = <span ref="remaining"
-                      className={'remaining '+this.afterClass()}>
-                  { this.props.limit - (this.state.value || '').length}
-                </span>
-
     return <div className='mui-row form--row' >
       <div className='mui-col-md-6'>
-        <InputComponent after={this.props.limit ? after : ''}
+        <InputComponent limit={this.props.limit}
                         ref="input"
                         onChange={this.updateValue}
                         preview={true}

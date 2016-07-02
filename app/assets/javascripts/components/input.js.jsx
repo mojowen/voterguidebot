@@ -6,12 +6,20 @@ var InputComponent = React.createClass({
       value: null,
       placeholder: null,
       className: '',
+      limit: false,
       fa: null,
       onChange: function() { }
     }
   },
-  handleChange: function(event) {
-    this.props.handleChange(event)
+  isValid: function() {
+    return this.props.limit ? this.props.value.length <= this.props.limit : true
+  },
+  limitClass: function() {
+    if( this.isValid() ) return 'mui--text-accent-hint'
+
+    var remaining = this.props.limit - this.props.value.length
+    if( remaining >= 15 && remaining >= 0 ) return 'mui--text-accent-secondary'
+    return 'mui--text-accent mui--text-subhead'
   },
   render: function() {
     var label = this.props.label ? <label>{ this.props.label }</label> : '',
@@ -19,7 +27,11 @@ var InputComponent = React.createClass({
                                     { ...this.props }
                                     value={ this.props.value } />,
         font_awesome = '',
-        className = ['mui-textfield',this.props.className]
+        className = ['mui-textfield',this.props.className],
+        limit = <span ref="remaining"
+                      className={'remaining '+this.limitClass()}>
+                  { this.props.limit - (this.props.value || '').length}
+                </span>
 
     if( this.props.fa !== null ) {
       className.push('fa-prefix')
@@ -36,6 +48,7 @@ var InputComponent = React.createClass({
       { this.props.afterLabel }
       { font_awesome }
       { input }
+      { this.props.limit ? limit : '' }
       { this.props.after }
     </div>
   }

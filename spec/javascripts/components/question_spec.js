@@ -36,11 +36,11 @@ describe('Question', function() {
   })
 
   it('displays answers', function() {
-    expect(this.dom.querySelector('[name=candidate_1]').value).toEqual(
+    expect(this.dom.querySelector('[name=candidate_0]').value).toEqual(
       this.props.answers[0].text)
   })
   it('updates answers', function() {
-    var event = { target: { name: this.props.candidates[0].id, value: 'different' } }
+    var event = { target: { name: 'candidate_0', value: 'different' } }
     this.component.handleAnswerChange(event)
     expect(this.component.props.handleChange).toHaveBeenCalledWith(
       this.props.id, 'answers', [{ candidate_id: 1, text: 'different' }])
@@ -62,7 +62,7 @@ describe('Question', function() {
     })
 
     it('updates answers', function() {
-      var event = { target: { name: this.props.candidates[0].id, value: 'different' } }
+      var event = { target: { name: 'candidate_0', value: 'different' } }
       this.component.handleAnswerChange(event)
       expect(this.component.props.handleChange).toHaveBeenCalledWith(
         this.props.id, 'answers', [{ question_id: 5, candidate_id: 1, text: 'different' }])
