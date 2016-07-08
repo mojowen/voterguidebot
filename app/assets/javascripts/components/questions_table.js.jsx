@@ -3,13 +3,12 @@ var QuestionsTable = React.createClass({
     return { candidates: [],
              questions: [],
              template_tags: [],
+             template_questions: [],
              handleAdd: function() { },
              handleRemove: function() { },
              handleChange: function() { } }
   },
   render: function() {
-    if( this.props.questions.length < 1 ) return <table className="questions"></table>
-
     var questions_headers = _.map(this.props.candidates, function(candidate, index) {
           var has_photo = candidate.photo && !_.isEmpty(candidate.photo),
               bgImg = has_photo ? 'url('+candidate.photo+')' : '',
@@ -31,11 +30,13 @@ var QuestionsTable = React.createClass({
                            handleRemove={this.props.handleRemove} />
         }, this)
 
+    var table_display = this.props.questions.length < 1 ? 'none' : 'block'
+
     return <div>
       <div className="mui-row">
         <div className="questions--form">
           <h3>Questions</h3>
-          <table className="questions">
+          <table className="questions" style={{ display: table_display }}>
             <thead><tr><th></th><th></th>{ questions_headers }</tr></thead>
             <tbody>{ questions }</tbody>
           </table>
@@ -43,10 +44,9 @@ var QuestionsTable = React.createClass({
       </div>
       <div className="mui-row">
         <div className="mui--pull-right">
-          <a onClick={ this.props.handleAdd }
-              className="mui-btn mui-btn--accent">
-            <i className="fa fa-plus-circle" /> Add Question
-          </a>
+          <AddQuestion ref="add_question"
+                       handleAdd={ this.props.handleAdd }
+                       template_questions={this.props.template_questions} />
         </div>
       </div>
     </div>

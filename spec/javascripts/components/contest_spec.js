@@ -87,11 +87,6 @@ describe('Contest', function() {
       expect(this.component.state.questions[0].text).toEqual('LOVE ME?')
       expect(this.component.state.changed).toEqual(true)
     })
-    it('adds new questions', function() {
-      this.component.handleClickToAddQuestion({ preventDefault: function() {}})
-      expect(this.component.state.questions.length).toEqual(2)
-      expect(this.component.state.changed).toEqual(true)
-    })
     it('deletes questions', function() {
       this.component.handleQuestionRemove(this.question.id)
       swalSpy.confirmLast(true)
@@ -111,7 +106,7 @@ describe('Contest', function() {
     })
   })
 
-  describe('seed questions', function() {
+  describe('template questions', function() {
     beforeEach(function() {
       this.candidate = {
         name: 'Katherine Hegel',
@@ -120,23 +115,40 @@ describe('Contest', function() {
         id: 5,
         endorsements: ['Cool Dudes Inc']
       }
-      this.seed_question = {
-        text: 'WHAT ARE THOSE',
-        tags: [{ name: 'Economy' }],
-        id: 8
-      }
+      this.template_questions = [{ text: 'WHAT ARE THOSE',
+                                   tags: [{ name: 'Economy' }],
+                                   id: 8 },
+                                { text: 'ANOTHER ONE',
+                                  tags: [{ name: 'DJ Khaled' }],
+                                  id: 8 }]
+
       this.props = {
         candidates: [this.candidate],
-        template_questions: [this.seed_question]
+        template_questions: this.template_questions
       }
       this.setUpComponent(Contest, this.props)
+      this.add_question = this.component.refs.questions.refs.add_question
+      this.add_question.handleAddQuestionStart({ preventDefault: function() {} })
     })
 
-    it('shows the seed question', function() {
-      expect(this.dom.querySelector('[name=text]').value).toEqual(this.seed_question.text)
+    it('creates a select for template questions', function() {
+      var tags = this.dom.querySelectorAll('.add--question select optgroup')
+      expect(tags[0].label).toEqual(this.template_questions[0].tags[0].name)
+      expect(tags[1].label).toEqual(this.template_questions[1].tags[0].name)
+
+      var sample_qs = this.dom.querySelectorAll('.add--question select option')
+      expect(sample_qs[1].innerText).toEqual(this.template_questions[0].text)
+      expect(sample_qs[2].innerText).toEqual(this.template_questions[1].text)
     })
-    it('shows the seed questions tags', function() {
-      expect(this.dom.querySelector('.tag span').innerText).toEqual(this.seed_question.tags[0].name)
+
+    it('selects a template question and creaets a new question', function() {
+      this.add_question.handleAddSelected({
+        target: this.dom.querySelector('.add--question select option') })
+      expect(this.component.state.questions[0].text).toEqual(this.template_questions.text)
+    })
+    it('selects blank question adds new blank question', function() {
+      this.add_question.handleAddBlank({ preventDefault: function() {} })
+      expect(this.component.state.questions[0].text).toEqual(undefined)
     })
   })
 })

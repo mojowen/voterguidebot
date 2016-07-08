@@ -22,7 +22,7 @@ var Contest = React.createClass({
   getInitialState: function() {
     return { candidates: this.props.candidates,
              _candidates: [],
-             questions: this.props.questions.concat(this.props.template_questions),
+             questions: this.props.questions,
              _questions: [],
              answers: this.props.answers,
              title: this.props.title,
@@ -59,11 +59,10 @@ var Contest = React.createClass({
       })
     }, this)
   },
-  handleClickToAddQuestion: function(event) {
+  handleAddQuestion: function(question) {
     var questions = this.state.questions
-    questions.push(this.newObject('question'))
+    questions.push(question)
     this.setChangedState({ questions: questions })
-    event.preventDefault()
   },
   handleQuestionChange: function(id, key, value) {
     var index = _.map(this.state.questions,'id').indexOf(id),
@@ -95,15 +94,18 @@ var Contest = React.createClass({
       <ContestDetails title={this.state.title}
                       description={this.state.description}
                       handleChange={this.handleChange} />
-      <Candidates candidates={this.state.candidates}
+      <Candidates ref="candidates"
+                  candidates={this.state.candidates}
                   handleChange={this.handleCandidateChange}
                   handleRemove={this.handleCandidateRemove}
                   handleAdd={this.handleClickToAddCandidate} />
-      <QuestionsTable candidates={this.state.candidates}
+      <QuestionsTable ref="questions"
+                      candidates={this.state.candidates}
                       questions={this.state.questions}
                       template_tags={this.props.template_tags}
+                      template_questions={this.props.template_questions}
                       handleChange={this.handleQuestionChange}
-                      handleAdd={this.handleClickToAddQuestion}
+                      handleAdd={this.handleAddQuestion}
                       handleRemove={this.handleQuestionRemove} />
 
     </div>
