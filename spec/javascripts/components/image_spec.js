@@ -56,4 +56,19 @@ describe('ImageComponent', function() {
       expect(this.callback).toHaveBeenCalled()
     })
   })
+
+  describe('with a guide resource', function() {
+    beforeEach(function() {
+      this.setUpComponent(ImageComponent, {})
+      // Set up the component twice to allow mocking
+      this.component.dropzone.element.dropzone = null
+      spyOn(this.component, 'pathname').and.returnValue('/guides/5/fields')
+      this.component.componentDidMount()
+      this.dropzone = this.component.dropzone
+    })
+
+    it('propagates values with an onChange', function() {
+      expect(this.dropzone.options.url).toEqual('/uploads?guide_id=5')
+    })
+  })
 })

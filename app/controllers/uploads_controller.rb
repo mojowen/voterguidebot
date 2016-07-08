@@ -1,7 +1,8 @@
 class UploadsController < ApplicationController
+  include GuideFinder
 
   def create
-    @upload = Upload.create(upload_params)
+    @upload = @guide.uploads.new(upload_params)
     @upload.user = current_user
 
     if @upload.save
@@ -16,5 +17,4 @@ class UploadsController < ApplicationController
   def upload_params
     params.require(:upload).permit(:file)
   end
-
 end

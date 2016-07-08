@@ -7,6 +7,7 @@ class Guide < ActiveRecord::Base
   has_many :contests
   has_many :measures
   has_many :languages
+  has_many :uploads
   has_many :fields
   has_one :location
 

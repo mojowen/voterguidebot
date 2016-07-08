@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UploadsController, active_mocker: true do
   let(:user) { Fabricate :user }
+  let(:guide) { Fabricate :guide, users: [user] }
   before(:each) { sign_in user }
 
   describe '#create' do
@@ -9,7 +10,8 @@ RSpec.describe UploadsController, active_mocker: true do
       {
         upload: {
           file: fixture_file_upload('test.png', 'image/png')
-        }
+        },
+        guide_id: guide.id
       }
     end
     it 'creates a new upload' do

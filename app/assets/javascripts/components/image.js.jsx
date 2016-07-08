@@ -27,6 +27,14 @@ var ImageComponent = React.createClass({
     this.handleChange(null)
     event.preventDefault()
   },
+  pathname: function() {
+    return document.location.pathname.toString()
+  },
+  include_guide_resource: function() {
+    var match = this.pathname().match(/\/guides\/(\d+)/)
+    if( match && match.length > 1 ) return '?guide_id='+match[1]
+    return ''
+  },
   componentDidMount: function() {
     var domNode = ReactDOM.findDOMNode(this.refs.dropzone),
         config = {
@@ -37,7 +45,7 @@ var ImageComponent = React.createClass({
           paramName: "upload[file]",
           maxFiles: this.props.maxFiles,
           previewTemplate: '<div></div>',
-          url: '/uploads'
+          url: '/uploads' + this.include_guide_resource()
         }
 
     this.dropzone = new Dropzone(domNode, config)

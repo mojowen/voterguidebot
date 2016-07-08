@@ -5,19 +5,19 @@ class UploadMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "user_id" => nil, "created_at" => nil, "updated_at" => nil, "file_file_name" => nil, "file_content_type" => nil, "file_file_size" => nil, "file_updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "user_id" => nil, "created_at" => nil, "updated_at" => nil, "file_file_name" => nil, "file_content_type" => nil, "file_file_size" => nil, "file_updated_at" => nil, "guide_id" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, user_id: Fixnum, created_at: DateTime, updated_at: DateTime, file_file_name: String, file_content_type: String, file_file_size: Fixnum, file_updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, user_id: Fixnum, created_at: DateTime, updated_at: DateTime, file_file_name: String, file_content_type: String, file_file_size: Fixnum, file_updated_at: DateTime, guide_id: Fixnum }, method(:build_type)).merge(super)
     end
 
     def associations
-      @associations ||= { user: nil }.merge(super)
+      @associations ||= { user: nil, guide: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "User" => { belongs_to: [:user] } }.merge(super)
+      @associations_by_class ||= { "User" => { belongs_to: [:user] }, "Guide" => { belongs_to: [:guide] } }.merge(super)
     end
 
     def mocked_class
@@ -26,7 +26,7 @@ class UploadMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "user_id", "created_at", "updated_at", "file_file_name", "file_content_type", "file_file_size", "file_updated_at"] | super)
+      @attribute_names ||= (["id", "user_id", "created_at", "updated_at", "file_file_name", "file_content_type", "file_file_size", "file_updated_at", "guide_id"] | super)
     end
 
     def primary_key
@@ -108,6 +108,14 @@ class UploadMock < ActiveMocker::Base
     write_attribute(:file_updated_at, val)
   end
 
+  def guide_id
+    read_attribute(:guide_id)
+  end
+
+  def guide_id=(val)
+    write_attribute(:guide_id, val)
+  end
+
   # _associations.erb
   # belongs_to
   def user
@@ -138,6 +146,34 @@ class UploadMock < ActiveMocker::Base
   end
 
   alias_method(:create_user!, :create_user)
+  def guide
+    read_association(:guide) || write_association(:guide, classes("Guide").try do |k|
+      k.find_by(id: guide_id)
+    end)
+  end
+
+  def guide=(val)
+    write_association(:guide, val)
+    ActiveMocker::BelongsTo.new(val, child_self: self, foreign_key: :guide_id).item
+  end
+
+  def build_guide(attributes = {}, &block)
+    association = classes("Guide").try(:new, attributes, &block)
+    unless association.nil?
+      write_association(:guide, association)
+    end
+
+  end
+
+  def create_guide(attributes = {}, &block)
+    association = classes("Guide").try(:create, attributes, &block)
+    unless association.nil?
+      write_association(:guide, association)
+    end
+
+  end
+
+  alias_method(:create_guide!, :create_guide)
   # _scopes.erb
   module Scopes
     include(ActiveMocker::Base::Scopes)

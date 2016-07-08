@@ -13,11 +13,11 @@ class GuideMock < ActiveMocker::Base
     end
 
     def associations
-      @associations ||= { location: nil, audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, measures: nil, languages: nil, fields: nil }.merge(super)
+      @associations ||= { location: nil, audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, measures: nil, languages: nil, uploads: nil, fields: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Location" => { has_one: [:location] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Measure" => { has_many: [:measures] }, "Language" => { has_many: [:languages] }, "Field" => { has_many: [:fields] } }.merge(super)
+      @associations_by_class ||= { "Location" => { has_one: [:location] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Measure" => { has_many: [:measures] }, "Language" => { has_many: [:languages] }, "Upload" => { has_many: [:uploads] }, "Field" => { has_many: [:fields] } }.merge(super)
     end
 
     def mocked_class
@@ -179,6 +179,16 @@ class GuideMock < ActiveMocker::Base
 
   def languages=(val)
     write_association(:languages, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Language"), source: ""))
+  end
+
+  def uploads
+    read_association(:uploads, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Upload"), source: "")
+    end)
+  end
+
+  def uploads=(val)
+    write_association(:uploads, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Upload"), source: ""))
   end
 
   def fields

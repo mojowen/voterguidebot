@@ -1,7 +1,7 @@
 :javascript
   if( typeof window.google === 'undefined' ) {
     var script = document.createElement('script')
-    script.src = "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API']}&callback=initMap"
+    script.src = "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API']}&callback=initMap"
     document.head.appendChild(script)
   }
 
