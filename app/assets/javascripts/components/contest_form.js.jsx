@@ -2,8 +2,6 @@ var ContestForm = React.createClass({
   mixins: [FormBase],
   getDefaultProps: function() {
     return { contest: { id: false },
-             template_tags: [],
-             template_questions: [],
              url: document.location.pathname }
   },
   componentDidMount: function() {
@@ -30,8 +28,6 @@ var ContestForm = React.createClass({
   render: function() {
     return <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
             <Contest ref='contest'
-                     template_tags={this.props.template_tags}
-                     template_questions={this.props.template_questions}
                      {...this.props.contest} />
             { this.menuComponent() }
           </form>

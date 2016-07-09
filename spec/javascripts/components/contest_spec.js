@@ -116,15 +116,17 @@ describe('Contest', function() {
         endorsements: ['Cool Dudes Inc']
       }
       this.template_questions = [{ text: 'WHAT ARE THOSE',
-                                   tags: [{ name: 'Economy' }],
-                                   id: 8 },
-                                { text: 'ANOTHER ONE',
-                                  tags: [{ name: 'DJ Khaled' }],
-                                  id: 8 }]
+                                   tag: 'Economy' },
+                                 { text: 'ANOTHER ONE',
+                                   tag: 'DJ Khaled' }]
 
       this.props = {
         candidates: [this.candidate],
-        template_questions: this.template_questions
+        questions: [],
+        template: {
+          endorsements: { max: 3 },
+          questions: { samples: this.template_questions, max: 7, text: { limit: 140 } }
+        }
       }
       this.setUpComponent(Contest, this.props)
       this.add_question = this.component.refs.questions.refs.add_question
@@ -133,8 +135,8 @@ describe('Contest', function() {
 
     it('creates a select for template questions', function() {
       var tags = this.dom.querySelectorAll('.add--question select optgroup')
-      expect(tags[0].label).toEqual(this.template_questions[0].tags[0].name)
-      expect(tags[1].label).toEqual(this.template_questions[1].tags[0].name)
+      expect(tags[0].label).toEqual(this.template_questions[0].tag)
+      expect(tags[1].label).toEqual(this.template_questions[1].tag)
 
       var sample_qs = this.dom.querySelectorAll('.add--question select option')
       expect(sample_qs[1].innerText).toEqual(this.template_questions[0].text)
@@ -143,8 +145,8 @@ describe('Contest', function() {
 
     it('selects a template question and creaets a new question', function() {
       this.add_question.handleAddSelected({
-        target: this.dom.querySelector('.add--question select option') })
-      expect(this.component.state.questions[0].text).toEqual(this.template_questions.text)
+        target: this.dom.querySelectorAll('.add--question select option')[1] })
+      expect(this.component.state.questions[0].text).toEqual(this.template_questions[0].text)
     })
     it('selects blank question adds new blank question', function() {
       this.add_question.handleAddBlank({ preventDefault: function() {} })

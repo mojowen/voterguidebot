@@ -1,10 +1,9 @@
 var Contest = React.createClass({
-  mixins: [NewObject, HandleChange],
+  mixins: [NewObject, HandleChange, Template],
   getDefaultProps: function() {
-    return { candidates: [],
+    return { id: false,
+             candidates: [],
              questions: [],
-             template_tags: [],
-             template_questions: [],
              answers: [],
              title: '',
              description: '' }
@@ -91,19 +90,20 @@ var Contest = React.createClass({
   },
   render: function() {
     return <div className="mui-col-md-11">
-      <ContestDetails title={this.state.title}
+      <ContestDetails ref="details"
+                      title={this.state.title}
                       description={this.state.description}
                       handleChange={this.handleChange} />
       <Candidates ref="candidates"
                   candidates={this.state.candidates}
+                  template={this.props.template}
                   handleChange={this.handleCandidateChange}
                   handleRemove={this.handleCandidateRemove}
                   handleAdd={this.handleClickToAddCandidate} />
       <QuestionsTable ref="questions"
                       candidates={this.state.candidates}
                       questions={this.state.questions}
-                      template_tags={this.props.template_tags}
-                      template_questions={this.props.template_questions}
+                      template={this.props.template}
                       handleChange={this.handleQuestionChange}
                       handleAdd={this.handleAddQuestion}
                       handleRemove={this.handleQuestionRemove} />

@@ -21,43 +21,69 @@ class Guide < ActiveRecord::Base
     @template ||= Template.default
   end
 
+  def publish(force = false)
+    Publisher.new(as_json, template.make, version).publish
+
+    # TODO: Handle multi-lingual
+    # create workspace
+    # create website with all languages using dom-i18n
+    # create pdf with all languages
+    # maybe doesn't need to live in guide model - maybe something else
+  end
+
+  def all_locales
+    base = as_json
+    return base if languages.empty?
+
+    base['languages'].map! do |language|
+      language['guide'] = Globalize.with_locale(language['code']) { as_json }
+      language
+    end
+
+    base
+  end
+
+  def as_json(options = nil)
+    super({
+      include: {
+        location: nil,
+        fields: nil,
+        languages: nil,
+        contests: {
+          include: { candidates: { include: :endorsements },
+                     questions: { include: [:answers, :tags] }}},
+        measures: { include: [:endorsements, :tags] }} }.update(options || {}))
+  end
+
   def template_fields
     template.fields.map do |template_field|
       template_field = template_field.clone
-      template_field[:value] = field_value template_field
+      template_field['value'] = field_value template_field
       template_field
     end
   end
 
-  def template_questions
-    template.question_seeds.map.with_index do |question, index|
-      question = Question.new text: question['text'],
-                              tags: [ Tag.new(name: question['tag'] )]
-      question.as_json(include: :tags).update('id' => "#{index}question")
-    end
-  end
-
-  def template_question_tags
-    template.question_tags
-  end
-
   def template_field_names
-    template.fields.map{ |template_field| template_field[:name] }
+    template.fields.map{ |template_field| template_field['name'] }
   end
 
   def template_fields=(fields_obj)
     template.fields.each do |template_field|
-      value = fields_obj[template_field[:name]]
+      value = fields_obj[template_field['name']]
       next if value.nil? || value.empty?
 
-      field = find_field(template_field[:name])
-      field ||= fields.new(field_template: template_field[:name])
+      field = find_field(template_field['name'])
+      field ||= fields.new(field_template: template_field['name'])
       field.value = value
       field.save!
     end
   end
 
   private
+
+  def version
+    @version ||= Digest::MD5.hexdigest to_json
+  end
 
   def find_field(template_name)
     fields.find { |field| field.field_template == template_name  }
@@ -68,8 +94,8 @@ class Guide < ActiveRecord::Base
   end
 
   def field_value(template_field)
-    field = find_field(template_field[:name])
-    return universal_field(field) if template_field[:element] == 'ImageComponent'
+    field = find_field(template_field['name'])
+    return universal_field(field) if template_field['element'] == 'ImageComponent'
     field.try(:value)
   end
 end

@@ -48,7 +48,7 @@
       %h1.big
         %span.mui--text-dark= @guide.contests.length
         %span.mui--text-dark-hint /
-        %span.mui--text-dark-hint= @guide.template.contests
+        %span.mui--text-dark-hint= @guide.template.contests.fetch('max', 0)
       = button_link_to guide_contests_path(@guide) do
         %i.fa.fa-users
         Edit Contests
@@ -60,7 +60,7 @@
       %h1.big
         %span.mui--text-dark 0
         %span.mui--text-dark-hint /
-        %span.mui--text-dark-hint= @guide.template.ballot_measures
+        %span.mui--text-dark-hint= @guide.template.measures.fetch('max', 0)
       = button_link_to guide_measures_path(@guide) do
         %i.fa.fa-file-text
         Edit Ballot Measures

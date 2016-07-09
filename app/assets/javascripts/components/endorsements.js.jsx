@@ -1,4 +1,5 @@
 var Endorsements = React.createClass({
+  mixins: [Template],
   getDefaultProps: function() {
     return { endorsements: [],
              stance: 'for',
@@ -14,7 +15,7 @@ var Endorsements = React.createClass({
   },
   addEndorsement: function(event) {
     var endorsements = this.props.endorsements
-    if( this.qualifyingEndorsements().length < 3 ) {
+    if( this.qualifyingEndorsements().length < this.props.template.endorsements.max ) {
       endorsements.push({
         endorser: '',
         endorsed_type: this.props.endorsed_type,
@@ -60,7 +61,7 @@ var Endorsements = React.createClass({
         }, this),
         addEndorsement = ''
 
-    if( this.qualifyingEndorsements().length < 3 ) {
+    if( this.qualifyingEndorsements().length < this.props.template.endorsements.max ) {
       addEndorsement = <a className="add--endorsements"
                           onClick={this.addEndorsement}>
                           <i className="fa fa-plus-square" /></a>

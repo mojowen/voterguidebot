@@ -1,9 +1,8 @@
 var QuestionsTable = React.createClass({
+  mixins: [Template],
   getDefaultProps: function() {
     return { candidates: [],
              questions: [],
-             template_tags: [],
-             template_questions: [],
              handleAdd: function() { },
              handleRemove: function() { },
              handleChange: function() { } }
@@ -24,13 +23,13 @@ var QuestionsTable = React.createClass({
           return <Question {...question}
                            answers={question.answers}
                            candidates={this.props.candidates}
-                           template_tags={this.props.template_tags}
                            key={question.id}
+                           template={this.props.template}
                            handleChange={this.props.handleChange}
                            handleRemove={this.props.handleRemove} />
-        }, this)
-
-    var table_display = this.props.questions.length < 1 ? 'none' : 'block'
+        }, this),
+      table_display = this.props.questions.length < 1 ? 'none' : 'block'
+      add_display = this.props.questions.length >= this.props.template.questions.max ? 'none' : 'block'
 
     return <div>
       <div className="mui-row">
@@ -42,11 +41,11 @@ var QuestionsTable = React.createClass({
           </table>
         </div>
       </div>
-      <div className="mui-row">
-        <div className="mui--pull-right">
+      <div className="mui-row" >
+        <div className="mui--pull-right" style={{ display: add_display }}>
           <AddQuestion ref="add_question"
                        handleAdd={ this.props.handleAdd }
-                       template_questions={this.props.template_questions} />
+                       template={this.props.template} />
         </div>
       </div>
     </div>

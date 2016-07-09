@@ -11,6 +11,8 @@ class Contest < ActiveRecord::Base
   has_many :endorsements, through: :candidates
   has_many :tags, through: :questions
 
+  delegate :template, to: :guide
+
   def assign_attributes(attributes)
     @candidate_ids = {}
     create_candidates! attributes
@@ -21,8 +23,8 @@ class Contest < ActiveRecord::Base
   def as_json(options = nil)
     super({
       include: { candidates: { include: :endorsements },
-                 questions: { include: [:answers, :tags] }}
-      }.update(options || {}))
+                 questions: { include: [:answers, :tags] } },
+      methods: :template }.update(options || {}))
   end
 
   private
@@ -37,9 +39,12 @@ class Contest < ActiveRecord::Base
     end
 
     associates_obj[:candidates].map! do |raw_candidate|
-      candidate = candidates.find_or_initialize_by(
-        id: raw_candidate[:id])
-      candidate_ids[raw_candidate[:id].to_s] = candidate
+      candidate_id = raw_candidate[:id].to_s
+      raw_candidate.delete(:id) if candidate_id.match /candidate/
+
+      candidate = candidates.find_or_initialize_by(id: raw_candidate[:id])
+
+      candidate_ids[candidate_id] = candidate
       candidate.assign_attributes(raw_candidate)
       candidate
     end
@@ -53,8 +58,8 @@ class Contest < ActiveRecord::Base
     end
 
     associates_obj[:questions].map! do |raw_question|
-      question = questions.find_or_initialize_by(
-        id: raw_question[:id])
+      raw_question.delete :id if raw_question[:id].to_s.match /question/
+      question = questions.find_or_initialize_by(id: raw_question[:id])
 
       raw_answers = raw_question[:answers].clone if raw_question[:answers]
       question.assign_attributes(raw_question)

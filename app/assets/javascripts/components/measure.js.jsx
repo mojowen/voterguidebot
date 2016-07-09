@@ -1,5 +1,5 @@
 var Measure = React.createClass({
-  mixins: [HandleChange],
+  mixins: [HandleChange, Template],
   getDefaultProps: function() {
     return { id: false,
              title: '',
@@ -7,8 +7,7 @@ var Measure = React.createClass({
              yes_means: '',
              no_means: '',
              endorsements: [],
-             tags: [],
-             template_tags: [] }
+             tags: [] }
   },
   removeTag: function(tag) {
     var tags = _.without(this.props.tags, _.find(this.props.tags, { name: tag }))
@@ -47,7 +46,7 @@ var Measure = React.createClass({
         <Taggable tags={this.state.tags}
                   id={this.props.id}
                   tagged_type='Ballot Measure'
-                  template_tags={this.props.template_tags}
+                  available_tags={this.props.template.tags}
                   removeTag={this.removeTag}
                   addTag={this.addTag} />
       </div>
@@ -61,6 +60,7 @@ var Measure = React.createClass({
                         onChange={this.handleChange} />
         <Endorsements ref="yes_endorsements"
                       className="mui-col-md-5"
+                      template={this.props.template}
                       endorsements={this.state.endorsements}
                       handleChange={this.handleChange}
                       endorsed_type='measure'
@@ -77,6 +77,7 @@ var Measure = React.createClass({
                         onChange={this.handleChange} />
         <Endorsements ref="no_endorsements"
                       className="mui-col-md-5"
+                      template={this.props.template}
                       endorsements={this.state.endorsements}
                       handleChange={this.handleChange}
                       endorsed_type='measure'

@@ -1,4 +1,5 @@
 var Candidate = React.createClass({
+  mixins: [Template],
   getDefaultProps: function() {
     return { name: '',
              party: '',
@@ -61,6 +62,7 @@ var Candidate = React.createClass({
       <Endorsements ref="endorsements"
                     endorsements={this.props.endorsements}
                     handleChange={this.handleEndorsementChange}
+                    template={this.props.template}
                     endorsed_type='candidate'
                     endorsed_id={this.props.id} />
     </div>

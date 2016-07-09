@@ -6,9 +6,10 @@ class Measure < ActiveRecord::Base
   include Tags
 
   belongs_to :guide
+  delegate :template, to: :guide
 
   def as_json(options = nil)
-    super({ include: [:endorsements, :tags] }.update(options))
+    super({ include: [:endorsements, :tags], methods: :template }.update(options))
   end
 
   def assign_attributes(attributes)

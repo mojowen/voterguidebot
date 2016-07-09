@@ -1,4 +1,5 @@
 var Candidates = React.createClass({
+  mixins: [Template],
   getDefaultProps: function() {
     return { candidates: [],
              handleAdd: function() { },
@@ -8,6 +9,7 @@ var Candidates = React.createClass({
   render: function() {
     var candidates = _.map(this.props.candidates, function(candidate) {
           return <Candidate {...candidate}
+                            template={this.props.template}
                             key={candidate.id}
                             handleChange={this.props.handleChange}
                             handleRemove={this.props.handleRemove}  />

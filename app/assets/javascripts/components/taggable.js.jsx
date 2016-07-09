@@ -1,7 +1,7 @@
 var Taggable = React.createClass({
   getDefaultProps: function() {
     return { tags: [],
-             template_tags: [],
+             available_tags: [],
              addTag: function() {},
              removeTag: function() {} }
   },
@@ -23,7 +23,7 @@ var Taggable = React.createClass({
                 <i className="fa fa-times"/>
               </a>
             </div> }, this),
-        tag_options = _.difference(this.props.template_tags,
+        tag_options = _.difference(this.props.available_tags,
                                    _.map(this.props.tags, 'name'))
 
     if( tag_options.length > 0 ) {

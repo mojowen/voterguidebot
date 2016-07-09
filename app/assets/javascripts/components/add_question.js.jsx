@@ -1,5 +1,5 @@
 var AddQuestion = React.createClass({
-  mixins: [NewObject],
+  mixins: [NewObject, Template],
   getDefaultProps: function() {
     return { template_questions: [],
              handleAdd: function() { } }
@@ -21,14 +21,16 @@ var AddQuestion = React.createClass({
     event.preventDefault()
   },
   handleAddSelected: function(event) {
-    var selected_question = _.find(this.props.template_questions, { text: event.target.value } )
+    var selected_question = _.find(this.props.template.questions.samples,
+                                   { text: event.target.value })
+    selected_question.tags = [{ name: selected_question.tag }]
     this.props.handleAdd(this.newObject('question', selected_question))
     this.setState({ picking: false })
   },
   render: function() {
     if( this.state.picking ) {
-      var template_questions = _.chain(this.props.template_questions)
-                                .groupBy(function(quest) { return quest.tags[0].name })
+      var template_questions = _.chain(this.props.template.questions.samples)
+                                .groupBy('tag')
                                 .map(function(tag, name) {
                                   var tags = _.map(tag, function(question) {
                                     return <option value={question.text} key={question.text}>
@@ -50,7 +52,7 @@ var AddQuestion = React.createClass({
         </div>
         <div className="mui--text-center">
           <em style={{ marginRight: '10px' }}>or</em>
-          <a onClick={ this.props.handleAddBlank }
+          <a onClick={ this.handleAddBlank }
              className="mui-btn mui-btn--small mui-btn--primary">
               <i className="fa fa-plus-circle" /> Add Blank Question</a>
           <br />

@@ -55,7 +55,7 @@ RSpec.describe Contest, type: :model do
 
       it 'creates new endorsers' do
         subject.assign_attributes raw_obj
-        subject.save
+        subject.save!
         expect(subject.endorsements.first.endorsed).to eq(
           subject.candidates.first)
       end
@@ -64,7 +64,7 @@ RSpec.describe Contest, type: :model do
         let(:endorsed_id) { candidate.id }
         it 'associates with existing candidate' do
           subject.assign_attributes raw_obj
-          subject.save
+          subject.save!
           expect(subject.endorsements.first.endorsed).to eq(candidate)
         end
       end
@@ -79,7 +79,7 @@ RSpec.describe Contest, type: :model do
 
         it 'updates endorsers' do
           subject.assign_attributes raw_obj
-          subject.save
+          subject.save!
           expect(subject.endorsements.first.id).to eq(endorsement[:id])
           expect(subject.reload.endorsements.first.endorser).to eq(endorsement[:endorser])
         end
@@ -103,7 +103,7 @@ RSpec.describe Contest, type: :model do
 
       it 'creates new tags' do
         subject.assign_attributes raw_obj
-        subject.save
+        subject.save!
         expect(subject.tags.first.tagged).to eq(
           subject.questions.first)
       end
@@ -112,7 +112,7 @@ RSpec.describe Contest, type: :model do
         let(:question_id) { question.id }
         it 'associates with existing question' do
           subject.assign_attributes raw_obj
-          subject.save
+          subject.save!
           expect(subject.tags.first.tagged).to eq(question)
         end
       end
@@ -127,7 +127,7 @@ RSpec.describe Contest, type: :model do
         end
         it 'deletes unused endorsers' do
           subject.assign_attributes({ questions: [{ id: question_id, tags: [] }] })
-          subject.save
+          subject.save!
           expect(subject.reload.tags).to be_empty
         end
       end
@@ -148,7 +148,7 @@ RSpec.describe Contest, type: :model do
 
       it 'creates new answers from new candidates and questions' do
         subject.assign_attributes raw_obj
-        subject.save
+        subject.save!
         expect(subject.answers.first.question).to eq(subject.questions.first)
         expect(subject.answers.first.candidate).to eq(subject.candidates.first)
       end
@@ -158,7 +158,7 @@ RSpec.describe Contest, type: :model do
         let(:question_id) { question.id }
         it 'associates appropriately' do
           subject.assign_attributes raw_obj
-          subject.save
+          subject.save!
           expect(subject.answers.first.question).to eq(question)
         end
       end
@@ -168,7 +168,7 @@ RSpec.describe Contest, type: :model do
         let(:candidate_id) { candidate.id }
         it 'associates appropriately' do
           subject.assign_attributes raw_obj
-          subject.save
+          subject.save!
           expect(subject.answers.first.candidate).to eq(candidate)
         end
       end

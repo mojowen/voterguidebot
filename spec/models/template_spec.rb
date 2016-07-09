@@ -27,10 +27,10 @@ RSpec.describe Template do
       expect(subject.name).to eq(config['name'])
     end
     it 'has a question tags' do
-      expect(subject.question_tags).to eq(config['question_tags'])
+      expect(subject.tags).to eq(config['tags'])
     end
     it 'has a question seeds' do
-      expect(subject.question_seeds).to eq(config['question_seeds'])
+      expect(subject.questions['samples']).to eq(config['questions']['samples'])
     end
   end
 
@@ -38,23 +38,23 @@ RSpec.describe Template do
     describe 'each field' do
       it 'has a label' do
         subject.fields.each do |field|
-          expect(field[:label]).to_not be_falsey
+          expect(field['label']).to_not be_falsey
         end
       end
       it 'has an example' do
         subject.fields.each do |field|
-          expect(field[:example]).to_not be_falsey
+          expect(field['example']).to_not be_falsey
         end
       end
       it 'has a limit if not image' do
         subject.fields.each do |field|
-          next if field[:element] == 'ImageComponent'
-          expect(field[:limit]).to_not be_falsey
+          next if field['element'] == 'ImageComponent'
+          expect(field['limit']).to_not be_falsey
         end
       end
       it 'has an element' do
         subject.fields.each do |field|
-          expect(field[:element]).to_not be_falsey
+          expect(field['element']).to_not be_falsey
         end
       end
     end

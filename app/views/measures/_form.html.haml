@@ -1,4 +1,4 @@
 .mui-row
   .mui-col-md-2 &nbsp;
   .mui-col-md-10{ style: 'margin-top: 30px' }
-    = react_component :MeasureForm, measure: measure, url: measure.new_record? ? guide_measures_path(guide) : guide_measure_path(guide, measure), languages: guide.languages, template_tags: guide.template_question_tags
+    = react_component :MeasureForm, measure: measure, url: measure.new_record? ? guide_measures_path(guide) : guide_measure_path(guide, measure), languages: guide.languages

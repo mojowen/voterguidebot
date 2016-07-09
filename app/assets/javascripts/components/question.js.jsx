@@ -1,9 +1,9 @@
 var Question = React.createClass({
+  mixins: [Template],
   getDefaultProps: function() {
     return { candidates: [],
              answers: null,
              tags: null,
-             template_tags: [],
              text: '',
              id: null,
              handleRemove: function() {  },
@@ -66,12 +66,12 @@ var Question = React.createClass({
         <InputComponent value={this.props.text}
                         name="text"
                         element="textarea"
-                        limit={140}
+                        limit={this.props.template.questions.text.limit}
                         placeholder="Add Your Question"
                         onChange={this.handleChange} />
         <Taggable tags={this.props.tags}
                   id={this.props.id}
-                  template_tags={this.props.template_tags}
+                  available_tags={this.props.template.tags}
                   tagged_type='Question'
                   removeTag={this.removeTag}
                   addTag={this.addTag} />
