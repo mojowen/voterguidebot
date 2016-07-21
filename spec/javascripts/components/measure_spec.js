@@ -16,7 +16,8 @@ describe('Measure', function() {
     expect(this.component.state.changed).toEqual(false)
   })
   it('title updates when changed', function() {
-    this.component.handleChange({ target: { name: 'title', value: 'New Title'}})
+    this.dom.querySelector('[name=title]').value = 'New Title'
+    Utils.Simulate.change(this.dom.querySelector('[name=title]'))
     expect(this.component.state.title).toEqual('New Title')
     expect(this.component.state.changed).toEqual(true)
   })
@@ -25,7 +26,9 @@ describe('Measure', function() {
     expect(this.dom.querySelector('[name=yes_means]').value).toEqual(this.props.yes_means)
   })
   it('yes_means updates when changed', function() {
-    this.component.handleChange({ target: { name: 'yes_means', value: 'New description'}})
+    this.dom.querySelector('[name=yes_means]').value = 'New description'
+    Utils.Simulate.change(this.dom.querySelector('[name=yes_means]'))
+
     expect(this.component.state.yes_means).toEqual('New description')
     expect(this.component.state.changed).toEqual(true)
   })
@@ -34,7 +37,9 @@ describe('Measure', function() {
     expect(this.dom.querySelector('[name=no_means]').value).toEqual(this.props.no_means)
   })
   it('no_means updates when changed', function() {
-    this.component.handleChange({ target: { name: 'no_means', value: 'New description'}})
+    this.dom.querySelector('[name=no_means]').value = 'New description'
+    Utils.Simulate.change(this.dom.querySelector('[name=no_means]'))
+
     expect(this.component.state.no_means).toEqual('New description')
     expect(this.component.state.changed).toEqual(true)
   })

@@ -5,8 +5,8 @@ class Contest < ActiveRecord::Base
   translates :description, :title
 
   belongs_to :guide
-  has_many :candidates, autosave: true
-  has_many :questions, autosave: true
+  has_many :candidates, -> { order(position: :asc) }, autosave: true
+  has_many :questions, -> { order(position: :asc) }, autosave: true
   has_many :answers, through: :questions
   has_many :endorsements, through: :candidates
   has_many :tags, through: :questions
@@ -34,11 +34,7 @@ class Contest < ActiveRecord::Base
   def create_candidates!(associates_obj)
     return unless associates_obj[:candidates]
 
-    associates_obj[:candidates].reject! do |raw_candidate|
-      raw_candidate[:_destroy]
-    end
-
-    associates_obj[:candidates].map! do |raw_candidate|
+    associates_obj[:candidates].map!.with_index do |raw_candidate, index|
       candidate_id = raw_candidate[:id].to_s
       raw_candidate.delete(:id) if candidate_id.match /candidate/
 
@@ -46,6 +42,7 @@ class Contest < ActiveRecord::Base
 
       candidate_ids[candidate_id] = candidate
       candidate.assign_attributes(raw_candidate)
+      candidate.position = index
       candidate
     end
   end
@@ -53,18 +50,14 @@ class Contest < ActiveRecord::Base
   def create_questions!(associates_obj)
     return unless associates_obj[:questions]
 
-    associates_obj[:questions].reject! do |raw_question|
-      raw_question[:_destroy]
-    end
-
-    associates_obj[:questions].map! do |raw_question|
+    associates_obj[:questions].map!.with_index do |raw_question, index|
       raw_question.delete :id if raw_question[:id].to_s.match /question/
       question = questions.find_or_initialize_by(id: raw_question[:id])
 
       raw_answers = raw_question[:answers].clone if raw_question[:answers]
       question.assign_attributes(raw_question)
+      question.position = index
       update_candidates!(raw_answers, question) if raw_answers
-
       question
     end
   end

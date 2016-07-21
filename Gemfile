@@ -4,7 +4,7 @@ gem 'rails', '4.2.2'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.0'
 gem 'jbuilder', '~> 2.0'
 gem 'mui-sass'
 gem 'react-rails'
@@ -22,6 +22,10 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 
 gem 'exception_notification'
+
+group :assets do
+  gem 'coffee-rails'
+end
 
 group :development do
   gem 'web-console', '~> 2.0'

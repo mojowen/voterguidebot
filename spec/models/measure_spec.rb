@@ -11,7 +11,7 @@ RSpec.describe Measure, type: :model do
       [Fabricate.build(:tag, name: 'LGBTQ').as_json]
     end
     let(:raw) do
-      { title: 'Title', endorsements: endorsements, tags: tags }.with_indifferent_access
+      { title: 'Title', endorsements: endorsements, tags: tags }
     end
     it 'assigns regular attributes' do
       subject.assign_attributes raw
@@ -37,8 +37,15 @@ RSpec.describe Measure, type: :model do
         expect(subject.endorsements.first.endorser).to eq(raw[:endorsements].first[:endorser])
       end
       it 'deletes missing endorsements' do
-        subject.assign_attributes raw.update(endorsements: [endorsements.first]).with_indifferent_access
+        subject.assign_attributes raw.update(endorsements: [endorsements.first])
         expect(subject.endorsements.length).to eq(1)
+      end
+      it 'reorders endorsements' do
+        subject.assign_attributes raw
+        subject.save!
+        subject.reload
+        expect(subject.endorsements.last.id).to eq endorsements.last['id']
+        expect(subject.endorsements.last.position).to eq 1
       end
     end
     context 'with already existing tags' do
@@ -53,7 +60,7 @@ RSpec.describe Measure, type: :model do
         expect(subject.tags.first.name).to eq(raw[:tags].first[:name])
       end
       it 'deletes missing tags' do
-        subject.assign_attributes raw.update(tags: [tags.first]).with_indifferent_access
+        subject.assign_attributes raw.update(tags: [tags.first])
         expect(subject.tags.length).to eq(1)
       end
     end

@@ -3,12 +3,12 @@ var HandleChange = {
     return { changed: false }
   },
   handleChange: function(key, value) {
-    if( typeof key === 'object' ) {
-      var value = key.target.value,
-          key = key.target.name
+    if( typeof key === 'object' && arguments.length === 1 ) {
+      var new_state = key
+    } else {
+      var new_state = {}
+      new_state[key] = value
     }
-    var new_state = {}
-    new_state[key] = value
     this.setChangedState(new_state)
   },
   setChangedState: function(new_state) {

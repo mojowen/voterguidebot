@@ -6,11 +6,11 @@ class CandidateMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "photo" => nil, "name" => nil, "bio" => nil, "facebook" => nil, "website" => nil, "twitter" => nil, "created_at" => nil, "updated_at" => nil, "party" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "photo" => nil, "name" => nil, "bio" => nil, "facebook" => nil, "website" => nil, "twitter" => nil, "created_at" => nil, "updated_at" => nil, "party" => nil, "position" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, photo: String, name: String, bio: String, facebook: String, website: String, twitter: String, created_at: DateTime, updated_at: DateTime, party: String }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, photo: String, name: String, bio: String, facebook: String, website: String, twitter: String, created_at: DateTime, updated_at: DateTime, party: String, position: Fixnum }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -27,7 +27,7 @@ class CandidateMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "contest_id", "photo", "name", "bio", "facebook", "website", "twitter", "created_at", "updated_at", "party"] | super)
+      @attribute_names ||= (["id", "contest_id", "photo", "name", "bio", "facebook", "website", "twitter", "created_at", "updated_at", "party", "position"] | super)
     end
 
     def primary_key
@@ -131,6 +131,14 @@ class CandidateMock < ActiveMocker::Base
 
   def party=(val)
     write_attribute(:party, val)
+  end
+
+  def position
+    read_attribute(:position)
+  end
+
+  def position=(val)
+    write_attribute(:position, val)
   end
 
   # _associations.erb

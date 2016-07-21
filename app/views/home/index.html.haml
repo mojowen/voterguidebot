@@ -35,6 +35,6 @@
             .mui--pull-left
               = guide.contests.length
               %span.mui--text-dark-hint /
-              = guide.template.contests
+              = guide.template.contests['max']
           %td
             .mui--pull-right= button_link_to 'View', guide_path(guide), { class: 'mui-btn--small' }

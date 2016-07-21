@@ -15,8 +15,8 @@ var ContestForm = React.createClass({
       { contest: {
           title: contest.state.title,
           description: contest.state.description,
-          candidates: contest.state.candidates.concat(contest.state._candidates),
-          questions: contest.state.questions.concat(contest.state._questions)
+          candidates: contest.state.candidates,
+          questions: contest.state.questions
       }},
       function(res) {
         contest.setState(_.extend({ _candidates: [], _questions: [] },

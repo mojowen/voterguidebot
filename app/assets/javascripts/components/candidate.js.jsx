@@ -1,5 +1,5 @@
 var Candidate = React.createClass({
-  mixins: [Template],
+  mixins: [Template, Draggable],
   getDefaultProps: function() {
     return { name: '',
              party: '',
@@ -7,64 +7,126 @@ var Candidate = React.createClass({
              photo: '',
              id: '',
              endorsements: [],
-             handleChange: function() { },
-             handleRemove: function() { } }
+             start_open: false,
+             candidates: [],
+             handleChange: function() {} }
+  },
+  getInitialState: function() {
+    return { open: this.props.start_open }
   },
   handleChange: function(event) {
     var field = event.target.name,
-        value = event.target.value
+        value = event.target.value,
+        candidates = this.props.candidates
 
-    this.props.handleChange(this.props.id, field, value)
-  },
-  handleEndorsementChange: function(field, value) {
-    this.props.handleChange(this.props.id, field, value)
+    candidates[this.props.index][field] = value
+    this.props.handleChange('candidates', candidates)
   },
   handleRemove: function(event) {
-    this.props.handleRemove(this.props.id)
+    event.preventDefault()
+
+    var candidates = this.props.candidates,
+        candidate = candidates[this.props.index]
+
+    vgConfirm('Are you sure you want to remove this candidate?', function(confirmed) {
+      if( !confirmed ) return
+      this.props.handleChange('candidates', _.without(candidates, candidate))
+    }, this)
+  },
+  handleEndorsementChange: function(field, value) {
+    var candidates = this.props.candidates
+
+    candidates[this.props.index][field] = value
+    this.props.handleChange('candidates', candidates)
+  },
+  handleDragOver: function(current_id, replaced_id) {
+    var candidates = this.props.candidates,
+        current = candidates[current_id],
+        replaced = candidates[replaced_id]
+
+    candidates[replaced_id] = current
+    candidates[current_id] = replaced
+
+    this.props.handleChange('candidates', candidates)
+  },
+  openCandidate: function(event) {
+    this.setState({ open: !this.state.open })
+    event.preventDefault()
   },
   render: function() {
-    return <div className="candidate--form mui-col-md-5 mui-col-md-offset-1 mui-panel">
+    var candidateClassNames = ['candidate--form',
+                               'mui-col-md-5',
+                               'mui-col-md-offset-1',
+                               'mui-panel']
+
+    if( this.state.open ) {
+      candidateClassNames.push('open')
+      var button = 'Done',
+          icon = 'check'
+          guts = <div>
+            <InputComponent label="Name"
+                            placeholder="Joe Smith"
+                            value={this.props.name}
+                            name="name"
+                            onChange={this.handleChange} />
+            <InputComponent label="photo"
+                            element="ImageComponent"
+                            value={this.props.photo}
+                            name="photo"
+                            preview={true}
+                            onChange={this.handleChange} />
+            <InputComponent label="Party"
+                            placeholder="Working Families Party"
+                            value={this.props.party}
+                            name="party"
+                            onChange={this.handleChange} />
+            <InputComponent label="Bio"
+                            placeholder="Paper towel preserver, motorcycle rider, etc."
+                            value={this.props.bio}
+                            element="textarea"
+                            name="bio"
+                            onChange={this.handleChange} />
+            <strong>Links</strong>
+            <div className="social">
+              <InputComponent placeholder="http://candidate-website.pizza"
+                              value={this.props.website} name="website" type="url"
+                              onChange={this.handleChange} fa="link" />
+              <InputComponent placeholder="http://facebook.com/candidate-name"
+                              value={this.props.facebook} name="facebook" type="url"
+                              onChange={this.handleChange} fa="facebook-square" />
+              <InputComponent placeholder="http://twitter.com/the-real-candidate"
+                              value={this.props.twitter} name="twitter" type="url"
+                              onChange={this.handleChange} fa="twitter-square" />
+            </div>
+            <Endorsements ref="endorsements"
+                          endorsements={this.props.endorsements}
+                          handleChange={this.handleEndorsementChange}
+                          template={this.props.template}
+                          endorsed_type='candidate'
+                          endorsed_id={this.props.id} />
+          </div>
+    } else {
+      var photo = <img src={this.props.photo} className="profile" />,
+          photo = this.props.photo ? photo : <div className="unknown profile" />,
+          guts = <div><h4>{ this.props.name || 'Candidate Name' }</h4>
+                  { photo }
+          </div>,
+        icon = 'pencil',
+        button = 'Edit'
+    }
+
+    return <div className={candidateClassNames.join(' ')} {...this.draggable_props()} >
       <i className="fa fa-times remove--candidate" onClick={ this.handleRemove } />
-      <InputComponent label="photo"
-                      element="ImageComponent"
-                      value={this.props.photo}
-                      name="photo"
-                      preview={true}
-                      onChange={this.handleChange} />
-      <InputComponent label="Name"
-                      placeholder="Joe Smith"
-                      value={this.props.name}
-                      name="name"
-                      onChange={this.handleChange} />
-      <InputComponent label="Party"
-                      placeholder="Working Families Party"
-                      value={this.props.party}
-                      name="party"
-                      onChange={this.handleChange} />
-      <InputComponent label="Bio"
-                      placeholder="Paper towel preserver, motorcycle rider, etc."
-                      value={this.props.bio}
-                      element="textarea"
-                      name="bio"
-                      onChange={this.handleChange} />
-      <strong>Links</strong>
-      <div className="social">
-        <InputComponent placeholder="http://candidate-website.pizza"
-                        value={this.props.website} name="website" type="url"
-                        onChange={this.handleChange} fa="link" />
-        <InputComponent placeholder="http://facebook.com/candidate-name"
-                        value={this.props.facebook} name="facebook" type="url"
-                        onChange={this.handleChange} fa="facebook-square" />
-        <InputComponent placeholder="http://twitter.com/the-real-candidate"
-                        value={this.props.twitter} name="twitter" type="url"
-                        onChange={this.handleChange} fa="twitter-square" />
+      { this.draggable() }
+      { guts }
+      <div className="edit--wrap">
+        <a href="#"
+           className="mui-btn mui-btn--small mui-btn--primary"
+           onClick={this.openCandidate} >
+            <i className={"fa fa-"+icon} />
+            { button }
+        </a>
       </div>
-      <Endorsements ref="endorsements"
-                    endorsements={this.props.endorsements}
-                    handleChange={this.handleEndorsementChange}
-                    template={this.props.template}
-                    endorsed_type='candidate'
-                    endorsed_id={this.props.id} />
     </div>
   }
 })

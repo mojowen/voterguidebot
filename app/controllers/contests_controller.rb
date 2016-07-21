@@ -37,10 +37,10 @@ class ContestsController < ApplicationController
   def contest_params
     params.require(:contest).permit(
       :title, :description,
-      questions: [:id, :_destroy, :text,
+      questions: [:id, :text,
         answers: [:text, :candidate_id, :question_id],
         tags: [:name, :tagged_id, :tagged_type]],
-      candidates: [:id, :_destroy, :name, :bio, :photo, :facebook,
+      candidates: [:id, :name, :bio, :photo, :facebook,
                    :twitter, :website, :party,
         endorsements: [:endorser, :endorsed_id, :endorsed_type, :stance]])
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708012102) do
+ActiveRecord::Schema.define(version: 20160715195050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160708012102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "party"
+    t.integer  "position"
   end
 
   create_table "contest_translations", force: :cascade do |t|
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 20160708012102) do
     t.boolean  "publish"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "position"
   end
 
   create_table "endorsement_translations", force: :cascade do |t|
@@ -121,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160708012102) do
     t.integer  "stance",        default: 0
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "position"
   end
 
   add_index "endorsements", ["endorsed_type", "endorsed_id"], name: "index_endorsements_on_endorsed_type_and_endorsed_id", using: :btree
@@ -198,6 +201,7 @@ ActiveRecord::Schema.define(version: 20160708012102) do
     t.text     "no_means"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "position"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -224,6 +228,7 @@ ActiveRecord::Schema.define(version: 20160708012102) do
     t.boolean  "publish"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "position"
   end
 
   create_table "tags", force: :cascade do |t|

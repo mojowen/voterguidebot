@@ -10,16 +10,25 @@ RSpec.describe Contest, type: :model do
       expect(subject.candidates.first.name).to eq('Frank')
     end
     context 'with a candidate' do
-      let(:candidate) { Fabricate :candidate, contest: subject, name: 'Bill' }
+      let!(:candidate) { Fabricate :candidate, contest: subject, name: 'Bill' }
       it 'updates candidates' do
         raw_obj = { candidates: [{ id: candidate.id, name: 'Frank' }] }
         subject.assign_attributes raw_obj
         expect(subject.candidates.first.name).to eq('Frank')
       end
       it 'deletes candidates' do
-        raw_obj = { candidates: [{ id: candidate.id, _destroy: true }] }
+        raw_obj = { candidates: [] }
         subject.assign_attributes raw_obj
         expect(subject.candidates).to be_empty
+      end
+      it 'reorders candidates' do
+        raw_obj = { candidates: [{ id: 'candidate5' },
+                                 { id: candidate.id }] }
+        subject.assign_attributes raw_obj
+        subject.save!
+        subject.reload
+        expect(subject.candidates.last.id).to eq candidate.id
+        expect(subject.candidates.last.position).to eq 1
       end
     end
 
@@ -29,16 +38,25 @@ RSpec.describe Contest, type: :model do
       expect(subject.questions.first.text).to eq('WHAT ARE THOSE')
     end
     context 'with a question' do
-      let(:question) { Fabricate :question, contest: subject, text: 'WHAT ARE THOSE' }
+      let!(:question) { Fabricate :question, contest: subject, text: 'WHAT ARE THOSE' }
       it 'updates questions' do
         raw_obj = { questions: [{ id: question.id, text: 'WHAT ARE THOSE' }] }
         subject.assign_attributes raw_obj
         expect(subject.questions.first.text).to eq('WHAT ARE THOSE')
       end
       it 'deletes questions' do
-        raw_obj = { questions: [{ id: question.id, _destroy: true }] }
+        raw_obj = { questions: [] }
         subject.assign_attributes raw_obj
         expect(subject.questions).to be_empty
+      end
+      it 'reorders questions' do
+        raw_obj = { questions: [{ id: 'question5' },
+                                { id: question.id, text: 'WHAT ARE THOSE' }] }
+        subject.assign_attributes raw_obj
+        subject.save!
+        subject.reload
+        expect(subject.questions.last.id).to eq question.id
+        expect(subject.questions.last.position).to eq 1
       end
     end
 

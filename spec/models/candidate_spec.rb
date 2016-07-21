@@ -7,7 +7,7 @@ RSpec.describe Candidate, type: :model do
       [Fabricate.build(:endorsement, endorser: 'great').as_json]
     end
     let(:raw) do
-      { name: 'Boby Shrum', party: 'Democrat', endorsements: endorsements }.with_indifferent_access
+      { name: 'Boby Shrum', party: 'Democrat', endorsements: endorsements }
     end
     it 'assigns regular attributes' do
       subject.assign_attributes raw
@@ -33,8 +33,15 @@ RSpec.describe Candidate, type: :model do
         expect(subject.endorsements.last.endorser).to eq(raw[:endorsements].first[:endorser])
       end
       it 'deletes missing endorsements' do
-        subject.assign_attributes raw.update(endorsements: [endorsements.first]).with_indifferent_access
+        subject.assign_attributes raw.update(endorsements: [endorsements.first])
         expect(subject.endorsements.length).to eq(1)
+      end
+      it 'reorders endorsements' do
+        subject.assign_attributes raw
+        subject.save!
+        subject.reload
+        expect(subject.endorsements.last.id).to eq endorsements.last['id']
+        expect(subject.endorsements.last.position).to eq 1
       end
     end
   end

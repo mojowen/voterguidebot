@@ -6,11 +6,11 @@ class QuestionMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "text" => nil, "publish" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "text" => nil, "publish" => nil, "created_at" => nil, "updated_at" => nil, "position" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, text: String, publish: Axiom::Types::Boolean, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, text: String, publish: Axiom::Types::Boolean, created_at: DateTime, updated_at: DateTime, position: Fixnum }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -27,7 +27,7 @@ class QuestionMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "contest_id", "text", "publish", "created_at", "updated_at"] | super)
+      @attribute_names ||= (["id", "contest_id", "text", "publish", "created_at", "updated_at", "position"] | super)
     end
 
     def primary_key
@@ -91,6 +91,14 @@ class QuestionMock < ActiveMocker::Base
 
   def updated_at=(val)
     write_attribute(:updated_at, val)
+  end
+
+  def position
+    read_attribute(:position)
+  end
+
+  def position=(val)
+    write_attribute(:position, val)
   end
 
   # _associations.erb

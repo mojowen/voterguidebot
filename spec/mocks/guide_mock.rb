@@ -221,6 +221,18 @@ class GuideMock < ActiveMocker::Base
     @attribute_aliases ||= {}.merge(super)
   end
 
+  def all_locales
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def as_json(options = nil)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
+  end
+
+  def publish(force = nil)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [force])
+  end
+
   def template
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
@@ -235,14 +247,6 @@ class GuideMock < ActiveMocker::Base
 
   def template_fields=(fields_obj)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [fields_obj])
-  end
-
-  def template_question_tags
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
-  end
-
-  def template_questions
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
 end

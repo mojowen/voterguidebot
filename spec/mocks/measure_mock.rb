@@ -7,11 +7,11 @@ class MeasureMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "title" => nil, "description" => nil, "yes_means" => nil, "no_means" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "title" => nil, "description" => nil, "yes_means" => nil, "no_means" => nil, "created_at" => nil, "updated_at" => nil, "position" => nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, title: String, description: String, yes_means: String, no_means: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, title: String, description: String, yes_means: String, no_means: String, created_at: DateTime, updated_at: DateTime, position: Fixnum }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -28,7 +28,7 @@ class MeasureMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "guide_id", "title", "description", "yes_means", "no_means", "created_at", "updated_at"] | super)
+      @attribute_names ||= (["id", "guide_id", "title", "description", "yes_means", "no_means", "created_at", "updated_at", "position"] | super)
     end
 
     def primary_key
@@ -108,6 +108,14 @@ class MeasureMock < ActiveMocker::Base
 
   def updated_at=(val)
     write_attribute(:updated_at, val)
+  end
+
+  def position
+    read_attribute(:position)
+  end
+
+  def position=(val)
+    write_attribute(:position, val)
   end
 
   # _associations.erb
@@ -207,6 +215,10 @@ class MeasureMock < ActiveMocker::Base
 
   def assign_attributes(attributes)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
+  end
+
+  def template(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
 
 end

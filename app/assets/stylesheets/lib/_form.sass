@@ -57,6 +57,7 @@ textarea
 
 .form--row,
 .candidate--form
+  min-width: 210px
   .preview--field
     white-space: pre-line
     word-wrap: break-word
@@ -115,7 +116,7 @@ textarea
 .measure--form
   .image--field
     img
-      @include frame(60px)
+      @include frame(80px)
       margin: 0 auto 10px
 
   .remove
@@ -158,7 +159,7 @@ textarea
           font-size: 12px
           height: 20px
   .profile
-    @include frame(40px)
+    @include frame(30px)
     &.unknown
       background-image: asset-url('unknown.png')
 
@@ -168,8 +169,26 @@ textarea
     height: 32px
     margin-bottom: 0
 
+
 .candidate--form
-  height: 520px
+  text-align: center
+  z-index: 90
+  transition: height 100ms, padding 800ms
+  height: 220px
+  position: relative
+  .edit--wrap
+    position: absolute
+    bottom: 20px
+    left: 0
+    text-align: center
+    width: 100%
+  img.profile, .profile
+    @include frame(80px)
+  &.open
+    height: 100%
+    text-align: left
+    padding-top: 40px
+    padding-bottom: 100px
   overflow-y: auto
   .remove--candidate
     top: 10px
@@ -181,15 +200,21 @@ textarea
       color: $mui-accent-color-dark
     cursor: pointer
 
-.questions--form
+.questions--wrap
+  overflow-y: scroll
+  padding: 0 10px 30px 0
   table
     width: 100%
   th
     text-align: center
-    max-width: 120px
-    vertical-align: bottom
-    em
-      font-weight: normal
+    max-width: 60px
+    vertical-align: top
+    font-size: 8px
+    font-weight: normal
+    padding: 4px
+    white-space: normal
+    word-wrap: break-word
+    font-style: italic
   .question
     .mui-textfield
       max-width: 450px
@@ -203,22 +228,33 @@ textarea
         right: 0
         bottom: 0px
         pointer-events: none
-  tbody tr td
-    padding-bottom: 10px
+  tbody
+    tr
+      border: 2px solid #eee
+      &[draggable=true]
+        border-style: dashed
+      td
+        padding-bottom: 30px
   td
     height: 80px
     vertical-align: bottom
     &.remover
+      &:after
+        content: ''
+        display: block
+        width: 36px
+      position: relative
       vertical-align: middle
+      padding: 0 4px
+      .remove
+        bottom: 10px
+        left: 10px
+        cursor: pointer
     input
       text-align: center
   .taggable--form
     margin-top: -15px
     position: absolute
-  .remove
-    position: relative
-    cursor: pointer
-    margin-right: 20px
 .add--question
   margin-top: 40px
   .remove
@@ -263,3 +299,30 @@ textarea
     width: 100%
     z-index: 10
 
+[draggable=true]
+  *
+    opacity: 0.5
+  .draggable
+    opacity: 1
+  &, *, .draggable
+    cursor: -moz-grabbing
+    cursor: -webkit-grabbing
+    cursor: grabbing
+
+[draggable=false]
+  position: relative
+
+.draggable
+  i
+    display: block
+    margin: 0
+    padding: 0
+    line-height: 6px
+    font-size: 16px
+  cursor: -webkit-grab
+  cursor: -moz-grab
+  cursor: grab
+  position: absolute
+  top: 0
+  left: 0
+  padding: 10px

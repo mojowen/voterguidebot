@@ -33,7 +33,6 @@ RSpec.describe ContestsController, active_mocker: true do
     context 'with assciations' do
       let(:candidates) do
         [{ 'id' => '1',
-           '_destroy' => true,
            'name' => 'Frank',
            'bio' => 'Frank is an ass',
            'photo' => '/pretty-picture',
@@ -45,7 +44,6 @@ RSpec.describe ContestsController, active_mocker: true do
       end
       let(:questions) do
         [{ 'id' => '1',
-           '_destroy' => true,
            'text' => 'WHAT ARE THOSE',
            'answers' => answers,
            'tags' => tags }]

@@ -1,18 +1,18 @@
 var Question = React.createClass({
-  mixins: [Template],
+  mixins: [Template, Draggable],
   getDefaultProps: function() {
     return { candidates: [],
              answers: null,
              tags: null,
              text: '',
              id: null,
-             handleRemove: function() {  },
              handleChange: function() {  } }
   },
   handleAnswerChange: function(event) {
     var answers = this.props.answers || [],
         text = event.target.value,
         index = event.target.name.split('_').reverse()[0],
+        questions = this.props.questions,
         candidate = this.props.candidates[index],
         answer = _.find(this.props.answers, function(answer) {
           return answer.candidate_id === candidate.id
@@ -25,22 +25,50 @@ var Question = React.createClass({
       answers[_.indexOf(this.props.answers, answer)].text = text
     }
 
-    this.props.handleChange(this.props.id, 'answers', answers)
+    questions[this.props.index].answers = answers
+
+    this.props.handleChange({ questions: questions })
   },
   handleChange: function(event) {
-    this.props.handleChange(this.props.id, event.target.name, event.target.value)
+    var questions = this.props.questions
+    questions[this.props.index][event.target.name] = event.target.value
+
+    this.props.handleChange({ questions: questions })
   },
   handleRemove: function(event) {
-    this.props.handleRemove(this.props.id)
+    var questions = this.props.questions,
+        question = questions[this.props.index]
+
+    vgConfirm('Are you sure you want to remove this question?', function(conf) {
+      if( !conf ) return
+      this.props.handleChange({ questions: _.without(questions, question) })
+    }, this)
   },
   removeTag: function(tag) {
-    var tags = _.without(this.props.tags || [], _.find(this.props.tags || [], { name: tag }))
-    this.props.handleChange(this.props.id, 'tags', tags)
+    var tags = this.props.tags || [],
+        questions = this.props.questions
+
+    questions[this.props.index].tags = _.without(tags, _.find(tags, { name: tag }))
+    this.props.handleChange({ questions: questions })
   },
   addTag: function(tag) {
-    var tags = this.props.tags || []
+    var tags = this.props.tags || [],
+        questions = this.props.questions
+
     tags.push({ name: tag, tagged_id: this.props.id, tagged_type: 'question' })
-    this.props.handleChange(this.props.id, 'tags', tags)
+
+    questions[this.props.index].tags = tags
+    this.props.handleChange({ questions: questions })
+  },
+  handleDragOver: function(current_id, replaced_id) {
+    var questions = this.props.questions,
+        current = questions[current_id],
+        replaced = questions[replaced_id]
+
+    questions[replaced_id] = current
+    questions[current_id] = replaced
+
+    this.props.handleChange('questions', questions)
   },
   render: function() {
     var candidates = _.map(this.props.candidates, function(candidate, index) {
@@ -56,8 +84,9 @@ var Question = React.createClass({
                             </td>
                     }, this)
 
-    return <tr>
+    return <tr {...this.draggable_props()}>
       <td className="remover">
+        { this.draggable() }
         <a className="remove" onClick={this.handleRemove} >
           <i className="fa fa-times" />
         </a>
@@ -75,7 +104,7 @@ var Question = React.createClass({
                   tagged_type='Question'
                   removeTag={this.removeTag}
                   addTag={this.addTag} />
-        </td>
+      </td>
       { candidates }
     </tr>
   }

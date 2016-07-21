@@ -18,6 +18,9 @@ var Measure = React.createClass({
     tags.push({ name: tag, tagged_id: this.props.id, tagged_type: 'measure' })
     this.setChangedState({ tags: tags })
   },
+  onChange: function(event) {
+    this.handleChange(event.target.name, event.target.value)
+  },
   getInitialState: function() {
     return { title: this.props.title,
              description: this.props.description,
@@ -34,13 +37,13 @@ var Measure = React.createClass({
                           label="Ballot Measure Title"
                           ref='title'
                           value={ this.state.title }
-                          onChange={ this.handleChange } />
+                          onChange={ this.onChange } />
           <InputComponent name="description"
                           element="textarea"
                           ref='description'
                           label="Description of Measure"
                           value={ this.state.description }
-                          onChange={ this.handleChange } />
+                          onChange={ this.onChange } />
       </div>
       <div className="mui-row">
         <Taggable tags={this.state.tags}
@@ -57,7 +60,7 @@ var Measure = React.createClass({
                         label="What happens if it passes?"
                         element="textarea"
                         value={this.state.yes_means}
-                        onChange={this.handleChange} />
+                        onChange={this.onChange} />
         <Endorsements ref="yes_endorsements"
                       className="mui-col-md-5"
                       template={this.props.template}
@@ -74,7 +77,7 @@ var Measure = React.createClass({
                         label="What happens if it does not pass?"
                         element="textarea"
                         value={this.state.no_means}
-                        onChange={this.handleChange} />
+                        onChange={this.onChange} />
         <Endorsements ref="no_endorsements"
                       className="mui-col-md-5"
                       template={this.props.template}

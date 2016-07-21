@@ -25,3 +25,5 @@
           %td= contest.candidates.map(&:name).join(', ')
           %td= contest.questions.map(&:text).join(', ')
           %td= button_link_to 'Edit', edit_guide_contest_path(@guide, contest)
+
+= react_component :SortableForm

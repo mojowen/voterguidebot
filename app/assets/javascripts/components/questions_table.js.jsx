@@ -3,9 +3,12 @@ var QuestionsTable = React.createClass({
   getDefaultProps: function() {
     return { candidates: [],
              questions: [],
-             handleAdd: function() { },
-             handleRemove: function() { },
              handleChange: function() { } }
+  },
+  handleAdd: function(question) {
+    var questions = this.props.questions
+    questions.push(question)
+    this.props.handleChange({ questions: questions })
   },
   render: function() {
     var questions_headers = _.map(this.props.candidates, function(candidate, index) {
@@ -19,14 +22,15 @@ var QuestionsTable = React.createClass({
               <span>{ candidate.name || 'Candidate Name' }</span>
             </th>
           }, this)
-        questions = _.map(this.props.questions, function(question) {
+        questions = _.map(this.props.questions, function(question, index) {
           return <Question {...question}
                            answers={question.answers}
                            candidates={this.props.candidates}
+                           questions={this.props.questions}
                            key={question.id}
+                           index={index}
                            template={this.props.template}
-                           handleChange={this.props.handleChange}
-                           handleRemove={this.props.handleRemove} />
+                           handleChange={this.props.handleChange} />
         }, this),
       table_display = this.props.questions.length < 1 ? 'none' : 'block'
       add_display = this.props.questions.length >= this.props.template.questions.max ? 'none' : 'block'
@@ -35,16 +39,18 @@ var QuestionsTable = React.createClass({
       <div className="mui-row">
         <div className="questions--form">
           <h3>Questions</h3>
-          <table className="questions" style={{ display: table_display }}>
-            <thead><tr><th></th><th></th>{ questions_headers }</tr></thead>
-            <tbody>{ questions }</tbody>
-          </table>
+          <div className="questions--wrap" >
+            <table className="questions" style={{ display: table_display }}>
+              <thead><tr><th></th><th></th>{ questions_headers }</tr></thead>
+              <tbody>{ questions }</tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div className="mui-row" >
         <div className="mui--pull-right" style={{ display: add_display }}>
           <AddQuestion ref="add_question"
-                       handleAdd={ this.props.handleAdd }
+                       handleAdd={ this.handleAdd }
                        template={this.props.template} />
         </div>
       </div>

@@ -12,7 +12,8 @@ var InputComponent = React.createClass({
     }
   },
   isValid: function() {
-    return this.props.limit ? this.props.value.length <= this.props.limit : true
+    var val = this.props.value || ''
+    return this.props.limit ? val.length <= this.props.limit : true
   },
   limitClass: function() {
     if( this.isValid() ) return 'mui--text-accent-hint'

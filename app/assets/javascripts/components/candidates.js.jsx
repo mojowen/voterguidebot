@@ -1,18 +1,26 @@
 var Candidates = React.createClass({
-  mixins: [Template],
+  mixins: [Template, NewObject],
   getDefaultProps: function() {
     return { candidates: [],
-             handleAdd: function() { },
-             handleChange: function() { },
-             handleRemove: function() { } }
+             handleChange: function() { } }
+  },
+  newCandidate: function() {
+    return this.newObject('candidate', { start_open: true, endorsements: [] })
+  },
+  handleAdd: function(event) {
+    var candidates = this.props.candidates
+    candidates.push(this.newCandidate())
+    this.props.handleChange('candidates', candidates)
+    event.preventDefault()
   },
   render: function() {
-    var candidates = _.map(this.props.candidates, function(candidate) {
+    var candidates = _.map(this.props.candidates, function(candidate, index) {
           return <Candidate {...candidate}
+                            candidates={this.props.candidates}
                             template={this.props.template}
                             key={candidate.id}
-                            handleChange={this.props.handleChange}
-                            handleRemove={this.props.handleRemove}  />
+                            index={index}
+                            handleChange={this.props.handleChange} />
         }, this)
 
     return <div>
@@ -20,7 +28,7 @@ var Candidates = React.createClass({
       <div className="mui-row">{ candidates }</div>
       <div className="mui-row">
         <div className="mui--pull-right">
-          <a onClick={ this.props.handleAdd }
+          <a onClick={ this.handleAdd }
               className="mui-btn mui-btn--accent">
             <i className="fa fa-plus-circle" /> Add Candidate
           </a>

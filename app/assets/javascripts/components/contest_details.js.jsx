@@ -4,6 +4,9 @@ var ContestDetails = React.createClass({
              description: '',
              handleChange: function() { } }
   },
+  handleChange: function(event) {
+    this.props.handleChange(event.target.name, event.target.value)
+  },
   render: function() {
     return <div className="contest mui-row">
       <h3>Details</h3>
@@ -12,14 +15,14 @@ var ContestDetails = React.createClass({
                       placeholder="Mayor of Gotham City"
                       ref='title'
                       value={ this.props.title }
-                      onChange={ this.props.handleChange } />
+                      onChange={ this.handleChange } />
       <InputComponent name="description"
                       element="textarea"
                       ref='description'
                       label="Description"
                       placeholder="Responsible for running the city of Gotham - avoiding capture, etc."
                       value={ this.props.description }
-                      onChange={ this.props.handleChange } />
+                      onChange={ this.handleChange } />
     </div>
   }
 })

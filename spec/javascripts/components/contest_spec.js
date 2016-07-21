@@ -16,7 +16,8 @@ describe('Contest', function() {
     expect(this.component.state.changed).toEqual(false)
   })
   it('title updates when changed', function() {
-    this.component.handleChange({ target: { name: 'title', value: 'New Title'}})
+    this.dom.querySelector('[name=title]').value = 'New Title'
+    Utils.Simulate.change(this.dom.querySelector('[name=title]'))
     expect(this.component.state.title).toEqual('New Title')
     expect(this.component.state.changed).toEqual(true)
   })
@@ -25,7 +26,8 @@ describe('Contest', function() {
     expect(this.dom.querySelector('[name=description]').value).toEqual(this.props.description)
   })
   it('description updates when changed', function() {
-    this.component.handleChange({ target: { name: 'description', value: 'New description'}})
+    this.dom.querySelector('[name=description]').value = 'New description'
+    Utils.Simulate.change(this.dom.querySelector('[name=description]'))
     expect(this.component.state.description).toEqual('New description')
     expect(this.component.state.changed).toEqual(true)
   })
@@ -37,27 +39,29 @@ describe('Contest', function() {
         bio: 'The greatest',
         photo: '/my/photo',
         id: 5,
-        endorsements: ['Cool Dudes Inc']
+        endorsements: ['Cool Dudes Inc'],
       }
       this.props = { candidates: [this.candidate] }
       this.setUpComponent(Contest, this.props)
     })
 
     it('updates when changed', function() {
-      this.component.handleCandidateChange(this.candidate.id, 'name', 'Seth Rogan')
+      Utils.Simulate.click(this.dom.querySelector('.candidate--form a'))
+      this.dom.querySelector('.candidate--form [name=name]').value = 'Seth Rogan'
+      Utils.Simulate.change(this.dom.querySelector('.candidate--form [name=name]'))
       expect(this.component.state.candidates[0].name).toEqual('Seth Rogan')
       expect(this.component.state.changed).toEqual(true)
     })
     it('adds new candidates', function() {
-      this.component.handleClickToAddCandidate({ preventDefault: function() {}})
+      Utils.Simulate.click(this.dom.querySelector('a i.fa-plus-circle'))
+
       expect(this.component.state.candidates.length).toEqual(2)
       expect(this.component.state.changed).toEqual(true)
     })
     it('deletes candidates', function() {
-      this.component.handleCandidateRemove(this.candidate.id)
+      Utils.Simulate.click(this.dom.querySelector('i.remove--candidate'))
       swalSpy.confirmLast(true)
       expect(this.component.state.candidates.length).toEqual(0)
-      expect(this.component.state._candidates).toEqual([this.candidate.id])
       expect(this.component.state.changed).toEqual(true)
     })
   })
@@ -77,30 +81,40 @@ describe('Contest', function() {
       }
       this.props = {
         candidates: [this.candidate],
-        questions: [this.question]
+        questions: [this.question],
       }
       this.setUpComponent(Contest, this.props)
     })
 
     it('updates when changed', function() {
-      this.component.handleQuestionChange(this.question.id, 'text', 'LOVE ME?')
+      this.dom.querySelector('td [name=text]').value = 'LOVE ME?'
+      Utils.Simulate.change(this.dom.querySelector('td [name=text]'))
+
       expect(this.component.state.questions[0].text).toEqual('LOVE ME?')
       expect(this.component.state.changed).toEqual(true)
     })
+    it('updates when the questions answerd', function() {
+      this.dom.querySelector('td [name=candidate_0]').value = 'Yes?'
+      Utils.Simulate.change(this.dom.querySelector('td [name=candidate_0]'))
+
+      expect(this.component.state.questions[0].answers[0].text).toEqual('Yes?')
+      expect(this.component.state.changed).toEqual(true)
+    })
     it('deletes questions', function() {
-      this.component.handleQuestionRemove(this.question.id)
+      Utils.Simulate.click(this.dom.querySelector('td a.remove'))
+
       swalSpy.confirmLast(true)
       expect(this.component.state.questions.length).toEqual(0)
-      expect(this.component.state._questions).toEqual([this.question.id])
       expect(this.component.state.changed).toEqual(true)
     })
     it('adds new candidates to questions', function() {
       expect(this.dom.querySelectorAll('th').length).toEqual(3)
-      this.component.handleClickToAddCandidate({ preventDefault: function() {}})
+      Utils.Simulate.click(this.dom.querySelector('a i.fa-plus-circle'))
       expect(this.dom.querySelectorAll('th').length).toEqual(4)
     })
     it('removes candidates from questions', function() {
-      this.component.handleCandidateRemove(this.candidate.id)
+      Utils.Simulate.click(this.dom.querySelector('i.remove--candidate'))
+      swalSpy.confirmLast(true)
       swalSpy.confirmLast(true)
       expect(this.component.state.changed).toEqual(true)
     })
@@ -130,7 +144,7 @@ describe('Contest', function() {
       }
       this.setUpComponent(Contest, this.props)
       this.add_question = this.component.refs.questions.refs.add_question
-      this.add_question.handleAddQuestionStart({ preventDefault: function() {} })
+      Utils.Simulate.click(this.dom.querySelectorAll('a.mui-btn--accent i.fa-plus-circle')[1])
     })
 
     it('creates a select for template questions', function() {
@@ -144,13 +158,15 @@ describe('Contest', function() {
     })
 
     it('selects a template question and creaets a new question', function() {
-      this.add_question.handleAddSelected({
-        target: this.dom.querySelectorAll('.add--question select option')[1] })
+      this.dom.querySelector('.mui-select select').value = this.template_questions[0].text
+      Utils.Simulate.change(this.dom.querySelector('.mui-select select'))
+
       expect(this.component.state.questions[0].text).toEqual(this.template_questions[0].text)
     })
     it('selects blank question adds new blank question', function() {
-      this.add_question.handleAddBlank({ preventDefault: function() {} })
-      expect(this.component.state.questions[0].text).toEqual(undefined)
+      Utils.Simulate.click(this.dom.querySelector('a.mui-btn--primary i.fa-plus-circle'))
+
+      expect(this.component.state.questions[0].text).toEqual()
     })
   })
 })
