@@ -86,31 +86,31 @@ questions:
       tag: Education
     -
       text: Do you support ending “Broken Windows” policing that spends more energy on arrests for loitering and graffiti over major crimes?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support increasing job training programs?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support offering alternatives to incarceration for low level offenses such as - traffic violations, and low level drug offenses?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support decriminalizing offenses that pose no safety threat and that have historically targeted Black and brown communities?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support reparations for slavery, Jim Crow laws, and/or victims of state (Or police depending on need of specificity) violence?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support would you support removing police presence from schools?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support moving government money from policing to schools and jobs programs?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support making police report data on who they target for stops, arrests and who they use force against?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support making prosecutors report data on who they choose to prosecute, for what offenses and what plea bargains they offer?
-      tag: Racial Justice
+      tag: Criminal Justice Reform
     -
       text: Do you support cities offering ID Cards to all residents, regardless of immigration status and gender identity?*
       tag: Immigration
@@ -260,6 +260,5 @@ tags:
   - Healthcare
   - Immigration
   - LGBT
-  - Racial Justice
   - Reproduction Rights
   - Voting Rights
