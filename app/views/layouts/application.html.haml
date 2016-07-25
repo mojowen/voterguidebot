@@ -5,6 +5,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = javascript_include_tag "https://linked.chat/web/JaZDLg", async: true, 'data-turbolinks-track' => true
     :javascript
       window['_fs_debug'] = false;
       window['_fs_host'] = 'www.fullstory.com';
@@ -58,3 +59,6 @@
           displayName: '#{ current_user.first_name } #{ current_user.last_name }',
           email: '#{ current_user.email }'
         })
+        window.linkedchat = {}
+        linkedchat.name = '#{ current_user.first_name } #{ current_user.last_name }';
+        linkedchat.email = '#{ current_user.email }';
