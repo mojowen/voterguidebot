@@ -1,5 +1,7 @@
 class Upload < ActiveRecord::Base
-  has_attached_file :file, default_url: "/images/unknown.png"
+  has_attached_file :file,
+    default_url: "/images/unknown.png",
+    path: "/:guide/:id_:filename"
 
   belongs_to :user
   belongs_to :guide
