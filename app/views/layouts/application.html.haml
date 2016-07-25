@@ -54,7 +54,7 @@
 
     - if current_user
       :javascript
-        FS.identify(<%= current_user.id %>, {
-          displayName: '<%= current_user.first_name %> <%= current_user.last_name %>',
-          email: '<%= current_user.email %>'
+        FS.identify(#{ current_user.id }, {
+          displayName: '#{ current_user.first_name } #{ current_user.last_name }',
+          email: '#{ current_user.email }'
         })
