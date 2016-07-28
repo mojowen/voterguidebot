@@ -8,7 +8,9 @@ before_script:
   - createdb test_vgbot
   - bundle exec rake db:migrate
 
-script: bundle exec rake spec && bundle exec rake jasmine:ci[random]
+script:
+  - bundle exec rake spec
+  - bundle exec rake jasmine:ci[random]
 
 env:
   global:
