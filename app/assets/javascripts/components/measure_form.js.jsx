@@ -24,8 +24,8 @@ var MeasureForm = React.createClass({
       { measure: measure_data },
       function(res) {
         Turbolinks.visit(res.body.path)
-        contest.setState(_.extend({ method: res.body.state.measure.id ? 'put' : 'post' },
-                                  res.body.state.measure))
+        measure.setState(_.extend({ method: res.body.state.measure.id ? 'put' : 'post' },
+                         res.body.state.measure))
       }
     )
     event.preventDefault()

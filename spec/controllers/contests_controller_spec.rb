@@ -91,7 +91,7 @@ RSpec.describe ContestsController, active_mocker: true do
   end
 
   context 'with a contest' do
-    let(:contest) { Fabricate :contest, guide: guide }
+    let!(:contest) { Fabricate :contest, guide: guide }
     describe '#edit' do
       render_views
       it 'renders successfully' do
@@ -111,6 +111,18 @@ RSpec.describe ContestsController, active_mocker: true do
       it 'assigns associations' do
         expect(subject).to receive(:update_contest)
         put :update, contest_params
+      end
+    end
+    describe '#destroy' do
+      it 'redirects to index' do
+        delete :destroy, { guide_id: guide.id, id: contest.id }
+        expect(response).to redirect_to guide_contests_path(guide, locale: :en)
+      end
+
+      it 'destroys contest' do
+        expect do
+          delete :destroy, { guide_id: guide.id, id: contest.id }
+        end.to change(Contest, :count).by(-1)
       end
     end
   end

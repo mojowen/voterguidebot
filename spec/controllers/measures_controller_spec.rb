@@ -48,7 +48,7 @@ RSpec.describe MeasuresController, active_mocker: true do
           tags: [tag]
         }}
     end
-    it 'creates contests' do
+    it 'creates measure' do
       expect do
         post :create, measure_params
       end.to change(Measure, :count).by(1)
@@ -81,7 +81,7 @@ RSpec.describe MeasuresController, active_mocker: true do
   end
 
   context 'with a measure' do
-    let(:measure) { Fabricate :measure, guide: guide }
+    let!(:measure) { Fabricate :measure, guide: guide }
     describe '#edit' do
       render_views
       it 'renders successfully' do
@@ -101,6 +101,18 @@ RSpec.describe MeasuresController, active_mocker: true do
       it 'assigns associations' do
         put :update, measure_params
         expect(measure.reload.title).to eq('Test')
+      end
+    end
+    describe '#destroy' do
+      it 'redirects to index' do
+        delete :destroy, { guide_id: guide.id, id: measure.id }
+        expect(response).to redirect_to guide_measures_path(guide, locale: :en)
+      end
+
+      it 'destroys measures' do
+        expect do
+          delete :destroy, { guide_id: guide.id, id: measure.id }
+        end.to change(Measure, :count).by(-1)
       end
     end
   end
