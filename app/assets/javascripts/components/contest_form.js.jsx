@@ -19,7 +19,8 @@ var ContestForm = React.createClass({
           questions: contest.state.questions
       }},
       function(res) {
-        contest.setState(_.extend({ _candidates: [], _questions: [] },
+        Turbolinks.visit(res.body.path)
+        contest.setState(_.extend({ method: res.body.state.contest.id ? 'put' : 'post' },
                                   res.body.state.contest))
       }
     )

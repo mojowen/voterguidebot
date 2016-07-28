@@ -12,13 +12,18 @@ class ContestsController < ApplicationController
     return render json: update_contest
   end
 
+  def destroy
+    @contest.destroy
+    redirect_to guide_contests_path(@guide)
+  end
+
   private
 
   def update_contest
     @contest.assign_attributes contest_params
     @contest.save
     {
-      path: guide_contest_path(@guide, @contest),
+      path: edit_guide_contest_path(@guide, @contest),
       state: { contest: @contest.reload, url: edit_guide_contest_path(@guide, @contest) }
     }
   end

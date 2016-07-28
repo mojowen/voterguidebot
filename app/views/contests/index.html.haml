@@ -17,6 +17,7 @@
           %th Candidates
           %th Questions
           %th
+          %th
       %tbody
       - @guide.contests.each do |contest|
         %tr
@@ -25,5 +26,6 @@
           %td= contest.candidates.map(&:name).join(', ')
           %td= contest.questions.map(&:text).join(', ')
           %td= button_link_to 'Edit', edit_guide_contest_path(@guide, contest)
+          %td= button_link_to 'Delete', guide_contest_path(@guide, contest), data: { confirm: 'Are you sure?', method: :delete }
 
 = react_component :SortableForm

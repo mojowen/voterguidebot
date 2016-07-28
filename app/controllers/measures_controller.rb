@@ -12,13 +12,18 @@ class MeasuresController < ApplicationController
     return render json: update_measure
   end
 
+  def destroy
+    @measure.destroy
+    redirect_to guide_measures_path(@guide)
+  end
+
   private
 
   def update_measure
     @measure.assign_attributes measure_param
     @measure.save
     {
-      path: guide_contest_path(@guide, @measure),
+      path: edit_guide_contest_path(@guide, @measure),
       state: { measure: @measure.reload, url: edit_guide_measure_path(@guide, @measure) }
     }
   end
