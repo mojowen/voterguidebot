@@ -9,7 +9,7 @@ class GuidesController < ApplicationController
     @guide.users << current_user
 
     if @guide.save
-      redirect_to guide_path(@guide)
+      redirect_to guide_path @guide
     else
       params[:template] = 'default'
       render :new

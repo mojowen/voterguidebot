@@ -2,28 +2,24 @@
 
 .dashboard
   .mui-row
-    .mui-col-md-12.mui--text-right
-      = button_link_to edit_guide_path(@guide) do
-        %i.fa.fa-gears
-      = button_link_to guide_languages_path(@guide) do
-        %i.fa.fa-language
-      = button_link_to invite_guide_path(@guide) do
-        %i.fa.fa-user-plus
+    .mui-col-md-12.mui--text-right.menu
+      = button_link_to edit_guide_path(@guide), class: 'mui-btn--small' do
+        %i.fa.fa-gears.settings
+        Adjust Settings
+      = button_link_to guide_languages_path(@guide), class: 'mui-btn--small' do
+        %i.fa.fa-language.languages
+        Add Languages
+      = button_link_to invite_guide_path(@guide), class: 'mui-btn--small' do
+        %i.fa.fa-user-plus.users
+        Invite Collaborators
 
     .mui-col-md-12
       %h2 Get Started on Your Voter Guide
-      %p Create your Voter Guide by editing the following sections. When your guide is approved and ready to publish you'll be able to preview the PDF and the website and request publication.
-
-  .mui-row
-    .mui-col-md-2
-      %strong GUIDE STATUS
-    .mui-col-md-3
-      %strong
-        %i.fa-desktop.fa
-        Online Guide
+    .mui-col-md-6
+      %p Create your Voter Guide by editing the following sections.
+    .mui-col-md-6
+      %strong GUIDE STATUS:
       &nbsp;
-      %em.mui--text-dark-hint Unapproved
-    .mui-col-md-3
       %strong
         %i.fa-newspaper-o.fa
         Print Guide

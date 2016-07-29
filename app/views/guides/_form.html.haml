@@ -26,7 +26,7 @@
     = form.text_field :name, placeholder: 'The Best Little Voter Guide in Texas'
   .mui-textfield
     = form.label :election_date
-    = form.date_field :election_date
+    = form.date_field :election_date, value: guide.election_date || Date.new(2016, 11, 8)
   %h2
     %i.fa.fa-map-marker
     Location
