@@ -11,6 +11,7 @@ class GuidesController < ApplicationController
     if @guide.save
       redirect_to guide_path(@guide)
     else
+      params[:template] = 'default'
       render :new
     end
   end

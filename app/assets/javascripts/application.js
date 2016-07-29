@@ -6,9 +6,9 @@
 //= require superagent
 //= require dropzone
 //= require sweetalert
+//= require autosize
 //= require_tree ./mixins
 //= require_tree ./components
-
 
 window.vgConfirm = function(question, callback, context) {
   swal(

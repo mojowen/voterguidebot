@@ -11,24 +11,29 @@ var InputComponent = React.createClass({
       onChange: function() { }
     }
   },
+  componentDidMount: function() {
+    autosize(document.querySelectorAll('textarea'))
+  },
   isValid: function() {
     var val = this.props.value || ''
     return this.props.limit ? val.length <= this.props.limit : true
   },
   limitClass: function() {
-    if( this.isValid() ) return 'mui--text-accent-hint'
+    var val = this.props.value || ''
 
-    var remaining = this.props.limit - this.props.value.length
-    if( remaining >= 15 && remaining >= 0 ) return 'mui--text-accent-secondary'
-    return 'mui--text-accent mui--text-subhead'
+    var remaining = this.props.limit - val.length
+    if( this.isValid() && remaining > 15 ) return 'mui--text-primary-hint'
+    if( remaining >= 15 && remaining >= 0 ) return 'mui--text-accent-hint'
+    return 'mui--text-danger'
   },
   render: function() {
     var label = this.props.label ? <label>{ this.props.label }</label> : '',
         input = <this.props.element ref="input"
                                     { ...this.props }
-                                    value={ this.props.value } />,
+                                    value={ this.props.value }
+                                    data-valid={this.isValid()} />,
         font_awesome = '',
-        className = ['mui-textfield',this.props.className],
+        className = ['mui-textfield', this.props.className],
         limit = <span ref="remaining"
                       className={'remaining '+this.limitClass()}>
                   { this.props.limit - (this.props.value || '').length}

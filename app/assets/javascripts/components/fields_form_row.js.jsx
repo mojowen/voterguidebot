@@ -8,8 +8,8 @@ var FieldFormRow = React.createClass({
     return { value: this.props.value || '' }
   },
   getPreviewText: function() {
-    return (this.state.value && this.state.value.length > 0 ? this.state.value :
-                                                              this.props.example)
+    return (!!this.state.value && this.state.value.length > 0 ? this.state.value :
+                                                                this.props.example)
   },
   isValid: function() {
     return this.refs.input.isValid()

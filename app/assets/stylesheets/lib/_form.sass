@@ -1,3 +1,5 @@
+ul.errors
+  text-align: left
 textarea
   resize: vertical
 
@@ -16,7 +18,7 @@ textarea
       color: $mui-accent-color-dark
 
   .remaining
-    font-size: 10px
+    font-size: 12px
     position: absolute
 
   .image--field
@@ -94,6 +96,8 @@ textarea
 
   input,
   textarea
+    &[data-valid=false]
+      border-bottom-color: red
     &::-webkit-input-placeholder
       color: #ccc
       font-weight: normal
@@ -110,6 +114,8 @@ textarea
       color: #ccc
       font-weight: normal
       font-size: 80%
+  textarea
+    font-size: 14px
 
 .questions--form,
 .candidate--form,
