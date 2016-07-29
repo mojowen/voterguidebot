@@ -41,7 +41,8 @@ describe('Contest', function() {
         id: 5,
         endorsements: ['Cool Dudes Inc'],
       }
-      this.props = { candidates: [this.candidate] }
+      this.other_candidate = { id: 6 }
+      this.props = { candidates: [this.candidate, this.other_candidate] }
       this.setUpComponent(Contest, this.props)
     })
 
@@ -55,14 +56,22 @@ describe('Contest', function() {
     it('adds new candidates', function() {
       Utils.Simulate.click(this.dom.querySelector('a i.fa-plus-circle'))
 
-      expect(this.component.state.candidates.length).toEqual(2)
+      expect(this.component.state.candidates.length).toEqual(3)
       expect(this.component.state.changed).toEqual(true)
     })
     it('deletes candidates', function() {
       Utils.Simulate.click(this.dom.querySelector('i.remove--candidate'))
       swalSpy.confirmLast(true)
-      expect(this.component.state.candidates.length).toEqual(0)
+      expect(this.component.state.candidates.length).toEqual(1)
       expect(this.component.state.changed).toEqual(true)
+    })
+    it('reorders the candidates when dragged', function() {
+      expect(this.component.state.candidates).toEqual([this.candidate, this.other_candidate])
+
+      Utils.Simulate.dragStart(this.dom.querySelectorAll('.candidate--form')[1])
+      Utils.Simulate.dragOver(this.dom.querySelectorAll('.candidate--form')[0])
+
+      expect(this.component.state.candidates).toEqual([this.other_candidate, this.candidate])
     })
   })
 
@@ -79,9 +88,10 @@ describe('Contest', function() {
         text: 'WHAT ARE THOSE',
         id: 8
       }
+      this.other_question = { id: 5 }
       this.props = {
         candidates: [this.candidate],
-        questions: [this.question],
+        questions: [this.question, this.other_question],
       }
       this.setUpComponent(Contest, this.props)
     })
@@ -104,7 +114,7 @@ describe('Contest', function() {
       Utils.Simulate.click(this.dom.querySelector('td a.remove'))
 
       swalSpy.confirmLast(true)
-      expect(this.component.state.questions.length).toEqual(0)
+      expect(this.component.state.questions.length).toEqual(1)
       expect(this.component.state.changed).toEqual(true)
     })
     it('adds new candidates to questions', function() {
@@ -118,6 +128,15 @@ describe('Contest', function() {
       swalSpy.confirmLast(true)
       expect(this.component.state.changed).toEqual(true)
     })
+    it('reorders the questions when dragged', function() {
+      expect(this.component.state.questions).toEqual([this.question, this.other_question])
+
+      Utils.Simulate.dragStart(this.dom.querySelectorAll('.question')[1])
+      Utils.Simulate.dragOver(this.dom.querySelectorAll('.question')[0])
+
+      expect(this.component.state.questions).toEqual([this.other_question, this.question])
+    })
+
   })
 
   describe('template questions', function() {

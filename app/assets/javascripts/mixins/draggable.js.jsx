@@ -31,14 +31,20 @@ var Draggable = {
     this.setState({ draggable: false })
   },
   findElement: function(elem) {
+    if( typeof elem.getAttribute === 'undefined' ) return false
     if( elem.getAttribute('data-index') ) return elem
     return this.findElement(elem.parentNode)
   },
   dragOver: function(event) {
     var handler = this.handleDragOver || function(current, replacement) { },
-        elem = this.findElement(event.target),
-        new_index = elem.getAttribute('data-index'),
+        elem = this.findElement(event.target)
+
+    if( !!!elem ) return
+
+    var new_index = elem.getAttribute('data-index'),
         current_index = this.constructor.prototype.draggingIndex
+
+    if( !!!new_index ) return
 
     if( new_index && Number(new_index) !== current_index ) {
       handler(current_index, Number(new_index))
@@ -47,8 +53,8 @@ var Draggable = {
   },
   draggable: function() {
     return <div onMouseDown={this.canDrag}
-                onMouseUp={this.cantDrag}
-                className="draggable" >
+               onMouseUp={this.cantDrag}
+               className="draggable" >
         <i className="fa fa-ellipsis-h" />
         <i className="fa fa-ellipsis-h" />
         <i className="fa fa-ellipsis-h" />

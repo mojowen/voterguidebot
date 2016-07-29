@@ -191,14 +191,10 @@ textarea
     padding-bottom: 100px
   overflow-y: auto
   .remove--candidate
-    top: 10px
-    right: 10px
-    position: absolute
-    color: $mui-accent-color-light
+    @include remove
+  .candidate--small span
     font-size: 16px
-    &:hover
-      color: $mui-accent-color-dark
-    cursor: pointer
+    font-weight: bold
 
 .questions--wrap
   overflow-y: scroll
@@ -262,6 +258,7 @@ textarea
     right: 10px
     bottom: auto
 
+.measures--form,
 .measure--form
   .against--block,
   .for--block
@@ -299,6 +296,36 @@ textarea
     width: 100%
     z-index: 10
 
+.contests--form,
+.measures--form
+  margin: 40px 0
+  .remove
+    @include remove
+  .edit
+    position: absolute
+    top: 4px
+    right: 60px
+    z-index: 10
+  .candidate--small
+    display: inline-block
+    span
+      display: none
+    .profile
+      @include frame(30px)
+      &.unknown
+        background-image: asset-url('unknown.png')
+  .against--block,
+  .for--block
+    position: relative
+    padding-left: 50px
+    &::before
+      width: 26px
+      height: 26px
+      top: -4px
+      right: auto
+      left: 20px
+      margin: 0
+
 [draggable=true]
   *
     opacity: 0.5
@@ -326,3 +353,4 @@ textarea
   top: 0
   left: 0
   padding: 10px
+

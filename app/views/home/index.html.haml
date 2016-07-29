@@ -19,13 +19,14 @@
           %th Guide
           %th Fields
           %th Contests
-          %th
+          %th Measures
       %tbody
       - current_user.guides.each do |guide|
         %tr
           %td
             .mui--pull-left
-              %h3= guide.name.humanize
+              = link_to guide_path(guide) do
+                %h3= guide.name.humanize
           %td
             .mui--pull-left
               = guide.fields.map(&:value).reject(&:nil?).count
@@ -37,4 +38,7 @@
               %span.mui--text-dark-hint /
               = guide.template.contests['max']
           %td
-            .mui--pull-right= button_link_to 'View', guide_path(guide), { class: 'mui-btn--small' }
+            .mui--pull-left
+              = guide.measures.length
+              %span.mui--text-dark-hint /
+              = guide.template.measures['max']

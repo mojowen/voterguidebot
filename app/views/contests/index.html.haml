@@ -2,30 +2,9 @@
 = render 'guides/breadcrumb'
 
 .mui-row
-  .mui-col-md-6.mui-col-md-offset-2
-    %h2 Your Contests
   .mui-col-md-4
+    %h2 Your Contests
+  .mui-col-md-3.mui--pull-right
     = button_link_to 'New Contest', new_guide_contest_path(@guide)
 
-.mui-row
-  .mui-col-md-10.mui-col-md-offset-2
-    %table.mui-table
-      %thead
-        %tr
-          %th Title
-          %th Description
-          %th Candidates
-          %th Questions
-          %th
-          %th
-      %tbody
-      - @guide.contests.each do |contest|
-        %tr
-          %td= contest.title
-          %td= contest.description
-          %td= contest.candidates.map(&:name).join(', ')
-          %td= contest.questions.map(&:text).join(', ')
-          %td= button_link_to 'Edit', edit_guide_contest_path(@guide, contest)
-          %td= button_link_to 'Delete', guide_contest_path(@guide, contest), data: { confirm: 'Are you sure?', method: :delete }
-
-= react_component :SortableForm
+= react_component :ContestsForm, { contests: @guide.contests, url: guide_contests_path(@guide, locale: nil) }

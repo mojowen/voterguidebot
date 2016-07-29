@@ -2,28 +2,9 @@
 = render 'guides/breadcrumb'
 
 .mui-row
-  .mui-col-md-6.mui-col-md-offset-2
-    %h2 Your Ballot Measures
   .mui-col-md-4
+    %h2 Your Ballot Measures
+  .mui-col-md-4.mui--pull-right
     = button_link_to 'New Ballot Measure', new_guide_measure_path(@guide)
 
-.mui-row
-  .mui-col-md-10.mui-col-md-offset-2
-    %table.mui-table
-      %thead
-        %tr
-          %th Title
-          %th Description
-          %th Yes Means
-          %th No Means
-          %th
-          %th
-      %tbody
-      - @guide.measures.each do |measure|
-        %tr
-          %td= measure.title
-          %td= measure.description
-          %td= measure.yes_means
-          %td= measure.no_means
-          %td= button_link_to 'Edit', edit_guide_measure_path(@guide, measure)
-          %td= button_link_to 'Delete', guide_measure_path(@guide, measure), data: { confirm: 'Are you sure?', method: :delete }
+= react_component :MeasuresForm, { measures: @guide.measures, url: guide_measures_path(@guide, locale: nil) }

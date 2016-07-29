@@ -14,8 +14,9 @@ Rails.application.routes.draw do
         patch 'users'
       end
       resources :languages, only: [:index, :create, :destroy, :show]
-      resources :contests, except: :show
-      resources :measures, except: :show
+      resources :contests, :measures, except: :show do
+        collection { put :position }
+      end
     end
 
     resources :uploads, only: [:create]

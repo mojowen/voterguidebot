@@ -13,8 +13,8 @@ describe('ContestForm', function() {
   })
 
   beforeEach(function() {
-    this.contests = {}
-    this.setUpComponent(ContestForm, { contest: this.contests })
+    this.contest = {}
+    this.setUpComponent(ContestForm, { contest: this.contest })
     jasmine.Ajax.install()
   })
 
@@ -42,7 +42,7 @@ describe('ContestForm', function() {
     spyOn(this.component, 'notify')
     expect(request.method).toBe('POST')
     request.respondWith({
-      responseText: JSON.stringify({ state: { contest: contest }}),
+      responseText: JSON.stringify({ contest: contest }),
       status: 200
     })
     expect(this.component.refs.contest.state.candidates).toEqual(

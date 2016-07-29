@@ -47,6 +47,8 @@ var Candidate = React.createClass({
     candidates[replaced_id] = current
     candidates[current_id] = replaced
 
+    console.log(_.map(candidates, 'id'))
+    console.log(_.map(this.props.candidates, 'id'))
     this.props.handleChange('candidates', candidates)
   },
   openCandidate: function(event) {
@@ -106,11 +108,7 @@ var Candidate = React.createClass({
                           endorsed_id={this.props.id} />
           </div>
     } else {
-      var photo = <img src={this.props.photo} className="profile" />,
-          photo = this.props.photo ? photo : <div className="unknown profile" />,
-          guts = <div><h4>{ this.props.name || 'Candidate Name' }</h4>
-                  { photo }
-          </div>,
+        guts = <SmallCandidate {...this.props} />
         icon = 'pencil',
         button = 'Edit'
     }

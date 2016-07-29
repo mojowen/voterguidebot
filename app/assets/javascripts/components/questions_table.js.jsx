@@ -12,16 +12,8 @@ var QuestionsTable = React.createClass({
   },
   render: function() {
     var questions_headers = _.map(this.props.candidates, function(candidate, index) {
-          var has_photo = candidate.photo && !_.isEmpty(candidate.photo),
-              bgImg = has_photo ? 'url('+candidate.photo+')' : '',
-              className = 'profile'
-          if( !has_photo ) className += ' unknown'
-          return <th key={'candidate_'+index} >
-                  <div className={className}
-                       style={{ backgroundImage: bgImg }} ></div>
-              <span>{ candidate.name || 'Candidate Name' }</span>
-            </th>
-          }, this)
+          return <th key={'candidate_'+index} ><SmallCandidate {...candidate} /></th>
+        }, this)
         questions = _.map(this.props.questions, function(question, index) {
           return <Question {...question}
                            answers={question.answers}

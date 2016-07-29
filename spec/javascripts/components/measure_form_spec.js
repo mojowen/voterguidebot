@@ -44,7 +44,7 @@ describe('MeasureForm', function() {
     spyOn(this.component, 'notify')
     expect(request.method).toBe('POST')
     request.respondWith({
-      responseText: JSON.stringify({ state: { measure: measure }}),
+      responseText: JSON.stringify({ measure: measure }),
       status: 200
     })
     expect(this.component.refs.measure.state.title).toEqual(

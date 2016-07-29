@@ -116,7 +116,7 @@ RSpec.describe ContestsController, active_mocker: true do
     describe '#destroy' do
       it 'redirects to index' do
         delete :destroy, { guide_id: guide.id, id: contest.id }
-        expect(response).to redirect_to guide_contests_path(guide, locale: :en)
+        be_success
       end
 
       it 'destroys contest' do
@@ -125,6 +125,21 @@ RSpec.describe ContestsController, active_mocker: true do
         end.to change(Contest, :count).by(-1)
       end
     end
-  end
 
+    context 'with another contest' do
+      let!(:other_contest) { Fabricate :contest, guide: guide }
+
+      describe '#position' do
+        it 'is successful' do
+          put :position, { guide_id: guide.id, contests: [other_contest.id, contest.id] }
+          be_success
+        end
+        it 'changes the position on the resource' do
+          put :position, { guide_id: guide.id, contests: [other_contest.id, contest.id] }
+          expect(other_contest.reload.position).to eq(0)
+          expect(contest.reload.position).to eq(1)
+        end
+      end
+    end
+  end
 end

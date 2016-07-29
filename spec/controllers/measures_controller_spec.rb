@@ -106,7 +106,7 @@ RSpec.describe MeasuresController, active_mocker: true do
     describe '#destroy' do
       it 'redirects to index' do
         delete :destroy, { guide_id: guide.id, id: measure.id }
-        expect(response).to redirect_to guide_measures_path(guide, locale: :en)
+        be_success
       end
 
       it 'destroys measures' do
@@ -115,6 +115,22 @@ RSpec.describe MeasuresController, active_mocker: true do
         end.to change(Measure, :count).by(-1)
       end
     end
+    context 'with another measure' do
+      let!(:other_measure) { Fabricate :measure, guide: guide }
+
+      describe '#position' do
+        it 'is successful' do
+          put :position, { guide_id: guide.id, measures: [other_measure.id, measure.id] }
+          be_success
+        end
+        it 'changes the position on the resource' do
+          put :position, { guide_id: guide.id, measures: [other_measure.id, measure.id] }
+          expect(other_measure.reload.position).to eq(0)
+          expect(measure.reload.position).to eq(1)
+        end
+      end
+    end
+
   end
 
 end

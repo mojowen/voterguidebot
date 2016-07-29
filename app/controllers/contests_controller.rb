@@ -1,20 +1,21 @@
 class ContestsController < ApplicationController
   include GuideFinder
+  include Reposition
 
   before_filter :init_contest, only: [:new, :create]
-  before_filter :find_contest, except: [:new, :create, :index]
+  before_filter :find_contest, except: [:new, :create, :index, :position]
 
   def create
-    return render json: update_contest
+    render json: update_contest
   end
 
   def update
-    return render json: update_contest
+    render json: update_contest
   end
 
   def destroy
     @contest.destroy
-    redirect_to guide_contests_path(@guide)
+    render json: true
   end
 
   private
@@ -24,7 +25,7 @@ class ContestsController < ApplicationController
     @contest.save
     {
       path: edit_guide_contest_path(@guide, @contest),
-      state: { contest: @contest.reload, url: edit_guide_contest_path(@guide, @contest) }
+      contest: @contest.reload
     }
   end
 

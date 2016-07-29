@@ -12,29 +12,31 @@ var FormBase = {
   handleSuccess: function(res, message) {
     this.setState({ icon: 'fa-check-square' })
     this.notify(message || 'Success!')
-    if( res && res.body && res.body.path ) {
-      history.pushState({}, '', res.body.url)
-    }
+
+    if( res && res.path ) history.pushState({}, '', res.path)
   },
   notify: function(message, is_error) {
     if( is_error ) return swal({ title: 'Uh Oh!', text: message })
     swal({ title: message, timer: 500 })
   },
+  request: function(url, data, method) {
+    var method = superagent[method || this.state.method]
+
+    return method(url || this.props.url).send(data)
+                                        .set('X-CSRF-Token', CSRF.token())
+                                        .set('Accept', 'application/json')
+  },
   updateGuide: function(url, data, callback) {
     this.setState({ icon: 'fa-circle-o-notch fa-spin' })
 
     var that = this,
-        method = superagent[this.state.method],
         callback = callback || function() {}
 
-    method(this.props.url)
-      .send(data)
-      .set('X-CSRF-Token', CSRF.token())
-      .set('Accept', 'application/json')
-      .end(function(err, res) {
+    this.request(url, data)
+        .end(function(err, res) {
           if( err ) return that.handleError(res.body)
-          that.handleSuccess(res.body)
-          callback(res)
+            that.handleSuccess(res.body)
+            callback(res)
         })
   },
   languageChange: function(event) {

@@ -7,6 +7,16 @@
   display: block
   margin: 0 auto
 
+@mixin remove
+  top: 10px
+  right: 10px
+  position: absolute
+  color: $mui-accent-color-light
+  font-size: 16px
+  &:hover
+    color: $mui-accent-color-dark
+  cursor: pointer
+  z-index: 10
 
 $sm-width: 544px
 $md-width: 769px

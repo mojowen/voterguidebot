@@ -1,20 +1,21 @@
 class MeasuresController < ApplicationController
   include GuideFinder
+  include Reposition
 
   before_filter :init_measure, only: [:new, :create]
-  before_filter :find_measure, except: [:new, :create, :index]
+  before_filter :find_measure, except: [:new, :create, :index, :position]
 
   def create
-    return render json: update_measure
+    render json: update_measure
   end
 
   def update
-    return render json: update_measure
+    render json: update_measure
   end
 
   def destroy
     @measure.destroy
-    redirect_to guide_measures_path(@guide)
+    render json: true
   end
 
   private
@@ -23,8 +24,8 @@ class MeasuresController < ApplicationController
     @measure.assign_attributes measure_param
     @measure.save
     {
-      path: edit_guide_contest_path(@guide, @measure),
-      state: { measure: @measure.reload, url: edit_guide_measure_path(@guide, @measure) }
+      path: edit_guide_measure_path(@guide, @measure),
+      measure: @measure.reload
     }
   end
 

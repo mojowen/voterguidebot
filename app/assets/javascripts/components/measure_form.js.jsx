@@ -23,9 +23,8 @@ var MeasureForm = React.createClass({
       this.props.url,
       { measure: measure_data },
       function(res) {
-        Turbolinks.visit(res.body.path)
-        measure.setState(_.extend({ method: res.body.state.measure.id ? 'put' : 'post' },
-                         res.body.state.measure))
+        measure.setState(_.extend({ method: res.body.measure.id ? 'put' : 'post' },
+                         res.body.measure))
       }
     )
     event.preventDefault()
