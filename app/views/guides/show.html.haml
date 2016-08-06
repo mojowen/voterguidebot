@@ -18,13 +18,10 @@
     .mui-col-md-6
       %p Create your Voter Guide by editing the following sections.
     .mui-col-md-6
-      %strong GUIDE STATUS:
-      &nbsp;
-      %strong
-        %i.fa-newspaper-o.fa
-        Print Guide
-      &nbsp;
-      %em.mui--text-dark-hint Unapproved
+      = link_to preview_guide_path(@guide), { target: '_blank' } do
+        %strong
+          %i.fa-newspaper-o.fa
+          Preview
 
   .mui-row
     .mui-col-md-4.box

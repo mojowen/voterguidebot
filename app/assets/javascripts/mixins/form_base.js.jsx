@@ -51,6 +51,10 @@ var FormBase = {
     new_search.push(['locale',event.target.value].join('='))
     Turbolinks.visit([document.path, new_search.join('&')].join('?'))
   },
+  preview_guide_url: function() {
+    var guide_base = document.location.pathname.match(/\/guides\/\d+\//)
+    return guide_base + 'preview'
+  },
   menuComponent: function(before, after) {
     var languages = ''
 
@@ -78,6 +82,11 @@ var FormBase = {
       <button type="submit" className="mui-btn mui-btn--accent">
         <i className={'fa ' + this.state.icon} /> Save
       </button>
+      <a href={ this.preview_guide_url() } className="preview mui-btn mui-btn--primary" target="_blank">
+        <i className="fa-newspaper-o fa" />
+        &nbsp;
+        Preview
+      </a>
       { after }
     </div>
   }

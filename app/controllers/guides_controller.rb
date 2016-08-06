@@ -40,6 +40,13 @@ class GuidesController < ApplicationController
     render json: { state: user.valid? ? 'success' : 'error' }
   end
 
+  def preview
+    return redirect_to preview_guide_path(@guide, version: @guide.version) unless params[:version]
+    @is_pdf = request.env['HTTP_USER_AGENT'].match /PhantomJS/
+    p **@guide.template.render
+    render **@guide.template.render
+  end
+
   private
 
   def field_params

@@ -2,13 +2,15 @@
 name: Default Voter Guide
 
 screenshot: default.png
-
-make: 'lib/themes/default/web'
+view: default
+layout: default_layout
+contest: contest_large
 
 contests:
   max: 4
 
 candidates:
+  max: 4
 
 questions:
   max: 7

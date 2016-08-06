@@ -79,11 +79,15 @@ class Guide < ActiveRecord::Base
     end
   end
 
-  private
-
   def version
     @version ||= Digest::MD5.hexdigest to_json
   end
+
+  def field(template_name)
+    find_field(template_name).try(:value)
+  end
+
+  private
 
   def find_field(template_name)
     fields.find { |field| field.field_template == template_name  }

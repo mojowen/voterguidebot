@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Preview</title>
+  <%= stylesheet_link_tag 'default' %>
+  <% unless @is_pdf %>
+    <style type="text/css">
+      body {
+        background: #999;
+        height: auto;
+        overflow: visibe;
+      }
+      .page {
+          margin: 20px auto 0;
+          box-shadow: #333 -1px 1px 3px;
+      }
+    </style>
+  <% end %>
+</head>
+<body>
+  <div class="page" >
+    <div class="title full">
+      <div class="box full">
+        <div class="inner full">
+          <h1><%= @guide.name %></h1>
+          <h1 class="big">Voter<br />Guide</h1>
+          <h2>
+            Be sure to vote by
+            <%= @guide.election_date.strftime("%B") %>
+            <%= @guide.election_date.day.ordinalize %></h1>
+          <p>Your ballot is secret, and your choices are 100% yours. But hopefully this independent, locally-prepared guide helps you make an informed decision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="header">
+      <h2>The Guide To This Guide</h2>
+    </div>
+    <div class="content about-us">
+      <div class="section">
+        <h3>Contents</h3>
+        <ul class="contents">
+          <li><span>how to vote</span><span class="right">6-9</span></li>
+          <li><span>how to vote</span><span class="right">6-9</span></li>
+          <li><span>how to vote</span><span class="right">6-9</span></li>
+        </ul>
+      </div>
+      <div class="section">
+        <h3>About Us</h3>
+        <p><%= @guide.field('about_us_blurb') %></p>
+        <%= image_tag @guide.field('about_us_logo'), class: 'logo' %>
+      </div>
+    </div>
+    <div class="footer footer_1"></div>
+  </div>
+  <%= yield %>
+  <div class="page">
+    <div class="header">
+      <h4>all the info you need</h4>
+      <h2>How To Vote</h2>
+    </div>
+    <div class="content how-to">
+      <div class="section">
+        <h3>What you gotta bring</h3>
+        <p><%= @guide.field('what_you_got_to_bring') %></p>
+      </div>
+      <div class="section">
+        <h3>Where you've gotta go</h3>
+        <p><%= @guide.field('where_you_got_to_go') %></p>
+      </div>
+    </div>
+    <div class="footer footer_2"></div>
+  </div>
+  </body>
+</html>

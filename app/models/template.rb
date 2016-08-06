@@ -6,4 +6,8 @@ class Template < OpenStruct
   def as_json
     to_h.as_json
   end
+
+  def render
+    { template: File.join('templates', view), layout: File.join('..', 'templates', layout) }
+  end
 end

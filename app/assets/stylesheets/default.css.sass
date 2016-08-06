@@ -1,0 +1,224 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic,600)
+@import 'lib/normalize.css'
+
+$width: 6in
+$height: 4in
+
+$blue: #26aac6
+$grey-blue: #7091a3
+$pink: #d81b59
+$yellow: #fab815
+$green: #2f8f44
+$fuzzy_blue: transparentize($blue, 0.85)
+
+@import 'lib/mixins'
+
+*
+  box-sizing: border-box
+  font-family: 'Open Sans', sans-serif
+
+p, h1, h2, h3, h4, h5
+  margin: 0
+  padding: 0
+
+h1, h2, h3, h4
+  text-transform: uppercase
+  font-weight: lighter
+
+h3
+  color: $pink
+  text-transform: uppercase
+  font-style: 14px
+  font-weight: normal
+
+p, div
+  font-size: 10px
+
+.page
+  height: $height
+  width: $width
+  background: white
+  display: block
+  position: relative
+  overflow: hidden
+
+.full
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+.content
+  top: 80px
+  left: 80px
+  right: 80px
+  bottom: 80px
+  position: absolute
+  padding: 20px 0
+
+.section
+  margin: 20px 0
+  position: relative
+  width: 100%
+  display: block
+
+.header
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 80px
+  background-color: $blue
+  color: white
+  h2, h4
+    position: absolute
+    left: 80px
+  h2
+    top: 36px
+    font-size: 18px
+    color: white
+  h4
+    font-size: 12px
+    text-transform: lowercase
+    font-style: italic
+    top: 20px
+
+
+.footer
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  height: 80px
+  background: transparent top left no-repeat
+  background-size: cover
+  &.footer_1
+    background-image: url('default/footer_1.png')
+  &.footer_2
+    background-image: url('default/vote_here.png')
+    background-position: center middle
+
+.candidates
+  margin: 10px 0
+
+.candidate
+  clear: both
+  div
+    float: left
+    margin-right: 10px
+    height: 60px
+    &.photo
+      width: 20%
+      text-align: center
+    &.name
+      text-align: right
+      width: 20%
+      h3
+        word-wrap: break-word
+        white-space: break-word
+      .party
+        font-size: 8px
+        font-style: italic
+  .img
+    @include frame(40px)
+  ul
+    margin: 0
+    padding-left: 20px
+    li
+      margin: 0
+      font-size: 8px
+      line-height: 8px
+
+.questions
+  left: 40px
+  right: 40px
+  th
+    h3
+      font-size: 10px
+
+    padding: 0 4px 10px
+    &.stance
+      padding: 0 0 10px
+      font-style: italic
+      color: $blue
+      text-align: left
+      vertical-align: bottom
+    .img
+      @include frame(20px)
+    text-align: center
+    font-size: 12px
+    vertical-align: top
+  tbody tr
+    &:nth-child(odd)
+      background: $fuzzy_blue
+  td
+    &.question
+      min-width: 240px
+      text-align: left
+      padding: 10
+    text-align: center
+    color: #999
+
+.measure
+  .section
+    border-bottom: 5px $fuzzy_blue solid
+    clear: both
+    padding-bottom: 10px
+    margin-top: 10px
+    div
+      display: inline-block
+      height: 60px
+      vertical-align: top
+    .hand
+      width: 14%
+      padding-top: 4px
+      img
+        width: 40px
+    .explain
+      width: 44%
+      h4
+        color: $blue
+        span
+          color: #999
+    .endorse
+      width: 32%
+.about-us
+  .logo
+    max-width: 200px
+    max-height: 60px
+    float: right
+  ul.contents
+    margin: 0
+    padding: 0
+    li
+      list-style: none
+      width: 100%
+      display: block
+      .right
+        float: right
+
+.title
+  background: transparent url('default/vote_here.png') top left
+  background-size: contain
+  .box
+    border: 40px solid rgba(white, 0.75)
+  .inner
+    background: rgba($blue, 0.75)
+    padding: 20px 0
+    color: white
+    text-align: center
+    font-weight: lighter
+    p
+      font-size: 10px
+      padding: 0 70px
+    h1, h2
+      padding-bottom: 10px
+      font-size: 14px
+    h1
+      font-size: 20px
+      &.big
+        font-size: 90px
+        line-height: 80px
+        font-weight: normal
+        text-shadow: $pink -2px 2px 0px

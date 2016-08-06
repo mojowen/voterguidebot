@@ -1,0 +1,46 @@
+<div class="page measure">
+  <div class="header">
+    <h4>ballot measures</h4>
+    <h2><%= measure.title %></h2>
+  </div>
+  <div class="content">
+    <div class="section">
+      <h3>What it Does</h3>
+      <p><%= measure.description %></p>
+    </div>
+    <div class="section">
+      <div class="hand">
+        <img src="<%= asset_url('up.png') %>">
+      </div>
+      <div class="explain">
+          <h4>A <span>Yes</span> Vote Means...</h4>
+          <p><%= measure.yes_means %></p>
+      </div>
+      <div class="endorse">
+          <p>who says YES...</p>
+          <ul>
+            <% measure.endorsements.for.each do |endorsement| %>
+              <li><%= endorsement.endorser %></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="hand">
+        <img src="<%= asset_url('down.png') %>">
+      </div>
+      <div class="explain">
+          <h4>A <span>No</span> Vote Means...</h4>
+          <p><%= measure.no_means %></p>
+      </div>
+      <div class="endorse">
+          <p>who says NO...</p>
+          <ul>
+            <% measure.endorsements.against.each do |endorsement| %>
+              <li><%= endorsement.endorser %></li>
+            <% end %>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
