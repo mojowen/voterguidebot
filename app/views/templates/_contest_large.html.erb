@@ -27,38 +27,36 @@
     </div>
   </div>
 </div>
-<% unless contest.questions.empty? %>
-  <div class="page">
-    <div class="header">
-      <h4>candidates</h4>
-      <h2><%= contest.title %></h2>
-    </div>
-    <div class="content questions">
-      <table>
-        <thead>
+<div class="page">
+  <div class="header">
+    <h4>candidates</h4>
+    <h2><%= contest.title %></h2>
+  </div>
+  <div class="content questions">
+    <table>
+      <thead>
+        <tr>
+          <th class="stance">What's their stance on?</th>
+          <% contest.candidates.each do |candidate| %>
+            <th>
+              <%= render 'templates/photo', candidate: candidate %>
+              <h3><%= candidate.name %></h3>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% contest.questions.each do |question| %>
           <tr>
-            <th class="stance">What's their stance on?</th>
+            <td class="question"><%= question.text %></td>
             <% contest.candidates.each do |candidate| %>
-              <th>
-                <%= render 'templates/photo', candidate: candidate %>
-                <h3><%= candidate.name %></h3>
-              </th>
+              <td>
+                <%= question.answers.find{ |answer| answer.candidate_id == candidate.id }.try(:text) || 'N/A' %>
+              </td>
             <% end %>
           </tr>
-        </thead>
-        <tbody>
-          <% contest.questions.each do |question| %>
-            <tr>
-              <td class="question"><%= question.text %></td>
-              <% contest.candidates.each do |candidate| %>
-                <td>
-                  <%= question.answers.find{ |answer| answer.candidate_id == candidate.id }.try(:text) || 'N/A' %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
+</div>

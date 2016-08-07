@@ -9,7 +9,7 @@ $grey-blue: #7091a3
 $pink: #d81b59
 $yellow: #fab815
 $green: #2f8f44
-$fuzzy_blue: transparentize($blue, 0.85)
+$fuzzy_blue: lighten($blue, 35)
 
 @import 'lib/mixins'
 
@@ -197,6 +197,8 @@ p, div
       display: block
       .right
         float: right
+        text-align: left
+        width: 40px
 
 .title
   background: transparent url('default/vote_here.png') top left
@@ -222,3 +224,8 @@ p, div
         line-height: 80px
         font-weight: normal
         text-shadow: $pink -2px 2px 0px
+
+.back
+  border: 30px $fuzzy_blue solid
+  background: $blue
+  color: white

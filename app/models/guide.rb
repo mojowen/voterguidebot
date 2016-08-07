@@ -21,16 +21,6 @@ class Guide < ActiveRecord::Base
     @template ||= Template.default
   end
 
-  def publish(force = false)
-    Publisher.new(as_json, template.make, version).publish
-
-    # TODO: Handle multi-lingual
-    # create workspace
-    # create website with all languages using dom-i18n
-    # create pdf with all languages
-    # maybe doesn't need to live in guide model - maybe something else
-  end
-
   def all_locales
     base = as_json
     return base if languages.empty?
@@ -85,6 +75,22 @@ class Guide < ActiveRecord::Base
 
   def field(template_name)
     find_field(template_name).try(:value)
+  end
+
+  def contest_page_range(start_page)
+    "#{start_page + 1} - #{contests_end_page(start_page)}"
+  end
+
+  def measure_page_range(start_page)
+    "#{contests_end_page(start_page) + 1} - #{measures_end_page(start_page)}"
+  end
+
+  def contests_end_page(start_page)
+    start_page + contests.count * (template.contests['pages'] || 1)
+  end
+
+  def measures_end_page(start_page)
+    contests_end_page(start_page) + measures.count * (template.measures['pages'] || 1)
   end
 
   private

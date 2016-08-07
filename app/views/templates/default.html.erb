@@ -1,5 +1,5 @@
 <% @guide.contests.each do |contest| %>
-  <%= render "templates/#{@guide.template.contest}", contest: contest %>
+  <%= render "templates/#{@guide.template.contests['partial']}", contest: contest %>
 <% end %>
 <% @guide.measures.each do |measure| %>
   <%= render 'templates/measure', measure: measure %>

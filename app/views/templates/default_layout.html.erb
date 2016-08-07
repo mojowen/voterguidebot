@@ -7,13 +7,24 @@
     <style type="text/css">
       body {
         background: #999;
-        height: auto;
-        overflow: visibe;
       }
       .page {
           margin: 20px auto 0;
           box-shadow: #333 -1px 1px 3px;
       }
+      <% if params[:page_numbers] %>
+        body .page:before {
+          counter-increment: counter;
+          content: counter(counter);
+          position: absolute;
+          top: 0;
+          z-index: 100;
+          font-size: 50px;
+        }
+        body {
+          counter-reset: counter;
+        }
+      <% end %>
     </style>
   <% end %>
 </head>
@@ -41,9 +52,10 @@
       <div class="section">
         <h3>Contents</h3>
         <ul class="contents">
-          <li><span>how to vote</span><span class="right">6-9</span></li>
-          <li><span>how to vote</span><span class="right">6-9</span></li>
-          <li><span>how to vote</span><span class="right">6-9</span></li>
+          <li><span>candidates</span><span class="right"><%= @guide.contest_page_range(2) %></span></li>
+          <li><span>ballot measures</span><span class="right"><%= @guide.measure_page_range(2) %></span></li>
+          <li><span>how to vote</span><span class="right"><%= @guide.measures_end_page(2) + 1 %> - <%= @guide.measures_end_page(2) + 2 %></span></li>
+
         </ul>
       </div>
       <div class="section">
@@ -71,6 +83,20 @@
       </div>
     </div>
     <div class="footer footer_2"></div>
+  </div>
+  <div class="page back">
+    <div class="content">
+      <div class="section">
+        <h2>Find Out More</h2>
+        <p><%= @guide.field('find_out_more') %></p>
+      </div>
+      <div class="section">
+        <p>Also a lot more good info at our website:</p>
+        <br />
+        <strong>www.americanvoterguide.org/<%= @guide.location.state_name.downcase %></strong>
+      </div>
+      <p>
+    </div>
   </div>
   </body>
 </html>

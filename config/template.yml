@@ -4,13 +4,20 @@ name: Default Voter Guide
 screenshot: default.png
 view: default
 layout: default_layout
-contest: contest_large
 
 contests:
+  partial: contest_large
   max: 4
+  pages: 2
 
 candidates:
   max: 4
+
+measures:
+  max: 4
+
+endorsements:
+  max: 3
 
 questions:
   max: 7
@@ -176,12 +183,6 @@ questions:
     -
       text: Do you support a constitutional amendment overturning Citizens United and limiting private money in campaign finance?
       tag: Voting Rights
-
-measures:
-  max: 4
-
-endorsements:
-  max: 3
 
 fields:
   -
