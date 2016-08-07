@@ -16,11 +16,9 @@ gem 'audited-activerecord', '~> 4.0'
 gem 'globalize'
 gem 'paperclip', '~> 5.0.0.beta1'
 gem 'aws-sdk'
-
 gem 'unicorn'
 gem 'devise'
 gem 'omniauth-google-oauth2'
-
 gem 'exception_notification'
 
 group :assets do
