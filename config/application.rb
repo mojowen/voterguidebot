@@ -3,7 +3,6 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 require File.expand_path('../../lib/env_loader', __FILE__)
-require 'shrimp'
 
 module VoterGuideBot
   class Application < Rails::Application
