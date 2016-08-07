@@ -28,8 +28,9 @@ h1, h2, h3, h4
 h3
   color: $pink
   text-transform: uppercase
-  font-style: 14px
+  font-size: 14px
   font-weight: normal
+  word-break: break-word
 
 p, div
   font-size: 10px
@@ -105,7 +106,8 @@ p, div
 .candidate
   clear: both
   div
-    float: left
+    display: inline-block
+    vertical-align: top
     margin-right: 10px
     height: 60px
     &.photo
@@ -115,11 +117,11 @@ p, div
       text-align: right
       width: 20%
       h3
-        word-wrap: break-word
-        white-space: break-word
+        line-height: 10px
       .party
         font-size: 8px
         font-style: italic
+        line-height: 8px
   .img
     @include frame(40px)
   ul
@@ -129,6 +131,68 @@ p, div
       margin: 0
       font-size: 8px
       line-height: 8px
+
+  &.small
+    display: inline-block
+    height: 80px
+    div
+      margin: 0
+    .name, .photo
+      height: 45px
+    .name
+      width: 60%
+      text-align: left
+      h3
+        font-size: 10px
+        margin: 0
+        padding: 0
+        line-height: 10px
+      .party
+        font-size: 6px
+        line-height: 6px
+        color: #999
+        font-weight: bold
+      p
+        font-size: 8px
+        color: $grey-blue
+    .photo
+      width: 38%
+      .img
+        @include frame(40px)
+    .endorse
+      width: 100%
+      em
+        font-size: 6px
+      ul
+        padding: 0
+        li
+          list-style: none
+          padding: 0
+          color: $grey-blue
+
+.candidates
+  &.count--2
+    .small
+      width: 48%
+  &.count--3
+    .small
+      width: 31%
+  .questions
+    left: 80px
+    right: 80px
+    .stance
+      width: 150px
+      font-size: 8px
+      vertical-align: bottom
+      padding-bottom: 0
+    .question
+      min-width: 100px
+    th
+      h3
+        font-size: 8px
+      width: 60px
+      padding: 0
+      vertical-align: bottom
 
 .questions
   left: 40px
@@ -156,7 +220,7 @@ p, div
     &.question
       min-width: 240px
       text-align: left
-      padding: 10
+      padding: 4px
     text-align: center
     color: #999
 

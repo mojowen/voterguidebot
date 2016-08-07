@@ -1,0 +1,11 @@
+
+name: Small Contest Page
+inherits: default
+
+contests:
+  partial: contest_small
+  max: 4
+  pages: 1
+
+candidates:
+  max: 3

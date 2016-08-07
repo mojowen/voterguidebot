@@ -27,6 +27,9 @@
   .mui-textfield
     = form.label :election_date
     = form.date_field :election_date, value: guide.election_date || Date.new(2016, 11, 8)
+  .mui-textfield.mui-select
+    = form.label :template_name
+    = form.select :template_name, ::Template.options
   %h2
     %i.fa.fa-map-marker
     Location

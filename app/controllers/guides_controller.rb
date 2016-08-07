@@ -66,7 +66,6 @@ class GuidesController < ApplicationController
   end
 
   def init_guide
-    @templates = [Template.default]
     @guide = Guide.new
   end
 

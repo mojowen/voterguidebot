@@ -3,6 +3,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 require File.expand_path('../../lib/env_loader', __FILE__)
+require 'shrimp'
 
 module VoterGuideBot
   class Application < Rails::Application
@@ -13,5 +14,13 @@ module VoterGuideBot
     config.react.variant = :production
     config.react.addons  = true
     config.i18n.enforce_available_locales = false
+
+    # config.middleware.use Shrimp::Middleware, {
+    #                                             polling_interval: 1,
+    #                                             polling_offset: 5,
+    #                                             cache_ttl: 3600,
+    #                                             out_path: Rails.root.join('public')
+    #                                           },
+    #                                           only: %r(/guides/\d+/preview)
   end
 end

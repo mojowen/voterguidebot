@@ -15,10 +15,11 @@ class Guide < ActiveRecord::Base
 
   validates :name, presence: true
   validates :location, presence: true
+  validates :template_name, presence: true
   validates :election_date, presence: true
 
   def template
-    @template ||= Template.default
+    @template ||= Template.new template_name
   end
 
   def all_locales

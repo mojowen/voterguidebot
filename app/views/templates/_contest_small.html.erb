@@ -1,0 +1,57 @@
+<div class="page">
+  <div class="header">
+    <h4>candidates</h4>
+    <h2><%= contest.title %></h2>
+  </div>
+  <div class="content">
+    <h3>What She or He Does</h3>
+    <p><%= contest.description %></p>
+    <div class="candidates small count--<%= contest.candidates.count %>">
+      <% contest.candidates.each do |candidate| %>
+        <div class="candidate small">
+          <div class="name">
+            <h3><%= candidate.name %></h3>
+            <span class="party"><%= candidate.party %></span>
+            <p><%= candidate.bio %></p>
+          </div>
+          <div class="photo"><%= render 'templates/photo', candidate: candidate %></div>
+          <div class="endorse">
+            <em>endorsed by...</em>
+            <ul class="endorsements">
+              <% candidate.endorsements.each do |endorsement| %>
+                <li><%= endorsement.endorser %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <div class="questions">
+        <table>
+          <thead>
+            <tr>
+              <th class="stance">What's their stance on?</th>
+              <% contest.candidates.each do |candidate| %>
+                <th>
+                  <h3><%= candidate.name %></h3>
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% contest.questions.each do |question| %>
+              <tr>
+                <td class="question"><%= question.text %></td>
+                <% contest.candidates.each do |candidate| %>
+                  <td>
+                    <%= question.answers.find{ |answer| answer.candidate_id == candidate.id }.try(:text) || 'N/A' %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

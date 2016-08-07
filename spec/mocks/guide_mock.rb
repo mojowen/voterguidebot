@@ -5,11 +5,11 @@ class GuideMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "name" => nil, "created_at" => nil, "updated_at" => nil, "election_date" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "name" => nil, "created_at" => nil, "updated_at" => nil, "election_date" => nil, "template_name" => "default").merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date, template_name: String }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class GuideMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "name", "created_at", "updated_at", "election_date"] | super)
+      @attribute_names ||= (["id", "name", "created_at", "updated_at", "election_date", "template_name"] | super)
     end
 
     def primary_key
@@ -82,6 +82,14 @@ class GuideMock < ActiveMocker::Base
 
   def election_date=(val)
     write_attribute(:election_date, val)
+  end
+
+  def template_name
+    read_attribute(:template_name)
+  end
+
+  def template_name=(val)
+    write_attribute(:template_name, val)
   end
 
   # _associations.erb
@@ -229,8 +237,24 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
   end
 
-  def publish(force = nil)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [force])
+  def contest_page_range(start_page)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
+  end
+
+  def contests_end_page(start_page)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
+  end
+
+  def field(template_name)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [template_name])
+  end
+
+  def measure_page_range(start_page)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
+  end
+
+  def measures_end_page(start_page)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
   end
 
   def template
@@ -247,6 +271,10 @@ class GuideMock < ActiveMocker::Base
 
   def template_fields=(fields_obj)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [fields_obj])
+  end
+
+  def version
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
 end

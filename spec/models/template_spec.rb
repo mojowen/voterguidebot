@@ -1,10 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Template do
-  subject { described_class.default }
+  subject { described_class.new 'default' }
+
+  describe 'sub template inherits from parent template' do
+    subject { described_class.new 'small' }
+    let(:default) { described_class.new 'default' }
+
+    it 'inherits properties not defined' do
+      expect(subject.tags).to eq(default.tags)
+    end
+
+    it 'overrides defined properties' do
+      expect(subject.contests).to_not eq(default.contests)
+    end
+  end
 
   describe '.default initalizes from template' do
-    let(:config) { YAML.load_file Rails.root.join('config','template.yml') }
+    let(:config) { YAML.load_file Rails.root.join('config','templates', 'default.yml') }
     it 'with contests' do
       expect(subject.contests).to eq(config['contests'])
     end

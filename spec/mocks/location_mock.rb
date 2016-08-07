@@ -209,4 +209,8 @@ class LocationMock < ActiveMocker::Base
     @attribute_aliases ||= {}.merge(super)
   end
 
+  def state_name
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
 end
