@@ -16,6 +16,10 @@ class Template < OpenStruct
      ['One Page Contests', :small]]
   end
 
+  def self.default
+    new(:default)
+  end
+
   private
 
   def config_file(name, inheritable = true)
