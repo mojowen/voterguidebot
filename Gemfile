@@ -20,6 +20,7 @@ gem 'unicorn'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'exception_notification'
+gem 'puma'
 
 group :assets do
   gem 'coffee-rails'

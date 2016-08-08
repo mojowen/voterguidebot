@@ -1,24 +1,24 @@
 language: ruby
-
 rvm:
-  - 2.2.1
+- 2.3.1
 cache: bundler
-
 before_script:
-  - createdb test_vgbot
-  - bundle exec rake db:migrate
-
+- createdb test_vgbot
+- bundle exec rake db:migrate
 script:
-  - bundle exec rake spec
-  - bundle exec rake jasmine:ci[random]
-
+- bundle exec rake spec
+- bundle exec rake jasmine:ci[random]
 env:
   global:
     RAILS_ENV: test
     TRAVIS: true
-
 addons:
   postgresql: 9.3
-
 sudo: false
-cache: bundler
+deploy:
+  provider: heroku
+  api_key:
+    secure: l2hBQJM0gdjrHUDnUFzvpARcbOXdnv6Y9162X9W2zFfMAarjPDPzqRS4HqQ2biQAM8dcS48oZg0WbQqRKzKBvl6A2grDeLXakFUnIx1susbRYdwOkAX5qJv/DqPNCmpQO5zuwFJDuuQB2gjG3iYij8NLhCQ1z1ZUIVzvSbCPNkhdH1ig3slIf4/hGTfKvA+aZDbylNyoqoiLPh0dRP9k1YX/fK4rd+CN4/Ijfp+xc8fyC8CGf9jkM0JhBOJ0Dyz/8c/CHE33hj+X/JW3EhTAtyIYv87azo8q3/etGtbbUTqvMou8zayVlvo/DCNBbnzyUF1Y9YA+7pRw0PBeWklSiQmSxgzd5CeYcNpztyIeGHiNJwWJxshhrpCBV55X3z4u0D2iHB4K6aY7MS1209NSGSLY8w3vRavRFrifPKFF1SriC5k0FNLwtu2o21fpNupwwgpg+15K2X1NtkxvjBkaf9l36Hf/Lm5HEzNCqnACjN1z6Gw6q5WM7zRJfm41Dr2EPqlA4L2vDo7qXNMP43rQlrnZNzd3tYoWF7A5YH9crMx0pnPQdZoE3+jPfEfxM22SrEDCnq6rpaIyrUsyY4ZYJDwQXB+1uFayCj8wGZ1LP7FUPXSpSiIRuyEJUZyEd+VGEl5j6uGafZ5h2EX0Tt0sXkPPPDARZCIN7qgiX1EbIFI=
+  app: voterguidebot
+  on:
+    repo: mojowen/voterguidebot
