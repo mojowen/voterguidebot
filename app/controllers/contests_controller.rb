@@ -25,6 +25,7 @@ class ContestsController < ApplicationController
     @contest.save
     {
       path: edit_guide_contest_path(@guide, @contest),
+      url: guide_contest_path(@guide, @contest),
       contest: @contest.reload
     }
   end

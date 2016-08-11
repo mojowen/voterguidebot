@@ -1,6 +1,6 @@
 var FormBase = {
   getInitialState: function() {
-    return { icon: 'fa-save', method: 'patch' }
+    return { icon: 'fa-save', method: 'patch', url: this.props.url || document.location.pathname }
   },
   getDefaultProps: function() {
     return { languages: [] }
@@ -14,6 +14,7 @@ var FormBase = {
     this.notify(message || 'Success!')
 
     if( res && res.path ) history.pushState({}, '', res.path)
+    if( res && res.url ) this.setState({ url: res.url })
   },
   notify: function(message, is_error) {
     if( is_error ) return swal({ title: 'Uh Oh!', text: message })
@@ -22,16 +23,15 @@ var FormBase = {
   request: function(url, data, method) {
     var method = superagent[method || this.state.method]
 
-    return method(url || this.props.url).send(data)
-                                        .set('X-CSRF-Token', CSRF.token())
-                                        .set('Accept', 'application/json')
+    return method(url).send(data)
+                      .set('X-CSRF-Token', CSRF.token())
+                      .set('Accept', 'application/json')
   },
   updateGuide: function(url, data, callback) {
     this.setState({ icon: 'fa-circle-o-notch fa-spin' })
 
     var that = this,
         callback = callback || function() {}
-
     this.request(url, data)
         .end(function(err, res) {
           if( err ) return that.handleError(res.body)

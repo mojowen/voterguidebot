@@ -9,7 +9,8 @@ var MeasureForm = React.createClass({
     if( !this.props.measure.id ) this.setState({ method: 'post' })
   },
   handleSubmit: function(event) {
-    var measure = this.refs.measure,
+    var that = this,
+        measure = this.refs.measure,
         measure_data = {
           title: measure.state.title,
           description: measure.state.description,
@@ -23,8 +24,8 @@ var MeasureForm = React.createClass({
       this.props.url,
       { measure: measure_data },
       function(res) {
-        measure.setState(_.extend({ method: res.body.measure.id ? 'put' : 'post' },
-                         res.body.measure))
+        if( that.state.method !== 'patch' ) that.setState({ method: 'patch' })
+        measure.setState(res.body.measure)
       }
     )
     event.preventDefault()

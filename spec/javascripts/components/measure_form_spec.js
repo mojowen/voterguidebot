@@ -10,6 +10,18 @@ describe('MeasureForm', function() {
     it('sets method to post', function() {
       expect(this.component.state.method).toEqual('post')
     })
+
+    it('sets new form settings on save', function() {
+      Utils.Simulate.submit(this.component.refs.form_wrapper)
+
+      var request = jasmine.Ajax.requests.mostRecent(),
+          response = { measure: { id: 5 } }
+
+      request.respondWith({ responseText: JSON.stringify(response),
+                            status: 200 })
+
+      expect(this.component.state.method).toEqual('patch')
+    })
   })
 
   beforeEach(function() {
@@ -51,4 +63,15 @@ describe('MeasureForm', function() {
       measure.title)
   })
 
+  it('sets new form settings on save', function() {
+    Utils.Simulate.submit(this.component.refs.form_wrapper)
+
+    var request = jasmine.Ajax.requests.mostRecent(),
+        response = { url: 'this-url', measure: { id: 5 } }
+
+    request.respondWith({ responseText: JSON.stringify(response),
+                          status: 200 })
+
+    expect(this.component.state.url).toEqual(response.url)
+  })
 })

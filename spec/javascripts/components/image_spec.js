@@ -58,8 +58,8 @@ describe('ImageComponent', function() {
 
     it('does propagate values with thumbnail', function() {
       var fake_response = { xhr: { response: '{"path":"some-remote"}' }}
-      this.dropzone._callbacks.success[1].call(this.dropzone, )
-      expect(this.callback).toHaveBeenCalledWith("some-remote")
+      this.dropzone._callbacks.success[1].call(this.dropzone, fake_response)
+      expect(this.callback).toHaveBeenCalledWith({ target: { value: "some-remote", name: '' } })
     })
   })
 

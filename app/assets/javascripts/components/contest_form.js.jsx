@@ -1,17 +1,17 @@
 var ContestForm = React.createClass({
   mixins: [FormBase],
   getDefaultProps: function() {
-    return { contest: { id: false },
-             url: document.location.pathname }
+    return { contest: { id: false } }
   },
   componentDidMount: function() {
     if( !this.props.contest.id ) this.setState({ method: 'post' })
   },
   handleSubmit: function(event) {
-    var contest = this.refs.contest
+    var that = this,
+        contest = this.refs.contest
 
     this.updateGuide(
-      this.props.url,
+      this.state.url,
       { contest: {
           title: contest.state.title,
           description: contest.state.description,
@@ -19,8 +19,8 @@ var ContestForm = React.createClass({
           questions: contest.state.questions
       }},
       function(res) {
-        contest.setState(_.extend({ method: res.body.contest.id ? 'put' : 'post' },
-                                  res.body.contest))
+        if( that.state.method !== 'patch' ) that.setState({ method: 'patch' })
+        contest.setState(res.body.contest)
       }
     )
     event.preventDefault()
