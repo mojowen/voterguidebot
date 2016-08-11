@@ -11,11 +11,6 @@ class Template < OpenStruct
     { template: File.join('templates', view), layout: File.join('..', 'templates', layout) }
   end
 
-  def self.options
-    [['Default Voter Guide', :default],
-     ['One Page Contests', :small]]
-  end
-
   def self.default
     new(:default)
   end

@@ -25,164 +25,231 @@ questions:
     limit: 140
   samples:
     -
-      text: Do you support boosting the use of clean energy?
+      text: boosting the use of clean energy?
       tag: Climate
     -
-      text: Do you support taking government action to reduce the pollution that causes global warming?
+      text: taking government action to reduce the pollution that causes global warming?
       tag: Climate
     -
-      text: Do you support regulating fracking more closely?
+      text: regulating fracking more closely?
       tag: Climate
     -
-      text: Do you support encouraging colleges and pension funds to divest from fossil fuels?
+      text: encouraging colleges and pension funds to divest from fossil fuels?
       tag: Climate
     -
-      text: Do you support setting benchmarks for investments in women and minority owned businesses?
+      text: setting benchmarks for investments in women and minority owned businesses?
       tag: Economy
     -
-      text: Do you support eliminating domestic tax loopholes that reduce tax revenue that could fund infrastructure and education?
+      text: eliminating domestic tax loopholes that reduce tax revenue that could fund infrastructure and education?
       tag: Economy
     -
-      text: Do you support guaranteeing people who do the same work part-time and full-time are paid the same for the hours they work?
+      text: guaranteeing people who do the same work part-time and full-time are paid the same for the hours they work?
       tag: Economy
     -
-      text: Do you support ensuring more stable work hours like providing enough notice of work schedules, compensating working people for last-minute shift changes and cancellations?
+      text: ensuring more stable work hours like providing enough notice of work schedules, compensating working people for last-minute shift changes and cancellations?
       tag: Economy
     -
-      text: Do you support ensuring working people have healthy work hours with enough rest between shifts and work weeks?
+      text: ensuring working people have healthy work hours with enough rest between shifts and work weeks?
       tag: Economy
     -
-      text: Do you support will you support policies that protect working people from being penalized for changing their availability or making a scheduling accommodation request?
+      text: will you support policies that protect working people from being penalized for changing their availability or making a scheduling accommodation request?
       tag: Economy
     -
-      text: Do you support making corporations give  hourly workers their schedules at least two weeks in advance?
+      text: making corporations give  hourly workers their schedules at least two weeks in advance?
       tag: Economy
     -
-      text: Do you support allowing under-employed part-time workers to qualify for unemployment & housing assistance?
+      text: allowing under-employed part-time workers to qualify for unemployment & housing assistance?
       tag: Economy
     -
-      text: Do you support building a universal high-quality early childhood education system available to parents in low-wage service jobs who work irregular hours?
+      text: building a universal high-quality early childhood education system available to parents in low-wage service jobs who work irregular hours?
       tag: Economy
     -
-      text: Do you support increased investment in schools, highways, and other infrastructure as a federal jobs program?
+      text: increased investment in schools, highways, and other infrastructure as a federal jobs program?
       tag: Economy
     -
-      text: Do you support lowering how much the government spends on imprisoning people?
+      text: lowering how much the government spends on imprisoning people?
       tag: Economy
     -
-      text: Do you support raising taxes on people making over $250,000?
+      text: raising taxes on people making over $250,000?
       tag: Economy
     -
-      text: Do you support prosecuting businesses that steal wages or tips from workers?
+      text: prosecuting businesses that steal wages or tips from workers?
       tag: Economy
     -
-      text: Do you support the government helping refinance mortgages at lower and more affordable rates?
+      text: the government helping refinance mortgages at lower and more affordable rates?
       tag: Economy
     -
-      text: Do you support removing barriers to employment for people trying to restart their lives after finishing their prison terms?
+      text: removing barriers to employment for people trying to restart their lives after finishing their prison terms?
       tag: Economy
     -
-      text: Do you support guaranteeing a living income regardless of employment status?
+      text: guaranteeing a living income regardless of employment status?
       tag: Economy
     -
-      text: Do you support paying every worker in America at least $15 per hour?
+      text: paying every worker in America at least $15 per hour?
       tag: Economy
     -
-      text: Do you support making college free for students from families making less than $125,000?
+      text: making college free for students from families making less than $125,000?
       tag: Education
     -
-      text: Do you support allowing recent college graduates to refinance student loans?
+      text: allowing recent college graduates to refinance student loans?
       tag: Education
     -
-      text: Do you support ending “Broken Windows” policing that spends more energy on arrests for loitering and graffiti over major crimes?
+      text: ending “Broken Windows” policing that spends more energy on arrests for loitering and graffiti over major crimes?
       tag: Criminal Justice Reform
     -
-      text: Do you support increasing job training programs?
+      text: increasing job training programs?
       tag: Criminal Justice Reform
     -
-      text: Do you support offering alternatives to incarceration for low level offenses such as - traffic violations, and low level drug offenses?
+      text: offering alternatives to incarceration for low level offenses such as - traffic violations, and low level drug offenses?
       tag: Criminal Justice Reform
     -
-      text: Do you support decriminalizing offenses that pose no safety threat and that have historically targeted Black and brown communities?
+      text: decriminalizing offenses that pose no safety threat and that have historically targeted Black and brown communities?
       tag: Criminal Justice Reform
     -
-      text: Do you support reparations for slavery, Jim Crow laws, and/or victims of state (Or police depending on need of specificity) violence?
+      text: reparations for slavery, Jim Crow laws, and/or victims of state (Or police depending on need of specificity) violence?
       tag: Criminal Justice Reform
     -
-      text: Do you support would you support removing police presence from schools?
+      text: would you support removing police presence from schools?
       tag: Criminal Justice Reform
     -
-      text: Do you support moving government money from policing to schools and jobs programs?
+      text: moving government money from policing to schools and jobs programs?
       tag: Criminal Justice Reform
     -
-      text: Do you support making police report data on who they target for stops, arrests and who they use force against?
+      text: making police report data on who they target for stops, arrests and who they use force against?
       tag: Criminal Justice Reform
     -
-      text: Do you support making prosecutors report data on who they choose to prosecute, for what offenses and what plea bargains they offer?
+      text: making prosecutors report data on who they choose to prosecute, for what offenses and what plea bargains they offer?
       tag: Criminal Justice Reform
     -
-      text: Do you support cities offering ID Cards to all residents, regardless of immigration status and gender identity?*
+      text: cities offering ID Cards to all residents, regardless of immigration status and gender identity?*
       tag: Immigration
     -
-      text: Do you support providing free legal support to immigrants in deportation proceedings?
+      text: providing free legal support to immigrants in deportation proceedings?
       tag: Immigration
     -
-      text: Do you support not letting local police help Immigration Customs and Enforcement (ICE) deport immigrant families?
+      text: not letting local police help Immigration Customs and Enforcement (ICE) deport immigrant families?
       tag: Immigration
     -
-      text: Do you support the government making sure eligible immigrants know about services to become citizens?
+      text: the government making sure eligible immigrants know about services to become citizens?
       tag: Immigration
     -
-      text: Do you support giving non-citizens the right to vote in local elections?
+      text: giving non-citizens the right to vote in local elections?
       tag: Immigration
     -
-      text: Do you support tacking if police do racial profiling, and holding them accountable if they do?
+      text: tacking if police do racial profiling, and holding them accountable if they do?
       tag: Immigration
     -
-      text: Do you support limiting the number of people who get deported rather than sentenced to serve time, if convicted of a crime?
+      text: limiting the number of people who get deported rather than sentenced to serve time, if convicted of a crime?
       tag: Immigration
     -
-      text: Do you support the government providing or ensuring housing for LGBTQ youth facing homelessness?
+      text: the government providing or ensuring housing for LGBTQ youth facing homelessness?
       tag: LGBT
     -
-      text: Do you support allowing transgender youth to attend school, use facilities, and participate in programs that match the gender they identify as?
+      text: protecting LGBTQ people from discrimination in housing, employment, and public serving spaces/businesses like restaurants and taxis?
       tag: LGBT
     -
-      text: Do you support protecting LGBTQ people from discrimination in housing, employment, and public serving spaces/businesses like restaurants and taxis?
+      text: banning anti-gay conversion "therapy"?
       tag: LGBT
     -
-      text: Do you support banning anti-gay conversion "therapy"?
+      text: lifting the ban on gay and bisexual men donating blood?
       tag: LGBT
     -
-      text: Do you support lifting the ban on gay and bisexual men donating blood?
+      text: allowing transgender youth to attend school, use facilities, and participate in programs that match the gender they identify as?
       tag: LGBT
     -
-      text: Do you support allowing transgender youth to attend school, use facilities, and participate in programs that match the gender they identify as?
+      text: nondiscrimination protections for LGBTQ people in housing, employment, and public serving spaces/businesses like restaurants and taxis?
       tag: LGBT
     -
-      text: Do you support nondiscrimination protections for LGBTQ people in housing, employment, and public serving spaces/businesses like restaurants and taxis?
-      tag: LGBT
-    -
-      text: Do you support the government providing or ensuring housing for LGBTQ youth facing homelessness?
-      tag: LGBT
-    -
-      text: Do you support introducing small dollar public financing to decrease the influence of money in politics?
+      text: introducing small dollar public financing to decrease the influence of money in politics?
       tag: Voting Rights
     -
-      text: Do you support lowering the voting age in local and municipal elections to 16?
+      text: lowering the voting age in local and municipal elections to 16?
       tag: Voting Rights
     -
-      text: Do you support restoring voting rights to citizens who have been in prison, or are currently in prison?
+      text: restoring voting rights to citizens who have been in prison, or are currently in prison?
       tag: Voting Rights
     -
-      text: Do you support automatically and securely registering every eligible citizen to vote?
+      text: automatically and securely registering every eligible citizen to vote?
       tag: Voting Rights
     -
-      text: Do you support offering every citizen the option to early vote, vote by mail, or register and vote on Election Day?
+      text: offering every citizen the option to early vote, vote by mail, or register and vote on Election Day?
       tag: Voting Rights
     -
-      text: Do you support a constitutional amendment overturning Citizens United and limiting private money in campaign finance?
+      text: a constitutional amendment overturning Citizens United and limiting private money in campaign finance?
       tag: Voting Rights
+    -
+      text: encouraging a culture shift to focusing on safety and justice rather than maximum punishment?
+      tag: Judicial
+    -
+      text: ending discrimination against crime victims, regardless of the victim’s own potential criminal involvement, immigration status, etc.?
+      tag: Judicial
+    -
+      text: developing alternatives to prosecution and incarceration?
+      tag: Judicial
+    -
+      text: ending the practice of cash bail?
+      tag: Judicial
+    -
+      text: tracking and making public data regarding decisions made in and by your court with defendants?
+      tag: Judicial
+    -
+      text: providing training to your staff and encouraging an internal culture shift to focusing on safety and justice rather than maximum punishment?
+      tag: Local Law Enforcement
+    -
+      text: formally engaging the residents of neighborhoods most affected by crime?
+      tag: Local Law Enforcement
+    -
+      text: prohibiting discrimination against crime victims, regardless of the victim’s own potential criminal involvement, immigration status, etc.?
+      tag: Local Law Enforcement
+    -
+      text: implementing written policies providing guidance to all deputies/officers outlining expectations around handling of arrests?
+      tag: Local Law Enforcement
+    -
+      text: tracking, evaluating, and making public the discretionary decisions of deputies/officers in your office?
+      tag: Local Law Enforcement
+    -
+      text: appointing independent investigators for all police-involved shootings?
+      tag: Local Law Enforcement
+    -
+      text: bringing criminal charges against police who file false official reports?
+      tag: Local Law Enforcement
+    -
+      text: ending arrests of low level, non-violent drug crimes?
+      tag: Local Law Enforcement
+    -
+      text: encouraging a internal culture shift to focusing on safety and justice rather than maximum punishment?
+      tag: Prosecutors
+    -
+      text: formally engaging the residents of neighborhoods most affected by crime?
+      tag: Prosecutors
+    -
+      text: prohibiting discrimination against crime victims, regardless of the victim’s own potential criminal involvement, immigration status, etc.?
+      tag: Prosecutors
+    -
+      text: implementing written policies providing guidance to all staff attorneys outlining expectations around handling of arrests?
+      tag: Prosecutors
+    -
+      text: developing alternatives to prosecution and incarceration?
+      tag: Prosecutors
+    -
+      text: ending the practice of charging minors as adults without oversight by a judge or a grand jury?
+      tag: Prosecutors
+    -
+      text: tracking, evaluating, and making public the discretionary decisions of attorneys in your office?
+      tag: Prosecutors
+    -
+      text: ending the practice of cash bail?
+      tag: Prosecutors
+    -
+      text: appointing independent prosecutors to investigate all police-involved shootings?
+      tag: Prosecutors
+    -
+      text: bringing criminal charges against police who file false official reports?
+      tag: Prosecutors
+    -
+      text: ending prosecutions of low level, non-violent drug crimes?
+      tag: Prosecutors
+
 
 fields:
   -

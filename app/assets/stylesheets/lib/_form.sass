@@ -221,11 +221,18 @@ textarea
     .mui-textfield
       max-width: 450px
       min-width: 250px
-      textarea
+      &:before
+        content: "Do you support"
+        font-style: italic
+        position: absolute
+        color: $mui-text-dark-hint
+      textarea, &:before
         text-align: left
         font-size: 12px
+      textarea
         resize: none
         height: auto
+        text-indent: 86px
       .remaining
         right: 0
         bottom: 0px

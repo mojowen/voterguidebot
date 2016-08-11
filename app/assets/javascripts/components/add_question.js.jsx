@@ -34,7 +34,7 @@ var AddQuestion = React.createClass({
                                 .map(function(tag, name) {
                                   var tags = _.map(tag, function(question) {
                                     return <option value={question.text} key={question.text}>
-                                      {question.text}
+                                      Do you support {question.text}
                                     </option> })
                                   return <optgroup key={name} label={name}>{ tags }</optgroup> })
                                 .value()
