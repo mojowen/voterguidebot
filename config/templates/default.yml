@@ -250,7 +250,6 @@ questions:
       text: ending prosecutions of low level, non-violent drug crimes?
       tag: Prosecutors
 
-
 fields:
   -
     label: Title Page Header
@@ -320,6 +319,22 @@ fields:
     element: input
     limit: 50
     name: partners_list
+  -
+    label: Primary Color
+    element: input
+    type: color
+    name: primary_color
+    default: "#26aac6"
+    example_elem: ColorBlob
+    example_attr: color
+  -
+    label: Secondary Color
+    element: input
+    type: color
+    name: secondary_color
+    default: "#d81b59"
+    example_elem: ColorText
+    example_attr: color
 
 tags:
   - Climate

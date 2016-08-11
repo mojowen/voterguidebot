@@ -6,7 +6,16 @@ describe('InputComponent', function() {
 
   describe('with initial value', function(){
     beforeEach(function() {
-      this.setUpComponent(InputComponent, { value: 'init' })
+      this.setUpComponent(InputComponent, { default: 'default' })
+    })
+    it('renders initial value', function() {
+      expect(this.dom.querySelector('input').value).toEqual('default')
+    })
+  })
+
+  describe('with initial value', function(){
+    beforeEach(function() {
+      this.setUpComponent(InputComponent, { value: 'init', default: 'default' })
     })
     it('renders initial value', function() {
       expect(this.dom.querySelector('input').value).toEqual('init')

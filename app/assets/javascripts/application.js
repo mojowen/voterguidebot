@@ -30,4 +30,3 @@ window.vgConfirm = function(question, callback, context) {
     }
   )
 }
-

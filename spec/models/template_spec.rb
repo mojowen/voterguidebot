@@ -3,19 +3,6 @@ require 'rails_helper'
 RSpec.describe Template do
   subject { described_class.new 'default' }
 
-  describe 'sub template inherits from parent template' do
-    subject { described_class.new 'small' }
-    let(:default) { described_class.new 'default' }
-
-    it 'inherits properties not defined' do
-      expect(subject.tags).to eq(default.tags)
-    end
-
-    it 'overrides defined properties' do
-      expect(subject.contests).to_not eq(default.contests)
-    end
-  end
-
   describe '.default initalizes from template' do
     let(:config) { YAML.load_file Rails.root.join('config','templates', 'default.yml') }
     it 'with contests' do
@@ -54,14 +41,15 @@ RSpec.describe Template do
           expect(field['label']).to_not be_falsey
         end
       end
-      it 'has an example' do
+      it 'has an example or default' do
         subject.fields.each do |field|
-          expect(field['example']).to_not be_falsey
+          expect(field['example'] || field['default']).to_not be_falsey
         end
       end
       it 'has a limit if not image' do
         subject.fields.each do |field|
           next if field['element'] == 'ImageComponent'
+          next if field['type'] == 'color'
           expect(field['limit']).to_not be_falsey
         end
       end

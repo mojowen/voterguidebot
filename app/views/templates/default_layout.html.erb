@@ -3,6 +3,35 @@
 <head>
   <title>Preview</title>
   <%= stylesheet_link_tag 'default' %>
+  <style type="text/css">
+    h3 {
+      color: <%= @guide.field('secondary_color') %>;
+    }
+    title h1.big {
+      text-shadow: <%= @guide.field('secondary_color') %> -2px 2px 0px;
+    }
+    .header {
+      background-color: <%= @guide.field('primary_color') %>;
+    }
+    .title .inner {
+      background: <%= to_rgba(@guide.field('primary_color'), 0.75) %>;
+    }
+    .questions tbody tr:nth-child(odd) {
+      background: <%= to_rgba(@guide.field('primary_color'), 0.25) %>;
+    }
+    .questions th.stance {
+      color: <%= to_rgba(@guide.field('primary_color'), 0.75) %>;
+    }
+    .measure .section {
+      border-bottom-color: <%= to_rgba(@guide.field('primary_color'), 0.25) %>;
+    }
+    .measure .section .explain h4 {
+      color: <%= @guide.field('primary_color') %>;
+    }
+    .back {
+      background: <%= @guide.field('primary_color') %>;
+    }
+  </style>
   <% unless @is_pdf %>
     <style type="text/css">
       body {
@@ -49,15 +78,6 @@
       <h2>The Guide To This Guide</h2>
     </div>
     <div class="content about-us">
-      <div class="section">
-        <h3>Contents</h3>
-        <ul class="contents">
-          <li><span>candidates</span><span class="right"><%= @guide.contest_page_range(2) %></span></li>
-          <li><span>ballot measures</span><span class="right"><%= @guide.measure_page_range(2) %></span></li>
-          <li><span>how to vote</span><span class="right"><%= @guide.measures_end_page(2) + 1 %> - <%= @guide.measures_end_page(2) + 2 %></span></li>
-
-        </ul>
-      </div>
       <div class="section">
         <h3>About Us</h3>
         <p><%= @guide.field('about_us_blurb') %></p>

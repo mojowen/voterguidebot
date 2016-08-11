@@ -7,9 +7,9 @@ var FieldFormRow = React.createClass({
   getInitialState: function() {
     return { value: this.props.value || '' }
   },
-  getPreviewText: function() {
-    return (!!this.state.value && this.state.value.length > 0 ? this.state.value :
-                                                                this.props.example)
+  getPreview: function() {
+    if(!!this.state.value && this.state.value.length ) return this.state.value
+    return this.props.example || this.props.default
   },
   isValid: function() {
     return this.refs.input.isValid()
@@ -20,14 +20,14 @@ var FieldFormRow = React.createClass({
   },
   render: function() {
     if( this.props.example_attr ) {
-      var example_props = this.props.example_props
-      example_props[this.props.example_attr] = this.getPreviewText()
-      var preview = <this.props.example_elem {...example_props}
-                                             ref="preview"/>
+      var example_props = this.props.example_props || {},
+          ExampleElem = to_react_class(this.props.example_elem)
+      example_props[this.props.example_attr] = this.getPreview()
+      var preview = <ExampleElem {...example_props} ref="preview"/>
     } else {
       var preview = <this.props.example_elem {...this.props.example_props}
                                              ref="preview">
-        { this.getPreviewText() }
+        { this.getPreview() }
       </this.props.example_elem>
     }
 

@@ -172,8 +172,8 @@ describe('Contest', function() {
       expect(tags[1].label).toEqual(this.template_questions[1].tag)
 
       var sample_qs = this.dom.querySelectorAll('.add--question select option')
-      expect(sample_qs[1].innerText).toEqual(this.template_questions[0].text)
-      expect(sample_qs[2].innerText).toEqual(this.template_questions[1].text)
+      expect(sample_qs[1].innerText).toEqual('Do you support '+this.template_questions[0].text)
+      expect(sample_qs[2].innerText).toEqual('Do you support '+this.template_questions[1].text)
     })
 
     it('selects a template question and creaets a new question', function() {

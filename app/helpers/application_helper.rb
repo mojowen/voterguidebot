@@ -10,4 +10,13 @@ module ApplicationHelper
       link_to body, url, options.update(class: "mui-btn mui-btn--accent #{passed_class}")
     end
   end
+
+  def to_rgba(hex_val, alpha = 1)
+    hex_val = hex_val.gsub(/\#/,'')
+    hex_val += hex_val if hex_val.length < 6
+    rgb = {}
+    %w(r g b).inject(hex_val.hex) {|a,i| rest, rgb[i] = a.divmod 256; rest }
+    p rgb.keys
+    "rgba(#{rgb.values.reverse.join(', ')}, #{alpha})"
+  end
 end

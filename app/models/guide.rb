@@ -82,22 +82,6 @@ class Guide < ActiveRecord::Base
     find_field(template_name).try(:value)
   end
 
-  def contest_page_range(start_page)
-    "#{start_page + 1} - #{contests_end_page(start_page)}"
-  end
-
-  def measure_page_range(start_page)
-    "#{contests_end_page(start_page) + 1} - #{measures_end_page(start_page)}"
-  end
-
-  def contests_end_page(start_page)
-    start_page + contests.count * (template.contests['pages'] || 1)
-  end
-
-  def measures_end_page(start_page)
-    contests_end_page(start_page) + measures.count * (template.measures['pages'] || 1)
-  end
-
   private
 
   def find_field(template_name)

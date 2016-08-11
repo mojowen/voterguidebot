@@ -1,14 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic,600)
 @import 'lib/normalize.css'
 
-$width: 6in
-$height: 4in
+$width: 5in
+$height: 5in
 
 $blue: #26aac6
 $grey-blue: #7091a3
 $pink: #d81b59
-$yellow: #fab815
-$green: #2f8f44
 $fuzzy_blue: lighten($blue, 35)
 
 @import 'lib/mixins'
@@ -290,6 +288,6 @@ p, div
         text-shadow: $pink -2px 2px 0px
 
 .back
-  border: 30px $fuzzy_blue solid
+  border: 30px rgba(255, 255, 255, 0.5) solid
   background: $blue
   color: white
