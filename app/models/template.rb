@@ -8,7 +8,7 @@ class Template < OpenStruct
   end
 
   def render
-    { template: File.join('templates', view), layout: File.join('..', 'templates', layout) }
+    File.join('templates', view)
   end
 
   def self.default

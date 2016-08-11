@@ -43,8 +43,7 @@ class GuidesController < ApplicationController
   def preview
     return redirect_to preview_guide_path(@guide, version: @guide.version) unless params[:version]
     @is_pdf = request.env['HTTP_USER_AGENT'].match /PhantomJS/
-    p **@guide.template.render
-    render **@guide.template.render
+    render template: @guide.template.render, layout: false
   end
 
   private

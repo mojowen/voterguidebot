@@ -3,7 +3,6 @@ name: Default Voter Guide
 
 screenshot: default.png
 view: default
-layout: default_layout
 
 contests:
   partial: contest_large
@@ -335,6 +334,21 @@ fields:
     default: "#d81b59"
     example_elem: ColorText
     example_attr: color
+  -
+    label: Contest Layout
+    element: SelectComponent
+    options:
+      -
+        text: Two Page Contests
+        value: contest_large
+      -
+        text: One Page Contests
+        value: contest_small
+    type: color
+    name: contest_layout
+    default: contest_large
+    example_elem: ContestType
+    example_attr: partial
 
 tags:
   - Climate

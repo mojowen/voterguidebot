@@ -120,3 +120,16 @@ body
 .img.unknown
   @include frame(60px)
   background-image: asset-url('unknown.png')
+
+.contest--type
+  .thumbnail
+    width: 200px
+    height: 200px
+    background: transparent none no-repeat top left
+    background-size: contain
+    display: block
+    margin: auto
+    &.contest_large
+      background-image: asset-url('large.png')
+    &.contest_small
+      background-image: asset-url('small.png')
