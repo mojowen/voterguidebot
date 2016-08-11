@@ -344,7 +344,6 @@ fields:
       -
         text: One Page Contests
         value: contest_small
-    type: color
     name: contest_layout
     default: contest_large
     example_elem: ContestType

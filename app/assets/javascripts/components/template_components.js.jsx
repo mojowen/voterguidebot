@@ -7,12 +7,12 @@ var ColorBlob = React.createClass({
       backgroundColor: this.props.color,
       border: '10px rgba(255, 255, 255, 0.5) solid',
       width: '100%',
-      height: '100px',
+      height: '200px',
       color: 'white',
       padding: '10px'
     }
     return <div style={style}>
-      <h2 style={{ color: 'white', margin: 0, padding: 0 }}>HERE IS THE BACK OF YOUR GUIDE</h2>
+      <h2 style={{ color: 'white', margin: 0, padding: 0 }}>THE BACK PAGE</h2>
       <p style={{ color: 'white' }}>This is what the back page of your guide will look like.</p>
     </div>
   }
@@ -23,12 +23,16 @@ var ColorText = React.createClass({
     return { color: 'transparent' }
   },
   render: function() {
-    return <div>
-      <div className="name">
-        <h3 style={{ color: this.props.color }} >Candidate Name</h3>
-        <span className="party">Independent</span>
+    return <div style={{ width: '200px' }}>
+      <div className="name" style={{ textAlign: 'right', width: '60%', display: 'inline-block' }}>
+        <h3 style={{ color: this.props.color, padding: 0, margin: 0 }} >Candidate Name</h3>
+        <span style={{ fontSize: '8px', fontStyle: 'italic', lineHeight: '8px'}}>
+          Independent
+        </span>
       </div>
-      <div className="photo"><div className="img unknown"></div></div>
+      <div className="photo" style={{ verticalAlign: 'top', width: '40%', display: 'inline-block' }}>
+        <div className="img unknown"></div>
+      </div>
     </div>
   }
 })
