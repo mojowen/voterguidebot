@@ -46,9 +46,6 @@ var Candidate = React.createClass({
 
     candidates[replaced_id] = current
     candidates[current_id] = replaced
-
-    console.log(_.map(candidates, 'id'))
-    console.log(_.map(this.props.candidates, 'id'))
     this.props.handleChange('candidates', candidates)
   },
   openCandidate: function(event) {
