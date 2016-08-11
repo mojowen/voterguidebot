@@ -79,7 +79,7 @@ class Guide < ActiveRecord::Base
   end
 
   def field(template_name)
-    find_field(template_name).try(:value)
+    find_field(template_name).try(:value) || find_field(template_name).try(:default)
   end
 
   private

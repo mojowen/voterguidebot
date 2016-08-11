@@ -12,6 +12,7 @@ module ApplicationHelper
   end
 
   def to_rgba(hex_val, alpha = 1)
+    return unless hex_val
     hex_val = hex_val.gsub(/\#/,'')
     hex_val += hex_val if hex_val.length < 6
     rgb = {}
