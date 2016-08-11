@@ -51,9 +51,15 @@ describe('ImageComponent', function() {
       this.dropzone = this.component.dropzone
     })
 
-    it('propagates values with an onChange', function() {
+    it('does not propagate values with thumbnail', function() {
       this.dropzone._callbacks.thumbnail[1].call(this.dropzone, fakeFile, transparentGif)
-      expect(this.callback).toHaveBeenCalled()
+      expect(this.callback).not.toHaveBeenCalled()
+    })
+
+    it('does propagate values with thumbnail', function() {
+      var fake_response = { xhr: { response: '{"path":"some-remote"}' }}
+      this.dropzone._callbacks.success[1].call(this.dropzone, )
+      expect(this.callback).toHaveBeenCalledWith("some-remote")
     })
   })
 

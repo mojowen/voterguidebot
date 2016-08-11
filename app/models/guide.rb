@@ -22,6 +22,10 @@ class Guide < ActiveRecord::Base
     @template ||= Template.new template_name
   end
 
+  def slug
+    [id,  name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
+  end
+
   def all_locales
     base = as_json
     return base if languages.empty?

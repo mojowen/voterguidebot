@@ -15,7 +15,9 @@ var ImageComponent = React.createClass({
     alert('Somethings gone wrong')
     this.handleChange(null)
   },
-  handleThumbnail: function(file, dataURL) { this.handleChange(dataURL) },
+  handleThumbnail: function(file, dataURL) {
+    this.setState({ value: dataURL })
+  },
   handleSuccess: function(file) {
     this.handleChange(JSON.parse(file.xhr.response).path)
   },
