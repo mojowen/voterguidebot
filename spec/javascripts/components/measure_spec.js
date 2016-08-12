@@ -4,6 +4,7 @@ describe('Measure', function() {
       id: 5,
       title: 'This Contest',
       description: 'Mike Well Made It',
+      stance: 'against',
       yes_means: 'Free cake',
       no_means: 'Paid cake',
       tags: [{ name: 'LGBTQ' }, { name: 'Climate Change' }],
@@ -19,7 +20,15 @@ describe('Measure', function() {
     this.dom.querySelector('[name=title]').value = 'New Title'
     Utils.Simulate.change(this.dom.querySelector('[name=title]'))
     expect(this.component.state.title).toEqual('New Title')
-    expect(this.component.state.changed).toEqual(true)
+  })
+
+  it('stance set by props', function() {
+    var against_button = this.dom.querySelector('.recommendation button[data-stance=against]')
+    expect(against_button.className).toMatch('accent')
+  })
+  it('title updates when changed', function() {
+    Utils.Simulate.click(this.dom.querySelector('.recommendation button'))
+    expect(this.component.state.stance).toEqual('for')
   })
 
   it('yes_means set by props', function() {

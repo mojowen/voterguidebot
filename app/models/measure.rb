@@ -4,6 +4,7 @@ class Measure < ActiveRecord::Base
 
   include Endorsements
   include Tags
+  include Stance
 
   belongs_to :guide
   delegate :template, to: :guide

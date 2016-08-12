@@ -2,6 +2,7 @@ require("active_mocker/mock")
 class EndorsementMock < ActiveMocker::Base
   created_with("2.2.2")
   # _modules_constants.erb
+  prepend(Stance)
   #_class_methods.erb
   class << self
     def attributes

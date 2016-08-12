@@ -280,7 +280,7 @@ textarea
     &::before
       content: ''
       position: absolute
-      background-image: asset-url('no.png')
+      background-image: asset-url('down.png')
       background-repeat: no-repeat
       width: 60px
       height: 50px
@@ -293,9 +293,18 @@ textarea
         top: auto
         right: auto
   .for--block::before
-    background-image: asset-url('yes.png')
+    background-image: asset-url('up.png')
   .taggable--form
     margin: 20px 0
+  .recommendation
+    float: right
+    margin-top: 30px
+    @include md
+      position: absolute
+      top: -26px
+      right: 10px
+    button.mui-btn--accent
+      background: $yellow
 
 .location--search
   .fa-check

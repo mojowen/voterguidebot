@@ -42,6 +42,7 @@ describe('MeasureForm', function() {
       document.location.pathname,
       { measure: { title: '',
                    description: '',
+                   stance: null,
                    yes_means: '',
                    no_means: '',
                    endorsements: [],

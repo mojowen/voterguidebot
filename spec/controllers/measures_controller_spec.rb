@@ -42,6 +42,7 @@ RSpec.describe MeasuresController, active_mocker: true do
         measure: {
           title: 'Sweet',
           description: 'Baller',
+          stance: 'for',
           yes_means: 'Straight creeping',
           no_means: 'No creapin',
           endorsements: [for_endorsements, against_endorsements],
@@ -60,6 +61,10 @@ RSpec.describe MeasuresController, active_mocker: true do
     it 'assigns description' do
       post :create, measure_params
       expect(assigns(:measure).description).to eq('Baller')
+    end
+    it 'assigns stance' do
+      post :create, measure_params
+      expect(assigns(:measure).stance).to eq('for')
     end
     it 'assigns yes_mans' do
       post :create, measure_params

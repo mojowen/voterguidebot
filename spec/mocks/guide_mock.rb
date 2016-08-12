@@ -237,24 +237,12 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
   end
 
-  def contest_page_range(start_page)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
-  end
-
-  def contests_end_page(start_page)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
-  end
-
   def field(template_name)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [template_name])
   end
 
-  def measure_page_range(start_page)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
-  end
-
-  def measures_end_page(start_page)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [start_page])
+  def slug
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
   def template

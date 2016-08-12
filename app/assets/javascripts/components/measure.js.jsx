@@ -4,6 +4,7 @@ var Measure = React.createClass({
     return { id: false,
              title: '',
              description: '',
+             stance: null,
              yes_means: '',
              no_means: '',
              endorsements: [],
@@ -21,9 +22,30 @@ var Measure = React.createClass({
   onChange: function(event) {
     this.handleChange(event.target.name, event.target.value)
   },
+  handleRecommend: function(event) {
+    event.preventDefault()
+    var stance = event.currentTarget.getAttribute('data-stance')
+    this.handleChange('stance', this.state.stance === stance ? null : stance)
+  },
+  recommender: function(stance) {
+    var is_recommended = this.state.stance == stance,
+        icon = is_recommended ? 'check-square-o' : '',
+        className = is_recommended ? 'accent' : 'primary'
+        text = is_recommended ? 'Recommended' : 'Recommend'
+
+    return <div className="recommendation">
+        <button className={"mui-btn mui-btn--small mui-btn--" + className}
+                onClick={this.handleRecommend}
+                data-stance={stance}>
+          <i className={"fa fa-" +icon} />&nbsp;
+          {text}
+        </button>
+      </div>
+  },
   getInitialState: function() {
     return { title: this.props.title,
              description: this.props.description,
+             stance: this.props.stance,
              yes_means: this.props.yes_means,
              no_means: this.props.no_means,
              endorsements: this.props.endorsements,
@@ -72,6 +94,7 @@ var Measure = React.createClass({
                       endorsed_type='measure'
                       endorsed_id={this.props.id}
                       stance="for" />
+        { this.recommender('for') }
       </div>
       <div className="mui-row mui-panel against--block">
         <h4>Against</h4>
@@ -90,6 +113,7 @@ var Measure = React.createClass({
                       endorsed_type='measure'
                       endorsed_id={this.props.id}
                       stance="against" />
+        { this.recommender('against') }
       </div>
     </div>
   }

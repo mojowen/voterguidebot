@@ -27,7 +27,15 @@ var MeasureRow = React.createClass({
     event.preventDefault()
     this.props.handleRemove(this.props.id)
   },
+  recommends: function(stance) {
+    if( this.props.stance === stance ) return <p>
+      <i className="fa fa-check-square-o" />
+      &nbsp;
+      <em>Recommended</em>
+    </p>
+  },
   render: function() {
+    var stance = ''
     return <div className="mui-panel measure--row"
                 key={this.props.id}
                 {...this.draggable_props()}
@@ -44,11 +52,12 @@ var MeasureRow = React.createClass({
       </div>
       <div className="mui-col-sm-6 for--block">
         <p><strong>Yes</strong>: { this.props.yes_means }</p>
+        { this.recommends('for') }
       </div>
       <div className="mui-col-sm-6 against--block">
         <p><strong>No</strong>: { this.props.no_means }</p>
+        { this.recommends('against') }
       </div>
-
     </div>
   }
 })

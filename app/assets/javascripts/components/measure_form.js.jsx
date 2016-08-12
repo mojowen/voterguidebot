@@ -6,14 +6,19 @@ var MeasureForm = React.createClass({
              url: document.location.pathname }
   },
   componentDidMount: function() {
-    if( !this.props.measure.id ) this.setState({ method: 'post' })
+    if( !this.props.measure.id ) this.setNewObjectState()
   },
   handleSubmit: function(event) {
+    event.preventDefault()
+    this.saveGuide()
+  },
+  saveGuide: function() {
     var that = this,
         measure = this.refs.measure,
         measure_data = {
           title: measure.state.title,
           description: measure.state.description,
+          stance: measure.state.stance,
           yes_means: measure.state.yes_means,
           no_means: measure.state.no_means,
           endorsements: measure.state.endorsements,
