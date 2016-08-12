@@ -13,13 +13,11 @@ describe('Contest', function() {
 
   it('title set by props', function() {
     expect(this.dom.querySelector('[name=title]').value).toEqual(this.props.title)
-    expect(this.component.state.changed).toEqual(false)
   })
   it('title updates when changed', function() {
     this.dom.querySelector('[name=title]').value = 'New Title'
     Utils.Simulate.change(this.dom.querySelector('[name=title]'))
     expect(this.component.state.title).toEqual('New Title')
-    expect(this.component.state.changed).toEqual(true)
   })
 
   it('description set by props', function() {
@@ -29,7 +27,6 @@ describe('Contest', function() {
     this.dom.querySelector('[name=description]').value = 'New description'
     Utils.Simulate.change(this.dom.querySelector('[name=description]'))
     expect(this.component.state.description).toEqual('New description')
-    expect(this.component.state.changed).toEqual(true)
   })
 
   describe('tracks candidates', function(){
@@ -51,19 +48,16 @@ describe('Contest', function() {
       this.dom.querySelector('.candidate--form [name=name]').value = 'Seth Rogan'
       Utils.Simulate.change(this.dom.querySelector('.candidate--form [name=name]'))
       expect(this.component.state.candidates[0].name).toEqual('Seth Rogan')
-      expect(this.component.state.changed).toEqual(true)
     })
     it('adds new candidates', function() {
       Utils.Simulate.click(this.dom.querySelector('a i.fa-plus-circle'))
 
       expect(this.component.state.candidates.length).toEqual(3)
-      expect(this.component.state.changed).toEqual(true)
     })
     it('deletes candidates', function() {
       Utils.Simulate.click(this.dom.querySelector('i.remove--candidate'))
       swalSpy.confirmLast(true)
       expect(this.component.state.candidates.length).toEqual(1)
-      expect(this.component.state.changed).toEqual(true)
     })
     it('reorders the candidates when dragged', function() {
       expect(this.component.state.candidates).toEqual([this.candidate, this.other_candidate])
@@ -101,21 +95,18 @@ describe('Contest', function() {
       Utils.Simulate.change(this.dom.querySelector('td [name=text]'))
 
       expect(this.component.state.questions[0].text).toEqual('LOVE ME?')
-      expect(this.component.state.changed).toEqual(true)
     })
     it('updates when the questions answerd', function() {
       this.dom.querySelector('td [name=candidate_0]').value = 'Yes?'
       Utils.Simulate.change(this.dom.querySelector('td [name=candidate_0]'))
 
       expect(this.component.state.questions[0].answers[0].text).toEqual('Yes?')
-      expect(this.component.state.changed).toEqual(true)
     })
     it('deletes questions', function() {
       Utils.Simulate.click(this.dom.querySelector('td a.remove'))
 
       swalSpy.confirmLast(true)
       expect(this.component.state.questions.length).toEqual(1)
-      expect(this.component.state.changed).toEqual(true)
     })
     it('adds new candidates to questions', function() {
       expect(this.dom.querySelectorAll('th').length).toEqual(3)
@@ -125,8 +116,7 @@ describe('Contest', function() {
     it('removes candidates from questions', function() {
       Utils.Simulate.click(this.dom.querySelector('i.remove--candidate'))
       swalSpy.confirmLast(true)
-      swalSpy.confirmLast(true)
-      expect(this.component.state.changed).toEqual(true)
+      expect(this.dom.querySelectorAll('th').length).toEqual(2)
     })
     it('reorders the questions when dragged', function() {
       expect(this.component.state.questions).toEqual([this.question, this.other_question])

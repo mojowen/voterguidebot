@@ -1,17 +1,33 @@
 var FormBase = {
   getInitialState: function() {
-    return { icon: 'fa-save', method: 'patch', url: this.props.url || document.location.pathname }
+    return { loading: false,
+             changed: false,
+             errored: false,
+             autosave: true,
+             method: 'patch',
+             url: this.props.url || document.location.pathname }
   },
   getDefaultProps: function() {
     return { languages: [] }
   },
+  setNewObjectState: function() {
+    this.setState({ method: 'post', changed: true, autosave: false })
+  },
   handleError: function(res, message) {
-    this.setState({ icon: 'fa-exclamation-triangle' })
+    this.setState({ loading: false, errored: true, autosave: false })
     this.notify(message || 'Something went wrong saving')
   },
+  changeNotifer: function() {
+    this.setState({ changed: true })
+    if( !this.state.autosave ) return
+    if( this.saveGuide === 'undefined' ) return
+
+    this.debounceSaveGuide = this.debounceSaveGuide || _.debounce(this.saveGuide, 2500)
+    this.debounceSaveGuide()
+  },
   handleSuccess: function(res, message) {
-    this.setState({ icon: 'fa-check-square' })
-    this.notify(message || 'Success!')
+    if( !this.state.autosave ) this.notify(message || 'Success!')
+    this.setState({ autosave: true, loading: false, changed: false, method: 'patch' })
 
     if( res && res.path ) history.pushState({}, '', res.path)
     if( res && res.url ) this.setState({ url: res.url })
@@ -28,7 +44,7 @@ var FormBase = {
                       .set('Accept', 'application/json')
   },
   updateGuide: function(url, data, callback) {
-    this.setState({ icon: 'fa-circle-o-notch fa-spin' })
+    this.setState({ loading: true, errored: false })
 
     var that = this,
         callback = callback || function() {}
@@ -55,6 +71,18 @@ var FormBase = {
     var guide_base = document.location.pathname.match(/\/guides\/\d+\//)
     return guide_base + 'preview'
   },
+  saveIcon: function() {
+    if( this.state.loading ) return 'fa-save fa-pulse'
+    if( this.state.errored ) return 'fa-exclamation-triangle'
+    if( this.state.changed ) return 'fa-save'
+    return 'fa-check-square'
+  },
+  saveText: function() {
+    if( this.state.loading ) return 'Saving...'
+    if( this.state.errored ) return 'Try Again'
+    if( this.state.changed ) return 'Save'
+    return 'Saved'
+  },
   menuComponent: function(before, after) {
     var languages = ''
 
@@ -77,17 +105,19 @@ var FormBase = {
     }
 
     return <div className="fixed--menu mui-panel">
-      { before }
       { languages }
-      <button type="submit" className="mui-btn mui-btn--accent">
-        <i className={'fa ' + this.state.icon} /> Save
+      <button type="submit" className="mui-btn mui-btn--accent"
+              disabled={!this.state.changed} >
+        <i className={'fa ' + this.saveIcon()} />&nbsp;{ this.saveText() }
       </button>
-      <a href={ this.preview_guide_url() } className="preview mui-btn mui-btn--primary" target="_blank">
-        <i className="fa-newspaper-o fa" />
-        &nbsp;
-        Preview
-      </a>
-      { after }
+      <button  className="preview mui-btn mui-btn--primary"
+               disabled={this.state.changed || this.state.errored || this.state.loading } >
+        <a href={ this.preview_guide_url() } target="_blank">
+          <i className="fa-newspaper-o fa" />
+          &nbsp;
+          {this.state.changed ? 'Pls Save First' : 'Preview'}
+        </a>
+      </button>
     </div>
   }
 }

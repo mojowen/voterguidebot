@@ -25,6 +25,7 @@ class MeasuresController < ApplicationController
     @measure.save
     {
       path: edit_guide_measure_path(@guide, @measure),
+      url: guide_measure_path(@guide, @measure),
       measure: @measure.reload
     }
   end

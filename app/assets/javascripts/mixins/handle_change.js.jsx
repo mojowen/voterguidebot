@@ -1,6 +1,6 @@
 var HandleChange = {
-  getInitialState: function() {
-    return { changed: false }
+  getDefaultProps: function() {
+    return { changeNotifier: function() { } }
   },
   handleChange: function(key, value) {
     if( typeof key === 'object' && arguments.length === 1 ) {
@@ -12,7 +12,7 @@ var HandleChange = {
     this.setChangedState(new_state)
   },
   setChangedState: function(new_state) {
-    new_state.changed = true
+    this.props.changeNotifier()
     this.setState(new_state)
   }
 }

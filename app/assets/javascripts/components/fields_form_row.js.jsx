@@ -1,4 +1,5 @@
 var FieldFormRow = React.createClass({
+  mixins: [HandleChange],
   getDefaultProps: function() {
     return { example_elem: 'p',
              example_attr: false,
@@ -15,8 +16,7 @@ var FieldFormRow = React.createClass({
     return this.refs.input.isValid()
   },
   updateValue: function(event) {
-    this.setState({ value: event.target.value })
-    return true
+    this.setChangedState({ value: event.target.value })
   },
   render: function() {
     if( this.props.example_attr ) {

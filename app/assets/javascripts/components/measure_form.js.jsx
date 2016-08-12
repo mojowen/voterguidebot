@@ -26,20 +26,19 @@ var MeasureForm = React.createClass({
         }
 
     this.updateGuide(
-      this.props.url,
+      this.state.url,
       { measure: measure_data },
       function(res) {
-        if( that.state.method !== 'patch' ) that.setState({ method: 'patch' })
         measure.setState(res.body.measure)
       }
     )
-    event.preventDefault()
   },
   render: function() {
     return <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
             <Measure ref="measure"
-              template_tags={this.props.template_tags}
-              {...this.props.measure} />
+                     template_tags={this.props.template_tags}
+                     changeNotifier={this.changeNotifer}
+                     {...this.props.measure} />
             { this.menuComponent() }
           </form>
   }

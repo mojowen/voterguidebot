@@ -5,7 +5,9 @@ var FieldsForm = React.createClass({
   },
   handleSubmit: function(event) {
     event.preventDefault()
-
+    this.saveGuide()
+  },
+  saveGuide: function() {
     var fields_request = {}
 
     for (var i = 0; i < this.props.fields.length; i++) {
@@ -25,8 +27,9 @@ var FieldsForm = React.createClass({
     var fields = _.map(this.props.fields, function(field) {
       return <FieldFormRow ref={field.name}
                            key={field.name+'_form_row'}
+                           changeNotifier={this.changeNotifer}
                            {...field} />
-    })
+    }, this)
     return <form ref="form_wrapper" onSubmit={this.handleSubmit}>
             { fields }
             { this.menuComponent() }

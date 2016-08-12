@@ -35,7 +35,6 @@ var MeasureRow = React.createClass({
     </p>
   },
   render: function() {
-    var stance = ''
     return <div className="mui-panel measure--row"
                 key={this.props.id}
                 {...this.draggable_props()}

@@ -10,6 +10,12 @@ describe('MeasureForm', function() {
     it('sets method to post', function() {
       expect(this.component.state.method).toEqual('post')
     })
+    it('sets changed to true', function() {
+      expect(this.component.state.changed).toEqual(true)
+    })
+    it('sets changed to true', function() {
+      expect(this.component.state.autosave).toEqual(false)
+    })
 
     it('sets new form settings on save', function() {
       Utils.Simulate.submit(this.component.refs.form_wrapper)
@@ -73,6 +79,7 @@ describe('MeasureForm', function() {
     request.respondWith({ responseText: JSON.stringify(response),
                           status: 200 })
 
+    expect(this.component.state.changed).toEqual(false)
     expect(this.component.state.url).toEqual(response.url)
   })
 })

@@ -14,7 +14,6 @@ describe('Measure', function() {
 
   it('title set by props', function() {
     expect(this.dom.querySelector('[name=title]').value).toEqual(this.props.title)
-    expect(this.component.state.changed).toEqual(false)
   })
   it('title updates when changed', function() {
     this.dom.querySelector('[name=title]').value = 'New Title'
@@ -39,7 +38,6 @@ describe('Measure', function() {
     Utils.Simulate.change(this.dom.querySelector('[name=yes_means]'))
 
     expect(this.component.state.yes_means).toEqual('New description')
-    expect(this.component.state.changed).toEqual(true)
   })
 
   it('no_means set by props', function() {
@@ -50,7 +48,6 @@ describe('Measure', function() {
     Utils.Simulate.change(this.dom.querySelector('[name=no_means]'))
 
     expect(this.component.state.no_means).toEqual('New description')
-    expect(this.component.state.changed).toEqual(true)
   })
 
   describe('tracks endorsements', function(){

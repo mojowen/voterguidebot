@@ -4,7 +4,7 @@ var ContestForm = React.createClass({
     return { contest: { id: false } }
   },
   componentDidMount: function() {
-    if( !this.props.contest.id ) this.setState({ method: 'post' })
+    if( !this.props.contest.id ) this.setNewObjectState()
   },
   handleSubmit: function(event) {
     var that = this,
@@ -19,7 +19,6 @@ var ContestForm = React.createClass({
           questions: contest.state.questions
       }},
       function(res) {
-        if( that.state.method !== 'patch' ) that.setState({ method: 'patch' })
         contest.setState(res.body.contest)
       }
     )
@@ -28,6 +27,7 @@ var ContestForm = React.createClass({
   render: function() {
     return <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
             <Contest ref='contest'
+                     changeNotifier={this.changeNotifer}
                      {...this.props.contest} />
             { this.menuComponent() }
           </form>

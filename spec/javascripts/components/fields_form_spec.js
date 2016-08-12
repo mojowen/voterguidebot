@@ -50,11 +50,11 @@ describe('FieldsForm', function() {
   })
 
   it('notifies on a success', function() {
-    spyOn(this.component, 'notify')
+    spyOn(this.component, 'handleSuccess')
     this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
     request.respondWith({  responseText: '', status: 200 })
-    expect(this.component.notify).toHaveBeenCalledWith('Success!')
+    expect(this.component.handleSuccess).toHaveBeenCalled()
   })
 
   it('notifies on an error', function() {
