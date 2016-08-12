@@ -15,6 +15,10 @@ h1
     font-size: 100px
     margin-bottom: 10px
     line-height: 1em
+    .small
+      font-size: 12px
+      float: right
+      line-height: 12px
 h2
   color: lighten($second-emphasis, 20%)
   font-size: 1.5em
@@ -45,3 +49,7 @@ strong
 
 button a
   color: white
+
+button, a, .mui-btn
+  &, *
+    cursor: pointer !important

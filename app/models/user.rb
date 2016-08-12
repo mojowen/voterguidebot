@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
       user
   end
 
+  def name
+    [first_name, last_name].join(' ')
+  end
+
   def can_edit?(guide)
     admin? || guides.include?(guide)
   end

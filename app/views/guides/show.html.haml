@@ -2,7 +2,7 @@
 
 .dashboard
   .mui-row
-    .mui-col-md-12.mui--text-right.menu
+    .mui-col-md-12.mui--text-right.menu.slide--menu
       = button_link_to edit_guide_path(@guide), class: 'mui-btn--small' do
         %i.fa.fa-gears.settings
         Adjust Settings
@@ -12,24 +12,31 @@
       = button_link_to invite_guide_path(@guide), class: 'mui-btn--small' do
         %i.fa.fa-user-plus.users
         Invite Collaborators
+      = button_link_to preview_guide_path(@guide), class: 'mui-btn--small', target: '_blank', btn: :primary do
+        %strong
+          %i.fa-newspaper-o.fa
+          Preview
 
     .mui-col-md-12
       %h2 Get Started on Your Voter Guide
     .mui-col-md-6
       %p Create your Voter Guide by editing the following sections.
-    .mui-col-md-6
-      = link_to preview_guide_path(@guide), { target: '_blank' } do
-        %strong
-          %i.fa-newspaper-o.fa
-          Preview
 
   .mui-row
     .mui-col-md-4.box
-      %h3 Fields
+      %h3
+        - if @guide.fields.map(&:value).reject(&:nil?).count == @guide.template.fields.count
+          %i.fa.fa-check-circle-o
+        Fields
       %h1.big
-        %span.mui--text-dark= @guide.fields.map(&:value).reject(&:nil?).count
+        %span{ class: @guide.fields.map(&:value).reject(&:nil?).count == @guide.template.fields.count ? 'mui--text-dark-hint' : 'mui--text-dark'  }= @guide.fields.map(&:value).reject(&:nil?).count
         %span.mui--text-dark-hint /
         %span.mui--text-dark-hint= @guide.template.fields.count
+        %span.small
+          - if @guide.fields.map(&:value).reject(&:nil?).count == @guide.template.fields.count
+            all good!
+          - else
+            fields to complete
       = button_link_to fields_guide_path(@guide) do
         %i.fa.fa-map-signs
         Edit Fields
@@ -37,11 +44,15 @@
         %em Edit the descriptive fields that will explain how to vote and what your guide is all about.
 
     .mui-col-md-4.box
-      %h3 Contests
+      %h3
+        - unless @guide.is_there_space?(contests: 1)
+          %i.fa.fa-check-circle-o
+        Contests
       %h1.big
-        %span.mui--text-dark= @guide.contests.length
+        %span{ class: @guide.is_there_space?(contests: 1) ? 'mui--text-dark' : 'mui--text-dark-hint'  }= @guide.pages_for(:contests)
         %span.mui--text-dark-hint /
-        %span.mui--text-dark-hint= @guide.template.contests.fetch('max', 0)
+        %span.mui--text-dark-hint= @guide.template.available_pages
+        %span.small pages
       = button_link_to guide_contests_path(@guide) do
         %i.fa.fa-users
         Edit Contests
@@ -49,11 +60,15 @@
         %em Manage the candidates that are running for office and the questions they've answered.
 
     .mui-col-md-4.box
-      %h3 Ballot Measures
+      %h3
+        - unless @guide.is_there_space?(measures: 1)
+          %i.fa.fa-check-circle-o
+        Ballot Measures
       %h1.big
-        %span.mui--text-dark 0
+        %span{ class: @guide.is_there_space?(measures: 1) ? 'mui--text-dark' : 'mui--text-dark-hint'  }= @guide.pages_for(:measures)
         %span.mui--text-dark-hint /
-        %span.mui--text-dark-hint= @guide.template.measures.fetch('max', 0)
+        %span.mui--text-dark-hint= @guide.template.available_pages
+        %span.small pages
       = button_link_to guide_measures_path(@guide) do
         %i.fa.fa-file-text
         Edit Ballot Measures

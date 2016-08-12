@@ -3,11 +3,13 @@ module ApplicationHelper
     if block_given?
       options = url ||  {}
       passed_class = options.fetch(:class, '')
-      link_to(body, options.update(class: "mui-btn mui-btn--accent #{passed_class}")) { yield }
+      btn_passed_class = options.fetch(:btn, 'accent')
+      link_to(body, options.update(class: "mui-btn mui-btn--#{btn_passed_class} #{passed_class}")) { yield }
     else
       options = html_options ||  {}
       passed_class = options.fetch(:class, '')
-      link_to body, url, options.update(class: "mui-btn mui-btn--accent #{passed_class}")
+      btn_passed_class = options.fetch(:btn, 'accent')
+      link_to body, url, options.update(class: "mui-btn mui-btn--#{btn_passed_class} #{passed_class}")
     end
   end
 
@@ -17,7 +19,7 @@ module ApplicationHelper
     hex_val += hex_val if hex_val.length < 6
     rgb = {}
     %w(r g b).inject(hex_val.hex) {|a,i| rest, rgb[i] = a.divmod 256; rest }
-    p rgb.keys
+
     "rgba(#{rgb.values.reverse.join(', ')}, #{alpha})"
   end
 end

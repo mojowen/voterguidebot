@@ -74,6 +74,22 @@ class Guide < ActiveRecord::Base
     end
   end
 
+  def pages_for(type, check_size: 0)
+    count = send(type).count + check_size
+    options = template.send(type)['per_page']
+    per_page = options.is_a?(Integer) ? options : options['values'][field(options['key'])]
+    count * per_page
+  end
+
+  def total_pages
+    pages_for(:contests) + pages_for(:measures) + template.filler_pages
+  end
+
+  def is_there_space?(contests: 0, measures: 0)
+    check_pages = pages_for(:contests, check_size: contests) + pages_for(:measures, check_size: measures)
+    check_pages <= template.available_pages
+  end
+
   def version
     @version ||= Digest::MD5.hexdigest to_json
   end

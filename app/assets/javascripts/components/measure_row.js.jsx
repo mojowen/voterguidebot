@@ -28,11 +28,11 @@ var MeasureRow = React.createClass({
     this.props.handleRemove(this.props.id)
   },
   recommends: function(stance) {
-    if( this.props.stance === stance ) return <p>
+    if( this.props.stance === stance ) return <div style={{ float: 'right' }}>
       <i className="fa fa-check-square-o" />
       &nbsp;
       <em>Recommended</em>
-    </p>
+    </div>
   },
   render: function() {
     return <div className="mui-panel measure--row"
@@ -50,12 +50,12 @@ var MeasureRow = React.createClass({
         <p><strong>Description</strong>: { this.props.description }</p>
       </div>
       <div className="mui-col-sm-6 for--block">
-        <p><strong>Yes</strong>: { this.props.yes_means }</p>
         { this.recommends('for') }
+        <p><strong>Yes</strong>: { this.props.yes_means }</p>
       </div>
       <div className="mui-col-sm-6 against--block">
-        <p><strong>No</strong>: { this.props.no_means }</p>
         { this.recommends('against') }
+        <p><strong>No</strong>: { this.props.no_means }</p>
       </div>
     </div>
   }

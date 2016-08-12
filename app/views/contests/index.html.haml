@@ -4,7 +4,7 @@
 .mui-row
   .mui-col-md-4
     %h2 Your Contests
-  .mui-col-md-3.mui--pull-right
+  .mui-col-md-4.mui--pull-right{ style: 'text-align: right'}
     = button_link_to 'New Contest', new_guide_contest_path(@guide)
 
 = react_component :ContestsForm, { contests: @guide.contests, url: guide_contests_path(@guide, locale: nil) }

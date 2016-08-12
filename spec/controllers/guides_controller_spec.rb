@@ -146,6 +146,18 @@ RSpec.describe GuidesController, active_mocker: true do
         expect(response).to be_success
       end
     end
+
+    describe '#preview' do
+      render_views
+      before(:each) do
+        2.times { Fabricate :measure, guide: guide }
+        4.times { Fabricate :contest, guide: guide }
+      end
+      it 'renders successfully' do
+        get :preview, { id: guide.id, version: guide.version }
+        expect(response).to be_success
+      end
+    end
   end
 
 end

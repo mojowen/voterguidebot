@@ -5,4 +5,6 @@ Fabricator(:location) do
   south { 31.3321771 }
   east { -109.04522309999999 }
   west { -114.8165909 }
+  city { 'Baloogaville' }
+  state { 'FL' }
 end
