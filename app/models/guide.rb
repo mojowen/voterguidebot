@@ -79,10 +79,14 @@ class Guide < ActiveRecord::Base
   end
 
   def field(template_name)
-    find_field(template_name).try(:value) || find_field(template_name).try(:default)
+    find_field(template_name).try(:value) || find_template_field(template_name).try(:fetch, 'default', '')
   end
 
   private
+
+  def find_template_field(template_name)
+    template_field.template_fields.find { |fd| fd["name"]  == "contest_layout" }
+  end
 
   def find_field(template_name)
     fields.find { |field| field.field_template == template_name  }

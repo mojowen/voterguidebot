@@ -88,7 +88,7 @@
   </div>
 
   <% @guide.contests.each do |contest| %>
-    <%= render "templates/#{@guide.field('contest_layout') }", contest: contest %>
+    <%= render "templates/#{ @guide.field('contest_layout') }", contest: contest %>
   <% end %>
   <% @guide.measures.each do |measure| %>
     <%= render 'templates/measure', measure: measure %>
