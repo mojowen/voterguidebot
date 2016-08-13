@@ -33,6 +33,8 @@
           %td
             .mui--pull-left
               = link_to guide_contests_path(guide) do
+                %i.fa.fa-users
+                &nbsp;
                 = guide.pages_for(:contests)
                 %span.mui--text-dark-hint /
                 = guide.template.available_pages
@@ -40,6 +42,8 @@
           %td
             .mui--pull-left
               = link_to guide_measures_path(guide) do
+                %i.fa.fa-file-text
+                &nbsp;
                 = guide.pages_for(:measures)
                 %span.mui--text-dark-hint /
                 = guide.template.available_pages
