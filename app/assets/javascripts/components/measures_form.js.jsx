@@ -1,7 +1,7 @@
 var MeasuresForm = React.createClass({
   mixins: [FormBase],
   getDefaultProps: function() {
-    return { measures: [] }
+    return { measures: [], draggable: true }
   },
   getInitialState: function() {
     return { measures: this.props.measures }
@@ -48,6 +48,8 @@ var MeasuresForm = React.createClass({
                          handleDrag={this.handleDrag}
                          handleRemove={this.handleRemove}
                          url={this.props.url}
+                         draggable={this.props.draggable}
+                         expropriatable={this.props.expropriatable}
                          measures={this.state.measures} />
     }, this)
 

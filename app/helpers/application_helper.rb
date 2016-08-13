@@ -22,4 +22,8 @@ module ApplicationHelper
 
     "rgba(#{rgb.values.reverse.join(', ')}, #{alpha})"
   end
+
+  def admin_not_owner?(guide)
+    current_user.admin && !guide.users.include?(current_user)
+  end
 end

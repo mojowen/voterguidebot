@@ -11,7 +11,12 @@
 
 .mui-row
   .mui-col-md-8.mui-col-md-offset-2.mui--text-center
-    %h2 Your Guides
+    %h2
+      Your Guides
+      - if current_user.admin
+        \/
+        = link_to 'All Guides', guides_path
+
 
     %table.mui-table
       %thead
@@ -36,15 +41,17 @@
               .small fields
           %td
             .mui--pull-left
-              = guide.pages_for(:contests)
-              %span.mui--text-dark-hint /
-              = guide.template.available_pages
+              = link_to guide_measures_path(guide) do
+                = guide.pages_for(:contests)
+                %span.mui--text-dark-hint /
+                = guide.template.available_pages
               .small pages
           %td
             .mui--pull-left
-              = guide.pages_for(:measures)
-              %span.mui--text-dark-hint /
-              = guide.template.available_pages
+              = link_to guide_contests_path(guide) do
+                = guide.pages_for(:measures)
+                %span.mui--text-dark-hint /
+                = guide.template.available_pages
               .small pages
           %td
             .mui--pull-left

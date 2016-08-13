@@ -1,0 +1,46 @@
+.mui-row
+  .mui-col-md-8.mui-col-md-offset-2
+    %h2
+      = link_to 'Your Guides', root_url
+      \/
+      All Guides
+
+    %table.mui-table
+      %thead
+        %tr
+          %th Guide
+          %th Location
+          %th Users
+          %th Contests
+          %th Measures
+      %tbody
+      - Guide.all.each do |guide|
+        - next if guide.users.include? current_user
+        %tr
+          %td
+            .mui--pull-left
+              = link_to guide_path(guide) do
+                %strong= guide.name.humanize
+          %td
+            .mui--pull-left
+              - if guide.location
+                = guide.location.city
+                ,
+                = guide.location.state
+          %td
+            .mui--pull-left
+              = guide.users.uniq.map(&:name).reject(&:blank?).join(', ')
+          %td
+            .mui--pull-left
+              = link_to guide_contests_path(guide) do
+                = guide.pages_for(:contests)
+                %span.mui--text-dark-hint /
+                = guide.template.available_pages
+              .small pages
+          %td
+            .mui--pull-left
+              = link_to guide_measures_path(guide) do
+                = guide.pages_for(:measures)
+                %span.mui--text-dark-hint /
+                = guide.template.available_pages
+              .small pages

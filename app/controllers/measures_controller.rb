@@ -1,9 +1,10 @@
 class MeasuresController < ApplicationController
   include GuideFinder
   include Reposition
+  include Expropriate
 
   before_filter :init_measure, only: [:new, :create]
-  before_filter :find_measure, except: [:new, :create, :index, :position]
+  before_filter :find_measure, only: [:edit, :update, :destroy]
 
   def create
     render json: update_measure

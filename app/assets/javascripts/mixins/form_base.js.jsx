@@ -83,8 +83,9 @@ var FormBase = {
     if( this.state.changed ) return 'Save'
     return 'Saved'
   },
-  menuComponent: function(before, after) {
-    var languages = ''
+  menuComponent: function(options) {
+    var languages = '',
+        options = options || {}
 
     if( this.props.languages.length > 0 ) {
       var selected = document.location.search.match(/locale\=[A-z^&]./g)
@@ -107,7 +108,8 @@ var FormBase = {
     return <div className="fixed--menu mui-panel">
       { languages }
       <button type="submit" className="mui-btn mui-btn--accent"
-              disabled={!this.state.changed} >
+              disabled={!this.state.changed}
+              onClick={this.handleSubmit} >
         <i className={'fa ' + this.saveIcon()} />&nbsp;{ this.saveText() }
       </button>
       <button className="preview mui-btn mui-btn--primary"
@@ -115,9 +117,10 @@ var FormBase = {
         <a href={ this.preview_guide_url() } target="_blank">
           <i className="fa-newspaper-o fa" />
           &nbsp;
-          {this.state.changed ? 'Pls Save First' : 'Preview'}
+          Preview
         </a>
       </button>
+      { options.after }
     </div>
   }
 }

@@ -147,6 +147,24 @@ RSpec.describe GuidesController, active_mocker: true do
       end
     end
 
+    describe '#index' do
+      it 'redirects to root' do
+        get :index
+        expect(response).to redirect_to root_path(locale: :en)
+      end
+
+      context 'as admin' do
+        let(:admin) { Fabricate :user, admin: true }
+        let(:admin_guide) { Fabricate :guide }
+        before(:each) { sign_in admin }
+
+        it 'returns successfully' do
+          get :index
+          be_success
+        end
+      end
+    end
+
     describe '#preview' do
       render_views
       before(:each) do

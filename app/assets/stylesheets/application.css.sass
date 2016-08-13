@@ -71,17 +71,24 @@ body
     position: absolute
   .mui-select
     padding-top: 0
-  button, div, .preview
+  button, div, .preview, .expropriator.mui-select
     display: inline-block
   button
     margin: 0 8px
   .mui-btn + .mui-btn
     margin: 0
-  button, .preview
+  .expropriator.mui-select
+    padding-top: 0
+    margin-left: 8px
+    i
+      bottom: 0
+      left: 30px
+  button, .preview, .expropriator, select
     i
       font-size: 24px
       line-height: 38px
     font-size: 0px
+    width: 80px
   @include lg
     width: 200px
     top: 120px
@@ -94,10 +101,22 @@ body
       display: block
     .mui-select
       padding-top: 15px
-    button, .preview
+    button, .preview, .expropriator
       width: 170px
       &, i
         font-size: 14px
+    .expropriator.mui-select
+      i
+        left: 24px
+        bottom: -1px
+      display: block
+      padding-top: 0
+      margin-top: 8px
+      margin-left: 0
+      select
+        width: 100%
+        font-size: 14px
+
 .welcome
   .menu
     a.mui-btn

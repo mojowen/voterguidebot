@@ -3,6 +3,45 @@ require 'rails_helper'
 RSpec.describe Contest, type: :model do
   subject { Fabricate :contest }
 
+  describe "#full_clone" do
+    let!(:candidate) { Fabricate :candidate, contest: subject }
+    let!(:question) { Fabricate :question, contest: subject }
+    let!(:answer) { Fabricate :answer, candidate: candidate, question: question }
+    let!(:endorsement) { Fabricate :endorsement, endorsed: candidate }
+    let!(:tag) { Fabricate :tag, tagged: question }
+
+    let!(:clone) { subject.full_clone }
+    before(:each) { clone.save }
+
+    it 'clones the title' do
+      expect(clone.title).to eq(subject.title)
+    end
+    it 'clones the description' do
+      expect(clone.description).to eq(subject.description)
+    end
+    it 'clones the candidates' do
+      expect(clone.candidates.first.name).to eq(candidate.name)
+      expect(clone.candidates.first.id).to_not eq(candidate.id)
+    end
+    it 'clones the questions' do
+      expect(clone.questions.first.text).to eq(question.text)
+      expect(clone.questions.first.id).to_not eq(question.id)
+    end
+    it 'clones the answers' do
+      expect(clone.answers.first.text).to eq(answer.text)
+      expect(clone.answers.first.question_id).to_not eq(question.id)
+      expect(clone.answers.first.candidate_id).to_not eq(candidate.id)
+    end
+    it 'clones the endorsements' do
+      expect(clone.endorsements.first.endorser).to eq(endorsement.endorser)
+      expect(clone.endorsements.first.endorsed_id).to_not eq(candidate.id)
+    end
+    it 'clones the tags' do
+      expect(clone.tags.first.name).to eq(tag.name)
+      expect(clone.tags.first.tagged_id).to_not eq(question.id)
+    end
+  end
+
   describe '#assign_attributes' do
     it 'creates candidates' do
       raw_obj = { candidates: [{ id: 'candidate5', name: 'Frank' }] }

@@ -1,5 +1,5 @@
 var ContestForm = React.createClass({
-  mixins: [FormBase],
+  mixins: [FormBase, Expropriator],
   getDefaultProps: function() {
     return { contest: { id: false } }
   },
@@ -25,11 +25,13 @@ var ContestForm = React.createClass({
     event.preventDefault()
   },
   render: function() {
-    return <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
-            <Contest ref='contest'
-                     changeNotifier={this.changeNotifer}
-                     {...this.props.contest} />
-            { this.menuComponent() }
-          </form>
+    return <div>
+      <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
+        <Contest ref='contest'
+                 changeNotifier={this.changeNotifer}
+                 {...this.props.contest} />
+      </form>
+      { this.menuComponent({ after: this.expropriator(this.props.contest.id) }) }
+    </div>
   }
 })

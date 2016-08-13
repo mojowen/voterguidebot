@@ -3,6 +3,37 @@ require 'rails_helper'
 RSpec.describe Measure, type: :model do
   subject { Fabricate :measure }
 
+  describe "#full_clone" do
+    let!(:tag) { Fabricate :tag, tagged: subject }
+    let!(:endorsement) { Fabricate :endorsement, endorsed: subject }
+
+    let!(:clone) { subject.full_clone }
+    before(:each) { clone.save }
+
+    it 'clones the title' do
+      expect(clone.title).to eq(subject.title)
+    end
+    it 'clones the description' do
+      expect(clone.description).to eq(subject.description)
+    end
+    it 'clones the yes_means' do
+      expect(clone.yes_means).to eq(subject.yes_means)
+    end
+    it 'clones the no_means' do
+      expect(clone.no_means).to eq(subject.no_means)
+    end
+    it 'clones the stance' do
+      expect(clone.stance).to eq(subject.stance)
+    end
+    it 'clones the endorsements' do
+      expect(clone.endorsements.first.endorser).to eq(endorsement.endorser)
+      expect(clone.endorsements.first.endorsed_id).to_not eq(subject.id)
+    end
+    it 'clones the tags' do
+      expect(clone.tags.first.name).to eq(tag.name)
+      expect(clone.tags.first.tagged_id).to_not eq(subject.id)
+    end
+  end
   context '#assign_attributes' do
     let(:endorsements) do
       [Fabricate.build(:endorsement, endorser: 'great').as_json]

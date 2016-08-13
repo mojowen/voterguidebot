@@ -7,4 +7,4 @@
   .mui-col-md-4.mui--pull-right{ style: 'text-align: right'}
     = button_link_to 'New Contest', new_guide_contest_path(@guide)
 
-= react_component :ContestsForm, { contests: @guide.contests, url: guide_contests_path(@guide, locale: nil) }
+= react_component :ContestsForm, contests: @guide.contests, url: guide_contests_path(@guide, locale: nil), draggable: !admin_not_owner?(@guide), expropriatable: admin_not_owner?(@guide) ? { path: expropriate_guide_contests_path(@guide), guides: current_user.guides.uniq } : false

@@ -31,7 +31,10 @@
           %table{ width: '100%' }
             %tr.mui--appbar-height
               %td
-                = link_to image_tag('robot.png'), root_path
+                - if current_user && current_user.admin
+                  = link_to image_tag('admin.png'), root_path
+                - else
+                  = link_to image_tag('robot.png'), root_path
                 - if content_for :breadcrumb
                   .breadcrumbs= yield :breadcrumb
               %td.mui--text-right

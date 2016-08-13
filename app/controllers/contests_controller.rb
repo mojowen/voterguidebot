@@ -1,9 +1,10 @@
 class ContestsController < ApplicationController
   include GuideFinder
   include Reposition
+  include Expropriate
 
   before_filter :init_contest, only: [:new, :create]
-  before_filter :find_contest, except: [:new, :create, :index, :position]
+  before_filter :find_contest, only: [:edit, :update, :destroy]
 
   def create
     render json: update_contest

@@ -16,7 +16,10 @@ Rails.application.routes.draw do
       end
       resources :languages, only: [:index, :create, :destroy, :show]
       resources :contests, :measures, except: :show do
-        collection { put :position }
+        collection do
+          put :position
+          post :expropriate
+        end
       end
     end
 

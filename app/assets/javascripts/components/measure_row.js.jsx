@@ -1,5 +1,5 @@
 var MeasureRow = React.createClass({
-  mixins: [Draggable],
+  mixins: [Draggable, Expropriator],
   getDefaultProps: function() {
     return { id: null,
              title: '',
@@ -45,6 +45,7 @@ var MeasureRow = React.createClass({
          className="edit mui-btn mui-btn--small mui-btn--primary" >
         <i className="fa fa-pencil" />&nbsp;Edit
       </a>
+      { this.expropriator(this.props.id) }
       <div className="mui-col-sm-12">
         <h2>{ this.props.title }</h2>
         <p><strong>Description</strong>: { this.props.description }</p>

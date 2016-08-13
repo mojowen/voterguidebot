@@ -1,5 +1,5 @@
 var MeasureForm = React.createClass({
-  mixins: [FormBase],
+  mixins: [FormBase, Expropriator],
   getDefaultProps: function() {
     return { measure: { id: false },
              template_tags: [],
@@ -34,12 +34,14 @@ var MeasureForm = React.createClass({
     )
   },
   render: function() {
-    return <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
-            <Measure ref="measure"
-                     template_tags={this.props.template_tags}
-                     changeNotifier={this.changeNotifer}
-                     {...this.props.measure} />
-            { this.menuComponent() }
-          </form>
+    return <div>
+      <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
+        <Measure ref="measure"
+                 template_tags={this.props.template_tags}
+                 changeNotifier={this.changeNotifer}
+                 {...this.props.measure} />
+      </form>
+      { this.menuComponent({ after: this.expropriator(this.props.measure.id) }) }
+    </div>
   }
 })

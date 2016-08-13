@@ -325,11 +325,25 @@ textarea
   margin: 40px 0
   .remove
     @include remove
-  .edit
+  .edit,
+  .expropriator
     position: absolute
     top: 4px
-    right: 60px
+    right: 40px
     z-index: 10
+  .expropriator
+    width: 150px
+    right: 120px
+    margin: 6px 0 0
+    padding: 0 0 0 4px
+    height: 30.6px
+    i
+      font-size: 13px
+      bottom: 6px
+      left: 20px
+    &, option, select
+      font-size: 13px
+      line-height: 20px
   .candidate--small
     display: inline-block
     span
@@ -378,3 +392,22 @@ textarea
   left: 0
   padding: 10px
 
+
+.expropriator
+  i
+    position: absolute
+    left: 10px
+    bottom: 10px
+  padding: 4px 8px 0
+  line-height: 14px
+  select
+    padding: 4px 0 0 34px
+    background-position: left center
+    border-bottom: none
+    color: white
+    font-weight: 500
+    font-size: 14px
+  &.disabled
+    opacity: 0.6
+    pointer-events: none
+    box-shadow: none

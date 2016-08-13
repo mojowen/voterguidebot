@@ -18,4 +18,11 @@ class Measure < ActiveRecord::Base
     create_tags! attributes
     super(attributes)
   end
+
+  def full_clone
+    cloned = dup
+    cloned.endorsements = endorsements.map(&:dup)
+    cloned.tags = tags.map(&:dup)
+    cloned
+  end
 end

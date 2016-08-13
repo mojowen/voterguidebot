@@ -136,6 +136,29 @@ RSpec.describe MeasuresController, active_mocker: true do
       end
     end
 
-  end
+    context 'with another guide' do
+      let!(:admin) { Fabricate :user, admin: true }
+      let!(:admin_guide) { Fabricate :guide }
+      let!(:endorsement) { Fabricate :endorsement, endorsed: measure }
+      let!(:tag) { Fabricate :tag, tagged: measure }
 
+      before(:each) { sign_in admin }
+
+      describe '#expropriate' do
+        it 'clones a measure to a different guide' do
+          post :expropriate, { guide_id: admin_guide.id, expropriator_id: measure.id }
+          cloned = admin_guide.measures.first
+          expect(cloned.title).to eq(measure.title)
+
+          expect(cloned.endorsements.first.endorser).to eq(measure.endorsements.first.endorser)
+          expect(cloned.tags.first.name).to eq(measure.tags.first.name)
+        end
+
+        it 'redirects to all measures for cloned to guide' do
+          post :expropriate, { guide_id: admin_guide.id, expropriator_id: measure.id }
+          expect(response).to redirect_to guide_measures_path(admin_guide, locale: :en)
+        end
+      end
+    end
+  end
 end

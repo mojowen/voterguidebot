@@ -27,6 +27,30 @@ class Contest < ActiveRecord::Base
       methods: :template }.update(options || {}))
   end
 
+  def full_clone
+    cloned = dup
+
+    @candidate_ids = Hash[ candidates.map { |cand| [cand.id, cand.dup] } ]
+    cloned.candidates = candidate_ids.values
+    cloned.candidates.each.with_index do |candidate, index|
+      candidate.endorsements = candidates[index].endorsements.map(&:dup)
+    end
+
+    cloned.questions = questions.map do |question|
+      cloned_question = question.dup
+      cloned_question.tags = question.tags.map(&:dup)
+      cloned_question.answers = question.answers.map do |answer|
+        cloned_answer = answer.dup
+        cloned_answer.question = cloned_question
+        cloned_answer.candidate = candidate_ids[answer.candidate_id]
+        cloned_answer
+      end
+      cloned_question
+    end
+
+    cloned
+  end
+
   private
 
   attr_accessor :candidate_ids

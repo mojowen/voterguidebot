@@ -3,4 +3,5 @@
     .tick
     = link_to @guide.name.try(:humanize) || 'My Guide', guide_path(@guide)
     = yield
-
+    - if admin_not_owner?(@guide)
+      %em{ style: 'color: rgba(255, 255, 255, 0.6); font-size: 9px; vertical-align: middle' } viewing as admin

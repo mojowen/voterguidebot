@@ -114,7 +114,7 @@ RSpec.describe ContestsController, active_mocker: true do
       end
     end
     describe '#destroy' do
-      it 'redirects to index' do
+      it 'returns successful' do
         delete :destroy, { guide_id: guide.id, id: contest.id }
         be_success
       end
@@ -123,6 +123,14 @@ RSpec.describe ContestsController, active_mocker: true do
         expect do
           delete :destroy, { guide_id: guide.id, id: contest.id }
         end.to change(Contest, :count).by(-1)
+      end
+    end
+
+    describe '#index' do
+      render_views
+      it 'returns successfully' do
+        get :index, { guide_id: guide.id }
+        be_success
       end
     end
 
@@ -138,6 +146,33 @@ RSpec.describe ContestsController, active_mocker: true do
           put :position, { guide_id: guide.id, contests: [other_contest.id, contest.id] }
           expect(other_contest.reload.position).to eq(0)
           expect(contest.reload.position).to eq(1)
+        end
+      end
+    end
+
+    context 'with another guide' do
+      let!(:admin) { Fabricate :user, admin: true }
+      let!(:admin_guide) { Fabricate :guide }
+      let!(:candidate) { Fabricate :candidate, contest: contest }
+      let!(:question) { Fabricate :question, contest: contest }
+      let!(:answer) { Fabricate :answer, candidate: candidate, question: question }
+
+      before(:each) { sign_in admin }
+
+      describe '#expropriate' do
+        it 'clones a contest to a different guide' do
+          post :expropriate, { guide_id: admin_guide.id, expropriator_id: contest.id }
+          cloned = admin_guide.contests.first
+          expect(cloned.title).to eq(contest.title)
+
+          expect(cloned.candidates.first.name).to eq(candidate.name)
+          expect(cloned.questions.first.text).to eq(contest.questions.first.text)
+          expect(cloned.answers.first.text).to eq(contest.answers.first.text)
+        end
+
+        it 'redirects to all contests for cloned to guide' do
+          post :expropriate, { guide_id: admin_guide.id, expropriator_id: contest.id }
+          expect(response).to redirect_to guide_contests_path(admin_guide, locale: :en)
         end
       end
     end

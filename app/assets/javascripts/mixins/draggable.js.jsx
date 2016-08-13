@@ -1,8 +1,13 @@
 var Draggable = {
+  getDefaultProps: function() {
+    return { draggable: true }
+  },
   getInitialState: function() {
     return { draggable: false }
   },
   draggable_props: function() {
+    if( !this.props.draggable ) return {}
+
     return { draggable: this.state.draggable,
              onDragOver: this.dragOver,
              onDragStart: this.dragStart,
@@ -52,6 +57,8 @@ var Draggable = {
     }
   },
   draggable: function() {
+    if( !this.props.draggable ) return ''
+
     return <div onMouseDown={this.canDrag}
                onMouseUp={this.cantDrag}
                className="draggable" >

@@ -1,7 +1,7 @@
 var ContestsForm = React.createClass({
   mixins: [FormBase],
   getDefaultProps: function() {
-    return { contests: [] }
+    return { contests: [], draggable: true }
   },
   getInitialState: function() {
     return { contests: this.props.contests }
@@ -48,6 +48,8 @@ var ContestsForm = React.createClass({
                          handleDrag={this.handleDrag}
                          handleRemove={this.handleRemove}
                          url={this.props.url}
+                         draggable={this.props.draggable}
+                         expropriatable={this.props.expropriatable}
                          contests={this.state.contests} />
     }, this)
 
