@@ -23,12 +23,18 @@ class MeasuresController < ApplicationController
 
   def update_measure
     @measure.assign_attributes measure_param
-    @measure.save
-    {
-      path: edit_guide_measure_path(@guide, @measure),
-      url: guide_measure_path(@guide, @measure),
-      measure: @measure.reload
-    }
+    if @measure.save
+      {
+        path: edit_guide_measure_path(@guide, @measure),
+        url: guide_measure_path(@guide, @measure),
+        measure: @measure.reload
+      }
+    else
+      {
+        error: @measure.error.full_message.join(','),
+        measure: @measure
+      }
+    end
   end
 
   def init_measure

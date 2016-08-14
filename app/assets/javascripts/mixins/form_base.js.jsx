@@ -13,9 +13,9 @@ var FormBase = {
   setNewObjectState: function() {
     this.setState({ method: 'post', changed: true, autosave: false })
   },
-  handleError: function(res, message) {
+  handleError: function(body) {
     this.setState({ loading: false, errored: true, autosave: false })
-    this.notify(message || 'Something went wrong saving')
+    this.notify(body.error || 'Something went wrong saving')
   },
   changeNotifer: function() {
     this.setState({ changed: true })

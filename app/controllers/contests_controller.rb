@@ -23,12 +23,18 @@ class ContestsController < ApplicationController
 
   def update_contest
     @contest.assign_attributes contest_params
-    @contest.save
-    {
-      path: edit_guide_contest_path(@guide, @contest),
-      url: guide_contest_path(@guide, @contest),
-      contest: @contest.reload
-    }
+    if @contest.save
+      {
+        path: edit_guide_contest_path(@guide, @contest),
+        url: guide_contest_path(@guide, @contest),
+        contest: @contest.reload
+      }
+    else
+      {
+        error: @contest.error.full_message.join(','),
+        contest: @contest
+      }
+    end
   end
 
   def init_contest
