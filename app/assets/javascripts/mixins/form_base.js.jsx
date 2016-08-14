@@ -17,12 +17,14 @@ var FormBase = {
     this.setState({ loading: false, errored: true, autosave: false })
     this.notify(body.error || 'Something went wrong saving')
   },
+  debounceDelay: 2500,
   changeNotifer: function() {
     this.setState({ changed: true })
     if( !this.state.autosave ) return
-    if( this.saveGuide === 'undefined' ) return
+    if( typeof this.saveGuide === 'undefined' ) return
 
-    this.debounceSaveGuide = this.debounceSaveGuide || _.debounce(this.saveGuide, 2500)
+
+    this.debounceSaveGuide = this.debounceSaveGuide || _.debounce(this.saveGuide, this.debounceDelay)
     this.debounceSaveGuide()
   },
   handleSuccess: function(res, message) {

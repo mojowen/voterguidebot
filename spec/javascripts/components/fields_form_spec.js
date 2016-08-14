@@ -61,7 +61,9 @@ describe('FieldsForm', function() {
     spyOn(this.component, 'notify')
     this.component.updateGuide(this.url, {})
     request = jasmine.Ajax.requests.mostRecent()
-    request.respondWith({  responseText: '', status: 500 })
+    request.respondWith({
+      responseText: JSON.stringify({ error: 'Something went wrong saving' }),
+      status: 500 })
     expect(this.component.notify)
       .toHaveBeenCalledWith('Something went wrong saving')
   })

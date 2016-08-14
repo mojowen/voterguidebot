@@ -7,6 +7,10 @@ var ContestForm = React.createClass({
     if( !this.props.contest.id ) this.setNewObjectState()
   },
   handleSubmit: function(event) {
+    event.preventDefault()
+    this.saveGuide()
+  },
+  saveGuide: function() {
     var that = this,
         contest = this.refs.contest
 
@@ -22,7 +26,6 @@ var ContestForm = React.createClass({
         contest.setState(res.body.contest)
       }
     )
-    event.preventDefault()
   },
   render: function() {
     return <div>
