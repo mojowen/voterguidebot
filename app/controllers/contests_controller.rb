@@ -6,6 +6,10 @@ class ContestsController < ApplicationController
   before_filter :init_contest, only: [:new, :create]
   before_filter :find_contest, only: [:edit, :update, :destroy]
 
+  def index
+    redirect_to new_guide_contest_path(@guide) if @guide.contests.empty?
+  end
+
   def create
     render json: update_contest
   end

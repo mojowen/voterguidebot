@@ -24,14 +24,18 @@
           %td
             .mui--pull-left
               - if guide.location
-                = guide.location.city
-                ,
-                = guide.location.state
+                - if guide.location.city.present?
+                  = guide.location.city
+                  ,
+                  = guide.location.state
+                - else
+                  The State of
+                  = guide.location.state_name
           %td
-            .mui--pull-left
+            .mui--pull-left.info
               = guide.users.uniq.map(&:name).reject(&:blank?).join(', ')
           %td
-            .mui--pull-left
+            .mui--pull-left.info
               = link_to guide_contests_path(guide) do
                 %i.fa.fa-users
                 &nbsp;

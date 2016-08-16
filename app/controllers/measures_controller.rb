@@ -6,6 +6,10 @@ class MeasuresController < ApplicationController
   before_filter :init_measure, only: [:new, :create]
   before_filter :find_measure, only: [:edit, :update, :destroy]
 
+  def index
+    redirect_to new_guide_measure_path(@guide) if @guide.measures.empty?
+  end
+
   def create
     render json: update_measure
   end
