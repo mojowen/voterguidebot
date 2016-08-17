@@ -30,9 +30,12 @@ var FieldsForm = React.createClass({
                            changeNotifier={this.changeNotifer}
                            {...field} />
     }, this)
-    return <form ref="form_wrapper" onSubmit={this.handleSubmit}>
-            { fields }
+    return <div>
+            <form ref="form_wrapper" onSubmit={this.handleSubmit}>
+              { fields }
+            </form>
             { this.menuComponent() }
-          </form>
+          </div>
+
   }
 })
