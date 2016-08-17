@@ -1,5 +1,5 @@
 .mui-row
-  .mui-col-md-8.mui-col-md-offset-2
+  .mui-col-md-12
     %h2
       = link_to 'Your Guides', root_url
       \/
@@ -13,6 +13,7 @@
           %th Users
           %th Contests
           %th Measures
+          %th
       %tbody
       - Guide.all.each do |guide|
         - next if guide.users.include? current_user
@@ -52,3 +53,7 @@
                 %span.mui--text-dark-hint /
                 = guide.template.available_pages
               .small pages
+          %td
+            = button_link_to preview_guide_path(guide), class: 'mui-btn--small', target: '_blank', btn: :primary do
+              %i.fa-newspaper-o.fa
+              Preview

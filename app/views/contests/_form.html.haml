@@ -1,3 +1,3 @@
 .mui-row
-  .mui-col-md-10.mui-col-md-offset-2.mui-col-lg-11.mui-col-lg-offset-1{ style: 'margin-top: 30px' }
+  .mui-col-md-10.mui-col-md-offset-2{ style: 'margin-top: 30px' }
     = react_component :ContestForm, contest: contest, url: contest.new_record? ? guide_contests_path(guide) : guide_contest_path(guide, contest), languages: guide.languages, expropriatable: admin_not_owner?(@guide) ? { path: expropriate_guide_contests_path(@guide), guides: current_user.guides.uniq } : false

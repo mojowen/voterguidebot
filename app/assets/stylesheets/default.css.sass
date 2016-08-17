@@ -9,6 +9,8 @@ $grey-blue: #7091a3
 $pink: #d81b59
 $fuzzy_blue: lighten($blue, 35)
 
+$margin: 60px
+
 @import 'lib/mixins'
 
 *
@@ -49,10 +51,10 @@ p, div
   bottom: 0
 
 .content
-  top: 80px
-  left: 80px
-  right: 80px
-  bottom: 80px
+  top: $margin
+  left: $margin
+  right: $margin
+  bottom: $margin
   position: absolute
   padding: 20px 0
 
@@ -67,21 +69,21 @@ p, div
   top: 0
   left: 0
   right: 0
-  height: 80px
+  height: $margin
   background-color: $blue
   color: white
   h2, h4
     position: absolute
-    left: 80px
+    left: $margin
   h2
-    top: 36px
+    top: 26px
     font-size: 18px
     color: white
   h4
     font-size: 12px
     text-transform: lowercase
     font-style: italic
-    top: 20px
+    top: 10px
 
 
 .footer
@@ -89,7 +91,7 @@ p, div
   bottom: 0
   left: 0
   right: 0
-  height: 80px
+  height: $margin
   background: transparent top left no-repeat
   background-size: cover
   &.footer_1
@@ -106,22 +108,22 @@ p, div
   div
     display: inline-block
     vertical-align: top
-    margin-right: 10px
-    height: 60px
+    margin: 4px 10px 4px 0
+    height: 72px
     &.photo
       width: 20%
       text-align: center
     &.name
       text-align: right
-      width: 20%
+      width: 26%
       h3
-        line-height: 10px
+        line-height: 14px
       .party
         font-size: 8px
         font-style: italic
         line-height: 8px
   .img
-    @include frame(40px)
+    @include frame(50px)
   ul
     margin: 0
     padding-left: 20px
@@ -135,10 +137,10 @@ p, div
     height: 80px
     div
       margin: 0
-    .name, .photo
-      height: 45px
     .name
-      width: 60%
+      width: 100%
+      padding-right: 4px
+      height: 45px
       text-align: left
       h3
         font-size: 10px
@@ -152,43 +154,74 @@ p, div
         font-weight: bold
       p
         font-size: 8px
-        color: $grey-blue
+        line-height: 8px
     .photo
-      width: 38%
+      float: right
+      width: auto
+      height: auto
+      padding: 0 4px 4px
       .img
         @include frame(40px)
     .endorse
       width: 100%
-      em
-        font-size: 6px
-      ul
-        padding: 0
-        li
-          list-style: none
-          padding: 0
-          color: $grey-blue
+      margin-top: 4px
+      em, li
+        font-size: 8px
+        line-height: 8px
 
 .candidates
-  &.count--2
-    .small
-      width: 48%
   &.count--3
     .small
       width: 31%
+      .img
+        @include frame(25px)
+
+  &.count--4
+    .small
+      width: 24%
+      .name
+        h3
+          font-size: 7px
+          line-height: 8px
+        p
+          font-size: 6px
+          line-height: 6px
+      .photo
+        .img
+          @include frame(22px)
+      .endorse
+        em, li
+          font-size: 6px
+          line-height: 6px
+
+    .questions
+      table
+        th
+          font-size: 6px
+          width: 20px
+        td
+          font-size: 9px
+          padding: 1px 2px
+          &.question
+            min-width: 80px
+
   .questions
-    left: 80px
-    right: 80px
+    left: auto
+    right: auto
+    bottom: -$margin + 20px
+    position: absolute
     .stance
       width: 150px
       font-size: 8px
       vertical-align: bottom
       padding-bottom: 0
+      color: $blue
     .question
       min-width: 100px
     th
       h3
-        font-size: 8px
-      width: 60px
+        font-size: 6px
+      width: 30px
       padding: 0
       vertical-align: bottom
 
@@ -197,8 +230,7 @@ p, div
   right: 40px
   th
     h3
-      font-size: 10px
-
+      font-size: 6px
     padding: 0 4px 10px
     &.stance
       padding: 0 0 10px
@@ -208,6 +240,7 @@ p, div
       vertical-align: bottom
     .img
       @include frame(20px)
+      vertical-align: top
     text-align: center
     font-size: 12px
     vertical-align: top
@@ -215,8 +248,9 @@ p, div
     &:nth-child(odd)
       background: $fuzzy_blue
   td
+    min-width: 44px
     &.question
-      min-width: 240px
+      min-width: 140px
       text-align: left
       padding: 4px
     text-align: center
@@ -263,8 +297,8 @@ p, div
         width: 40px
 
 .title
-  background: transparent url('default/vote_here.png') top left
-  background-size: contain
+  background: transparent url('default/vote_here.png') center center no-repeat
+  background-size: cover
   .box
     border: 40px solid rgba(white, 0.75)
   .inner

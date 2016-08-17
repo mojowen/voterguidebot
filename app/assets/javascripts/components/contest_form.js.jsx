@@ -10,6 +10,10 @@ var ContestForm = React.createClass({
     event.preventDefault()
     this.saveGuide()
   },
+  anchor: function() {
+    if( !this.props.contest.id ) return ''
+    return '#contest-'+this.props.contest.id
+  },
   saveGuide: function() {
     var that = this,
         contest = this.refs.contest

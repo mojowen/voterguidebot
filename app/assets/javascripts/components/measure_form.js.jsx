@@ -12,6 +12,10 @@ var MeasureForm = React.createClass({
     event.preventDefault()
     this.saveGuide()
   },
+  anchor: function() {
+    if( !this.props.measure.id ) return ''
+    return '#measure-'+this.props.measure.id
+  },
   saveGuide: function() {
     var that = this,
         measure = this.refs.measure,

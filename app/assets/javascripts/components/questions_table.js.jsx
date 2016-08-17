@@ -24,7 +24,7 @@ var QuestionsTable = React.createClass({
                            template={this.props.template}
                            handleChange={this.props.handleChange} />
         }, this),
-      table_display = this.props.questions.length < 1 ? 'none' : 'block'
+      table_display = this.props.questions.length < 1 ? 'none' : 'table'
       add_display = this.props.questions.length >= this.props.template.questions.max ? 'none' : 'block'
 
     return <div>

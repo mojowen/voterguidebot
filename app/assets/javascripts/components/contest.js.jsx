@@ -26,7 +26,7 @@ var Contest = React.createClass({
              description: this.props.description }
   },
   render: function() {
-    return <div className="mui-col-md-11">
+    return <div>
       <ContestDetails ref="details"
                       title={this.state.title}
                       description={this.state.description}

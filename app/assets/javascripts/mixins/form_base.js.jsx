@@ -70,8 +70,9 @@ var FormBase = {
     Turbolinks.visit([document.path, new_search.join('&')].join('?'))
   },
   preview_guide_url: function() {
-    var guide_base = document.location.pathname.match(/\/guides\/\d+\//)
-    return guide_base + 'preview'
+    var guide_base = document.location.pathname.match(/\/guides\/\d+\//),
+        anchor = typeof this.anchor !== 'undefined' ? this.anchor() : ''
+    return guide_base + 'preview' + anchor
   },
   saveIcon: function() {
     if( this.state.loading ) return 'fa-save fa-pulse'

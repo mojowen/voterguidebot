@@ -5,7 +5,7 @@ var Candidates = React.createClass({
              handleChange: function() { } }
   },
   newCandidate: function() {
-    return this.newObject('candidate', { start_open: true, endorsements: [] })
+    return this.newObject('candidate', { endorsements: [] })
   },
   handleAdd: function(event) {
     var candidates = this.props.candidates
