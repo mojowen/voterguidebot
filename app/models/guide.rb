@@ -19,7 +19,7 @@ class Guide < ActiveRecord::Base
   validates :election_date, presence: true
 
   def template
-    @template ||= Template.new 'default'
+    @template ||= Template.new template_name
   end
 
   def slug

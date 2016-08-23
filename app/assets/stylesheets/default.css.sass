@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic,600)
-@import 'lib/normalize.css'
+@import './lib/normalize.css'
 
 $width: 5in
 $height: 5in
@@ -95,9 +95,9 @@ p, div
   background: transparent top left no-repeat
   background-size: cover
   &.footer_1
-    background-image: url('default/footer_1.png')
+    background-image: asset-data-url('default/footer_1.png')
   &.footer_2
-    background-image: url('default/vote_here.png')
+    background-image: asset-data-url('default/vote_here.png')
     background-position: center middle
 
 .candidates
@@ -297,7 +297,7 @@ p, div
         width: 40px
 
 .title
-  background: transparent url('default/vote_here.png') center center no-repeat
+  background: transparent asset-data-url('default/vote_here.png') center center no-repeat
   background-size: cover
   .box
     border: 40px solid rgba(white, 0.75)

@@ -1,5 +1,6 @@
 class Template < OpenStruct
   def initialize(template_name)
+    @template_name = template_name
     super config_file(template_name)
   end
 
@@ -8,7 +9,12 @@ class Template < OpenStruct
   end
 
   def render
-    File.join('templates', view)
+    { template: template_file_path(view), layout: template_file_path(layout) }
+  end
+
+  def template_file_path(file)
+    return unless file
+    File.join('templates', folder || template_name, file)
   end
 
   def self.default
@@ -16,6 +22,8 @@ class Template < OpenStruct
   end
 
   private
+
+  attr_reader :template_name
 
   def config_file(name, inheritable = true)
     config = YAML.load_file Rails.root.join('config', 'templates', "#{name}.yml")
