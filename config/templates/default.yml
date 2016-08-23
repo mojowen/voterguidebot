@@ -2,7 +2,7 @@
 name: Default Voter Guide
 
 screenshot: default.png
-view: default
+view: guide
 
 available_pages: 10
 filler_pages: 4
@@ -308,7 +308,7 @@ fields:
     placeholder: A paragraph explaining where you need to go to vote
     example: From February 29 through March 12, all 51 Early Voting sites will be open Monday through Saturday from 9am - 5pm. Go to chicagoelections.com to find a location near you. Please bring a government photo ID during early voting. For both “Grace Period” and “Early Voting” you will register and vote in the same day. To find polling locations for Election Day or early voting go to chicagoelections.com
     element: textarea
-    limit: 275
+    limit: 450
     name: where_you_got_to_go
   -
     label: Find Out More
