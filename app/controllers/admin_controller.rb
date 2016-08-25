@@ -9,9 +9,15 @@ class AdminController < ApplicationController
       notice: (user.promote!(current_user) ? "Successfully #{message}" : "FAIL #{message}"))
   end
 
+  def impersonate
+    user = User.find(params[:user])
+    sign_in(:user, user)
+    redirect_to root_path, notice: "Impersonating #{user.name}"
+  end
+
   private
 
-  def authenticate_admin!  
+  def authenticate_admin!
     return redirect_to root_url unless current_user.admin
   end
 end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     get '/settings' => 'admin#settings', as: 'admin_settings'
     post '/promote' => 'admin#promote', as: 'admin_promote'
+    post '/impersonate' => 'admin#impersonate', as: 'admin_impersonate'
 
     resources :guides do
       member do
