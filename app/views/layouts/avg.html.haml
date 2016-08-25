@@ -1,0 +1,57 @@
+!!!
+%html
+  %head
+    //= javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'avg', media: 'all'
+    %title
+      - if content_for :title
+        = yield :title
+      - else
+        American Voter Guide
+
+    %meta{ name: "viewport", content: "width=device-width,initial-scale=1" }
+  %body{ class: yield(:body_class) }
+    #header.mui-appbar
+      .mui-container
+        %table{ width: '100%' }
+          %tr.mui--appbar-height
+            %td
+              = link_to image_tag('avg/logo.svg'), 'http://americanvoterguide.org'
+            %td
+              .links
+                = link_to 'About', '/about'
+                .menu
+                  = link_to 'Your State', '/'
+                  %ul
+                    - Location::STATES.values.each do |name|
+                      %li= link_to name, "/#{name.gsub(/\s/,'').downcase}"
+                = link_to 'Register To Vote', '/'
+      - if content_for :header
+        = yield :header
+      - else
+
+    #content
+      .mui-container
+        = yield
+
+    #footer
+      .mui-container
+        .mui-row
+          .mui-col-xs-4
+            = link_to image_tag('avg/logo.svg'), 'http://americanvoterguide.org'
+          .mui-col-xs-4
+            = link_to 'Home', 'http://americanvoterguide.org'
+            = link_to 'About American Voter Guide', 'http://americanvoterguide.org'
+            = link_to 'Register to Vote', 'http://americanvoterguide.org'
+            = link_to 'Find A Polling Place', 'http://americanvoterguide.org'
+            = link_to 'Partner With Us', 'http://americanvoterguide.org'
+          .mui-col-xs-3
+            %h5 Contact:
+            %p The Bus Fed Action
+            %p 333 SE 2nd Ave
+            %p Portland, OR 97214
+            %p 503-736-2501
+          .mui-col-xs-1
+            %h5 Connect:
+            %i.fa.fa-facebook
+            %i.fa.fa-twitter

@@ -1,0 +1,16 @@
+
+name: Great American Voter Guide - National
+
+view: national
+
+available_pages: 1
+filler_pages: 0
+
+contests:
+  per_page: 1
+
+candidates:
+  max: 4
+
+measures:
+  per_page: 0

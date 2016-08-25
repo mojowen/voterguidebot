@@ -1,0 +1,177 @@
+
+name: Great American Voter Guide State
+
+view: state
+folder: avg
+layout: avg
+
+inherits: default
+
+available_pages: 30
+filler_pages: 0
+
+contests:
+  per_page: 1
+
+measures:
+  per_page: 1
+
+candidates:
+  max: 4
+
+fields:
+
+states:
+  AL:
+    video: ragLSjBiGIc
+    pic: Alabama.jpg
+  AK:
+    video: RZd7Rp4m8gs
+    pic: Alaska.jpg
+  AZ:
+    video: _1fKol8tBV8
+    pic: Arizona.jpg
+  AR:
+    video: gfCrwRUQJ3Q
+    pic: arkansas.jpg
+  CA:
+    video: uTF5o-Ma1Yg
+    pic: California.jpg
+  CO:
+    video: -YbN3aXcz98
+    pic: Colorado.jpg
+  CT:
+    video: Yj3UgguB9Nc
+    pic: Connecticut.jpg
+  DC:
+    video: caPj8bMmC1Y
+    pic: Washington DC.jpg
+  DE:
+    video: s8wwn3LA9uk
+    pic: Delaware.jpg
+  FL:
+    video: UlNCOrYkQBI
+    pic: Florida.jpg
+  GA:
+    video: Ap0e_O2RiLw
+    pic: Georgia.jpg
+  HI:
+    video: 6n6xAo2T-6o
+    pic: Hawaii.jpeg
+  ID:
+    video: c9RguBn58Iw
+    pic: Idaho.jpg
+  IL:
+    video: 8msQE61eREE
+    pic: Illinois.jpg
+  IN:
+    video: 2E2Whkw6wJw
+    pic: Indiana.jpg
+  IA:
+    video: nEN3Wuo2RmI
+    pic: Iowa.jpg
+  KS:
+    video: YwsELW1L0nM
+    pic: Kansas.jpg
+  KY:
+    video: SLarfndxNAg
+    pic: Kentucky.jpg
+  LA:
+    video: XtPU67RznWQ
+    pic: Louisiana.jpg
+  ME:
+    video: g1gdYGvoXEA
+    pic: Maine.jpg
+  MD:
+    video: ClBtYKEt5FU
+    pic: Maryland.jpg
+  MA:
+    video: 8uZywLgUWr0
+    pic: Massachusetts.jpg
+  MI:
+    video: w_pk22R6O7w
+    pic: Michigan.jpg
+  MN:
+    video: UtXybSbIOMc
+    pic: Minnesota.jpg
+  MS:
+    video: qOUNGL5mdDI
+    pic: Mississippi.jpg
+  MO:
+    video: YU-IlCoBi-8
+    pic: missouri.jpg
+  MT:
+    video: NLAUFj-4zXY
+    pic: Montana.jpg
+  NE:
+    video: P8Y562yAbyo
+    pic: Nebraska.jpg
+  NV:
+    video: x2_lHK93f8s
+    pic: Nevada.jpg
+  NH:
+    video: G8nJ95oCPU0
+    pic: New Hampshire.jpg
+  NJ:
+    video: XDEaYHbGieo
+    pic: New Jersey.jpg
+  NM:
+    video: 6RKCG5_Uq_Q
+    pic: New Mexico.png
+  NY:
+    video: 2K5a_NmSoYE
+    pic: New York.jpg
+  NC:
+    video: 14AJJjXjknQ
+    pic: North Carolina.jpg
+  ND:
+    video: gFJ5qeT-Jzk
+    pic: North Dakota.jpg
+  OH:
+    video: qCvdjNnT0Qc
+    pic: Ohio.jpg
+  OK:
+    video: nPY6d-BUClc
+    pic: Oklahoma.jpg
+  OR:
+    video: mI8D_eWAWPo
+    pic: Oregon.jpg
+  PA:
+    video: AMJQ5pqiRNA
+    pic: Pennsylvania.jpg
+  RI:
+    video: NN5NLNqyWD0
+    pic: Rhode Island.jpg
+  SC:
+    video: 83XBcxZQaiM
+    pic: South Carolina.jpg
+  SD:
+    video: pduL3Yyx410
+    pic: South Dakota.jpg
+  TN:
+    video: K6fYHqrS5FA
+    pic: Tennessee.JPG
+  TX:
+    video: BWas4N2d-0E
+    pic: Texas.jpg
+  UT:
+    video: xpFw9EvEjWY
+    pic: Utah.jpg
+  VT:
+    video: kdVjzsLbrpU
+    pic: Vermont.jpg
+  VA:
+    video: Ogth3fmIaME
+    pic: Virginia.jpg
+  WA:
+    video: ju1maRPLz8Y
+    pic: Washington.jpg
+  WV:
+    video: GidAHJ8O8Gw
+    pic: West Virginia.jpg
+  WI:
+    video: T8Uek3S1BUs
+    pic: Wisconsin.jpg
+  WY:
+    video: ZropUXblV8I
+    pic: Wyoming.jpg

@@ -13,7 +13,7 @@ class Location < ActiveRecord::Base
 
   STATES = { AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas',
              CA: 'California', CO: 'Colorado', CT: 'Connecticut',
-             DC: 'WashingtonDC', DE: 'Delaware', FL: 'Florida', GA: 'Georgia',
+             DC: 'Washington DC', DE: 'Delaware', FL: 'Florida', GA: 'Georgia',
              HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois', IN: 'Indiana',
              IA: 'Iowa', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana',
              ME: 'Maine', MD: 'Maryland', MA: 'Massachusetts', MI: 'Michigan',
@@ -29,6 +29,11 @@ class Location < ActiveRecord::Base
 
   def state_name
     STATES[state.upcase.to_sym]
+  end
+
+  def state_slug
+    return '' unless state_name
+    state_name.gsub(/\s/,'').downcase
   end
 
   def self.to_state_abv(name)

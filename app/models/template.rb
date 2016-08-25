@@ -9,7 +9,7 @@ class Template < OpenStruct
   end
 
   def render
-    { template: template_file_path(view), layout: template_file_path(layout) }
+    { template: template_file_path(view), layout: layout }
   end
 
   def template_file_path(file)
