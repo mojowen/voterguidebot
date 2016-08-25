@@ -15,14 +15,16 @@
             <span class="party"><%= candidate.party %></span>
             <p><%= candidate.bio %></p>
           </div>
-          <div class="endorse">
-            <em>endorsed by...</em>
-            <ul class="endorsements">
-              <% candidate.endorsements.each do |endorsement| %>
-                <li><%= endorsement.endorser %></li>
-              <% end %>
-            </ul>
-          </div>
+          <% if candidate.endorsements %>
+            <div class="endorse">
+              <em>endorsed by...</em>
+              <ul class="endorsements">
+                <% candidate.endorsements.each do |endorsement| %>
+                  <li><%= endorsement.endorser %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         </div>
       <% end %>
       <div class="questions">

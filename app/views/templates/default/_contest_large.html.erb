@@ -15,13 +15,15 @@
           </div>
           <div class="photo"><%= render @guide.template.template_file_path('photo'), candidate: candidate %></div>
           <div class="third">
-            <em>endorsed by...</em>
-            <ul class="endorsements">
-              <% candidate.endorsements.each do |endorsement| %>
-                <li><%= endorsement.endorser %></li>
-              <% end %>
-            </ul>
-          </div>
+            <% if candidate.endorsements %>
+              <em>endorsed by...</em>
+              <ul class="endorsements">
+                <% candidate.endorsements.each do |endorsement| %>
+                  <li><%= endorsement.endorser %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
