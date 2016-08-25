@@ -38,154 +38,154 @@ fields:
 states:
   AL:
     video: ragLSjBiGIc
-    pic: Alabama.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Alabama.jpg
   AK:
     video: RZd7Rp4m8gs
-    pic: Alaska.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Alaska.jpg
   AZ:
     video: _1fKol8tBV8
-    pic: Arizona.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Arizona.jpg
   AR:
     video: gfCrwRUQJ3Q
-    pic: arkansas.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/arkansas.jpg
   CA:
     video: uTF5o-Ma1Yg
-    pic: California.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/California.jpg
   CO:
     video: -YbN3aXcz98
-    pic: Colorado.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Colorado.jpg
   CT:
     video: Yj3UgguB9Nc
-    pic: Connecticut.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Connecticut.jpg
   DC:
     video: caPj8bMmC1Y
-    pic: Washington DC.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Washington+DC.jpg
   DE:
     video: s8wwn3LA9uk
-    pic: Delaware.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Delaware.jpg
   FL:
     video: UlNCOrYkQBI
-    pic: Florida.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Florida.jpg
   GA:
     video: Ap0e_O2RiLw
-    pic: Georgia.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Georgia.jpg
   HI:
     video: 6n6xAo2T-6o
-    pic: Hawaii.jpeg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Hawaii.jpeg
   ID:
     video: c9RguBn58Iw
-    pic: Idaho.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Idaho.jpg
   IL:
     video: 8msQE61eREE
-    pic: Illinois.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Illinois.jpg
   IN:
     video: 2E2Whkw6wJw
-    pic: Indiana.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Indiana.jpg
   IA:
     video: nEN3Wuo2RmI
-    pic: Iowa.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Iowa.jpg
   KS:
     video: YwsELW1L0nM
-    pic: Kansas.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Kansas.jpg
   KY:
     video: SLarfndxNAg
-    pic: Kentucky.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Kentucky.jpg
   LA:
     video: XtPU67RznWQ
-    pic: Louisiana.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Louisiana.jpg
   ME:
     video: g1gdYGvoXEA
-    pic: Maine.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Maine.jpg
   MD:
     video: ClBtYKEt5FU
-    pic: Maryland.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Maryland.jpg
   MA:
     video: 8uZywLgUWr0
-    pic: Massachusetts.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Massachusetts.jpg
   MI:
     video: w_pk22R6O7w
-    pic: Michigan.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Michigan.jpg
   MN:
     video: UtXybSbIOMc
-    pic: Minnesota.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Minnesota.jpg
   MS:
     video: qOUNGL5mdDI
-    pic: Mississippi.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Mississippi.jpg
   MO:
     video: YU-IlCoBi-8
-    pic: missouri.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/missouri.jpg
   MT:
     video: NLAUFj-4zXY
-    pic: Montana.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Montana.jpg
   NE:
     video: P8Y562yAbyo
-    pic: Nebraska.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Nebraska.jpg
   NV:
     video: x2_lHK93f8s
-    pic: Nevada.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Nevada.jpg
   NH:
     video: G8nJ95oCPU0
-    pic: New Hampshire.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/New+Hampshire.jpg
   NJ:
     video: XDEaYHbGieo
-    pic: New Jersey.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/New+Jersey.jpg
   NM:
     video: 6RKCG5_Uq_Q
-    pic: New Mexico.png
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/New+Mexico.png
   NY:
     video: 2K5a_NmSoYE
-    pic: New York.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/New+York.jpg
   NC:
     video: 14AJJjXjknQ
-    pic: North Carolina.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/North+Carolina.jpg
   ND:
     video: gFJ5qeT-Jzk
-    pic: North Dakota.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/North+Dakota.jpg
   OH:
     video: qCvdjNnT0Qc
-    pic: Ohio.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Ohio.jpg
   OK:
     video: nPY6d-BUClc
-    pic: Oklahoma.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Oklahoma.jpg
   OR:
     video: mI8D_eWAWPo
-    pic: Oregon.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Oregon.jpg
   PA:
     video: AMJQ5pqiRNA
-    pic: Pennsylvania.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Pennsylvania.jpg
   RI:
     video: NN5NLNqyWD0
-    pic: Rhode Island.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Rhode+Island.jpg
   SC:
     video: 83XBcxZQaiM
-    pic: South Carolina.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/South+Carolina.jpg
   SD:
     video: pduL3Yyx410
-    pic: South Dakota.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/South+Dakota.jpg
   TN:
     video: K6fYHqrS5FA
-    pic: Tennessee.JPG
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Tennessee.JPG
   TX:
     video: BWas4N2d-0E
-    pic: Texas.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Texas.jpg
   UT:
     video: xpFw9EvEjWY
-    pic: Utah.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Utah.jpg
   VT:
     video: kdVjzsLbrpU
-    pic: Vermont.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Vermont.jpg
   VA:
     video: Ogth3fmIaME
-    pic: Virginia.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Virginia.jpg
   WA:
     video: ju1maRPLz8Y
-    pic: Washington.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Washington.jpg
   WV:
     video: GidAHJ8O8Gw
-    pic: West Virginia.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/West+Virginia.jpg
   WI:
     video: T8Uek3S1BUs
-    pic: Wisconsin.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Wisconsin.jpg
   WY:
     video: ZropUXblV8I
-    pic: Wyoming.jpg
+    pic: https://s3-us-west-2.amazonaws.com/voterguides/states/Wyoming.jpg
