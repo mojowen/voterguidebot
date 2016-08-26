@@ -4,7 +4,7 @@ var Expropriator = {
   },
   expropriatorChange: function(event) {
     if( !event.target.value ) return
-    this.refs.expropriator.action = this.props.expropriatable.path.replace(/\d/, event.target.value)
+    this.refs.expropriator.action = this.props.expropriatable.path.replace(/\d+/, event.target.value)
     this.refs.expropriator.submit()
   },
   expropriator: function(id) {
