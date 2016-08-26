@@ -37,6 +37,9 @@
             - unless candidate.endorsements.empty?
               %em Endorsed by:
               = candidate.endorsements.map(&:endorser).to_sentence
+            .share
+              %i.fa.fa-share
+
           - contest.questions.each do |question|
             .fact
               %p
