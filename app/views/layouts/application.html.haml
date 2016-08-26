@@ -26,12 +26,11 @@
                 - if content_for :breadcrumb
                   .breadcrumbs= yield :breadcrumb
               %td.mui--text-right
-                = link_to edit_user_password_path do
-                  %span{ style: 'margin: 10px' }
-                    Hey
-                    = current_user.first_name
-                  = image_tag current_user.pic
-
+                %span{ style: 'margin: 10px' }
+                  Hey
+                  = current_user.first_name
+                = image_tag current_user.pic
+                = link_to 'log out', destroy_user_session_path, method: :delete, style: 'font-size: 8px; display: block; margin-right: 46px; margin-top: -8px;'
     #content
       .mui-container
         - if content_for :outside
