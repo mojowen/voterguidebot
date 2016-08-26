@@ -138,7 +138,7 @@ RSpec.describe MeasuresController, active_mocker: true do
 
     context 'with another guide' do
       let!(:user) { Fabricate :user }
-      let!(:user_guide) { Fabricate :guide }
+      let!(:user_guide) { Fabricate :guide, users: [user] }
       let!(:endorsement) { Fabricate :endorsement, endorsed: measure }
       let!(:tag) { Fabricate :tag, tagged: measure }
 

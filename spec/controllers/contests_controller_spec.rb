@@ -152,7 +152,7 @@ RSpec.describe ContestsController, active_mocker: true do
 
     context 'with another guide' do
       let!(:user) { Fabricate :user }
-      let!(:user_guide) { Fabricate :guide }
+      let!(:user_guide) { Fabricate :guide, users: [user] }
       let!(:candidate) { Fabricate :candidate, contest: contest }
       let!(:question) { Fabricate :question, contest: contest }
       let!(:answer) { Fabricate :answer, candidate: candidate, question: question }
