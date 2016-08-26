@@ -10,10 +10,11 @@
     %br
     - User.all.each do |user|
       = render layout: 'layouts/user', locals: { user: user } do
-        - if user.admin?
-          %strong.mui--text-accent Admin
-        - else
-          = button_link_to 'Promote', admin_promote_path(user: user.id), method: :post
+        %p
+          - if user.admin?
+            %strong.mui--text-accent Admin
+          - else
+            = button_link_to 'Promote', admin_promote_path(user: user.id), method: :post
 
-        = button_link_to 'Promote', admin_impersonate_path(user: user.id), method: :post
+        %p = button_link_to 'Impersonate', admin_impersonate_path(user: user.id), method: :post
 
