@@ -5,7 +5,8 @@
 
 $lightblue: #319ad5
 $blue: #1470be
-$orange: #3c3c3c
+$orange: #e34116
+$red: #ca2127
 $gray: #777
 $darkgray: #3c3c3c
 $lightgray: #e8ecef
@@ -113,3 +114,116 @@ h2
       color: $lightblue
       text-decoration: none
     margin: 10px 0
+
+.embed
+  background: #e8ecef
+  position: relative
+  padding: 60px 0 0
+  margin: 20px 0
+
+  .candidate
+    padding: 10px 0
+    margin: 30px 10px 0
+    border-bottom: 2px solid white
+    min-width: 450px
+    .inner
+      width: 100%
+      position: relative
+      box-sizing: border-box
+
+    .info,
+    .facts
+      display: inline-block
+      vertical-align: top
+    .info
+      height: 180px
+      width: 120px
+      .box
+        background: $lightblue
+        color: white
+        font-size: 9px
+        line-height: 7px
+        padding: 4px
+        strong
+          font-weight: 600
+          font-size: 11px
+        p
+          margin-bottom: 6px
+        a
+          i
+            color: white
+      .photo
+        height: 120px
+        width: 120px
+        background-size: cover
+        background-position: center center
+        background-repeat: no-repeat
+    .facts
+      width: 60%
+      padding: 10px
+      .fact
+        .share
+          position: absolute
+          bottom: 10px
+          right: 10px
+
+  .titles,
+  .left,
+  .right
+    top: 10px
+    position: absolute
+
+  .left,
+  .right
+    background: $orange
+    color: white
+    padding:  0px 16px
+    font-size: 30px
+    font-weight: bold
+    cursor: pointer
+  .left
+    left: 0
+  .right
+    right: 0
+
+  .titles
+    left: 50%
+    right: 50%
+    margin: 0 -25%
+    text-align: center
+    color: white
+    background: $darkgray
+    height: 40px
+    font-size: 20px
+    padding-top: 4px
+
+  .title,
+  .fact
+    display: none
+    &.active
+      display: block
+
+  .tools,
+  .share
+    color: $gray
+
+  .footer
+    text-align: center
+    padding: 10px 0
+    .tools
+      float: right
+      margin: 0 20px 0 0
+    a
+      margin: 0 2px
+      color: $gray
+      width: 12px
+      height: 12px
+      border-radius: 12px
+      display: inline-block
+      background: transparent
+      border: 2px solid $gray
+      cursor: pointer !important
+      &.active, &:hover
+        background: $lightblue
+        border-color: $lightblue
+        text-decoration: none
