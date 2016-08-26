@@ -18,7 +18,7 @@
         = link_to 'All Guides', guides_path
 
 
-    %table.mui-table
+    %table.mui-table{ style: 'font-size: 90%'}
       %thead
         %tr
           %th Guide
@@ -30,11 +30,11 @@
       - current_user.guides.each do |guide|
         %tr
           %td
-            .mui--pull-left
+            .mui--pull-left.mui--text-left
               = link_to guide_path(guide) do
                 %h3= guide.name.humanize
           %td
-            .mui--pull-left
+            .mui--pull-left.mui--text-left
               = link_to fields_guide_path(guide) do
                 %i.fa.fa-map-signs
                 &nbsp;
@@ -43,7 +43,7 @@
                 = guide.template.fields.count
               .small fields
           %td
-            .mui--pull-left.info
+            .mui--pull-left.info.mui--text-left
               = link_to guide_measures_path(guide) do
                 %i.fa.fa-users
                 &nbsp;
@@ -52,7 +52,7 @@
                 = guide.template.available_pages
               .small pages
           %td
-            .mui--pull-left.info
+            .mui--pull-left.info.mui--text-left
               = link_to guide_measures_path(guide) do
                 %i.fa.fa-file-text
                 &nbsp;
@@ -61,7 +61,7 @@
                 = guide.template.available_pages
               .small pages
           %td
-            .mui--pull-left
+            .mui--pull-left.mui--text-left
               - if guide.location
                 - if guide.location.city.present?
                   = guide.location.city

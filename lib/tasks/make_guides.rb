@@ -4,7 +4,7 @@ require 'net/http'
 Location::STATES.each do |state_abv, state_name|
 
   guide_name = "#{state_name} Voter Guide"
-  next if Guide.find(guide_name)
+  next if Guide.find_by name: guide_name
 
   uri = URI("https://maps.googleapis.com/maps/api/geocode/json?" \
             "key=#{ENV['GOOGLE_MAPS_API']}&address=#{state_name}")
@@ -16,12 +16,14 @@ Location::STATES.each do |state_abv, state_name|
                           west: result['geometry']['bounds']['southwest']['lng'],
                           east: result['geometry']['bounds']['northeast']['lng'],
                           north: result['geometry']['bounds']['northeast']['lat'],
-                          south: result['geometry']['bounds']['southwest']['lat']
+                          south: result['geometry']['bounds']['southwest']['lat'],
+                          state: state_abv
 
   Guide.create! location: location,
                 users: User.where(admin: true),
                 name: guide_name,
-                template_name: :state
+                template_name: :state,
+                election_date: Date.new(2016, 11, 8)
 
   puts "Created #{guide_name}"
 end
