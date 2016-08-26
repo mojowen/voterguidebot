@@ -20,7 +20,8 @@ Location::STATES.each do |state_abv, state_name|
 
   Guide.create! location: location,
                 users: User.where(admin: true),
-                name: ,
+                name: guide_name,
                 template_name: :state
 
+  puts "Created #{guide_name}"
 end
