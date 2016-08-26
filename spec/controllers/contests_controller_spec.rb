@@ -151,18 +151,18 @@ RSpec.describe ContestsController, active_mocker: true do
     end
 
     context 'with another guide' do
-      let!(:admin) { Fabricate :user, admin: true }
-      let!(:admin_guide) { Fabricate :guide }
+      let!(:user) { Fabricate :user }
+      let!(:user_guide) { Fabricate :guide }
       let!(:candidate) { Fabricate :candidate, contest: contest }
       let!(:question) { Fabricate :question, contest: contest }
       let!(:answer) { Fabricate :answer, candidate: candidate, question: question }
 
-      before(:each) { sign_in admin }
+      before(:each) { sign_in user }
 
       describe '#expropriate' do
         it 'clones a contest to a different guide' do
-          post :expropriate, { guide_id: admin_guide.id, expropriator_id: contest.id }
-          cloned = admin_guide.contests.first
+          post :expropriate, { guide_id: user_guide.id, expropriator_id: contest.id }
+          cloned = user_guide.contests.first
           expect(cloned.title).to eq(contest.title)
 
           expect(cloned.candidates.first.name).to eq(candidate.name)
@@ -171,8 +171,8 @@ RSpec.describe ContestsController, active_mocker: true do
         end
 
         it 'redirects to all contests for cloned to guide' do
-          post :expropriate, { guide_id: admin_guide.id, expropriator_id: contest.id }
-          expect(response).to redirect_to guide_contests_path(admin_guide, locale: :en)
+          post :expropriate, { guide_id: user_guide.id, expropriator_id: contest.id }
+          expect(response).to redirect_to guide_contests_path(user_guide, locale: :en)
         end
       end
     end

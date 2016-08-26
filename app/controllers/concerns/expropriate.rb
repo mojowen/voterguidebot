@@ -1,8 +1,6 @@
 module Expropriate
   extend ActiveSupport::Concern
 
-  included { before_filter :only_admin, only: [:expropriate] }
-
   def expropriate
     resourceClass = params[:controller].singularize.capitalize.constantize
 
