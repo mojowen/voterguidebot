@@ -7,6 +7,14 @@
         Select a user and click
         %strong.mui--text-accent Promote
         to create an admin.
+    %p
+      %em
+        Select a user and click
+        %strong.mui--text-default
+          %a
+            %i.fa.fa-user-secret
+            Impersonate
+        to log in as if you are them.
     %br
     - User.all.each do |user|
       = render layout: 'layouts/user', locals: { user: user } do

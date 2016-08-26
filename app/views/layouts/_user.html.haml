@@ -1,6 +1,9 @@
 .mui-row.mui-panel
   .mui-col-md-3
-    = image_tag user.pic, width: '100px'
+    - if user.pic && !user.pic.empty?
+      = image_tag user.pic, width: '100px'
+    - else
+      = image_tag 'unknown.png', width: '100px'
   .mui-col-md-6
     %p
       = user.first_name
