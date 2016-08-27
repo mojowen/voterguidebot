@@ -22,6 +22,8 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'exception_notification'
 gem 'puma'
+gem 'phantomjs'
+gem 'shrimp'
 
 group :assets do
   gem 'coffee-rails'
