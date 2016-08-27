@@ -27,33 +27,34 @@
           <% end %>
         </div>
       <% end %>
-      <div class="questions">
-        <table>
-          <thead>
-            <tr>
-              <th class="stance">Do you support</th>
-              <% contest.candidates.each do |candidate| %>
-                <th>
-                  <h3><%= candidate.name %></h3>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <% contest.questions.each do |question| %>
+      <% unless contest.questions.empty? %>
+        <div class="questions">
+          <table>
+            <thead>
               <tr>
-                <td class="question"><%= question.text %></td>
+                <th class="stance">Do you support</th>
                 <% contest.candidates.each do |candidate| %>
-                  <td>
-                    <%= question.answers.find{ |answer| answer.candidate_id == candidate.id }.try(:text) || 'N/A' %>
-                  </td>
+                  <th>
+                    <h3><%= candidate.name %></h3>
+                  </th>
                 <% end %>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-
+            </thead>
+            <tbody>
+              <% contest.questions.each do |question| %>
+                <tr>
+                  <td class="question"><%= question.text %></td>
+                  <% contest.candidates.each do |candidate| %>
+                    <td>
+                      <%= question.answers.find{ |answer| answer.candidate_id == candidate.id }.try(:text) || 'N/A' %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

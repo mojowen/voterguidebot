@@ -20,6 +20,8 @@ candidates:
 
 measures:
   per_page: 1
+  title:
+    limit: 104
 
 endorsements:
   max: 3

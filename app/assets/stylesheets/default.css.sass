@@ -75,6 +75,9 @@ p, div
   h2, h4
     position: absolute
     left: $margin
+    right: $margin
+    white-space: nowrap
+    overflow: hidden
   h2
     top: 26px
     font-size: 18px
@@ -272,7 +275,7 @@ p, div
     margin-top: 10px
     div
       display: inline-block
-      height: 60px
+      min-height: 60px
       vertical-align: top
     .hand
       width: 14%
@@ -287,6 +290,11 @@ p, div
           color: #999
     .endorse
       width: 32%
+      ul
+        font-size: 9px
+        margin-left: 20px
+        padding-left: 0
+
 .about-us
   .logo
     max-width: 200px

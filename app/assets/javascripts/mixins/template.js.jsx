@@ -8,6 +8,9 @@ var Template = {
           text: { limit: 140 },
           samples: []
         },
+        measures: {
+          title: { limit: 104 }
+        },
         endorsements: {
           max: 3
         }

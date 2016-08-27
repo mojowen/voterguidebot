@@ -17,12 +17,14 @@
           <p><%= measure.yes_means %></p>
       </div>
       <div class="endorse">
+        <% unless measure.endorsements.against.empty? %>
           <p>who says YES...</p>
           <ul>
             <% measure.endorsements.for.each do |endorsement| %>
               <li><%= endorsement.endorser %></li>
             <% end %>
           </ul>
+        <% end %>
       </div>
     </div>
     <div class="section">
@@ -34,12 +36,14 @@
           <p><%= measure.no_means %></p>
       </div>
       <div class="endorse">
+        <% unless measure.endorsements.against.empty? %>
           <p>who says NO...</p>
           <ul>
             <% measure.endorsements.against.each do |endorsement| %>
               <li><%= endorsement.endorser %></li>
             <% end %>
           </ul>
+        <% end %>
       </div>
     </div>
   </div>
