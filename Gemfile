@@ -38,6 +38,7 @@ group :development, :test do
   gem 'spring'
   gem 'guard-rspec'
   gem 'guard-livereload', '~> 2.5'
+  gem 'guard-rake'
   gem 'active_mocker'
   gem 'jasmine-rails'
   gem 'guard-jasmine'

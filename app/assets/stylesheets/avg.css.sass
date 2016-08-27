@@ -124,21 +124,20 @@ h2
 
   .candidate
     padding: 10px 0
-    margin: 30px 10px 0
+    margin: 10px 30px 0
     border-bottom: 2px solid white
     min-width: 450px
+    @include clear
+
     .inner
       width: 100%
       position: relative
       box-sizing: border-box
+      padding: 0 10px
 
-    .info,
-    .facts
-      display: inline-block
-      vertical-align: top
     .info
-      height: 180px
-      width: 120px
+      float: left
+      width: 90px
       .box
         background: $lightblue
         color: white
@@ -154,21 +153,21 @@ h2
           i
             color: white
       .photo
-        height: 120px
-        width: 120px
+        height: 60px
+        width: 90px
         background-size: cover
-        background-position: center center
+        background-position: top center
         background-repeat: no-repeat
     .facts
-      width: 60%
-      padding: 10px
+      width: 100%
+      padding: 10px 0 0 100px
+      height: 30px
       .fact
         .share
           position: absolute
           bottom: 10px
           right: 10px
 
-  .titles,
   .left,
   .right
     top: 10px
@@ -188,32 +187,35 @@ h2
     right: 0
 
   .titles
-    left: 50%
-    right: 50%
-    margin: 0 -25%
+    margin: -50px 12% 10px
     text-align: center
     color: white
     background: $darkgray
-    height: 40px
     font-size: 20px
-    padding-top: 4px
+    padding: 8px
 
   .title,
   .fact
     display: none
     &.active
       display: block
+    h1
+      font-weight: bold
+      color: $darkgray
 
   .tools,
   .share
     color: $gray
+    display: none // TODO: Add this feature
 
   .footer
     text-align: center
     padding: 10px 0
+    position: relative
     .tools
-      float: right
-      margin: 0 20px 0 0
+      position: absolute
+      right: 20px
+      top: 10px
     a
       margin: 0 2px
       color: $gray

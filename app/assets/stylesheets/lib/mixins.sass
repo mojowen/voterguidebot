@@ -34,3 +34,9 @@ $xl-width: 1200px
 @mixin lg
   @media (min-width: #{$lg-width})
     @content
+
+@mixin clear
+  &:after
+    content: ''
+    clear: both
+    display: block

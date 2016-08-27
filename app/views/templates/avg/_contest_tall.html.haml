@@ -6,9 +6,8 @@
       .title.active About the Candidates
       - contest.questions.each do |question|
         .title
-          - unless question.tags.empty?
-            \##{question.tags.map(&:name).join(' #')}
-          - else
+          Do you support
+          = question.text
 
     %a.right{ href: '#' }
       %i.fa.fa-angle-right
@@ -42,12 +41,7 @@
 
           - contest.questions.each do |question|
             .fact
-              %p
-                %em
-                  Do you support
-                  = question.text
-              %p
-                %strong= question.answers.find{ |answer| answer.candidate == candidate }.try(:text)
+              %h1.big= question.answers.find{ |answer| answer.candidate == candidate }.try(:text)
               .share
                 %i.fa.fa-share
 

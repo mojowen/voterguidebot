@@ -2,7 +2,7 @@
 %html
   %head
     //= javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = stylesheet_link_tag 'avg', media: 'all'
+    = stylesheet_link_tag '/assets/avg.css', media: 'all'
     %title
       - if content_for :title
         = yield :title
@@ -47,7 +47,7 @@
             = link_to 'Partner With Us', 'http://americanvoterguide.org'
           .mui-col-xs-3
             %h5 Contact:
-            %p The Bus Fed Action
+            %p Bus Federation Action
             %p 333 SE 2nd Ave
             %p Portland, OR 97214
             %p 503-736-2501
