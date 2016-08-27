@@ -1,16 +1,19 @@
-
-name: Great American Voter Guide - National
+name: Great American Voter Guide National
 
 view: national
+folder: avg
+layout: avg
 
-available_pages: 1
+inherits: default
+
+available_pages: 30
 filler_pages: 0
 
 contests:
   per_page: 1
 
+measures:
+  per_page: 1
+
 candidates:
   max: 4
-
-measures:
-  per_page: 0
