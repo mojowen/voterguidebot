@@ -16,7 +16,7 @@
           <div class="photo"><%= render @guide.template.template_file_path('photo'), candidate: candidate %></div>
           <div class="third">
             <% if candidate.endorsements %>
-              <em>endorsed by...</em>
+              <em>supported by...</em>
               <ul class="endorsements">
                 <% candidate.endorsements.each do |endorsement| %>
                   <li><%= endorsement.endorser %></li>

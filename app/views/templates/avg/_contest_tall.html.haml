@@ -34,7 +34,7 @@
           .fact.active
             = candidate.bio
             - unless candidate.endorsements.empty?
-              %em Endorsed by:
+              %em Supported by
               = candidate.endorsements.map(&:endorser).to_sentence
             .share
               %i.fa.fa-share
