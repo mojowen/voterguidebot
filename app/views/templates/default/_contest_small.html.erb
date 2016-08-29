@@ -15,7 +15,7 @@
             <span class="party"><%= candidate.party %></span>
             <p><%= candidate.bio %></p>
           </div>
-          <% if candidate.endorsements %>
+          <% unless candidate.endorsements.empty? %>
             <div class="endorse">
               <em>supported by...</em>
               <ul class="endorsements">
