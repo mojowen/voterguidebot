@@ -34,7 +34,6 @@ class ContestsController < ApplicationController
         contest: @contest.reload
       }
     else
-      binding.pry
       {
         error: @contest.errors.full_message.join(','),
         contest: @contest
