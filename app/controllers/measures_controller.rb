@@ -35,7 +35,7 @@ class MeasuresController < ApplicationController
       }
     else
       {
-        error: @measure.errors.full_message.join(','),
+        error: @measure.errors.full_messages.join(','),
         measure: @measure
       }
     end
