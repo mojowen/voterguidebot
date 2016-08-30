@@ -173,7 +173,7 @@ RSpec.describe Contest, type: :model do
           expect(subject.tags.first.tagged).to eq(question)
         end
       end
-      context 'with existing questio tagn' do
+      context 'with existing question tag' do
         let(:question) { Fabricate :question, contest: subject }
         let(:question_id) { question.id }
         let!(:existing_tag) { Fabricate :tag, tagged: question, name: 'LGTBQ' }
@@ -249,6 +249,29 @@ RSpec.describe Contest, type: :model do
           raw_obj[:questions].first.update(answers: [])
           subject.assign_attributes raw_obj
           expect(subject.reload.answers).to be_empty
+        end
+
+        context 'with a new answer' do
+          let(:new_candidate_id) { 'candidate_1' }
+          let(:new_answer) do
+            { question_id: question_id,
+              candidate_id: new_candidate_id,
+              text: answer.text }
+          end
+          let(:raw_obj) do
+            { questions: [{ id: question_id, answers: [answer, new_answer] }],
+              candidates: [{ id: candidate_id}, { id: new_candidate_id }] }
+          end
+
+          it 'adds both the new candidate and new answer' do
+            subject.assign_attributes raw_obj
+            subject.save!
+
+            expect(subject.answers.length).to eq(2)
+            expect(subject.candidates.length).to eq(2)
+            expect(subject.answers.first.candidate).to eq(subject.candidates.first)
+            expect(subject.answers.last.candidate).to eq(subject.candidates.last)
+          end
         end
       end
     end

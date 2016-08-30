@@ -64,7 +64,7 @@ class Contest < ActiveRecord::Base
 
       candidate = candidates.find_or_initialize_by(id: raw_candidate[:id])
 
-      candidate_ids[candidate_id] = candidate
+      candidate_ids[candidate_id.to_s] = candidate
       candidate.assign_attributes(raw_candidate)
       candidate.position = index
       candidate
@@ -78,18 +78,21 @@ class Contest < ActiveRecord::Base
       raw_question.delete :id if raw_question[:id].to_s.match /question/
       question = questions.find_or_initialize_by(id: raw_question[:id])
 
-      raw_answers = raw_question[:answers].clone if raw_question[:answers]
+      question.answers = update_candidates!(raw_question.delete(:answers), question)
       question.assign_attributes(raw_question)
       question.position = index
-      update_candidates!(raw_answers, question) if raw_answers
       question
     end
   end
 
   def update_candidates!(raw_answers, question)
-    raw_answers.each do |raw_answer|
-      answer = question.answers.find{ |answer| answer.text == raw_answer[:text] }
-      answer.candidate = candidate_ids[raw_answer[:candidate_id].to_s]
+    return [] unless raw_answers
+
+    raw_answers.map do |raw_answer|
+      answer = question.answers.find_or_initialize_by(id: raw_answer[:id])
+      answer.text = raw_answer[:text]
+      answer.candidate ||= candidate_ids[raw_answer[:candidate_id].to_s]
+      answer
     end
   end
 end

@@ -11,7 +11,7 @@ var Question = React.createClass({
   handleAnswerChange: function(event) {
     var answers = this.props.answers || [],
         text = event.target.value,
-        index = event.target.name.split('_').reverse()[0],
+        index = parseInt(event.target.name.match(/\d+/)[0]),
         questions = this.props.questions,
         candidate = this.props.candidates[index],
         answer = _.find(this.props.answers, function(answer) {
@@ -73,7 +73,7 @@ var Question = React.createClass({
   render: function() {
     var candidates = _.map(this.props.candidates, function(candidate, index) {
                       var answer = _.find(this.props.answers || [], function(answer) {
-                                    return answer.candidate_id == candidate.id
+                                    return answer.candidate_id === candidate.id
                                   })
 
                       return <td key={candidate.id}>
