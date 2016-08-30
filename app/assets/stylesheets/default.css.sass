@@ -113,6 +113,11 @@ p, div
     vertical-align: top
     margin: 4px 10px 4px 0
     height: 72px
+    &.third
+      max-width: 44%
+      p
+        font-size: 8px
+        margin-bottom: 4px
     &.photo
       width: 20%
       text-align: center
@@ -141,6 +146,7 @@ p, div
     vertical-align: top
     div
       margin: 0
+      height: auto
     .name
       width: 100%
       padding-right: 4px
@@ -172,16 +178,20 @@ p, div
       margin-top: 4px
       em, li
         font-size: 8px
-        line-height: 8px
+        line-height: 9px
 
 .candidates
   &.count--2
-    .small
-      width: 48%
-      .name
-        p
-          font-size: 7px
-          line-height: 8px
+    .candidate
+      margin-top: 40px
+    &.small
+      .small
+        margin-top: 0
+        width: 48%
+        .name
+          p
+            font-size: 7px
+            line-height: 8px
 
   &.count--3
     .small
@@ -292,9 +302,10 @@ p, div
           color: #999
     .endorse
       width: 32%
+      ul, p
+        font-size: 8px
       ul
-        font-size: 9px
-        margin-left: 20px
+        margin: 4px 0 0 20px
         padding-left: 0
 
 .about-us

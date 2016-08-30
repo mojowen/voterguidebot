@@ -6,7 +6,7 @@
   <div class="content">
     <h3>What They Do</h3>
     <p><%= contest.description %></p>
-    <div class="candidates">
+    <div class="candidates count--<%= contest.candidates.count %>">
       <% contest.candidates.each do |candidate| %>
         <div class="candidate">
           <div class="name">
@@ -16,7 +16,7 @@
           <div class="photo"><%= render @guide.template.template_file_path('photo'), candidate: candidate %></div>
           <div class="third">
             <% unless candidate.endorsements.empty? %>
-              <em>supported by...</em>
+              <p><em>supported by...</em></p>
               <ul class="endorsements">
                 <% candidate.endorsements.each do |endorsement| %>
                   <li><%= endorsement.endorser %></li>
