@@ -247,6 +247,10 @@ class ContestMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
   end
 
+  def full_clone
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
   def template(*args, &block)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
