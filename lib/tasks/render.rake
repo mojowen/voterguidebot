@@ -2,10 +2,9 @@ require_relative Rails.root.join('lib', 'static_renderer')
 
 namespace :render do
   desc "Render an HTML pages."
-  task :file, [:path, :layout] => [:environment] do |_, args|
-    filename_and_path = args.path.split('.').first
-    filename = filename_and_path.split('/').last
-    StaticRender.render_file("avg/#{filename}", filename_and_path, {}, args.layout)
+  task :file, [:file, :layout] => [:environment] do |_, args|
+    filename = File.basename(args.path).split('.').first
+    StaticRenderer.render_file("public/avg/#{filename}.html", args.path, {}, args.layout)
   end
 
   desc "Render a some sub pages."
