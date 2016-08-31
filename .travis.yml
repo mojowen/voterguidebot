@@ -2,7 +2,10 @@ language: ruby
 rvm:
   - 2.3.1
 
-cache: bundler
+cache:
+  - bundler: true
+  - directories:
+    - /home/travis/.phantomjs
 
 before_script:
   - createdb test_vgbot
