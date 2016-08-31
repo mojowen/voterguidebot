@@ -23,7 +23,7 @@ gem 'omniauth-google-oauth2'
 gem 'exception_notification'
 gem 'puma'
 gem 'phantomjs'
-gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 group :assets do
   gem 'coffee-rails'
