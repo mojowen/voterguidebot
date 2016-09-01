@@ -123,7 +123,8 @@ class Guide < ActiveRecord::Base
 
   def version
     @version ||= Digest::MD5.hexdigest(
-      to_json(except: [:updated_at, :created_at, :published_at, :published_version])
+      to_json(except: [:updated_at, :created_at, :published_at,
+                       :published_version, :users, :permissions, :uploads])
     )
   end
 
