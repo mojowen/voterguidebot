@@ -26,14 +26,7 @@
                 %strong= guide.name.humanize
           %td
             .mui--pull-left
-              - if guide.location
-                - if guide.location.city.present?
-                  = guide.location.city
-                  ,
-                  = guide.location.state
-                - else
-                  The State of
-                  = guide.location.state_name
+              = render partial: 'layouts/location', locals: { location: guide.location }
           %td
             .mui--pull-left.info
               = guide.users.uniq.map(&:name).reject(&:blank?).join(', ')

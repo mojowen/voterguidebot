@@ -1,0 +1,11 @@
+- if location
+  - if location.city.present?
+    = location.city
+    ,
+    = location.state
+  - else
+    - if location.state_name
+      The State of
+      = location.state_name
+    - else
+      = location.address
