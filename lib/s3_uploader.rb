@@ -21,7 +21,7 @@ class S3Uploader
   def upload_file_if_changed(path_to_file, key=nil)
     object = object(key || path_to_file)
 
-    return if is_pdf?(path_to_file) && object.exists?
+    return if will_multipart?(path_to_file) && object.exists?
 
     begin
       return if object.etag.gsub(/[^a-zA-Z\d]/, '') == md5(path_to_file)
@@ -43,8 +43,8 @@ class S3Uploader
     md5.hexdigest
   end
 
-  def is_pdf?(path_to_file)
-    path_to_file.include? '.pdf'
+  def will_multipart?(path_to_file)
+    File.size(path_to_file) > 1024 * 1024 * 20
   end
 
   private
