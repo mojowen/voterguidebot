@@ -78,21 +78,18 @@ class Contest < ActiveRecord::Base
       raw_question.delete :id if raw_question[:id].to_s.match /question/
       question = questions.find_or_initialize_by(id: raw_question[:id])
 
-      question.answers = update_candidates!(raw_question.delete(:answers), question)
+      update_candidates!(raw_question[:answers])
       question.assign_attributes(raw_question)
       question.position = index
       question
     end
   end
 
-  def update_candidates!(raw_answers, question)
+  def update_candidates!(raw_answers)
     return [] unless raw_answers
 
-    raw_answers.map do |raw_answer|
-      answer = question.answers.find_or_initialize_by(id: raw_answer[:id])
-      answer.text = raw_answer[:text]
-      answer.candidate ||= candidate_ids[raw_answer[:candidate_id].to_s]
-      answer
+    raw_answers.each do |raw_answer|
+      raw_answer[:candidate] = candidate_ids[raw_answer[:candidate_id].to_s]
     end
   end
 end

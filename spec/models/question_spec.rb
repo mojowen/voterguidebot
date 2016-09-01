@@ -53,7 +53,7 @@ RSpec.describe Question, type: :model do
         subject.assign_attributes raw.update(answers: [answers.first.update(text: 'No')])
         expect(subject.answers.last.text).to eq('No')
       end
-      it 'deletes missing tags' do
+      it 'deletes missing answers' do
         subject.assign_attributes raw.update(answers: []).with_indifferent_access
         expect(subject.answers.length).to eq(0)
       end

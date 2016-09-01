@@ -18,10 +18,13 @@ class Question < ActiveRecord::Base
 
   def create_answers!(attributes)
     return unless attributes[:answers]
+
     attributes[:answers].map! do |raw_answer|
-      answers.find_or_initialize_by(
-        text: raw_answer[:text],
-        candidate_id: raw_answer[:candidate_id])
+      answer = answers.find_or_initialize_by(id: raw_answer[:id],
+                                             candidate_id: raw_answer[:candidate_id])
+      answer.candidate ||= raw_answer[:candidate]
+      answer.text = raw_answer[:text]
+      answer
     end
   end
 end

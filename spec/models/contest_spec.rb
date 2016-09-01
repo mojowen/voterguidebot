@@ -199,7 +199,7 @@ RSpec.describe Contest, type: :model do
           text: 'whaaat' }
       end
       let(:raw_obj) do
-        { questions: [{ id: question_id, answers: [answer] }],
+        { questions: [{ id: question_id, answers: [answer.as_json.with_indifferent_access] }],
           candidates: [{ id: candidate_id}] }
       end
 
@@ -241,7 +241,8 @@ RSpec.describe Contest, type: :model do
         it 'updates answers' do
           raw_obj[:questions].first[:answers].first.update(text: 'Different')
           subject.assign_attributes raw_obj
-          expect(subject.answers.first.id).to eq(answer.id)
+          subject.save
+          expect(subject.reload.answers.first.id).to eq(answer.id)
           expect(subject.reload.answers.first.text).to eq('Different')
         end
 
@@ -259,7 +260,7 @@ RSpec.describe Contest, type: :model do
               text: answer.text }
           end
           let(:raw_obj) do
-            { questions: [{ id: question_id, answers: [answer, new_answer] }],
+            { questions: [{ id: question_id, answers: [answer.as_json.with_indifferent_access, new_answer] }],
               candidates: [{ id: candidate_id}, { id: new_candidate_id }] }
           end
 
