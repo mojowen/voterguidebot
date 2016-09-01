@@ -24,6 +24,7 @@ gem 'exception_notification'
 gem 'puma'
 gem 'phantomjs'
 gem 'delayed_job_active_record'
+gem 'puma_worker_killer'
 
 group :assets do
   gem 'coffee-rails'
