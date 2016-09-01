@@ -65,6 +65,6 @@
               = form_tag publish_guide_path(guide), style: 'display: inline-block' do
                 %button.mui-btn--small.mui-btn--accent.mui-btn{ disabled: guide.is_publishing? }
                   - if guide.is_publishing?
-                    %i.fa-cloud-upload.fa.fa-spin
+                    %i.fa-cloud-upload.fa.fa-pulse
                   - else
                     %i.fa-cloud-upload.fa
