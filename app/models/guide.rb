@@ -39,12 +39,8 @@ class Guide < ActiveRecord::Base
     published_version == 'publishing'
   end
 
-  def is_synced?
-    published_version == version
-  end
-
   def is_published?
-    !is_publishing? && published_version != 'unpublished' && template.publisher_resource
+    !%w{publishing-failed unpublished publishing}.include?(published_version) && template.publisher_resource
   end
 
   def is_synced?

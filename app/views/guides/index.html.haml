@@ -15,6 +15,7 @@
           %th Measures
           %th
           %th
+          %th
       %tbody
       - Guide.all.each do |guide|
         - next if guide.users.include? current_user
@@ -58,13 +59,13 @@
             = button_link_to preview_guide_path(guide), class: 'mui-btn--small', target: '_blank', btn: :primary do
               %i.fa-newspaper-o.fa
           %td
-            - if guide.is_synced?
-              = button_link_to guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary, disabled: !guide.is_synced? do
+            = form_tag publish_guide_path(guide), style: 'display: inline-block' do
+              %button.mui-btn--small.mui-btn--accent.mui-btn{ disabled: guide.is_publishing? }
+                - if guide.is_publishing?
+                  %i.fa-cloud-upload.fa.fa-pulse
+                - else
+                  %i.fa-cloud-upload.fa
+          %td
+            - if guide.is_published?
+              = button_link_to guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary do
                 %i.fa-file-pdf-o.fa
-            - else
-              = form_tag publish_guide_path(guide), style: 'display: inline-block' do
-                %button.mui-btn--small.mui-btn--accent.mui-btn{ disabled: guide.is_publishing? }
-                  - if guide.is_publishing?
-                    %i.fa-cloud-upload.fa.fa-pulse
-                  - else
-                    %i.fa-cloud-upload.fa

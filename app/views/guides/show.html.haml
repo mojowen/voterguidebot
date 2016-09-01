@@ -23,9 +23,10 @@
           %strong
             - if @guide.is_publishing?
               %i.fa-cloud-upload.fa.fa-pulse
+              Publishing...
             - else
               %i.fa-cloud-upload.fa
-            Publish
+              Publish
       - if @guide.is_published?
         = button_link_to @guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary, disabled: !@guide.is_synced? do
           %strong

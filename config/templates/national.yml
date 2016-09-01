@@ -3,6 +3,8 @@ name: Great American Voter Guide National
 view: national
 folder: avg
 layout: avg
+publisher_class: national
+publisher_resource: nil
 
 inherits: default
 

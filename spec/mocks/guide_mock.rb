@@ -257,12 +257,36 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [template_name])
   end
 
+  def full_clone
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def is_published?
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def is_publishing?
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def is_synced?
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
   def is_there_space?(contests: nil, measures: nil)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [{ contests: contests, measures: measures }])
   end
 
   def pages_for(type, check_size: nil)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [type, { check_size: check_size }])
+  end
+
+  def publish
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def published_resource
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
   def slug
