@@ -118,6 +118,3 @@ end
 guard :rake, task: 'render:subpages' do
   watch(%r{^app/views/templates/avg/subpages/(.+).html.haml$})
 end
-guard :rake, task: 'render:subpages:all' do
-  watch('app/views/layouts/avg.html.haml')
-end
