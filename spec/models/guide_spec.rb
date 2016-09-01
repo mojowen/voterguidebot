@@ -21,7 +21,7 @@ RSpec.describe Guide, active_mocker: true do
   end
 
   context "#full_clone" do
-    subject { Fabricate :full_guide }
+    subject { Fabricate :full_guide, users: [ Fabricate(:user) ] }
 
     it 'clones all of the contests and all associated objects' do
       subject.full_clone.contests.each.with_index do |contest, index|
@@ -39,6 +39,10 @@ RSpec.describe Guide, active_mocker: true do
       subject.full_clone.template_fields.each.with_index do |field, index|
         expect(field[:value]).to eq(subject.template_fields[index][:value])
       end
+    end
+
+    it 'clones all of the users' do
+      expect(subject.full_clone.users).to eq(subject.users)
     end
   end
 

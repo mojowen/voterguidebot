@@ -51,6 +51,7 @@ class Guide < ActiveRecord::Base
     cloned = dup
     cloned.contests = contests.map(&:full_clone)
     cloned.measures = measures.map(&:full_clone)
+    cloned.users = users
     cloned.template_fields = Hash[template_fields.map do |field|
       [field['name'], field['value']]
     end]
