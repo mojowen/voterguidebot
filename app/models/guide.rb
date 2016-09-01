@@ -31,7 +31,8 @@ class Guide < ActiveRecord::Base
   end
 
   def published_resource
-    S3Uploader.new.object("#{slug}/#{template.publisher_resource}").public_url
+    S3Uploader.new.object("#{slug}/#{template.publisher_resource}")
+      .presigned_url(:get, expires_in: 3600 * 24)
   end
 
   def is_publishing?
