@@ -288,6 +288,7 @@ fields:
     element: textarea
     limit: 120
     name: title_page_blurb
+    default: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
   -
     label: About Us Blurb
     placeholder: A note about your organization and what you do

@@ -61,7 +61,7 @@
             Be sure to vote by
             <%= guide.election_date.strftime("%B") %>
             <%= guide.election_date.day.ordinalize %></h1>
-          <p>Your ballot is secret, and your choices are 100% yours. But hopefully this independent, locally-prepared guide helps you make an informed decision.</p>
+          <p><%= guide.field('title_page_blurb') %></p>
         </div>
       </div>
     </div>
