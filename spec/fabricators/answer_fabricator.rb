@@ -1,5 +1,5 @@
 Fabricator(:answer) do
   question { Fabricate :question }
   candidate { Fabricate :candidate }
-  text { 'Maybe' }
+  text { %w(Yes No Maybe) }
 end

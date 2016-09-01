@@ -55,6 +55,16 @@ RSpec.describe GuidesController, active_mocker: true do
         expect(assigns(:guide).errors.messages).to include(name: ["can't be blank"])
       end
     end
+    context 'cloning' do
+      let!(:clone) { Fabricate :full_guide, users: [user] }
+
+      it 'clones the guide' do
+        post :create, { guide: { name: 'Different Guide' }, cloned_id: clone.id }
+
+        expect(assigns(:guide).contests.length).to eq(clone.contests.length)
+        expect(assigns(:guide).measures.length).to eq(clone.measures.length)
+      end
+    end
   end
 
   context 'with a guide' do

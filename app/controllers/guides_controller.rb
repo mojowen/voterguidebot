@@ -5,8 +5,12 @@ class GuidesController < ApplicationController
   before_filter :invite_params, only: :users
 
   def create
-    @guide = Guide.new guide_params
-    @guide.users << current_user
+    if cloned_guide
+      @guide.update_attributes guide_params
+    else
+      @guide = Guide.new(guide_params)
+      @guide.users << current_user
+    end
 
     if @guide.save
       redirect_to guide_path @guide
@@ -51,6 +55,13 @@ class GuidesController < ApplicationController
   end
 
   private
+
+  def cloned_guide
+    return unless params[:cloned_id]
+    clone_source = Guide.find(params[:cloned_id])
+    return unless clone_source && current_user.can_edit?(clone_source)
+    @guide = clone_source.full_clone
+  end
 
   def field_params
     params.require(:guide).permit(fields: @guide.template_field_names)[:fields]

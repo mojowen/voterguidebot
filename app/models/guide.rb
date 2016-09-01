@@ -51,6 +51,16 @@ class Guide < ActiveRecord::Base
     published_version == version
   end
 
+  def full_clone
+    cloned = dup
+    cloned.contests = contests.map(&:full_clone)
+    cloned.measures = measures.map(&:full_clone)
+    cloned.template_fields = Hash[template_fields.map do |field|
+      [field['name'], field['value']]
+    end]
+    cloned
+  end
+
   def all_locales
     base = as_json
     return base if languages.empty?
@@ -95,7 +105,6 @@ class Guide < ActiveRecord::Base
       field = find_field(template_field['name'])
       field ||= fields.new(field_template: template_field['name'])
       field.value = value
-      field.save!
     end
   end
 

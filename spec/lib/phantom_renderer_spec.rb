@@ -39,6 +39,9 @@ RSpec.describe PhantomRenderer do
     before(:each) do
       class_double("S3Uploader", new: uploader).as_stubbed_const
     end
+    after(:each) do
+      File.delete Rails.root.join('tmp', 'test.pdf')
+    end
 
     it 'creates a png and passes it to s3' do
       expect(uploader).to receive(:upload_file)

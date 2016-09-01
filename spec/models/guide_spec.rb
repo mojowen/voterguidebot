@@ -20,9 +20,32 @@ RSpec.describe Guide, active_mocker: true do
     end
   end
 
+  context "#full_clone" do
+    subject { Fabricate :full_guide }
+
+    it 'clones all of the contests and all associated objects' do
+      subject.full_clone.contests.each.with_index do |contest, index|
+        expect(contest.candidates.length).to eq(subject.contests[index].candidates.length)
+        expect(contest.questions.length).to eq(subject.contests[index].questions.length)
+        expect(contest.questions[0].answers.length).to eq(subject.contests[index].questions[0].answers.length)
+      end
+    end
+
+    it 'clones all of the measures' do
+      expect(subject.full_clone.measures.length).to eq(subject.measures.length)
+    end
+
+    it 'clones all of the fields' do
+      subject.full_clone.template_fields.each.with_index do |field, index|
+        expect(field[:value]).to eq(subject.template_fields[index][:value])
+      end
+    end
+  end
+
   context '.template_fields' do
     let(:field_template) { subject.template.fields.first['name'] }
     let(:field) { Fabricate :field, value: 'what', field_template: field_template }
+
     it 'merges the value with the template field' do
       allow(subject).to receive(:fields).and_return([field])
       expect(subject.template_fields.first['value']).to eq(field.value)
