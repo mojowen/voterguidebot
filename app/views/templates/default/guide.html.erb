@@ -3,7 +3,11 @@
 <head>
   <title>Preview</title>
   <style type="text/css">
-    <%= Rails.application.assets.find_asset('default.css').to_s %>
+    <% if Rails.env.development? %>
+      <%= Rails.application.assets.find_asset('default.css').to_s %>
+    <% else %>
+      <%= File.read(Rails.root.join('public', 'assets', Rails.application.assets_manifest.assets['default.css']) %>
+    <% end %>
     h3 {
       color: <%= guide.field('secondary_color') %>;
     }
