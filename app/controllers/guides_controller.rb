@@ -44,7 +44,6 @@ class GuidesController < ApplicationController
   end
 
   def preview
-    return redirect_to preview_guide_path(@guide, version: @guide.version) unless params[:version] == @guide.version
     render **@guide.template.render.update( locals: { guide: @guide, preview: true } )
   end
 
