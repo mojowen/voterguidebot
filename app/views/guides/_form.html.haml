@@ -27,18 +27,20 @@
   .mui-textfield
     = form.label :election_date
     = form.date_field :election_date, value: guide.election_date || Date.new(2016, 11, 8)
+  - if guide.new_record?
+    %h2
+      %i.fa.fa-clone
+      Clone One Of Your Guides
+    .mui-select
+      %p
+        %em Will clone all measures, contests, and fields to your new guide.
+      = select_tag :cloned_id, options_for_select(current_user.guides.uniq.map{ |guide| [guide.name, guide.id] }), prompt: 'Select guide to clone'
+
   %h2
     %i.fa.fa-map-marker
     Location
   .mui-textfield
     = react_component :LocationSearch, guide.location
-  - if guide.new_record?
-    .mui-select
-      = form.label 'Clone Existing Guide'
-      = select_tag :cloned_id, options_for_select(current_user.guides.uniq.map{ |guide| [guide.name, guide.id] }), prompt: 'Select guide to clone'
-      %p
-        %em Will clone all measures, contests, and fields.
-
   .mui--pull-right
     = form.submit 'Save', class: 'mui-btn mui-btn--raised mui-btn--primary'
 
