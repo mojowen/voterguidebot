@@ -178,17 +178,21 @@ RSpec.describe GuidesController, active_mocker: true do
     end
 
     describe '#publish' do
-      it 'renders successfully' do
+      it 'sets the guide published_version to publishing' do
         post :publish, { id: guide.id }
         expect(guide.reload.published_version).to eq('publishing')
       end
 
-      it 'renders successfully' do
+      it 'redirects to guide path' do
+        post :publish, { id: guide.id }
+        expect(response).to redirect_to guide_path(guide, locale: :en)
+      end
+
+      it 'creates a delayed job' do
         expect do
           post :publish, { id: guide.id }
         end.to change(Delayed::Job, :count).by(1)
       end
     end
   end
-
 end
