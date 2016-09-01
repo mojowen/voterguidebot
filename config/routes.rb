@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get 'fields'
         patch 'users'
         get 'preview'
+        post 'publish'
       end
       resources :languages, only: [:index, :create, :destroy, :show]
       resources :contests, :measures, except: :show do

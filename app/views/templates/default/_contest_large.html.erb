@@ -13,7 +13,7 @@
             <h3><%= candidate.name %></h3>
             <span class="party"><%= candidate.party %></span>
           </div>
-          <div class="photo"><%= render @guide.template.template_file_path('photo'), candidate: candidate %></div>
+          <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
           <div class="third">
             <% unless candidate.endorsements.empty? %>
               <p><em>supported by...</em></p>
@@ -42,7 +42,7 @@
             <th class="stance">Do you support</th>
             <% contest.candidates.each do |candidate| %>
               <th>
-                <%= render @guide.template.template_file_path('photo'), candidate: candidate %>
+                <%= render guide.template.template_file_path('photo'), candidate: candidate %>
                 <h3><%= candidate.name %></h3>
               </th>
             <% end %>

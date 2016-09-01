@@ -11,7 +11,6 @@ class GuidesController < ApplicationController
     if @guide.save
       redirect_to guide_path @guide
     else
-      params[:template] = 'default'
       render :new
     end
   end
@@ -42,8 +41,13 @@ class GuidesController < ApplicationController
 
   def preview
     return redirect_to preview_guide_path(@guide, version: @guide.version) unless params[:version] == @guide.version
-    @is_pdf = request.env['HTTP_USER_AGENT'].match /PhantomJS/
-    render **@guide.template.render
+    render **@guide.template.render.update( locals: { guide: @guide, preview: true } )
+  end
+
+  def publish
+    @guide.update_attributes published_version: 'publishing'
+    @guide.delay.publish
+    redirect_to guide_path(@guide), notice: 'Guide queued for publishing'
   end
 
   private

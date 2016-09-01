@@ -26,6 +26,30 @@ class Guide < ActiveRecord::Base
     [id,  name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
   end
 
+  def publish
+    Publisher::Conducter::publish id
+  end
+
+  def published_resource
+    S3Uploader.new.object("#{slug}/#{template.publisher_resource}").public_url
+  end
+
+  def is_publishing?
+    published_version == 'publishing'
+  end
+
+  def is_synced?
+    published_version == version
+  end
+
+  def is_published?
+    !is_publishing? && published_version != 'unpublished' && template.publisher_resource
+  end
+
+  def is_synced?
+    published_version == version
+  end
+
   def all_locales
     base = as_json
     return base if languages.empty?
@@ -91,7 +115,9 @@ class Guide < ActiveRecord::Base
   end
 
   def version
-    @version ||= Digest::MD5.hexdigest to_json
+    @version ||= Digest::MD5.hexdigest(
+      to_json(except: [:updated_at, :created_at, :published_at, :published_version])
+    )
   end
 
   def field(template_name)

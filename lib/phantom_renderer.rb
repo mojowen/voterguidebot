@@ -1,7 +1,6 @@
 require 'phantomjs'
 
 class PhantomRenderer
-
   attr_accessor :path_to_file, :extension, :rendered_filepath
 
   def initialize(path_to_file, extension: nil)

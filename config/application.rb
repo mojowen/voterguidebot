@@ -14,5 +14,6 @@ module VoterGuideBot
     config.react.addons  = true
     config.i18n.enforce_available_locales = false
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.active_job.queue_adapter = :delayed_job
   end
 end

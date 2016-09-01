@@ -12,10 +12,29 @@
       = button_link_to invite_guide_path(@guide), class: 'mui-btn--small' do
         %i.fa.fa-user-plus.users
         Invite Collaborators
+  .mui-row{ style: 'margin-top: 0px' }
+    .mui-col-md-12.mui--text-right.menu.slide--menu
       = button_link_to preview_guide_path(@guide), class: 'mui-btn--small', target: '_blank', btn: :primary do
         %strong
           %i.fa-newspaper-o.fa
           Preview
+      = form_tag publish_guide_path(@guide), style: 'display: inline-block' do
+        %button.mui-btn--small.mui-btn--primary.mui-btn{ disabled: @guide.is_publishing? || @guide.is_synced? }
+          %strong
+            - if @guide.is_publishing?
+              %i.fa-cloud-upload.fa.fa-spin
+            - else
+              %i.fa-cloud-upload.fa
+            Publish
+      - if @guide.is_published?
+        = button_link_to @guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary, disabled: !@guide.is_synced? do
+          %strong
+            %i.fa-file-pdf-o.fa
+            Download
+          - if @guide.is_synced?
+            Current Version
+          - else
+            Old Version
 
     .mui-col-md-12
       %h2 Get Started on Your Voter Guide

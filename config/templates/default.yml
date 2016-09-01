@@ -7,6 +7,13 @@ view: guide
 available_pages: 10
 filler_pages: 4
 
+publisher_class: PDF
+publisher_resource: voter-guide.pdf
+
+size:
+  height: 5in
+  width: 5in
+
 contests:
   partial: contest_large
   per_page:

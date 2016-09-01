@@ -2,37 +2,37 @@
 <html>
 <head>
   <title>Preview</title>
-  <%= stylesheet_link_tag 'default' %>
   <style type="text/css">
+    <%= Rails.application.assets.find_asset('default.css').to_s %>
     h3 {
-      color: <%= @guide.field('secondary_color') %>;
+      color: <%= guide.field('secondary_color') %>;
     }
     title h1.big {
-      text-shadow: <%= @guide.field('secondary_color') %> -2px 2px 0px;
+      text-shadow: <%= guide.field('secondary_color') %> -2px 2px 0px;
     }
     .header {
-      background-color: <%= @guide.field('primary_color') %>;
+      background-color: <%= guide.field('primary_color') %>;
     }
     .title .inner {
-      background: <%= to_rgba(@guide.field('primary_color'), 0.75) %>;
+      background: <%= to_rgba(guide.field('primary_color'), 0.75) %>;
     }
     .questions tbody tr:nth-child(odd) {
-      background: <%= to_rgba(@guide.field('primary_color'), 0.25) %>;
+      background: <%= to_rgba(guide.field('primary_color'), 0.25) %>;
     }
     .questions th.stance {
-      color: <%= to_rgba(@guide.field('primary_color'), 0.75) %>;
+      color: <%= to_rgba(guide.field('primary_color'), 0.75) %>;
     }
     .measure .section {
-      border-bottom-color: <%= to_rgba(@guide.field('primary_color'), 0.25) %>;
+      border-bottom-color: <%= to_rgba(guide.field('primary_color'), 0.25) %>;
     }
     .measure .section .explain h4 {
-      color: <%= @guide.field('primary_color') %>;
+      color: <%= guide.field('primary_color') %>;
     }
     .back {
-      background: <%= @guide.field('primary_color') %>;
+      background: <%= guide.field('primary_color') %>;
     }
   </style>
-  <% unless @is_pdf %>
+  <% if preview %>
     <style type="text/css">
       body {
         background: #999;
@@ -41,19 +41,6 @@
           margin: 20px auto 0;
           box-shadow: #333 -1px 1px 3px;
       }
-      <% if params[:page_numbers] %>
-        body .page:before {
-          counter-increment: counter;
-          content: counter(counter);
-          position: absolute;
-          top: 0;
-          z-index: 100;
-          font-size: 50px;
-        }
-        body {
-          counter-reset: counter;
-        }
-      <% end %>
     </style>
   <% end %>
 </head>
@@ -62,12 +49,12 @@
     <div class="title full">
       <div class="box full">
         <div class="inner full">
-          <h1><%= @guide.name %></h1>
+          <h1><%= guide.name %></h1>
           <h1 class="big">Voter<br />Guide</h1>
           <h2>
             Be sure to vote by
-            <%= @guide.election_date.strftime("%B") %>
-            <%= @guide.election_date.day.ordinalize %></h1>
+            <%= guide.election_date.strftime("%B") %>
+            <%= guide.election_date.day.ordinalize %></h1>
           <p>Your ballot is secret, and your choices are 100% yours. But hopefully this independent, locally-prepared guide helps you make an informed decision.</p>
         </div>
       </div>
@@ -80,18 +67,18 @@
     <div class="content about-us">
       <div class="section">
         <h3>About Us</h3>
-        <p><%= @guide.field('about_us_blurb') %></p>
-        <%= image_tag @guide.field('about_us_logo'), class: 'logo' %>
+        <p><%= guide.field('about_us_blurb') %></p>
+        <%= image_tag guide.field('about_us_logo'), class: 'logo' %>
       </div>
     </div>
     <div class="footer footer_1"></div>
   </div>
 
-  <% @guide.contests.each do |contest| %>
-    <%= render @guide.template.template_file_path(@guide.field('contest_layout')), contest: contest %>
+  <% guide.contests.each do |contest| %>
+    <%= render guide.template.template_file_path(guide.field('contest_layout')), contest: contest, guide: guide %>
   <% end %>
-  <% @guide.measures.each do |measure| %>
-    <%= render @guide.template.template_file_path('measure'), measure: measure %>
+  <% guide.measures.each do |measure| %>
+    <%= render guide.template.template_file_path('measure'), measure: measure, guide: guide  %>
   <% end %>
 
   <div class="page">
@@ -102,11 +89,11 @@
     <div class="content how-to">
       <div class="section">
         <h3>What you gotta bring</h3>
-        <p><%= @guide.field('what_you_got_to_bring') %></p>
+        <p><%= guide.field('what_you_got_to_bring') %></p>
       </div>
       <div class="section">
         <h3>Where you've gotta go</h3>
-        <p><%= @guide.field('where_you_got_to_go') %></p>
+        <p><%= guide.field('where_you_got_to_go') %></p>
       </div>
     </div>
     <div class="footer footer_2"></div>
@@ -115,12 +102,12 @@
     <div class="content">
       <div class="section">
         <h2>Find Out More</h2>
-        <p><%= @guide.field('find_out_more') %></p>
+        <p><%= guide.field('find_out_more') %></p>
       </div>
       <div class="section">
         <p>Also a lot more good info at our website:</p>
         <br />
-        <strong>www.americanvoterguide.org/<%= @guide.location.state_slug %></strong>
+        <strong>www.americanvoterguide.org/<%= guide.location.state_slug %></strong>
       </div>
       <p>
     </div>

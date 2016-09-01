@@ -13,9 +13,19 @@ $margin: 60px
 
 @import 'lib/mixins'
 
+body
+  transform-origin: 0 0
+  -webkit-transform-origin: 0 0
+  transform: scale(0.75)
+  -webkit-transform: scale(0.75)
+
+html
+  height: 100%
+  width: 100%
+
 *
   box-sizing: border-box
-  font-family: 'Open Sans', sans-serif
+  font-family: Open Sans, sans-serif
 
 p, h1, h2, h3, h4, h5
   margin: 0
