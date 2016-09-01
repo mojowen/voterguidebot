@@ -3,7 +3,7 @@
 <head>
   <title>Preview</title>
   <style type="text/css">
-    <% if Rails.env.development? %>
+    <% unless Rails.env.production? %>
       <%= Rails.application.assets.find_asset('default.css').to_s %>
     <% else %>
       <%= File.read(Rails.root.join('public', 'assets', Rails.application.assets_manifest.assets['default.css'])) %>
