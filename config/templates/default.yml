@@ -354,7 +354,7 @@ fields:
     placeholder: Disclaimer that will go on the back of the voter guide.
     example: Paid for by Forward Montana, Rachel Huff-Doria, Treasurer. 136 E Broadway, Missoula, MT 59802
     element: input
-    limit: 100
+    limit: 150
     name: disclaimer
   -
     label: Primary Color
