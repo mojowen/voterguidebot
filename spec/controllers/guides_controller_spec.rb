@@ -103,6 +103,16 @@ RSpec.describe GuidesController, active_mocker: true do
           post :update, guide_params
           expect(guide.fields.first.value).to eq('what')
         end
+        context 'with existing fields' do
+          let!(:field) do
+            Fabricate :field, guide: guide, value: 'Nope', field_template: 'title_page_header'
+          end
+
+          it 'creates a field that is missing' do
+            post :update, guide_params
+            expect(guide.fields.first.value).to eq('what')
+          end
+        end
       end
       describe 'updating guides' do
         let(:location) { Fabricate :location, guide: guide, city: 'Portland' }

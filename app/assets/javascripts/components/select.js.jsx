@@ -20,7 +20,7 @@ var SelectComponent = React.createClass({
     })
 
     return <div className='mui-select'>
-      <select onChange={this.handleChange} >
+      <select onChange={this.handleChange} value={this.props.value} >
       { options }
       </select>
     </div>

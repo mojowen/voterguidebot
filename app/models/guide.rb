@@ -8,7 +8,7 @@ class Guide < ActiveRecord::Base
   has_many :measures, -> { order(position: :asc) }
   has_many :languages
   has_many :uploads
-  has_many :fields
+  has_many :fields, autosave: true
   has_one :location
 
   accepts_nested_attributes_for :location
@@ -153,7 +153,7 @@ class Guide < ActiveRecord::Base
 
   def field_value(template_field)
     field = find_field(template_field['name'])
-    return universal_field(field) if template_field['element'] == 'ImageComponent'
+    return universal_field(field) if template_field['element'].match /image|select/
     field.try(:value)
   end
 end

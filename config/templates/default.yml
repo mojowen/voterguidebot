@@ -307,6 +307,20 @@ fields:
     element: ImageComponent
     name: about_us_logo
   -
+    label: Contest Layout
+    element: SelectComponent
+    options:
+      -
+        text: Feds
+        value: feds
+      -
+        text: Democracy Corps
+        value: dcorps
+    name: about_us_page_footer
+    default: fed
+    example_elem: SelectImages
+    example_attr: img
+  -
     label: What You've Got to Bring To Vote
     placeholder: A paragraph explaining what you need to bring to vote
     example: To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some form of identification. Options for what you can bring to prove identity and residency.

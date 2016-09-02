@@ -28,7 +28,7 @@ RSpec.describe PhantomRenderer do
     end
 
     it 'calls s3' do
-      expect(uploader).to receive(:upload_file).with(Rails.root.join('tmp', 'test.pdf'), nil)
+      expect(uploader).to receive(:upload_file_if_changed).with(Rails.root.join('tmp', 'test.pdf'), nil)
       subject.render.upload
     end
   end
@@ -44,20 +44,20 @@ RSpec.describe PhantomRenderer do
     end
 
     it 'creates a png and passes it to s3' do
-      expect(uploader).to receive(:upload_file)
+      expect(uploader).to receive(:upload_file_if_changed)
         .with(Rails.root.join('tmp', 'test.pdf'), 'my-file.png')
       described_class.render_and_upload(test_html_file, extenion: :png, key: 'my-file.png')
     end
 
     it 'creates a pdf and passes it to s3' do
-      expect(uploader).to receive(:upload_file)
+      expect(uploader).to receive(:upload_file_if_changed)
         .with(Rails.root.join('tmp', 'test.pdf'), nil)
       described_class.render_and_upload(test_html_file)
     end
 
     it 'uses specified bucket' do
       expect(S3Uploader).to receive(:new).with('my-bucket')
-      allow(uploader).to receive(:upload_file)
+      allow(uploader).to receive(:upload_file_if_changed)
       described_class.render_and_upload(test_html_file, bucket: 'my-bucket')
     end
   end

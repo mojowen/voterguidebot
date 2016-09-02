@@ -63,5 +63,18 @@ RSpec.describe Guide, active_mocker: true do
       subject.template_fields = field_params
       expect(subject.template_fields.first['value']).to eq('what')
     end
+
+    context 'already has a value' do
+      let!(:field) do
+        Fabricate :field,
+                  guide: subject,
+                  value: 'Nope',
+                  field_template: subject.template.fields.first['name']
+      end
+      it 'merges the value with the template field' do
+        subject.template_fields = field_params
+        expect(subject.template_fields.first['value']).to eq('what')
+      end
+    end
   end
 end

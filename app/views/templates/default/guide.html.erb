@@ -77,7 +77,7 @@
         <%= image_tag guide.field('about_us_logo'), class: 'logo' %>
       </div>
     </div>
-    <div class="footer footer_1"></div>
+    <div class="footer <%= guide.field('about_us_page_footer') %>" ></div>
   </div>
 
   <% guide.contests.each do |contest| %>
