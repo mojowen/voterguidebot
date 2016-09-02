@@ -31,8 +31,12 @@ module Publisher
       guide.published_version == 'publishing-failed'
     end
 
+    def is_unpublished?
+      guide.published_version == 'unpublished'
+    end
+
     def is_published?
-      !is_failed? && !is_publishing? && resource
+      !is_failed? && !is_publishing? && !is_unpublished? && resource
     end
 
     def is_synced?
