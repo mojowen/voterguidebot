@@ -15,7 +15,7 @@ var FormBase = {
   },
   handleError: function(body) {
     this.setState({ loading: false, errored: true, autosave: false })
-    this.notify(body.error || 'Something went wrong saving')
+    this.notify(body ? body.error : 'Something went wrong saving')
   },
   debounceDelay: 2500,
   changeNotifer: function() {

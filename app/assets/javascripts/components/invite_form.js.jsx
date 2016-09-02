@@ -6,7 +6,7 @@ var InviteForm = React.createClass({
   handleSubmit: function(event) {
     var emails = this.state.emails
 
-    if( event.target.checkValidity() ) {
+    if( event.target.checkValidity() && this.state.email.length > 0 ) {
       var email_obj = { state: 'sending', email: this.state.email }
       emails.push(email_obj)
       this.sendEmail(email_obj)
