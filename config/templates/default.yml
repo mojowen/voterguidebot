@@ -350,7 +350,7 @@ fields:
     limit: 50
     name: partners_list
   -
-    label: Partners
+    label: Disclaimer
     placeholder: Disclaimer that will go on the back of the voter guide.
     example: Paid for by Forward Montana, Rachel Huff-Doria, Treasurer. 136 E Broadway, Missoula, MT 59802
     element: input
