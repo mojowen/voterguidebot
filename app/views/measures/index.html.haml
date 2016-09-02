@@ -7,4 +7,4 @@
   .mui-col-md-4.mui--pull-right
     = button_link_to 'New Ballot Measure', new_guide_measure_path(@guide)
 
-= react_component :MeasuresForm, measures: @guide.measures, url: guide_measures_path(@guide, locale: nil), draggable: !admin_not_owner?(@guide), expropriatable: { path: expropriate_guide_measures_path(@guide), guides: current_user.guides.uniq - [@guide] }
+= react_component :MeasuresForm, measures: @guide.measures, url: guide_measures_path(@guide, locale: nil), draggable: !admin_not_owner?(@guide), expropriatable: { path: expropriate_guide_measures_path(@guide), guides: my_guides(@guide) }

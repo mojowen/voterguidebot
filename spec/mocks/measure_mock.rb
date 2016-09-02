@@ -1,6 +1,6 @@
 require("active_mocker/mock")
 class MeasureMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   prepend(Endorsements)
   prepend(Tags)
@@ -8,11 +8,11 @@ class MeasureMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "title" => nil, "description" => nil, "yes_means" => nil, "no_means" => nil, "created_at" => nil, "updated_at" => nil, "position" => nil, "stance" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, guide_id: nil, title: nil, description: nil, yes_means: nil, no_means: nil, created_at: nil, updated_at: nil, position: nil, stance: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, title: String, description: String, yes_means: String, no_means: String, created_at: DateTime, updated_at: DateTime, position: Fixnum, stance: Fixnum }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, guide_id: Integer, title: String, description: String, yes_means: String, no_means: String, created_at: DateTime, updated_at: DateTime, position: Integer, stance: Integer }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -29,7 +29,7 @@ class MeasureMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "guide_id", "title", "description", "yes_means", "no_means", "created_at", "updated_at", "position", "stance"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

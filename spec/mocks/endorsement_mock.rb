@@ -1,16 +1,16 @@
 require("active_mocker/mock")
 class EndorsementMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   prepend(Stance)
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "endorsed_id" => nil, "endorsed_type" => nil, "endorser" => nil, "stance" => 0, "created_at" => nil, "updated_at" => nil, "position" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, endorsed_id: nil, endorsed_type: nil, endorser: nil, stance: 0, created_at: nil, updated_at: nil, position: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, endorsed_id: Fixnum, endorsed_type: String, endorser: String, stance: Fixnum, created_at: DateTime, updated_at: DateTime, position: Fixnum }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, endorsed_id: Integer, endorsed_type: String, endorser: String, stance: Integer, created_at: DateTime, updated_at: DateTime, position: Integer }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -27,7 +27,7 @@ class EndorsementMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "endorsed_id", "endorsed_type", "endorser", "stance", "created_at", "updated_at", "position"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

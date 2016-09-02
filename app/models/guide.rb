@@ -29,6 +29,10 @@ class Guide < ActiveRecord::Base
     [id,  name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
   end
 
+  def slim_json
+    as_json(only: [:name, :id])
+  end
+
   def full_clone
     cloned = dup
     cloned.contests = contests.map(&:full_clone)
@@ -52,17 +56,6 @@ class Guide < ActiveRecord::Base
     base
   end
 
-  def as_json(options = nil)
-    super({
-      include: {
-        location: nil,
-        fields: nil,
-        languages: nil,
-        contests: {
-          include: { candidates: { include: :endorsements },
-                     questions: { include: [:answers, :tags] }}},
-        measures: { include: [:endorsements, :tags] }} }.update(options || {}))
-  end
 
   def template_fields
     template.fields.map do |template_field|

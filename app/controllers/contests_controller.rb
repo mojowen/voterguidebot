@@ -36,7 +36,7 @@ class ContestsController < ApplicationController
     else
       {
         error: @contest.errors.full_messages.join(','),
-        contest: @contest
+        contest: @contest.full_json
       }
     end
   end

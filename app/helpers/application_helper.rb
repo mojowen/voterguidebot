@@ -26,4 +26,8 @@ module ApplicationHelper
   def admin_not_owner?(guide)
     current_user.admin && !guide.users.include?(current_user)
   end
+
+  def my_guides(guide = nil)
+    (current_user.guides.uniq - [guide]).map(&:slim_json)
+  end
 end

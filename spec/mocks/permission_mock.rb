@@ -1,15 +1,15 @@
 require("active_mocker/mock")
 class PermissionMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "user_id" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, guide_id: nil, user_id: nil, created_at: nil, updated_at: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, user_id: Fixnum, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, guide_id: Integer, user_id: Integer, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class PermissionMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "guide_id", "user_id", "created_at", "updated_at"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

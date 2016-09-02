@@ -1,16 +1,16 @@
 require("active_mocker/mock")
 class LocationMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   STATES = { AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California", CO: "Colorado", CT: "Connecticut", DC: "Washington DC", DE: "Delaware", FL: "Florida", GA: "Georgia", HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa", KS: "Kansas", KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland", MA: "Massachusetts", MI: "Michigan", MN: "Minnesota", MS: "Mississippi", MO: "Missouri", MT: "Montana", NE: "Nebraska", NV: "Nevada", NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico", NY: "New York", NC: "North Carolina", ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania", RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota", TN: "Tennessee", TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington", WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming" }
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "address" => nil, "city" => nil, "state" => nil, "lat" => nil, "lng" => nil, "west" => nil, "east" => nil, "north" => nil, "south" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, guide_id: nil, address: nil, city: nil, state: nil, lat: nil, lng: nil, west: nil, east: nil, north: nil, south: nil, created_at: nil, updated_at: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, address: String, city: String, state: String, lat: BigDecimal, lng: BigDecimal, west: BigDecimal, east: BigDecimal, north: BigDecimal, south: BigDecimal, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, guide_id: Integer, address: String, city: String, state: String, lat: BigDecimal, lng: BigDecimal, west: BigDecimal, east: BigDecimal, north: BigDecimal, south: BigDecimal, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -27,7 +27,7 @@ class LocationMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "guide_id", "address", "city", "state", "lat", "lng", "west", "east", "north", "south", "created_at", "updated_at"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

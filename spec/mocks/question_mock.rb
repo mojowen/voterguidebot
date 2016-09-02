@@ -1,16 +1,16 @@
 require("active_mocker/mock")
 class QuestionMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   prepend(Tags)
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "contest_id" => nil, "text" => nil, "publish" => nil, "created_at" => nil, "updated_at" => nil, "position" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, contest_id: nil, text: nil, publish: nil, created_at: nil, updated_at: nil, position: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, contest_id: Fixnum, text: String, publish: Axiom::Types::Boolean, created_at: DateTime, updated_at: DateTime, position: Fixnum }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, contest_id: Integer, text: String, publish: Axiom::Types::Boolean, created_at: DateTime, updated_at: DateTime, position: Integer }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -27,7 +27,7 @@ class QuestionMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "contest_id", "text", "publish", "created_at", "updated_at", "position"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

@@ -20,11 +20,29 @@ class Contest < ActiveRecord::Base
     super attributes
   end
 
-  def as_json(options = nil)
-    super({
-      include: { candidates: { include: :endorsements },
-                 questions: { include: [:answers, :tags] } },
-      methods: :template }.update(options || {}))
+  def slim_json
+    as_json(only: [:title, :description, :id],
+            include: { candidates: { only: [:name, :photo] }})
+  end
+
+  def full_json
+    as_json(
+      include: {
+        candidates: {
+          include: {
+            endorsements: { only: :endorser }
+          }
+        },
+        questions: {
+          only: :text,
+          include: {
+            answers: { only: [:text, :candidate_id] },
+            tags: { only: :name }
+          }
+        }
+      },
+      methods: :template
+    )
   end
 
   def full_clone

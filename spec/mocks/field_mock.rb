@@ -1,15 +1,15 @@
 require("active_mocker/mock")
 class FieldMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "guide_id" => nil, "value" => nil, "field_template" => nil, "created_at" => nil, "updated_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, guide_id: nil, value: nil, field_template: nil, created_at: nil, updated_at: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, guide_id: Fixnum, value: String, field_template: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, guide_id: Integer, value: String, field_template: String, created_at: DateTime, updated_at: DateTime }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class FieldMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "guide_id", "value", "field_template", "created_at", "updated_at"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

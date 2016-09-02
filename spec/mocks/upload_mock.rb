@@ -1,15 +1,15 @@
 require("active_mocker/mock")
 class UploadMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "user_id" => nil, "created_at" => nil, "updated_at" => nil, "file_file_name" => nil, "file_content_type" => nil, "file_file_size" => nil, "file_updated_at" => nil, "guide_id" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, user_id: nil, created_at: nil, updated_at: nil, file_file_name: nil, file_content_type: nil, file_file_size: nil, file_updated_at: nil, guide_id: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, user_id: Fixnum, created_at: DateTime, updated_at: DateTime, file_file_name: String, file_content_type: String, file_file_size: Fixnum, file_updated_at: DateTime, guide_id: Fixnum }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, user_id: Integer, created_at: DateTime, updated_at: DateTime, file_file_name: String, file_content_type: String, file_file_size: Integer, file_updated_at: DateTime, guide_id: Integer }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class UploadMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "user_id", "created_at", "updated_at", "file_file_name", "file_content_type", "file_file_size", "file_updated_at", "guide_id"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key

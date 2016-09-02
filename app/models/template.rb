@@ -4,8 +4,8 @@ class Template < OpenStruct
     super config_file(template_name)
   end
 
-  def as_json
-    to_h.as_json
+  def as_json(**kwargs)
+    to_h.as_json(kwargs)
   end
 
   def render

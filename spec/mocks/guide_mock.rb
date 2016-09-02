@@ -1,15 +1,15 @@
 require("active_mocker/mock")
 class GuideMock < ActiveMocker::Base
-  created_with("2.2.2")
+  created_with("2.3.0")
   # _modules_constants.erb
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new("id" => nil, "name" => nil, "created_at" => nil, "updated_at" => nil, "election_date" => nil, "template_name" => "default", "published_version" => "unpublished", "published_at" => nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, name: nil, created_at: nil, updated_at: nil, election_date: nil, template_name: "default", published_version: "unpublished", published_at: nil).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Fixnum, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date, template_name: String, published_version: String, published_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date, template_name: String, published_version: String, published_at: DateTime }, method(:build_type)).merge(super)
     end
 
     def associations
@@ -26,7 +26,7 @@ class GuideMock < ActiveMocker::Base
 
     private(:mocked_class)
     def attribute_names
-      @attribute_names ||= (["id", "name", "created_at", "updated_at", "election_date", "template_name", "published_version", "published_at"] | super)
+      @attribute_names ||= attributes.stringify_keys.keys
     end
 
     def primary_key
@@ -249,10 +249,6 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
-  def as_json(options = nil)
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [options])
-  end
-
   def field(template_name)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [template_name])
   end
@@ -261,16 +257,20 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
-  def is_published?
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  def is_failed?(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
 
-  def is_publishing?
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  def is_published?(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
 
-  def is_synced?
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  def is_publishing?(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
+  end
+
+  def is_synced?(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
 
   def is_there_space?(contests: nil, measures: nil)
@@ -281,11 +281,15 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [type, { check_size: check_size }])
   end
 
-  def publish
-    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  def publish(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
 
-  def published_resource
+  def published_resource(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
+  end
+
+  def slim_json
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
