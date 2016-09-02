@@ -9,13 +9,11 @@ class StaticRenderer < ActionController::Base
   end
 
   def self.view
-    @view ||= begin
-      view = ActionView::Base.new(ActionController::Base.view_paths, {})
-      class << view
-        include ApplicationHelper
-        include AvgHelper
-      end
-      view
+    view = ActionView::Base.new(ActionController::Base.view_paths, {})
+    class << view
+      include ApplicationHelper
+      include AvgHelper
     end
+    view
   end
 end

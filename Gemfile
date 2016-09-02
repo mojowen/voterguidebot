@@ -26,6 +26,7 @@ gem 'phantomjs'
 gem 'delayed_job_active_record'
 gem 'puma_worker_killer'
 gem 'scout_apm'
+gem 'derailed', group: :development
 
 group :assets do
   gem 'coffee-rails'
