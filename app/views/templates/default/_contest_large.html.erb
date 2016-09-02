@@ -43,7 +43,7 @@
             <% contest.candidates.each do |candidate| %>
               <th>
                 <%= render guide.template.template_file_path('photo'), candidate: candidate %>
-                <h3><%= candidate.name %></h3>
+                <h3><%= (candidate.try(:name) || '').split(' ').last %></h3>
               </th>
             <% end %>
           </tr>
