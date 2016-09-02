@@ -27,12 +27,11 @@ class Guide < ActiveRecord::Base
   end
 
   def publish
-    Publisher::Conducter::publish id
+    publisher.publish
   end
 
   def published_resource
-    S3Uploader.new.object("#{slug}/#{template.publisher_resource}")
-      .presigned_url(:get, expires_in: 3600 * 24)
+    publisher.resource
   end
 
   def is_publishing?
@@ -40,7 +39,7 @@ class Guide < ActiveRecord::Base
   end
 
   def is_published?
-    !%w{publishing-failed unpublished publishing}.include?(published_version) && template.publisher_resource
+    !%w{publishing-failed unpublished publishing}.include?(published_version) && published_resource
   end
 
   def is_synced?
@@ -135,6 +134,10 @@ class Guide < ActiveRecord::Base
   end
 
   private
+
+  def publisher
+    @publisher ||= Publisher::Conducter.new(self)
+  end
 
   def find_template_field(template_name)
     template_fields.find { |fd| fd["name"]  == template_name }

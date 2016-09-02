@@ -43,6 +43,7 @@ RSpec.describe Question, type: :model do
       subject.assign_attributes raw
       expect(subject.answers.first.text).to eq(raw[:answers].first[:text])
     end
+
     context 'with already existing answers' do
       let(:answers) do
         [

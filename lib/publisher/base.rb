@@ -15,10 +15,18 @@ module Publisher
       raise error
     end
 
+    def resource
+      nil
+    end
+
     private
 
     def generate
       raise '#generate method must be overwritten'
+    end
+
+    def clean
+      nil
     end
 
     def complete
@@ -30,10 +38,6 @@ module Publisher
     def abort
       guide.update_attributes published_version: 'publishing-failed'
       clean
-    end
-
-    def clean
-      raise '#generate method must be overwritten'
     end
   end
 end

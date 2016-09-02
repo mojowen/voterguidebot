@@ -1,10 +1,27 @@
 module Publisher
   class Conducter
-    def self.publish(guide_id)
-      guide = Guide.find(guide_id)
+    attr_reader :guide
 
-      publish_class = Object.const_get("Publisher::#{guide.template.publisher_class}")
-      publish_class.new(guide).publish
+    def initialize(guide)
+      @guide = guide
+    end
+
+    def publish
+      publisher.publish
+    end
+
+    def resource
+      publisher.resource
+    end
+
+    private
+
+    def publisher
+      @publisher ||= publisher_class.new(guide)
+    end
+
+    def publisher_class
+      Object.const_get("Publisher::#{guide.template.publisher_class}")
     end
   end
 end
