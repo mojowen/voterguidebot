@@ -18,32 +18,15 @@ class Guide < ActiveRecord::Base
   validates :template_name, presence: true
   validates :election_date, presence: true
 
+  delegate :publish, :published_resource, :is_publishing?, :is_failed?,
+           :is_published?, :is_synced?, to: :publisher
+
   def template
     @template ||= Template.new template_name
   end
 
   def slug
     [id,  name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
-  end
-
-  def publish
-    publisher.publish
-  end
-
-  def published_resource
-    publisher.resource
-  end
-
-  def is_publishing?
-    published_version == 'publishing'
-  end
-
-  def is_published?
-    !%w{publishing-failed unpublished publishing}.include?(published_version) && published_resource
-  end
-
-  def is_synced?
-    published_version == version
   end
 
   def full_clone

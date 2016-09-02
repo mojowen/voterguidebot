@@ -1,26 +1,19 @@
 module Publisher
   class Conducter
-    attr_reader :guide
+
+    attr_reader :publisher
 
     def initialize(guide)
-      @guide = guide
+      @publisher = publisher_class(guide).new(guide)
     end
 
-    def publish
-      publisher.publish
-    end
-
-    def resource
-      publisher.resource
+    def method_missing(method_name, *arguments, &block)
+      publisher.send(method_name, *arguments, &block)
     end
 
     private
 
-    def publisher
-      @publisher ||= publisher_class.new(guide)
-    end
-
-    def publisher_class
+    def publisher_class(guide)
       Object.const_get("Publisher::#{guide.template.publisher_class}")
     end
   end

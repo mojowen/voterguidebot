@@ -36,6 +36,11 @@
             Current Version
           - else
             Old Version
+      - elsif @guide.is_failed?
+        %button.mui-btn--small.mui-btn--danger.mui-btn{ disabled: true }
+          %strong
+            %i.fa-exclamation-triangle.fa
+            Publishing Failed
 
     .mui-col-md-12
       %h2 Get Started on Your Voter Guide
@@ -94,3 +99,20 @@
         Edit Ballot Measures
       %p
         %em List the ballot measures that voters will get to decide on election day.
+
+- if @guide.is_publishing?
+  :javascript
+    var decay = 0
+    function check_if_published() {
+      decay += 1
+      superagent.get(document.location.pathname)
+                .send()
+                .set('X-CSRF-Token', CSRF.token())
+                .set('Accept', 'application/json')
+                .end(function(err, resp) {
+                  if( resp.body.publishing ) setTimeout(check_if_published, 50 * Math.pow(10, decay))
+                  else document.location.reload()
+                })
+
+      }
+    setTimeout(check_if_published, 500)

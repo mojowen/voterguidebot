@@ -19,6 +19,26 @@ module Publisher
       nil
     end
 
+    def published_resource
+      resource
+    end
+
+    def is_publishing?
+      guide.published_version == 'publishing'
+    end
+
+    def is_failed?
+      guide.published_version == 'publishing-failed'
+    end
+
+    def is_published?
+      !is_failed? && !is_publishing? && resource
+    end
+
+    def is_synced?
+      guide.published_version == guide.version
+    end
+
     private
 
     def generate
