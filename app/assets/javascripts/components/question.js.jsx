@@ -18,11 +18,11 @@ var Question = React.createClass({
           return answer.candidate_id === candidate.id
         })
 
-    if( !answer ) {
+    if( answer ) {
+      answers[_.indexOf(this.props.answers, answer)].text = text
+    } else {
       answer = { candidate_id: candidate.id, question_id: this.props.id, text: text }
       answers.push(answer)
-    } else {
-      answers[_.indexOf(this.props.answers, answer)].text = text
     }
 
     questions[this.props.index].answers = answers

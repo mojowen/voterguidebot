@@ -5,4 +5,4 @@
       = image_tag 'robot.png'
     .mui-panel
       %p This website creates voter guides. Want to make one?
-      = button_link_to 'Get Started', user_omniauth_authorize_path(:google_oauth2)
+      = button_link_to 'Get Started', user_google_oauth2_omniauth_authorize_path(:google_oauth2)

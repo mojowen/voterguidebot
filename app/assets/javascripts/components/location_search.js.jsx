@@ -103,7 +103,7 @@ var LocationSearch = React.createClass({
     location_fields = _.map(location_fields, function(field) {
       return <input key={field}
                     type="hidden"
-                    value={ this.state[field] }
+                    value={ this.state[field] || '' }
                     name={ 'guide[location_attributes]['+field+']'} />
     }, this)
 

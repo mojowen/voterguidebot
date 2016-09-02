@@ -27,11 +27,18 @@ var InputComponent = React.createClass({
     if( remaining >= 15 && remaining >= 0 ) return 'mui--text-accent-hint'
     return 'mui--text-danger'
   },
+  format_props: function() {
+    if( this.props.element.match(/input|textarea/) ) {
+      var allowed = ['value', 'placeholder', 'onChange', 'name', 'data-index', 'type']
+      return _.pick(this.props, allowed)
+    }
+    return this.props
+  },
   render: function() {
     var label = this.props.label ? <label>{ this.props.label }</label> : '',
         Element = to_react_class(this.props.element),
         input = <Element ref="input"
-                         { ...this.props }
+                         { ...this.format_props() }
                          value={ this.value() }
                          data-valid={this.isValid()} />,
         font_awesome = '',

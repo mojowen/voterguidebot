@@ -18,7 +18,7 @@ var Taggable = React.createClass({
         tags = _.map(this.props.tags, function(tag) {
             var key = ['tag', tag.name, this.props.id].join('_')
             return <div className="tag" key={key}>
-              {tag.name}
+              <span>{tag.name}</span>
               <a href="#" data-tag={tag} onClick={this.handleRemoveClick}>
                 <i className="fa fa-times"/>
               </a>
