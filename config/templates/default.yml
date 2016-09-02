@@ -10,9 +10,10 @@ filler_pages: 4
 publisher_class: PDF
 publisher_resource: voter-guide.pdf
 
-size:
-  height: 5in
-  width: 5in
+render_options:
+  height: 5.25in
+  width: 5.25in
+  margin: 0.125in
 
 contests:
   partial: contest_large

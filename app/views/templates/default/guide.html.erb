@@ -116,7 +116,9 @@
         <strong>www.americanvoterguide.org/<%= guide.location.state_slug %></strong>
       </div>
       <p>
-      <div class="disclaimer"><%= guide.field('disclaimer') %></div>
+      <% unless guide.field('disclaimer').empty? %>
+        <div class="disclaimer"><%= guide.field('disclaimer') %></div>
+      <% end %>
     </div>
   </div>
   </body>

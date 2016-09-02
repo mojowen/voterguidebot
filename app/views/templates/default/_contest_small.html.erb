@@ -10,7 +10,7 @@
       <% contest.candidates.each do |candidate| %>
         <div class="candidate small">
           <div class="name">
-            <div class="photo"><%= render @guide.template.template_file_path('photo'), candidate: candidate %></div>
+            <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
             <h3><%= candidate.name %></h3>
             <span class="party"><%= candidate.party %></span>
             <p><%= candidate.bio %></p>

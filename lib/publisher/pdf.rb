@@ -8,7 +8,7 @@ module Publisher
 
     def pdf
       phantom = PhantomRenderer.new guide_html_file, extension: :pdf
-      phantom.render height: template.size['height'], width: template.size['width']
+      phantom.render **template.render_options.symbolize_keys
       phantom
     end
 

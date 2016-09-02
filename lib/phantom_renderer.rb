@@ -8,9 +8,9 @@ class PhantomRenderer
     @extension = extension || :pdf
   end
 
-  def render(height: nil, width: nil, path: nil)
+  def render(path: nil, **render_kwargsons)
     @rendered_filepath = path || tmp_filepath
-    phantom command(height: height, width: width)
+    phantom command(**render_kwargsons)
     self
   end
 
@@ -31,8 +31,8 @@ class PhantomRenderer
     raise "Could not render #{rendered_filepath} #{phantom}" if $?.exitstatus != 0
   end
 
-  def command(height: nil, width: nil)
-    [render_script, path_to_file, rendered_filepath, width, height].join(' ')
+  def command(height: nil, width: nil, margin: 0)
+    [render_script, path_to_file, rendered_filepath, width, height, margin].join(' ')
   end
 
   def tmp_filepath
