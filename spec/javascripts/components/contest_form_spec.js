@@ -79,4 +79,9 @@ describe('ContestForm', function() {
     expect(this.component.state.changed).toEqual(false)
     expect(this.component.state.url).toEqual(response.url)
   })
+  it('cannot submit twice', function() {
+    Utils.Simulate.submit(this.component.refs.form_wrapper)
+    Utils.Simulate.submit(this.component.refs.form_wrapper)
+    expect(jasmine.Ajax.requests.count()).toEqual(1)
+  })
 })

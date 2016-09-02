@@ -46,6 +46,8 @@ var FormBase = {
                       .set('Accept', 'application/json')
   },
   updateGuide: function(url, data, callback) {
+    if( this.state.loading ) return
+
     this.setState({ loading: true, errored: false })
 
     var that = this,
