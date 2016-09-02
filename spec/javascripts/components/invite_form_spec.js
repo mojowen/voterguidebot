@@ -15,7 +15,9 @@ describe('InviteForm', function() {
 
   it('adds emails', function() {
     spyOn(this.component, 'sendEmail')
-    this.component.refs.email_input.setState({ value: 'dude@example.com' })
+    var input = this.dom.querySelector('input')
+    input.value = 'dude@example.com'
+    Utils.Simulate.change(input)
     Utils.Simulate.submit(this.component.refs.form_wrapper)
 
     expect(ReactDOM.findDOMNode(this.component).querySelectorAll('p').length).toEqual(1)
@@ -31,6 +33,13 @@ describe('InviteForm', function() {
 
     expect(ReactDOM.findDOMNode(this.component).querySelectorAll('p').length).toEqual(0)
     expect(this.component.state.email).toEqual('dude')
+    expect(this.component.sendEmail).not.toHaveBeenCalledWith()
+  })
+
+  it('does not add blank emails', function() {
+    spyOn(this.component, 'sendEmail')
+    Utils.Simulate.submit(this.component.refs.form_wrapper)
+
     expect(this.component.sendEmail).not.toHaveBeenCalledWith()
   })
 
