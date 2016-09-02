@@ -68,7 +68,7 @@ var Endorsements = React.createClass({
     }
 
     return <div className={"endorsements " +this.props.className}>
-      <strong>Endorsements</strong>{ addEndorsement }
+      <strong>Supporters</strong>{ addEndorsement }
       <ul>{ endorsements }</ul>
     </div>
   }
