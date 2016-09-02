@@ -26,7 +26,8 @@ class S3Uploader
     begin
       return if object.etag.gsub(/[^a-zA-Z\d]/, '') == md5(path_to_file)
       puts "File changed - uploading #{path_to_file}"
-    rescue Aws::S3::Errors::NotFound
+    rescue Aws::S3::Errors::NotFound,
+           Aws::S3::Errors::Forbidden
       puts "File not found - uploading #{path_to_file}"
     end
 
