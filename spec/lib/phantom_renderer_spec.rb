@@ -11,6 +11,7 @@ RSpec.describe PhantomRenderer do
       subject.render(path: filepath)
       expect(File.exists?(filepath)).to be true
     end
+
     it 'creates a png' do
       filepath = Rails.root.join(test_tmp, 'test.png')
       subject.render(path: filepath)
@@ -34,7 +35,6 @@ RSpec.describe PhantomRenderer do
 
   describe '.render_and_upload' do
     let(:uploader) { instance_double(S3Uploader) }
-
     before(:each) do
       class_double("S3Uploader", new: uploader).as_stubbed_const
     end

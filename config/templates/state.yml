@@ -4,7 +4,7 @@ name: Great American Voter Guide State
 view: state
 folder: avg
 layout: avg
-publisher_class: state
+publisher_class: State
 publisher_resource: nil
 
 inherits: default
