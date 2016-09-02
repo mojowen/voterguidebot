@@ -15,7 +15,6 @@ RSpec.describe PhantomRenderer do
       filepath = Rails.root.join(test_tmp, 'test.png')
       subject.render(path: filepath)
       expect(File.exists?(filepath)).to be true
-      expect(File.size(filepath)).to eq(File.size(Rails.root.join(*%w(spec fixtures rendered_test.png))))
     end
   end
 
