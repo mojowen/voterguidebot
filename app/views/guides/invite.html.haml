@@ -6,8 +6,7 @@
       Invite folks to Voter Guide
       = image_tag 'robot.png', width: 16, style: 'vertical-align: middle'
       \- they will need a Google account.
-    - @guide.users.each do |user|
-      - next if user == current_user
+    - @guide.users.uniq.each do |user|
       %p
         = user.email
         %i.fa.fa-pull-right.fa-check-circle-o
