@@ -36,7 +36,7 @@ class Contest < ActiveRecord::Base
         questions: {
           only: [:text, :id],
           include: {
-            answers: { only: [:text, :candidate_id] },
+            answers: { only: [:text, :candidate_id, :id] },
             tags: { only: :name }
           }
         }
