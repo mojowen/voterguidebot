@@ -40,10 +40,36 @@ questions:
     limit: 140
   samples:
     -
-      text: boosting the use of clean energy?
-      tag: Climate
+      text: Raising taxes on people making over $250,000 per year?
+      tag: Economy
+      standard: true
     -
-      text: taking government action to reduce the pollution that causes global warming?
+      text: Protecting LGBTQ people from discrimination in housing, employment, and businesses like restaurants and taxis?
+      tag: LGBT
+      standard: true
+    -
+      text: Making college free for students from families making less than $125,000 per year?
+      tag: Education
+      standard: true
+    -
+      text: Decriminalizing possession of small amounts of marijuana?
+      tag: Drug Policy
+      standard: true
+    -
+      text: Taking government action to reduce the pollution that causes global warming?
+      tag: Climate
+      standard: true
+    -
+      text: Offering a roadmap to citizenship to undocumented immigrants working and raising families in America?
+      tag: Immigration
+      standard: true
+    -
+      text: A woman’s right to seek a safe, legal abortion?
+      tag: Reproduction Rights
+      standard: true
+
+    -
+      text: boosting the use of clean energy?
       tag: Climate
     -
       text: regulating fracking more closely?
@@ -85,9 +111,6 @@ questions:
       text: lowering how much the government spends on imprisoning people?
       tag: Economy
     -
-      text: raising taxes on people making over $250,000?
-      tag: Economy
-    -
       text: prosecuting businesses that steal wages or tips from workers?
       tag: Economy
     -
@@ -102,9 +125,6 @@ questions:
     -
       text: paying every worker in America at least $15 per hour?
       tag: Economy
-    -
-      text: making college free for students from families making less than $125,000?
-      tag: Education
     -
       text: allowing recent college graduates to refinance student loans?
       tag: Education
@@ -158,9 +178,6 @@ questions:
       tag: Immigration
     -
       text: the government providing or ensuring housing for LGBTQ youth facing homelessness?
-      tag: LGBT
-    -
-      text: protecting LGBTQ people from discrimination in housing, employment, and public serving spaces/businesses like restaurants and taxis?
       tag: LGBT
     -
       text: banning anti-gay conversion "therapy"?

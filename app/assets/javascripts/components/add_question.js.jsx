@@ -30,6 +30,7 @@ var AddQuestion = React.createClass({
   render: function() {
     if( this.state.picking ) {
       var template_questions = _.chain(this.props.template.questions.samples)
+                                .reject('standard')
                                 .groupBy('tag')
                                 .map(function(tag, name) {
                                   var tags = _.map(tag, function(question) {
@@ -37,6 +38,13 @@ var AddQuestion = React.createClass({
                                       Do you support {question.text}
                                     </option> })
                                   return <optgroup key={name} label={name}>{ tags }</optgroup> })
+                                .value()
+      var standard_questions = _.chain(this.props.template.questions.samples)
+                                .filter('standard')
+                                .map(function(question) {
+                                    return <option value={question.text} key={question.text}>
+                                      Do you support {question.text}
+                                    </option> })
                                 .value()
 
       return <div className="add--question mui-panel mui-col-md-offset-3 mui-col-md-6">
@@ -47,6 +55,7 @@ var AddQuestion = React.createClass({
         <div className="tags--select mui-select">
           <select onChange={this.handleAddSelected} className="">
             <option>{['Select Question ',String.fromCharCode(187)].join(' ')}</option>
+            { standard_questions }
             { template_questions }
           </select>
         </div>

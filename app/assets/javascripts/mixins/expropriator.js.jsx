@@ -31,7 +31,7 @@ var Expropriator = {
         <option>CLONE TO GUIDE</option>
         { options }
       </select>
-      <input type="hidden" name="expropriator_id" value={id} />
+      <input type="hidden" name="expropriator_id" value={id || ''} />
       <input type="hidden" name="authenticity_token" value={CSRF.token()} />
     </form>
   }
