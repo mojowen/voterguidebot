@@ -1,0 +1,29 @@
+- content_for :header do
+  .header
+    .bg{ style: "background-image: url(https://s3-us-west-2.amazonaws.com/voterguides/states/register.jpg)" }
+    .mui-container
+      .mui-row
+        .mui-col-xs-12
+          %h1
+            Register to Vote
+        .mui-col-xs-4
+          %i.fa.fa-facebook
+          %i.fa.fa-twitter
+          %i.fa.fa-envelope
+
+- content_for :body_class do
+  register
+
+- content_for :title do
+  Register to Vote | American Voter Guide
+
+.mui-row
+  .mui-col-xs-12
+    %p Take 2 minutes to make sure you are registered to vote for the 2016 elections!
+    %iframe{ src: 'https://register.vote.org/?partner=915150&campaign=americanvoterguide.org', scrolling:"no", style:"margin: 30px auto; width: 80%; display: block; border: none;" }
+
+= render 'templates/avg/state_box'
+
+= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.min.js'
+:javascript
+  iFrameResize({ log:false, checkOrigin:false})

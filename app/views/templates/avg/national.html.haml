@@ -1,0 +1,57 @@
+- content_for :header do
+  = javascript_include_tag 'https://tool.votinginfoproject.org/app.js'
+  .header
+    .bg{ style: "background-image: url(https://s3-us-west-2.amazonaws.com/voterguides/states/pollingplace.jpg)" }
+    .mui-container
+      .mui-row
+        .mui-col-xs-12
+          %h1
+            Find your Polling Place
+        .mui-col-xs-4
+          %i.fa.fa-facebook
+          %i.fa.fa-twitter
+          %i.fa.fa-envelope
+
+- content_for :body_class do
+  pollingplace
+
+- content_for :title do
+  Find Your Polling Place | American Voter Guide
+
+.mui-row
+  .mui-col-xs-12
+    #_vit{ style: "margin: 30px auto 100px; min-height: 400px; width: 80%; display: block; border: none;" }
+      Loading...
+
+
+= render 'templates/avg/state_box'
+:javascript
+  vit.load({
+      modal: true,
+      title: 'Find Your Polling Place',
+
+      colors: {
+        'header': '#229acd',
+        'landscapeBackgroundHeader': '#228a9d'
+      },
+      language: 'en',
+      json: {
+        text: {
+          headers: {
+            pollingLocation: 'Polling Locations'
+          },
+          resources: {
+            electionAdministration: {
+              stateElectionsOffice: 'State Elections Office'
+            },
+            moreResources: {
+              electionInformationUrl: 'Election Information',
+              registrationConfirmationUrl: 'Registration Confirmation',
+              absenteeVotingInformationUrl: 'Absentee Voting Information',
+              votingLocationFinderUrl: 'Voting Location Finder',
+              ballotInformationUrl: 'Ballot Information'
+            }
+          }
+        }
+     }
+  });

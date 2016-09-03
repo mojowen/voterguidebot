@@ -1,11 +1,15 @@
 !!!
 %html
   %head
-    //= javascript_include_tag 'application', 'data-turbolinks-track' => true
     - unless Rails.env.production?
       = stylesheet_link_tag '/assets/avg.css', media: 'all'
     - else
       = stylesheet_link_tag "/assets/#{Rails.application.assets_manifest.assets['avg.css']}", media: 'all'
+
+    - unless Rails.env.production?
+      = javascript_include_tag 'avg.js'
+    - else
+      = javascript_include_tag "/assets/#{Rails.application.assets_manifest.assets['avg.js']}"
 
     %title
       - if content_for :title
@@ -23,13 +27,13 @@
               = link_to image_tag('avg/logo.svg'), 'http://americanvoterguide.org'
             %td
               .links
-                = link_to 'About', '/about'
+                = link_to 'About', '/about', class: 'about-link'
                 .menu
                   = link_to 'Your State', '/'
                   %ul
                     - Location::STATES.values.each do |name|
                       %li= link_to name, "/#{name.gsub(/\s/,'').downcase}"
-                = link_to 'Register To Vote', '/'
+                = link_to 'Register To Vote', '/', class: 'register-link'
       - if content_for :header
         = yield :header
       - else

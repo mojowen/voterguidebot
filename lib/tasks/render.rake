@@ -10,7 +10,7 @@ namespace :render do
   desc "Render a some sub pages."
   task :subpages, :paths do |_, args|
     layout = 'layouts/avg.html.haml'
-    args.paths.each do |path|
+    Dir.glob("app/views/templates/avg/subpages/*.html.haml").each do |path|
       Rake::Task['render:file'].invoke(path, layout)
       Rake::Task['render:file'].reenable
     end

@@ -1,0 +1,71 @@
+.mui-row
+  #statebox.mui-col-xs-12
+    .mui-col-xs-12.mui-col-md-6
+      %h3 Voter Information Specific To Your Area
+      .mui-select
+        %select#usa_select
+          %option Select Your State
+          - Location::STATES.values.each do |state|
+            %option{ value: Location.to_slug(state) }= state
+        %span Select Your State
+        %i.fa-angle-down.fa
+    .mui-col-md-6.mui--hidden-sm
+      #usa
+
+:css
+  svg {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+  }
+
+  path {
+    fill: none;
+    stroke-linejoin: round;
+  }
+
+  .land-fill {
+    stroke: white;
+    stroke-width: 1px;
+    fill: #1470be;
+    cursor: pointer;
+  }
+  .land-fill:hover {
+    fill: #e34116;
+  }
+
+
+:javascript
+  var width = 800,
+      height = 500;
+
+  var projection = albersUsa();
+
+  var path = d3.geo.path()
+      .projection(projection);
+
+  var svg = d3.select("#usa").append("svg")
+      .attr("viewBox", "0 0 " + width + " " + height)
+      .attr("width", width)
+      .attr("height", height);
+
+  var g = svg.append("g")
+      .style("stroke-width", "1.5px");
+
+  d3.json("#{ Rails.env.production? ? '' : '/avg' }/us.json", function(error, us) {
+
+   g.selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+    .attr("d", path)
+    .attr("class", "land-fill")
+    .on("click", function(elem, index) { go_to_state(index) });
+
+  });
+
+  function go_to_state(state) {
+    document.location = '/'+#{ Location::STATES.map { |_, v| Location.to_slug(v) }.to_json }[state]
+  }
+  usa_select.onchange = function(event) {
+    document.location = '/'+event.target.value
+  }

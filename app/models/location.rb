@@ -33,7 +33,11 @@ class Location < ActiveRecord::Base
 
   def state_slug
     return '' unless state_name
-    state_name.gsub(/\s/,'').downcase
+    self.class.to_slug(state_name)
+  end
+
+  def self.to_slug(name)
+    name.gsub(/\s/,'').downcase
   end
 
   def self.to_state_abv(name)
