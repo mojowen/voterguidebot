@@ -35,7 +35,9 @@
             = candidate.bio
             - unless candidate.endorsements.empty?
               %em Supported by
-              = candidate.endorsements.map(&:endorser).to_sentence
+              %ul
+                - candidate.endorsements.each do |endorsement|
+                  %li= endorsement.endorser
             .share
               %i.fa.fa-share
 

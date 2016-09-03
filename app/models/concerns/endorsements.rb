@@ -8,13 +8,16 @@ module Endorsements
   private
 
   def create_endorsements!(associates_obj)
-    return unless associates_obj[:endorsements]
-    associates_obj[:endorsements].map!.with_index do |raw_endorsement, index|
-      endorsement = endorsements.find_or_initialize_by(
-        stance: raw_endorsement[:stance] || 0,
-        endorser: raw_endorsement[:endorser])
-      endorsement.position = index
-      endorsement
+    if associates_obj[:endorsements]
+      associates_obj[:endorsements].map!.with_index do |raw_endorsement, index|
+        endorsement = endorsements.find_or_initialize_by(
+          stance: raw_endorsement[:stance] || 0,
+          endorser: raw_endorsement[:endorser])
+        endorsement.position = index
+        endorsement
+      end
+    else
+      associates_obj[:endorsements] = []
     end
   end
 

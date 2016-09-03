@@ -22,7 +22,7 @@ class Contest < ActiveRecord::Base
 
   def slim_json
     as_json(only: [:title, :description, :id],
-            include: { candidates: { only: [:name, :photo] }})
+            include: { candidates: { only: [:name, :photo, :id] }})
   end
 
   def full_json
@@ -30,7 +30,7 @@ class Contest < ActiveRecord::Base
       include: {
         candidates: {
           include: {
-            endorsements: { only: :endorser }
+            endorsements: { only: [:endorser, :stance] }
           }
         },
         questions: {
