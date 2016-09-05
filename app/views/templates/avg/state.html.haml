@@ -45,7 +45,8 @@
         %h4 A Yes Vote Means
         %p= measure.yes_means
         - unless measure.endorsements.for.empty?
-          %p Who Says Yes:
+          %p
+            %em Who Says Yes:
           %ul
             - measure.endorsements.for.each do |endorsement|
               %li= endorsement.endorser
@@ -56,8 +57,11 @@
         %h4 A No Vote Means
         %p= measure.yes_means
         - unless measure.endorsements.against.empty?
-          %p Who Says No:
+          %p
+            %em Who Says No:
           %ul
             - measure.endorsements.against.each do |endorsement|
               %li= endorsement.endorser
 
+
+= render 'templates/avg/state_box'

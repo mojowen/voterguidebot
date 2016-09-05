@@ -1,6 +1,7 @@
-.mui-row
+.mui-row{ style: 'margin-top: 40px' }
   #statebox.mui-col-xs-12
     .mui-col-xs-12.mui-col-md-6
+      = image_tag 'avg/states.png', class: 'mui--visible-sm-block mui--visible-xs-block'
       %h3 Voter Information Specific To Your Area
       .mui-select
         %select#usa_select
@@ -9,7 +10,7 @@
             %option{ value: Location.to_slug(state) }= state
         %span Select Your State
         %i.fa-angle-down.fa
-    .mui-col-md-6.mui--hidden-sm
+    .mui-col-md-6.mui--hidden-sm.mui--hidden-xs
       #usa
 
 :css
@@ -52,16 +53,18 @@
   var g = svg.append("g")
       .style("stroke-width", "1.5px");
 
-  d3.json("#{ Rails.env.production? ? '' : '/avg' }/us.json", function(error, us) {
+  if( window.innerWidth >= 768 ) {
+    d3.json("#{ Rails.env.production? ? '' : '/avg' }/us.json", function(error, us) {
 
-   g.selectAll("path")
-    .data(topojson.feature(us, us.objects.states).features)
-    .enter().append("path")
-    .attr("d", path)
-    .attr("class", "land-fill")
-    .on("click", function(elem, index) { go_to_state(index) });
+     g.selectAll("path")
+      .data(topojson.feature(us, us.objects.states).features)
+      .enter().append("path")
+      .attr("d", path)
+      .attr("class", "land-fill")
+      .on("click", function(elem, index) { go_to_state(index) });
 
-  });
+    })
+  }
 
   function go_to_state(state) {
     document.location = '/'+#{ Location::STATES.map { |_, v| Location.to_slug(v) }.to_json }[state]
