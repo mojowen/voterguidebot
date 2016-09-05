@@ -1,59 +1,65 @@
 .contest.embed{ id: "candidate_#{contest.id}" }
-  .header
-    %a.left{ href: '#' }
-      %i.fa.fa-angle-left
-    .titles
-      .title.active About the Candidates
-      - contest.questions.each do |question|
-        .title
-          Do you support
-          = question.text
+  .vitals
+    %h3= contest.title
+    %p= contest.description
 
-    %a.right{ href: '#' }
-      %i.fa.fa-angle-right
-  - contest.candidates.each do |candidate|
-    .candidate
-      .inner
-        .info
-          .photo{ style: "background-image: url(#{candidate.photo})" }
-          .box
-            %p
-              %strong= candidate.name
-            %p= candidate.party
-            %p
-              - if candidate.website
-                %a{ href: candidate.website, target: '_blank' }
-                  %i.fa.fa-globe
-              - if candidate.facebook
-                %a{ href: candidate.facebook, target: '_blank' }
-                  %i.fa.fa-facebook
-              - if candidate.twitter
-                %a{ href: candidate.twitter, target: '_blank' }
-                  %i.fa.fa-twitter
-        .facts
-          .fact.active
-            = candidate.bio
-            - unless candidate.endorsements.empty?
-              %em Supported by
-              %ul
-                - candidate.endorsements.each do |endorsement|
-                  %li= endorsement.endorser
-            .share
-              %i.fa.fa-share
+  .inner
+    .header
+      %a.left{ href: '#' }
+        %i.fa.fa-angle-left
+      .titles
+        .title.active About the Candidates
+        - contest.questions.each do |question|
+          .title
+            .pre Do you support
+            = question.text
 
-          - contest.questions.each do |question|
-            .fact
-              %h1.big= question.answers.find{ |answer| answer.candidate == candidate }.try(:text)
+      %a.right{ href: '#' }
+        %i.fa.fa-angle-right
+    - contest.candidates.each do |candidate|
+      .candidate
+        .inner
+          .info
+            .photo{ style: "background-image: url(#{candidate.photo})" }
+            .box
+              %p.name
+                %strong= candidate.name
+              %p.party= candidate.party
+              %p.links
+                - if candidate.website
+                  %a{ href: candidate.website, target: '_blank' }
+                    %i.fa.fa-globe
+                - if candidate.facebook
+                  %a{ href: candidate.facebook, target: '_blank' }
+                    %i.fa.fa-facebook
+                - if candidate.twitter
+                  %a{ href: candidate.twitter, target: '_blank' }
+                    %i.fa.fa-twitter
+          .facts
+            .fact.active.bio
+              %p= candidate.bio
+              - unless candidate.endorsements.empty?
+                %p
+                  %em Supported by
+                %ul
+                  - candidate.endorsements.each do |endorsement|
+                    %li= endorsement.endorser
               .share
                 %i.fa.fa-share
 
-  .footer
-    %a.active{ href: '#' }
-    - contest.questions.each do
-      %a{ href: '#' }
-    .tools
-      %i.fa.fa-code
-      %i.fa.fa-share
+            - contest.questions.each do |question|
+              .fact
+                %h1.big= question.answers.find{ |answer| answer.candidate == candidate }.try(:text)
+                .share
+                  %i.fa.fa-share
+
+    .footer
+      %a.active{ href: '#' }
+      - contest.questions.each do
+        %a{ href: '#' }
+      .tools
+        %i.fa.fa-code
+        %i.fa.fa-share
 
 :javascript
   (function() {

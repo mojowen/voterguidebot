@@ -85,7 +85,7 @@ h2
     height: 250px
     position: relative
     padding-top: 150px
-    *
+    .titles
       z-index: 1
       color: white
       position: relative
@@ -126,97 +126,117 @@ h2
     margin: 10px 0
 
 .embed
-  background: #e8ecef
-  position: relative
-  padding: 60px 0 0
-  margin: 20px 0
-  max-width: 600px
-
-  .candidate
-    padding: 10px 0
-    margin: 10px 30px 0
-    border-bottom: 2px solid white
-    min-width: 450px
-    @include clear
-
-    .inner
-      width: 100%
-      position: relative
-      box-sizing: border-box
-      padding: 0 10px
-
-    .info
-      float: left
-      width: 90px
-      .box
-        background: $lightblue
-        color: white
-        font-size: 9px
-        line-height: 7px
-        padding: 4px
-        strong
-          font-weight: 600
-          font-size: 11px
-        p
-          margin-bottom: 6px
-        a
-          i
-            color: white
-      .photo
-        height: 60px
-        width: 90px
-        background-size: cover
-        background-position: top center
-        background-repeat: no-repeat
-    .facts
-      width: 100%
-      padding: 10px 0 0 100px
-      height: 30px
-      .fact
-        .share
-          position: absolute
-          bottom: 10px
-          right: 10px
-
-  .left,
-  .right
-    top: 10px
-    position: absolute
-
-  .left,
-  .right
-    background: $orange
-    color: white
-    padding:  0px 16px
-    font-size: 30px
-    font-weight: bold
-    cursor: pointer
-  .left
-    left: 0
-  .right
-    right: 0
-
-  .titles
-    margin: -50px 12% 10px
-    text-align: center
-    color: white
-    background: $darkgray
-    font-size: 20px
-    padding: 8px
-
-  .title,
-  .fact
-    display: none
-    &.active
-      display: block
-    h1
+  .vitals
+    position: relative
+    z-index: 1
+    h2
       font-weight: bold
-      color: $darkgray
+  .inner
+    background: #e8ecef
+    position: relative
+    padding: 78px 0 0
+    margin: 20px 0
+    max-width: 600px
 
-  .tools,
-  .share
-    color: $gray
-    display: none // TODO: Add this feature
+    .candidate
+      position: relative
+      z-index: 1
+      padding: 10px 0
+      margin: 10px 30px 0
+      border-bottom: 2px solid white
+      min-width: 450px
+      @include clear
+      ul
+        margin: 0 0 0 1.5em
+        padding: 0
+      .inner
+        width: 100%
+        position: relative
+        box-sizing: border-box
+        padding: 0 10px
+
+      .info
+        float: left
+        width: 90px
+        .box
+          background: $lightblue
+          color: white
+          font-size: 9px
+          line-height: 7px
+          padding: 4px
+          strong
+            font-weight: 600
+            font-size: 11px
+          p
+            margin-bottom: 6px
+          a
+            i
+              color: white
+        .photo
+          height: 70px
+          width: 90px
+          background-size: cover
+          background-position: center center
+          background-repeat: no-repeat
+      .facts
+        width: 100%
+        padding: 10px 0 0 100px
+        height: 30px
+        font-size: 12px
+        .fact
+          .share
+            position: absolute
+            bottom: 10px
+            right: 10px
+
+    .left,
+    .right
+      top: 28px
+      position: absolute
+
+    .left,
+    .right
+      background: $orange
+      color: white
+      padding:  0px 16px
+      font-size: 30px
+      font-weight: bold
+      cursor: pointer
+    .left
+      left: 0
+    .right
+      right: 0
+
+    .titles
+      margin: -50px 12% 10px
+      text-align: center
+      color: white
+      background: $darkgray
+      font-size: 20px
+      padding: 8px
+      .pre
+        left: 0
+        right: 0
+        color: $darkgray
+        position: absolute
+        top: 8px
+        text-transform: uppercase
+        font-size: 14px
+        font-weight: bold
+
+    .title,
+    .fact
+      display: none
+      &.active
+        display: block
+      h1
+        font-weight: bold
+        color: $darkgray
+
+    .tools,
+    .share
+      color: $gray
+      display: none // TODO: Add this feature
 
   .footer
     text-align: center
@@ -289,3 +309,132 @@ h2
   ul
     margin-left: 0px
     padding-left: 1.5em
+
+.icons
+  .mui-col-md-4
+    text-align: center
+    padding: 10px
+    img
+      height: 80px
+    h4
+      font-weight: bold
+
+body.front
+  #content
+    background-color: $lightgray
+    .mui-container
+      margin-top: 0
+      margin-bottom: 0
+      padding-top: 400px
+      .state_holder
+        position: absolute
+        left: 0
+        right: 0
+        background-color: white
+        height: 360px
+        z-index: 0
+      #statebox
+        position: relative
+        z-index: 1
+        height: 360px
+
+  #header .header
+    height: 172px
+    .bg
+      margin-top: 150px
+      opacity: 1
+      img
+        position: absolute
+        max-width: 30%
+        margin-left: 0
+        bottom: 0px
+        &.left
+          left: 0
+        &.right
+          right: 0
+
+  #main_title
+    position: relative
+    z-index: 1
+    text-align: center
+    width: 60%
+    margin: -170px auto 92px
+    h1
+      color: white
+      font-size: 32px
+      font-weight: bold
+
+  #header .contest.embed
+    text-align: center
+    .vitals
+      display: none
+    .inner
+      background: transparent
+      padding-top: 0
+      margin-top: 0
+      max-width: none
+      .header
+        margin-top: 0
+        padding-top: 0
+        height: auto
+        width: 100%
+        .left, .right
+          position: absolute
+          top: 100px
+          z-index: 1
+        .pre
+          top: -2em
+      .candidate
+        text-align: left
+        display: inline-block
+        width: 160px
+        min-width: auto
+        margin: 0
+        vertical-align: top
+        border-bottom: 0
+        ul
+          padding-left: 0
+          margin-left: 1.5em
+          font-size: 10px
+        .party
+          float: left
+        .links
+          float: right
+          margin: 0
+          a
+            margin: 0 2px
+            &:hover
+              color: $blue
+            &
+              padding: 0
+        .info
+          float: none
+          width: 100%
+          background: $darkgray
+          .box
+            @include clear
+            background: transparent
+            .name
+              background: transparentize($lightblue, 0.2)
+              display: block
+              padding: 4px 6px
+              margin: -10px 0 4px -10px
+              &:after
+                content: ''
+                position: absolute
+                margin-top: 12px
+                border-bottom: 6px solid transparent
+                border-right: 6px solid transparentize($lightblue, 0.2)
+                left: 4px
+          .photo
+            width: 100%
+            height: 120px
+        .facts
+          padding-left: 0
+          height: auto
+          font-size: 10px
+          color: $darkgray
+          background: white
+          padding: 6px 4px
+          .bio
+            min-height: 150px
