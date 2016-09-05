@@ -14,7 +14,7 @@
           %i.fa.fa-envelope
 
 - content_for :body_class do
-  state
+  state #{guide.location.state_slug}
 
 - content_for :title do
   #{guide.location.state_name} Voter Guide
