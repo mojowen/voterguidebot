@@ -12,6 +12,7 @@ module GuideHelper
       Rails.application.assets.find_asset(asset).to_s
     else
       path = Rails.application.assets_manifest.assets[asset]
+      raise "Cannot find compiled asset #{asset} in manifest" unless path
       File.read(Rails.root.join('public', 'assets', path))
     end
   end
