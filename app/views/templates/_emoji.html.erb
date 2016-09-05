@@ -1,0 +1,13 @@
+<style type="text/css"><%= to_asset_string('emoji.css') %></style>
+<script type="text/javascript">
+  <%= raw to_asset_string('emoji.min.js') %>
+  var emoji = new EmojiConvertor()
+  emoji.img_sets.apple.path = 'https://s3-us-west-2.amazonaws.com/voterguides/img-apple-64/'
+
+  window.onload = function() {
+    Array.prototype.forEach.call(
+      document.body.querySelectorAll('p'),
+      function(el) { el.innerHTML = emoji.replace_unified(el.innerText) }
+    )
+  }
+</script>
