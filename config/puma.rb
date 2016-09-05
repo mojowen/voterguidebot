@@ -11,3 +11,9 @@ environment ENV['RACK_ENV'] || 'development'
 on_worker_boot do
   ActiveRecord::Base.establish_connection
 end
+
+before_fork do
+  require 'puma_worker_killer'
+
+  PumaWorkerKiller.enable_rolling_restart
+end
