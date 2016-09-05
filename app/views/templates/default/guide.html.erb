@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <title>Preview</title>
   <style type="text/css">
-    <% unless Rails.env.production? %>
-      <%= Rails.application.assets.find_asset('default.css').to_s %>
-    <% else %>
-      <%= File.read(Rails.root.join('public', 'assets', Rails.application.assets_manifest.assets['default.css'])) %>
-    <% end %>
+    <%= to_asset_string('guide.css') %>
     h3 {
       color: <%= guide.field('secondary_color') %>;
     }
@@ -26,7 +24,7 @@
     .questions th.stance {
       color: <%= to_rgba(guide.field('primary_color'), 0.75) %>;
     }
-    .measure .section {
+    .measure hr {
       border-bottom-color: <%= to_rgba(guide.field('primary_color'), 0.25) %>;
     }
     .measure .section .explain h4 {

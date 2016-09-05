@@ -8,9 +8,10 @@
       <h3>What it Does</h3>
       <p><%= measure.description %></p>
     </div>
+    <hr>
     <div class="section">
       <div class="hand">
-        <img src="<%= asset_url('up.png') %>">
+        <img src="data:image/png;base64,<%= to_asset_string('up.png') %>">
       </div>
       <div class="explain">
           <h4>A <span>Yes</span> Vote Means...</h4>
@@ -27,9 +28,10 @@
         <% end %>
       </div>
     </div>
+    <hr>
     <div class="section">
       <div class="hand">
-        <img src="<%= asset_url('down.png') %>">
+        <img src="data:image/png;base64,<%= to_asset_string('down.png') %>">
       </div>
       <div class="explain">
           <h4>A <span>No</span> Vote Means...</h4>
@@ -46,5 +48,6 @@
         <% end %>
       </div>
     </div>
+    <hr>
   </div>
 </div>

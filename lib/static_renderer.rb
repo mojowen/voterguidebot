@@ -12,6 +12,7 @@ class StaticRenderer < ActionController::Base
     view = ActionView::Base.new(ActionController::Base.view_paths, {})
     class << view
       include ApplicationHelper
+      include GuideHelper
       include AvgHelper
     end
     view
