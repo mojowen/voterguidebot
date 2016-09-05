@@ -30,8 +30,8 @@
       - if @guide.is_published?
         = button_link_to @guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary, disabled: !@guide.is_synced? do
           %strong
-            - if guide.template.publisher_type == 'web'
-              %i.fa-glob.fa
+            - if @guide.template.publisher_type == 'web'
+              %i.fa-globe.fa
               View
             - else
               %i.fa-file-pdf-o.fa
