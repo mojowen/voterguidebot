@@ -1,6 +1,10 @@
 module Publisher
   class State < AVG
 
+    def resource
+      "htttp://#{buket}/#{guide.location.state_slug}"
+    end
+
     private
 
     def generate
