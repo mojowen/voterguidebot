@@ -2,7 +2,7 @@ module Publisher
   class State < AVG
 
     def resource
-      "htttp://#{bucket}/#{guide.location.state_slug}"
+      "http://#{bucket}/#{guide.location.state_slug}"
     end
 
     private
