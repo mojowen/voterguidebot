@@ -1,3 +1,4 @@
+
 - content_for :header do
   .header
     .bg{ style: "background-image: url(https://s3-us-west-2.amazonaws.com/voterguides/states/#{state_pic(@guide)})" }
@@ -64,4 +65,4 @@
               %li= endorsement.endorser
 
 
-= render 'templates/avg/state_box'
+= render 'templates/avg/state_box', preview: preview
