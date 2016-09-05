@@ -19,7 +19,7 @@
           %i.fa-newspaper-o.fa
           Preview
       = form_tag publish_guide_path(@guide) do
-        %button.mui-btn--small.mui-btn--primary.mui-btn{ disabled: @guide.is_publishing? || @guide.is_synced? }
+        %button.mui-btn--small.mui-btn--primary.mui-btn{ disabled: @guide.is_publishing? }
           %strong
             - if @guide.is_publishing?
               %i.fa-cloud-upload.fa.fa-pulse
