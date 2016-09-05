@@ -21,7 +21,7 @@ var AddQuestion = React.createClass({
     event.preventDefault()
   },
   handleAddSelected: function(event) {
-    var selected_question = _.find(this.props.template.questions.samples,
+    var selected_question = _.find(this.template('questions.samples', []),
                                    { text: event.target.value })
     selected_question.tags = [{ name: selected_question.tag }]
     this.props.handleAdd(this.newObject('question', selected_question))
@@ -29,7 +29,7 @@ var AddQuestion = React.createClass({
   },
   render: function() {
     if( this.state.picking ) {
-      var template_questions = _.chain(this.props.template.questions.samples)
+      var template_questions = _.chain(this.template('questions.samples', []))
                                 .reject('standard')
                                 .groupBy('tag')
                                 .map(function(tag, name) {
@@ -39,7 +39,7 @@ var AddQuestion = React.createClass({
                                     </option> })
                                   return <optgroup key={name} label={name}>{ tags }</optgroup> })
                                 .value()
-      var standard_questions = _.chain(this.props.template.questions.samples)
+      var standard_questions = _.chain(this.template('questions.samples', []))
                                 .filter('standard')
                                 .map(function(question) {
                                     return <option value={question.text} key={question.text}>

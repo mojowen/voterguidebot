@@ -25,7 +25,7 @@ var QuestionsTable = React.createClass({
                            handleChange={this.props.handleChange} />
         }, this),
       table_display = this.props.questions.length < 1 ? 'none' : 'table'
-      add_display = this.props.questions.length >= this.props.template.questions.max ? 'none' : 'block'
+      add_display = this.props.questions.length >= this.template('questions.max', 7) ? 'none' : 'block'
 
     return <div>
       <div className="mui-row">

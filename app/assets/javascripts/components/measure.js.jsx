@@ -61,7 +61,7 @@ var Measure = React.createClass({
                           placeholder="Ballot Measure 420"
                           value={ this.state.title }
                           onChange={ this.onChange }
-                          limit={this.props.template.measures.title.limit} />
+                          limit={this.template('measures.title.limit', 104)} />
           <InputComponent name="description"
                           element="textarea"
                           ref='description'
@@ -74,7 +74,7 @@ var Measure = React.createClass({
         <Taggable tags={this.state.tags}
                   id={this.props.id}
                   tagged_type='Ballot Measure'
-                  available_tags={this.props.template.tags}
+                  available_tags={this.template('tags', [])}
                   removeTag={this.removeTag}
                   addTag={this.addTag} />
       </div>
