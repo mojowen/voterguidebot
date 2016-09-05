@@ -9,6 +9,7 @@ filler_pages: 4
 
 publisher_class: PDF
 publisher_resource: voter-guide.pdf
+publisher_type: pdf
 
 render_options:
   height: 5.25in

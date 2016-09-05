@@ -6,6 +6,7 @@ folder: avg
 layout: avg
 publisher_class: State
 publisher_resource: nil
+publisher_type: web
 
 inherits: default
 
