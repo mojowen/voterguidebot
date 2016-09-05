@@ -11,7 +11,7 @@ module GuideHelper
     unless Rails.env.production?
       Rails.application.assets.find_asset(asset).to_s
     else
-      Rails.application.assets_manifest.assets[asset]
+      path = Rails.application.assets_manifest.assets[asset]
       File.read(Rails.root.join('public', 'assets', path))
     end
   end
