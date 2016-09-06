@@ -69,7 +69,7 @@
           %i.fa.fa-share
       .code-box
         %textarea{ readonly: 'readonly' }
-          <script type="text/javascript">(function(d) { if( typeof window['_avg'] === 'undefined' ) { var s = d.createElement('script'); s.setAttribute('src', 'http://#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js'); d.head.appendChild(s); })(document)
+          <script>(function(d) { if( typeof window['_avg'] === 'undefined' ) { var s = d.createElement('script'); s.setAttribute('src', 'http://#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js'); d.head.appendChild(s); })(document)
           </script><div class="avg--embed" data-contest="#{contest.id}"></div>
         %em Click to Copy - Paste Where You'd Like to Embed This Guide
 

@@ -330,11 +330,11 @@ h2
       font-size: 12px
       width: 84%
       margin: 10px auto
-
+      color: $darkgray
       textarea
         border: none
         font-family: monospace
-        font-size: 7px
+        font-size: 8px
         line-height: 10px
         padding: 4px
         resize: none
@@ -589,6 +589,16 @@ body.front
             padding: 6px 4px
             .bio
               min-height: 150px
+    &.code-open
+      .code-box
+        width: 60%
+        width: 60%
+        margin: -30px auto -31px
+        z-index: 2
+        position: relative
+        background: white
+        textarea
+          border: 1px solid $lightgray
 
 body.menu-overlay #header .mui-appbar .links #menu_overlay
   display: block
