@@ -35,7 +35,7 @@
                 <th class="stance">Do you support</th>
                 <% contest.candidates.each do |candidate| %>
                   <th>
-                    <h3><%= candidate.name %></h3>
+                    <h3><%= (candidate.try(:name) || '').split(' ').last %></h3>
                   </th>
                 <% end %>
               </tr>
