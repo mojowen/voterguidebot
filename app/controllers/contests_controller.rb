@@ -53,7 +53,7 @@ class ContestsController < ApplicationController
   end
 
   def contest_params
-    params.require(:contest).permit(
+    attrs = params.require(:contest).permit(
       :title, :description,
       questions: [:id, :text,
         answers: [:text, :candidate_id, :question_id],
@@ -61,5 +61,19 @@ class ContestsController < ApplicationController
       candidates: [:id, :name, :bio, :photo, :facebook,
                    :twitter, :website, :party,
         endorsements: [:endorser, :endorsed_id, :endorsed_type, :stance]])
+
+    attrs[:candidates].map! do |candidate|
+      candidate[:endorsements] ||= []
+      candidate[:endorsements] ||= []
+      candidate
+    end if attrs[:candidates]
+
+    attrs[:questions].map! do |questin|
+      questin[:answers] ||= []
+      questin[:tags] ||= []
+      questin
+    end if attrs[:questions]
+
+    attrs
   end
 end

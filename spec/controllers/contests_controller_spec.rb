@@ -7,6 +7,7 @@ RSpec.describe ContestsController, active_mocker: true do
 
   describe '#new' do
     render_views
+
     it 'renders successfully' do
       get :new, { guide_id: guide.id }
       expect(response).to be_success
@@ -17,15 +18,18 @@ RSpec.describe ContestsController, active_mocker: true do
     let(:contest_params) do
       { guide_id: guide.id, contest: { title: 'Sweet', description: 'Baller'}}
     end
+
     it 'creates contests' do
       expect do
         post :create, contest_params
       end.to change(Contest, :count).by(1)
     end
+
     it 'assigns title' do
       post :create, contest_params
       expect(assigns(:contest).title).to eq('Sweet')
     end
+
     it 'assigns description' do
       post :create, contest_params
       expect(assigns(:contest).description).to eq('Baller')
@@ -73,11 +77,13 @@ RSpec.describe ContestsController, active_mocker: true do
             questions: questions,
           }}
       end
+
       it 'is successful' do
         expect(subject).to receive(:update_contest)
         post :create, contest_params
         expect(response).to be_success
       end
+
       it 'assigns associations' do
         contest = instance_double(Contest, assign_attributes: true, save: true,
                                   reload: true)
@@ -94,6 +100,7 @@ RSpec.describe ContestsController, active_mocker: true do
     let!(:contest) { Fabricate :contest, guide: guide }
     describe '#edit' do
       render_views
+
       it 'renders successfully' do
         get :edit, { guide_id: guide.id, id: contest.id }
         expect(response).to be_success
@@ -103,6 +110,7 @@ RSpec.describe ContestsController, active_mocker: true do
       let(:contest_params) do
         { guide_id: guide.id, id: contest.id, contest: { title: 'Test' } }
       end
+
       it 'is successful' do
         put :update, contest_params
         expect(response).to be_success
@@ -111,6 +119,29 @@ RSpec.describe ContestsController, active_mocker: true do
       it 'assigns associations' do
         expect(subject).to receive(:update_contest)
         put :update, contest_params
+      end
+
+      context 'with empty associations' do
+        let!(:candidate) { Fabricate :candidate, contest: contest }
+        let!(:endorsement) { Fabricate :endorsement, endorsed: candidate }
+        let!(:question) { Fabricate :question, contest: contest }
+        let!(:answer) { Fabricate :answer, question: question }
+        let!(:tag) { Fabricate :tag, tagged: question }
+        let(:contest_params) do
+          { guide_id: guide.id,
+            id: contest.id,
+            contest: {
+              candidates: [{ id: candidate.id }],
+              questions: [{ id: question.id }]
+            } }
+        end
+
+        it 'removes empty association' do
+          put :update, contest_params
+          expect(contest.reload.candidates.first.endorsements.empty?).to be true
+          expect(contest.reload.questions.first.tags.empty?).to be true
+          expect(contest.reload.questions.first.answers.empty?).to be true
+        end
       end
     end
     describe '#destroy' do
@@ -128,6 +159,7 @@ RSpec.describe ContestsController, active_mocker: true do
 
     describe '#index' do
       render_views
+
       it 'returns successfully' do
         get :index, { guide_id: guide.id }
         be_success
@@ -142,6 +174,7 @@ RSpec.describe ContestsController, active_mocker: true do
           put :position, { guide_id: guide.id, contests: [other_contest.id, contest.id] }
           be_success
         end
+
         it 'changes the position on the resource' do
           put :position, { guide_id: guide.id, contests: [other_contest.id, contest.id] }
           expect(other_contest.reload.position).to eq(0)

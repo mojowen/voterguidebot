@@ -107,6 +107,20 @@ RSpec.describe MeasuresController, active_mocker: true do
         put :update, measure_params
         expect(measure.reload.title).to eq('Test')
       end
+
+      context 'with empty associations' do
+        let!(:endorsement) { Fabricate :endorsement, endorsed: measure }
+        let!(:tag) { Fabricate :tag, tagged: measure }
+        let(:measure_params) do
+          { guide_id: guide.id, id: measure.id, measure: { title: measure.title } }
+        end
+
+        it 'removes empty association' do
+          put :update, measure_params
+          expect(measure.reload.endorsements.empty?).to be true
+          expect(measure.reload.tags.empty?).to be true
+        end
+      end
     end
     describe '#destroy' do
       it 'redirects to index' do

@@ -50,9 +50,13 @@ class MeasuresController < ApplicationController
   end
 
   def measure_param
-    params.require(:measure).permit(:title, :description, :stance, :yes_means, :no_means,
-                                    endorsements: [:endorser, :endorsed_id,
-                                                   :endorsed_type, :stance],
-                                    tags: [:name, :tagged_id, :tagged_type])
+    attrs = params.require(:measure).permit(
+      :title, :description, :stance, :yes_means, :no_means,
+      endorsements: [:endorser, :endorsed_id,
+                     :endorsed_type, :stance],
+      tags: [:name, :tagged_id, :tagged_type])
+    attrs[:endorsements] ||= []
+    attrs[:tags] ||= []
+    attrs
   end
 end
