@@ -58,12 +58,20 @@
                   %i.fa.fa-share
 
     .footer
-      %a.active{ href: '#' }
-      - contest.questions.each do
-        %a{ href: '#' }
+      .nav
+        %a.active{ href: '#' }
+        - contest.questions.each do
+          %a{ href: '#' }
       .tools
-        %i.fa.fa-code
-        %i.fa.fa-share
+        %a.js-open-code-box
+          %i.fa.fa-code
+        %a.js-share-dialog
+          %i.fa.fa-share
+      .code-box
+        %textarea{ readonly: 'readonly' }
+          <script type="text/javascript">(function(d) { if( typeof window['_avg'] === 'undefined' ) { var s = d.createElement('script'); s.setAttribute('src', 'http://#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js'); d.head.appendChild(s); })(document)
+          </script><div class="avg--embed" data-contest="#{contest.id}"></div>
+        %em Click to Copy - Paste Where You'd Like to Embed This Guide
 
 :javascript
   (function() {
@@ -113,9 +121,17 @@
         else el.className = el.className.replace(/active/, '').trim()
       })
     }
+
     if( document.location.hash.match(/contest\_#{contest.id}\_\d+/) ) {
       goTo(parseInt(document.location.hash.split('_').reverse()[0]))
     }
+
+    container.querySelector('.js-open-code-box').onclick = function() {
+      if( container.className.search('code-open') === -1 ) container.className += ' code-open'
+      else container.className = container.className.replace('code-open', '').trim()
+    }
+    container.querySelector('.code-box textarea').onclick = function() { this.select() }
+
   })()
 
 

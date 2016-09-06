@@ -3,7 +3,6 @@ module Publisher
 
     def initialize(guide)
       super(guide)
-      @asset_path = Rails.root.join(root_path, 'assets')
       FileUtils.mkdir_p asset_path
     end
 
@@ -18,8 +17,6 @@ module Publisher
     end
 
     private
-
-    attr_reader :asset_path
 
     def collect_assets
       render_assets
@@ -60,6 +57,19 @@ module Publisher
                                  'layouts/avg.html.haml'
     end
 
+    def render_contests
+      guide.contests.each { |contest| render_contest(contest) }
+    end
+
+    def render_contest(contest)
+      contest_path = Rails.root.join contests_path, contest.id.to_s
+      FileUtils.mkdir_p contest_path
+
+      StaticRenderer.render_file Rails.root.join(contest_path, 'index.html'),
+                                 'templates/avg/embed',
+                                 { contest: contest, preview: false }
+    end
+
     def sync_assets
       s3.upload_directory root_path
     end
@@ -77,7 +87,15 @@ module Publisher
     end
 
     def root_path
-      @root_path ||= Rails.root.join('tmp', Time.now.getutc.to_i.to_s, 'avg')
+      @root_path ||= Rails.root.join('tmp', 'renders', Time.now.getutc.to_i.to_s, 'avg')
+    end
+
+    def asset_path
+      @asset_path ||= Rails.root.join(root_path, 'assets')
+    end
+
+    def contests_path
+      @contests_path ||= Rails.root.join(root_path, 'contests')
     end
 
     def clean

@@ -30,40 +30,41 @@
 - guide.contests.each do |contest|
   .mui-row
     .mui-col-md-9.mui-col-md-offset-3
-      = render 'templates/avg/contest_tall', contest: contest
+      = render 'templates/avg/contest_tall', contest: contest, preview: preview
 
-.mui-row
-  .mui-col-md-9.mui-col-md-offset-3
-    %h2 Statewide Ballot Measures
-
-- guide.measures.each do |measure|
+- unless guide.measures.empty?
   .mui-row
-    .mui-col-md-9.mui-col-md-offset-3.ballot_measure
-      %h3= measure.title
-      %p= measure.description
-      .mui-col-xs-1
-        %i.fa.fa-thumbs-o-up.for
-      .mui-col-xs-11
-        %h4 A Yes Vote Means
-        %p= measure.yes_means
-        - unless measure.endorsements.for.empty?
-          %p
-            %em Who Says Yes:
-          %ul
-            - measure.endorsements.for.each do |endorsement|
-              %li= endorsement.endorser
+    .mui-col-md-9.mui-col-md-offset-3
+      %h2 Statewide Ballot Measures
 
-      .mui-col-xs-1
-        %i.fa.fa-thumbs-o-down.against
-      .mui-col-xs-11
-        %h4 A No Vote Means
-        %p= measure.yes_means
-        - unless measure.endorsements.against.empty?
-          %p
-            %em Who Says No:
-          %ul
-            - measure.endorsements.against.each do |endorsement|
-              %li= endorsement.endorser
+  - guide.measures.each do |measure|
+    .mui-row
+      .mui-col-md-9.mui-col-md-offset-3.ballot_measure
+        %h3= measure.title
+        %p= measure.description
+        .mui-col-xs-1
+          %i.fa.fa-thumbs-o-up.for
+        .mui-col-xs-11
+          %h4 A Yes Vote Means
+          %p= measure.yes_means
+          - unless measure.endorsements.for.empty?
+            %p
+              %em Who Says Yes:
+            %ul
+              - measure.endorsements.for.each do |endorsement|
+                %li= endorsement.endorser
+
+        .mui-col-xs-1
+          %i.fa.fa-thumbs-o-down.against
+        .mui-col-xs-11
+          %h4 A No Vote Means
+          %p= measure.yes_means
+          - unless measure.endorsements.against.empty?
+            %p
+              %em Who Says No:
+            %ul
+              - measure.endorsements.against.each do |endorsement|
+                %li= endorsement.endorser
 
 
 = render 'templates/avg/state_box', preview: preview

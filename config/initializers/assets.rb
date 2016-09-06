@@ -8,5 +8,5 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w(guide.css avg.css avg.js us-states.json)
+Rails.application.config.assets.precompile += %w(guide.css avg.css avg.js avg_embed.js)
 Rails.application.config.assets.precompile += %w(emoji.css emoji.min.js)

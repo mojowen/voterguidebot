@@ -9,6 +9,7 @@ module Publisher
 
     def generate
       render_state
+      render_contests
       sync_assets
     end
 
