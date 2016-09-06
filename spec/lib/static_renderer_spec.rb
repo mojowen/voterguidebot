@@ -4,12 +4,12 @@ RSpec.describe StaticRenderer do
   describe '#render_html' do
     it 'renders a view' do
       file = Rails.root.join(*%w(spec fixtures test.html.erb))
-      expect(described_class.render_html(file, {})).to include('4')
+      expect(described_class.render_html(file, { preview: false })).to include('4')
     end
 
     it 'renders a view with a layout'  do
       file = Rails.root.join(*%w(spec fixtures test.html.erb))
-      expect(described_class.render_html(file, {}, 'layouts/avg.html.haml')).to include('<html>')
+      expect(described_class.render_html(file, { preview: false }, 'layouts/avg.html.haml')).to include('<html>')
     end
 
     it 'renders a view with params' do
@@ -22,7 +22,7 @@ RSpec.describe StaticRenderer do
     it 'creates a file' do
       file = Rails.root.join(*%w(spec fixtures test.html.erb))
       rendered_file = Rails.root.join(*%w(spec test_files rendered.html))
-      described_class.render_file(rendered_file, file, {}, 'layouts/avg.html.haml')
+      described_class.render_file(rendered_file, file, { preview: false }, 'layouts/avg.html.haml')
       file_content = File.read(rendered_file)
 
       expect(file_content).to include('<html>')
