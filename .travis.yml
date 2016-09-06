@@ -10,7 +10,7 @@ cache:
 before_script:
   - createdb test_vgbot
   - bundle exec rake db:migrate
-  - bundle exec rake render:avg
+  - bundle exec rake render:assets
 
 script:
   - bundle exec rake spec

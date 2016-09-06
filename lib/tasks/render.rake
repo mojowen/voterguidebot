@@ -18,7 +18,7 @@ namespace :render do
   end
 
   desc "Render the national page and assets."
-  task :avg => [:environment] do |_, args|
+  task :assets => [:environment] do |_, args|
     Publisher::National.assets_only
   end
 
