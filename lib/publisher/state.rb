@@ -8,10 +8,14 @@ module Publisher
     private
 
     def generate
+      render_state
+      sync_assets
+    end
+
+    def render_state
       state_path = Rails.root.join(root_path, guide.location.state_slug)
       FileUtils.mkdir_p state_path
       render_static Rails.root.join(state_path, "index.html").to_s
-      sync_assets
     end
   end
 end
