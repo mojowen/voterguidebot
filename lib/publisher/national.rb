@@ -5,6 +5,15 @@ module Publisher
       "http://#{bucket}"
     end
 
+    def self.assets_only
+      new(Guide.new).collect_and_sync_assets
+    end
+
+    def collect_and_sync_assets
+      collect_assets
+      sync_assets
+    end
+
     private
 
     def generate
@@ -14,11 +23,6 @@ module Publisher
 
     def render_index
       render_static 'index.html'
-    end
-
-    def collect_and_sync_assets
-      collect_assets
-      sync_assets
     end
 
     def collect_assets

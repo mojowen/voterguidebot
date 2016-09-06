@@ -16,4 +16,9 @@ namespace :render do
       Rake::Task['render:file'].reenable
     end
   end
+
+  desc "Render the national page and assets."
+  task :avg => [:environment] do |_, args|
+    Publisher::National.assets_only
+  end
 end
