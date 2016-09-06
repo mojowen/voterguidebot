@@ -1,4 +1,8 @@
-.contest.embed{ id: "candidate_#{contest.id}" }
+.contest.embed{ id: "contest_#{contest.id}" }
+  .anchor{ id: "contest_#{contest.id}_0" }
+  - contest.questions.each.with_index do |question, index|
+    .anchor{ id: "contest_#{contest.id}_#{index + 1}" }
+
   .vitals
     %h3= contest.title
     %p= contest.description
@@ -9,7 +13,7 @@
         %i.fa.fa-angle-left
       .titles
         .title.active About the Candidates
-        - contest.questions.each do |question|
+        - contest.questions.each.with_index do |question, index|
           .title
             .pre Do you support
             = question.text
@@ -63,7 +67,7 @@
 
 :javascript
   (function() {
-    var container = document.querySelector("#candidate_#{contest.id}"),
+    var container = document.querySelector("#contest_#{contest.id}"),
         active = 0,
         tabs = container.querySelectorAll('.footer a').length
 
@@ -108,6 +112,9 @@
         if( i === except ) el.className += ' active'
         else el.className = el.className.replace(/active/, '').trim()
       })
+    }
+    if( document.location.hash.match(/contest\_#{contest.id}\_\d+/) ) {
+      goTo(parseInt(document.location.hash.split('_').reverse()[0]))
     }
   })()
 
