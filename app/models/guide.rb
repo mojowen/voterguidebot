@@ -25,6 +25,11 @@ class Guide < ActiveRecord::Base
     @template ||= Template.new template_name
   end
 
+  def start_publishing
+    update_attributes published_version: 'publishing'
+    delay.publish
+  end
+
   def slug
     [id,  name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
   end

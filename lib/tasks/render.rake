@@ -22,8 +22,8 @@ namespace :render do
     Publisher::National.assets_only
   end
 
-  desc "Render the national page and assets."
+  desc "Que all the avg guides for rendering."
   task :all => [:environment] do |_, args|
-    Guide.where(template_name: [:national, :state]).each { |guide| guide.delay.publish }
+    Guide.where(template_name: [:national, :state]).each(&:start_publishing)
   end
 end

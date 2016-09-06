@@ -55,7 +55,7 @@
       .style("stroke-width", "1.5px");
 
   if( window.innerWidth >= 768 ) {
-    d3.json("#{ !preview || Rails.env.production? ? '' : '/avg' }/us.json", function(error, us) {
+    d3.json("#{ preview ? '/avg' : '' }/us.json", function(error, us) {
 
      g.selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)

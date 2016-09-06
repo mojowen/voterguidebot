@@ -48,8 +48,7 @@ class GuidesController < ApplicationController
   end
 
   def publish
-    @guide.update_attributes published_version: 'publishing'
-    @guide.delay.publish
+    @guide.start_publishing
     redirect_to request.referer || guide_path(@guide), notice: 'Guide queued for publishing'
   end
 
