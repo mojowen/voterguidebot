@@ -19,7 +19,7 @@ namespace :render do
 
   desc "Render the national page and assets."
   task :assets => [:environment] do |_, args|
-    Publisher::National.assets_only
+    Publisher::AVG.assets_only
   end
 
   desc "Que all the avg guides for rendering."
