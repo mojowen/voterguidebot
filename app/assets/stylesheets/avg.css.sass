@@ -30,61 +30,120 @@ h2
   font-weight: 500
   color: $darkgray
 
-#header.mui-appbar
+#header
   background: $blue
-  padding: 0
-  td
-    vertical-align: top
-  .links .menu ul
-    position: absolute
-    width: 420px
-    margin: 30px 0 0 -52px
-    display: none
-    list-style: none
-    background: $lightblue
-    z-index: 10
-    padding: 20px 30px
-    column-count: 3
-    li
-      float: left
-      width: 120px
-      z-index: 10
-      position: relative
-      font-size: 90%
+  .mui-appbar
+    background: $blue
+    padding: 0
+    td
+      vertical-align: top
+    .links
       a
         &, &:hover, &:active
-          padding: 2px
-        &:hover
-          color: $blue
-  .menu
-    display: inline
-    &:hover
-      ul
-        display: block
-      a
-        background: $lightblue
-  .links
-    text-align: right
-    @include md
-      margin-right: -60px
-    a
-      &, &:hover, &:active
+          text-decoration: none
+
+      #open_menu_overlay
+        font-size: 30px
         color: white
-        text-decoration: none
-        padding: 10px 16px
-        display: block
-        float: left
-        text-transform: uppercase
-        font-weight: 600
-      &:hover
-        background: $lightblue
-  img
-    width: 100%
-    max-width: 50%
-    @include md
-      max-width: 300px
-    margin-left: -30px
+        &:hover
+          background-color: transparent
+        margin: 10px 10px 0 0
+
+      text-align: right
+      @include md
+        margin-right: -60px
+
+      #menu_overlay
+        top: -20px
+        left: 0px
+        right: 0px
+        height: 0px
+        overflow: hidden
+        position: absolute
+        padding-top: 30px
+        transition: height 750ms ease
+        background: $blue
+        z-index: 10
+        text-align: center
+        a
+          display: block
+          margin: 30px 0
+          float: none
+          font-size: 30px
+          color: white
+          text-transform: uppercase
+          font-weight: 600
+          &:hover, &:active
+            background: $lightblue
+
+        .menu
+          display: inline
+          &.active
+            ul
+              display: block
+          ul
+            display: none
+            list-style: none
+            padding: 0
+            li
+              font-size: 14px
+              text-align: center
+              a
+                font-size: 18px
+
+        @include md
+          overflow: visible
+          text-align: right
+          position: relative
+          display: inline-block
+          width: 100%
+          .home-link
+            display: none
+
+          a
+            font-size: 14px
+            &, &:hover, &:active
+              padding: 10px 16px
+              display: block
+              float: left
+
+          .menu
+            &:hover
+              ul
+                display: block
+                a
+                  background: $lightblue
+            ul
+              position: absolute
+              width: 420px
+              margin: 30px 0 0 -52px
+              display: none
+              background: $lightblue
+              z-index: 10
+              padding: 20px 30px
+              column-count: 3
+              li
+                float: left
+                width: 120px
+                z-index: 10
+                position: relative
+                font-size: 90%
+                a
+                  font-size: 11px
+                  text-align: left
+                  &, &:hover, &:active
+                    padding: 2px
+                  &:hover
+                    color: $blue
+
+    img
+      width: 100%
+      max-width: 50%
+      @include md
+        max-width: 300px
+        margin-left: -30px
   .header
+    color: white
     width: 100%
     height: 250px
     position: relative
@@ -379,13 +438,15 @@ body.front
     z-index: 1
     text-align: center
     width: 80%
-    margin: -120px auto 40px
+    margin: -120px auto 0
+    min-height: 172px
     @include md
       width: 60%
       margin: -170px auto 92px
+      min-height: auto
     h1
       color: white
-      font-size: 24px
+      font-size: 22px
       @include md
         font-size: 32px
       font-weight: bold
@@ -418,8 +479,12 @@ body.front
         .left, .right
           z-index: 1
           top: 0px
+        .left
+          left: -10px
+        .right
+          right: -10px
         .pre
-          top: -2em
+          top: -1.25em
       @include md
         background: transparent
         padding-top: 0
@@ -484,3 +549,14 @@ body.front
             padding: 6px 4px
             .bio
               min-height: 150px
+
+body.menu-overlay #header .mui-appbar .links #menu_overlay
+  display: block
+  top: 0px
+  height: auto
+  min-height: 100%
+  #close_menu_overlay
+    color: $red
+    position: absolute
+    top: -20px
+    right: 20px

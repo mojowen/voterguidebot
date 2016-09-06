@@ -9,13 +9,14 @@
     %title
       - if content_for :title
         = yield :title
+        \:: The American Voter Guide
       - else
-        American Voter Guide
+        The American Voter Guide
 
     %meta{ name: "viewport", content: "width=device-width,initial-scale=1" }
   %body{ class: yield(:body_class) }
-    #header.mui-appbar
-      .mui-container
+    #header
+      .mui-container.mui-appbar
         %table{ width: '100%' }
           %tr.mui--appbar-height
             %td
@@ -23,16 +24,19 @@
                 %img{ src: "data:image/svg+xml;utf8,#{to_asset_string('avg/logo.svg')}" }
             %td
               .links
-                %a.mui--visible-xs-block.mui--visible-sm-block ☰
+                %a#open_menu_overlay.mui--visible-xs-block.mui--visible-sm-block ☰
 
-                .mui--hidden-xs.mui--hidden-sm
+                #menu_overlay
+                  = link_to 'Home', '/', class: 'home-link'
                   = link_to 'About', '/about', class: 'about-link'
                   .menu
-                    = link_to 'Your State', '/'
+                    = link_to 'Your State', '/', class: 'js-menu-open'
                     %ul
                       - Location::STATES.values.each do |name|
                         %li= link_to name, "/#{name.gsub(/\s/,'').downcase}"
                   = link_to 'Register To Vote', '/register', class: 'register-link'
+                  %a#close_menu_overlay.mui--visible-xs-block.mui--visible-sm-block
+                    %i.fa.fa-times
       - if content_for :header
         = yield :header
 
