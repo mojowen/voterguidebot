@@ -109,7 +109,7 @@
     var decay = 0
     function check_if_published() {
       decay += 1
-      superagent.get(document.location.pathname)
+      superagent.get(document.location.pathname + '.json')
                 .send()
                 .set('X-CSRF-Token', CSRF.token())
                 .set('Accept', 'application/json')
