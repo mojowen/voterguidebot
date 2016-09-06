@@ -23,16 +23,18 @@
                 %img{ src: "data:image/svg+xml;utf8,#{to_asset_string('avg/logo.svg')}" }
             %td
               .links
-                = link_to 'About', '/about', class: 'about-link'
-                .menu
-                  = link_to 'Your State', '/'
-                  %ul
-                    - Location::STATES.values.each do |name|
-                      %li= link_to name, "/#{name.gsub(/\s/,'').downcase}"
-                = link_to 'Register To Vote', '/register', class: 'register-link'
+                %a.mui--visible-xs-block.mui--visible-sm-block ☰
+
+                .mui--hidden-xs.mui--hidden-sm
+                  = link_to 'About', '/about', class: 'about-link'
+                  .menu
+                    = link_to 'Your State', '/'
+                    %ul
+                      - Location::STATES.values.each do |name|
+                        %li= link_to name, "/#{name.gsub(/\s/,'').downcase}"
+                  = link_to 'Register To Vote', '/register', class: 'register-link'
       - if content_for :header
         = yield :header
-      - else
 
     #content
       .mui-container
@@ -41,25 +43,27 @@
     #footer
       .mui-container
         .mui-row
-          .mui-col-xs-4
+          .mui-col-md-4.mui--hidden-xs.mui--hidden-sm
             = link_to 'http://americanvoterguide.org' do
               %img{ src: "data:image/svg+xml;utf8,#{to_asset_string('avg/logo.svg')}" }
-          .mui-col-xs-4
+          .mui-col-xs-12.mui-col-md-4
             = link_to 'Home', '/'
             = link_to 'About American Voter Guide', '/about'
             = link_to 'Register to Vote', '/register'
             = link_to 'Find A Polling Place', '/polling-place'
             = link_to 'Partner With Us', '/partner'
-          .mui-col-xs-3
+            %hr.mui--visible-xs-block.mui--visible-sm-block
+          .mui-col-xs-6.mui-col-md-3
             %h5 Contact:
             %p Bus Federation Action
             %p 333 SE 2nd Ave
             %p Portland, OR 97214
             %p 503-736-2501
-          .mui-col-xs-1
+          .mui-col-xs-6.mui-col-md-1
             %h5 Connect:
             %i.fa.fa-facebook
             %i.fa.fa-twitter
+            %i.fa.fa-envelope
 
 :javascript
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
