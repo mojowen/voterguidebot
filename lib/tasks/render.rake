@@ -18,7 +18,7 @@ namespace :render do
   end
 
   desc "Render the national page and assets."
-  task :avg => [:environment] do |_, args|
-    Publisher::National.assets_only
+  task :all => [:environment] do |_, args|
+    Guide.where(template_name: [:national, :state]).each { |guide| guide.delay.publish }
   end
 end
