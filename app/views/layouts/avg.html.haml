@@ -5,6 +5,7 @@
     = javascript_include_tag avg_asset_path('/assets/avg.js', preview)
     %meta{ charset:"UTF-8"}
     %meta{ content:"text/html, charset:utf-8", 'http-equiv' => "Content-Type" }
+    %link{ href: "data:image/png;base64,#{ to_asset_string('avg/favicon.png') }", rel:"shortcut icon", type:"image/x-icon" }
 
     %title
       - if content_for :title

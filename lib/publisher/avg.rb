@@ -14,6 +14,7 @@ module Publisher
     def collect_and_sync_assets
       collect_assets
       sync_assets
+      clean_assets
     end
 
     private
