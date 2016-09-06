@@ -50,8 +50,6 @@ h2
         margin: 10px 10px 0 0
 
       text-align: right
-      @include md
-        margin-right: -60px
 
       #menu_overlay
         top: -20px
@@ -97,7 +95,6 @@ h2
           text-align: right
           position: relative
           display: inline-block
-          width: 100%
           .home-link
             display: none
 
@@ -117,7 +114,7 @@ h2
             ul
               position: absolute
               width: 420px
-              margin: 30px 0 0 -52px
+              margin: 70px 0 0 -52px
               display: none
               background: $lightblue
               z-index: 10
@@ -134,6 +131,7 @@ h2
                   text-align: left
                   &, &:hover, &:active
                     padding: 2px
+                    margin: 0
                   &:hover
                     color: $blue
 
@@ -565,3 +563,8 @@ body.menu-overlay #header .mui-appbar .links #menu_overlay
     position: absolute
     top: -20px
     right: 20px
+
+body
+  &.pollingplace
+    #header .header .bg
+      background-position: 0 -200px
