@@ -41,7 +41,7 @@
   whenReady(function() {
     if( window._avg.rendered ) return
 
-    var base_url = 'http://localhost:3000'
+    var base_url = '<%= ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'  %>'
 
     Array.prototype.forEach.call(
       document.body.querySelectorAll('.avg--embed'),
