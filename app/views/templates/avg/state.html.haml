@@ -8,17 +8,24 @@
           %h1
             = guide.location.state_name
             Voter Guide
-        .mui-col-xs-4
-          %i.fa.fa-facebook
-          %i.fa.fa-twitter
-          %i.fa.fa-tumblr
-          %i.fa.fa-envelope
+        #state_sharing.mui-col-xs-4.sharing{ data: { message: "On Nov. 8 we're not just electing a President. Learn more about what is happening this election" }}
+        :javascript
+          sharingWidget(state_sharing)
 
 - content_for :body_class do
   state #{guide.location.state_slug}
 
 - content_for :title do
   #{guide.location.state_name} Voter Guide
+
+- content_for :url do
+  = guide.location.state_slug
+
+- content_for :meta_description do
+  On Nov. 8 we're not just electing a President. Learn more about the candidates in #{guide.location.state_name} and where they stand on the issues you care about.
+
+- content_for :meta_image do
+  https://s3-us-west-2.amazonaws.com/voterguides/states/#{state_pic(guide)}
 
 .mui-row
   .mui-col-md-3.subnav

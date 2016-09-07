@@ -1,6 +1,5 @@
 .contest.embed{ id: "contest_#{contest.id}" }
-  .anchor{ id: "contest_#{contest.id}_0" }
-  .anchor{ id: "contest_#{contest.id}_0" }
+  .anchor{ id: "contest_#{contest.id}" }
   - contest.questions.each.with_index do |question, index|
     .anchor{ id: "contest_#{contest.id}_#{index + 1}" }
 
@@ -49,14 +48,14 @@
                 %ul
                   - candidate.endorsements.each do |endorsement|
                     %li= endorsement.endorser
-              .share
-                %i.fa.fa-share
+              .share{ data: { link: "#{contest.guide.published_resource}#contest_#{contest.id}", category: :contest, item: "#{candidate.name}:bio" } }
+                %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
 
-            - contest.questions.each do |question|
+            - contest.questions.each.with_index do |question, index|
               .fact
                 %h1.big= question.answers.find{ |answer| answer.candidate == candidate }.try(:text)
-                .share
-                  %i.fa.fa-share
+                .share{ data: { link: "#{contest.guide.published_resource}#contest_#{contest.id}_#{index+1}", category: :contest, item: "#{candidate.name}:#{question.text}" } }
+                  %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"'  }
 
     .footer
       .nav
@@ -66,73 +65,12 @@
       .tools
         %a.js-open-code-box
           %i.fa.fa-code
-        %a.js-share-dialog
-          %i.fa.fa-share
+        .share-box{ data: { link: "#{contest.guide.published_resource}#contest_#{contest.id}", category: :contest, item: :bottom_box } }
+          %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
       .code-box
         %textarea{ readonly: 'readonly' }
-          <script>(function(a, d) { if( typeof a !== 'undefined' ) return; var s = d.createElement('script'); s.setAttribute('src', 'http://#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js'); d.head.appendChild(s); })(window._avg, document)
-          </script><div class="avg--embed" data-contest="#{contest.id}"></div>
+          <script>!function(e,t){if("undefined"==typeof e){var i=t.createElement("script");i.setAttribute("src","http://#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js"),t.head.appendChild(i)}}(window._avg,document)</script><div class="avg--embed" data-contest="#{contest.id}"></div>
         %em Click to Copy - Paste Where You'd Like to Embed This Guide
 
 :javascript
-  (function() {
-    var container = document.querySelector("#contest_#{contest.id}"),
-        active = 0,
-        tabs = container.querySelectorAll('.footer .nav a').length
-
-    container.querySelector('.left').onclick = function() {
-      goTo(active - 1)
-      return false
-    }
-
-    container.querySelector('.right').onclick = function() {
-      goTo(active + 1)
-      return false
-    }
-
-    Array.prototype.forEach.call(
-      container.querySelectorAll('.footer a'),
-      function(el, i) {
-        el.onclick = function() {
-          goTo(i)
-          return false
-        }
-      }
-    )
-
-    function goTo(location) {
-      active = location
-      if( active < 0 ) active = tabs - 1
-      if( active >= tabs ) active = 0
-
-      Array.prototype.forEach.call(
-        container.querySelectorAll('.facts'),
-        function(el) { deactivateNodeListExcept('.facts .fact', active, el) }
-      )
-      deactivateNodeListExcept('.footer a', active)
-      deactivateNodeListExcept('.titles .title', active)
-    }
-
-    function deactivateNodeListExcept(domQuery, except, elem) {
-      var elem = elem || container
-      var nodeList = elem.querySelectorAll(domQuery)
-
-      Array.prototype.forEach.call(nodeList, function(el, i) {
-        if( i === except ) el.className += ' active'
-        else el.className = el.className.replace(/active/, '').trim()
-      })
-    }
-
-    if( document.location.hash.match(/contest\_#{contest.id}\_\d+/) ) {
-      goTo(parseInt(document.location.hash.split('_').reverse()[0]))
-    }
-
-    container.querySelector('.js-open-code-box').onclick = function() {
-      if( container.className.search('code-open') === -1 ) container.className += ' code-open'
-      else container.className = container.className.replace('code-open', '').trim()
-    }
-    container.querySelector('.code-box textarea').onclick = function() { this.select() }
-
-  })()
-
-
+  initWidget("#contest_#{contest.id}")

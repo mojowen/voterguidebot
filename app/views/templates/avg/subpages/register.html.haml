@@ -6,17 +6,25 @@
         .mui-col-xs-12
           %h1
             Register to Vote
-        .mui-col-xs-4
-          %i.fa.fa-facebook
-          %i.fa.fa-twitter
-          %i.fa.fa-tumblr
-          %i.fa.fa-envelope
+        #sharing.mui-col-xs-4
+        :javascript
+          sharingWidget(sharing)
+
 
 - content_for :body_class do
   register
 
 - content_for :title do
   Register to Vote
+
+- content_for :url do
+  /register
+
+- content_for :meta_description do
+  Take 2 minutes to make sure you are registered to vote for the 2016 elections!
+
+- content_for :meta_image do
+  https://s3-us-west-2.amazonaws.com/voterguides/states/register.jpg
 
 .mui-row
   .mui-col-xs-12

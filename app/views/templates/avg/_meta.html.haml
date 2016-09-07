@@ -1,0 +1,19 @@
+%title= (content_for(:title) ? yield(:title) + ":: The American Voter Guide" : "The American Voter Guide")
+
+%meta{ property:"og:title", content: content_for(:title) ? yield(:title) + ":: The American Voter Guide" : "The American Voter Guide" }
+%meta{ property:"og:url", content: "http://#{ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'}/#{yield(:url)}" }
+%meta{ property:"og:description", content: yield(:meta_description) }
+%meta{ property:"og:image", content: yield(:meta_image) }
+%meta{ property:"og:type", content:"website" }
+
+%meta{ name:"twitter:card", content:"summary_large_image" }
+%meta{ name:"twitter:site", content:"@whywevote2016" }
+%meta{ name:"twitter:title", content: content_for(:title) ? yield(:title) + ":: The American Voter Guide" : "The American Voter Guide" }
+%meta{ name:"twitter:description", content: yield(:meta_description) }
+%meta{ name:"twitter:image:src", content: yield(:meta_image) }
+
+:javascript
+  var related = 'whywevote2016'
+  var defaultTags = 'election 2016,2016,voting,election,whywevote'
+  var defaultMessage = "Election Day is Nov. 8th. Here's everything you need to vote, incl where people running for office stand on issues"
+  var hashtag = 'whywevote'

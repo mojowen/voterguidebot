@@ -15,6 +15,15 @@
 - content_for :body_class do
   front
 
+- content_for :url do
+  /
+
+- content_for :meta_description do
+  Election Day is Nov. 8th. Here's everything you need to vote, including where people running for office stand on issues you care about the most.
+
+- content_for :meta_image do
+  http://#{ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'}/assets/homepage_og.png
+
 .state_holder
 = render 'templates/avg/state_box', preview: preview
 

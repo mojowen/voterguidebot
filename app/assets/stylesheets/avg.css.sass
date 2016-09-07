@@ -76,7 +76,9 @@ h2
 
         .menu
           display: inline
-          &.active
+          &.active, &:hover
+            a
+              background: $lightblue
             ul
               display: block
           ul
@@ -165,6 +167,14 @@ h2
     .page--title
       z-index: 1
       position: relative
+    .sharing a
+      color: white
+      font-size: 16px
+      margin: 0 4px
+      &, &:hover
+        text-decoration: none
+      &:hover
+        color: $orange
 
 #content
   position: relative
@@ -310,20 +320,25 @@ h2
         font-weight: bold
         color: $darkgray
 
-    .fa-share
-      display: none // TODO: Geet share working
     .tools,
     .share
       a
         &:hover
           text-decoration: none
           color: $orange
-      color: $gray
-
+        color: $gray
+    .share
+      a
+        margin: 0 2px
   .footer
     text-align: center
     padding: 10px 0
     position: relative
+    .share-box
+      display: inline-block
+      a
+        margin: 0 4px
+        text-decoration: none
     .code-box
       display: none
       text-align: center
@@ -363,6 +378,8 @@ h2
         text-decoration: none
 
   &.code-open
+    .share-box
+      display: none
     .code-box
       display: block
     .tools

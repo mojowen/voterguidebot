@@ -2,6 +2,7 @@
 %html
   %head
     = stylesheet_link_tag avg_asset_path('/assets/avg.css', preview), media: 'all'
+    = stylesheet_link_tag avg_asset_path('/assets/avg_widget.js', preview), media: 'all'
   %body
     = render 'templates/avg/contest', contest: contest, preview: preview
 
