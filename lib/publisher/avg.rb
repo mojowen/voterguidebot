@@ -46,7 +46,7 @@ module Publisher
 
     def render_assets
       `bundle exec rake assets:clean`
-      `bundle exec rake assets:precompile`
+      `RAILS_ENV=production SECRET=what bundle exec rake assets:precompile`
       `bundle exec rake render:subpages[true]`
     end
 
