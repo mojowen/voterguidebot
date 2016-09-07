@@ -379,6 +379,8 @@ GEM
     turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uglifier (3.0.2)
+      execjs (>= 0.3.0, < 3)
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -445,6 +447,7 @@ DEPENDENCIES
   spring
   sweetalert-rails
   turbolinks (~> 5.0)
+  uglifier
   unicorn
   vanilla-ujs
   web-console (~> 2.0)
