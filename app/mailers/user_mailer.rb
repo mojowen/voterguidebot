@@ -25,4 +25,15 @@ class UserMailer < ApplicationMailer
       subject: "Invitation to Edit #{@guide.name.capitalize}"
     )
   end
+
+  def export(user, export, failed: false)
+    @user = user
+    @export = export
+    @failed = failed
+
+    mail(
+      to: "#{@user.first_name || @user.email} <#{@user.email}>",
+      subject: "Export Ready"
+    )
+  end
 end

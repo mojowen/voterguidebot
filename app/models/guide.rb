@@ -103,8 +103,36 @@ class Guide < ActiveRecord::Base
 
   def version
     @version ||= Digest::MD5.hexdigest(
-      to_json(except: [:updated_at, :created_at, :published_at,
-                       :published_version, :users, :permissions, :uploads])
+      to_json(
+        except: [:updated_at, :created_at, :published_at,
+                 :published_version, :users, :permissions, :uploads],
+        include: {
+          measures: {
+            only: [:title, :description, :yes_means, :no_means, :stance, :position],
+            include: {
+              endorsements: { only: :endorser },
+              tags: { only: :name }
+            }
+          },
+          contests: {
+            only: [:title, :description, :position],
+            include: {
+              candidates: {
+                only: [:photo, :name, :bio, :facebook, :website, :twitter, :party, :position],
+                include: { endorsements: { only: :endorser } }
+              },
+              questions: {
+                only: [:text, :position],
+                include: {
+                  answers: { only: [:text, :candidate_id] },
+                  tags: { only: :name }
+                }
+              }
+            }
+          }
+        },
+        methods: :template
+      )
     )
   end
 

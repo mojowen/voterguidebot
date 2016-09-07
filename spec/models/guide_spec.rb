@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Guide, active_mocker: true do
   subject { Fabricate :guide, name: 'My Test Name' }
 
-  context 'with users' do
+  describe 'with users' do
     let(:users) { [Fabricate(:user), Fabricate(:user)] }
     let!(:permissions) {
       users.each{ |user| Fabricate :permission, guide: subject, user: user }
@@ -14,13 +14,80 @@ RSpec.describe Guide, active_mocker: true do
     end
   end
 
-  context '#template' do
+  describe '#template' do
     it 'returns the default teplate' do
       expect(subject.template).to eq(Template.default)
     end
   end
 
-  context "#full_clone" do
+  describe '#version' do
+    subject { Fabricate :full_guide }
+    let!(:version) { subject.version }
+
+    context 'measure' do
+      let!(:measure) { subject.measures.first }
+
+      it 'changes version when measures change' do
+        measure.update_attributes title: 'different'
+        expect(Guide.find(subject.id).version).to_not eq(version)
+      end
+
+      it 'changes version when measure tags change' do
+        measure.tags << Tag.new(name: 'Root Veigtable')
+        expect(Guide.find(subject.id).version).to_not eq(version)
+      end
+
+      it 'changes version when measure endorsements change' do
+        measure.endorsements << Endorsement.new(endorser: 'NBC')
+        expect(Guide.find(subject.id).version).to_not eq(version)
+      end
+    end
+
+    context 'contest' do
+      let!(:contest) { subject.contests.first }
+
+      it 'changes version when measures change' do
+        contest.update_attributes title: :Different
+        expect(Guide.find(subject.id).version).to_not eq(version)
+      end
+
+      context 'question' do
+        let!(:question) { contest.questions.first }
+
+        it 'changes version when questions change' do
+          question.update_attributes text: :Different
+          expect(Guide.find(subject.id).version).to_not eq(version)
+        end
+
+        it 'changes version when question tags change' do
+          question.tags << Tag.new(name: 'Root Veigtable')
+          expect(Guide.find(subject.id).version).to_not eq(version)
+        end
+
+        it 'changes version when question answers change' do
+          question.answers << Answer.new(text: 'Yes', candidate: contest.candidates.first)
+          expect(Guide.find(subject.id).version).to_not eq(version)
+        end
+      end
+
+      context 'candidate' do
+        let!(:candidate) { contest.candidates.first }
+
+        it 'changes version when candidates change' do
+          candidate.update_attributes name: :Different
+          expect(Guide.find(subject.id).version).to_not eq(version)
+        end
+
+        it 'changes version when question tags change' do
+          candidate.endorsements << Endorsement.new(endorser: 'Root Veigtable')
+          expect(Guide.find(subject.id).version).to_not eq(version)
+        end
+      end
+    end
+
+  end
+
+  describe "#full_clone" do
     subject { Fabricate :full_guide, users: [ Fabricate(:user) ] }
 
     it 'clones all of the contests and all associated objects' do
@@ -46,7 +113,7 @@ RSpec.describe Guide, active_mocker: true do
     end
   end
 
-  context '.template_fields' do
+  describe '.template_fields' do
     let(:field_template) { subject.template.fields.first['name'] }
     let(:field) { Fabricate :field, value: 'what', field_template: field_template }
 
@@ -56,7 +123,7 @@ RSpec.describe Guide, active_mocker: true do
     end
   end
 
-  context '#template_fields=' do
+  describe '#template_fields=' do
     let(:field_template) { subject.template.fields.first['name'] }
     let(:field_params) { { field_template => 'what'} }
     it 'merges the value with the template field' do
