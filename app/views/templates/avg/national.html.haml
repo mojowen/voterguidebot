@@ -10,7 +10,7 @@
           #main_title
             %h1 Compare the U.S Presidential Candidates
             %p= guide.contests.first.description
-          = render 'templates/avg/contest_tall', contest: guide.contests.first, preview: preview
+          = render 'templates/avg/contest', contest: guide.contests.first, preview: preview
 
 - content_for :body_class do
   front
