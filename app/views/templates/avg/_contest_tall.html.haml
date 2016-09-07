@@ -77,7 +77,7 @@
   (function() {
     var container = document.querySelector("#contest_#{contest.id}"),
         active = 0,
-        tabs = container.querySelectorAll('.footer a').length
+        tabs = container.querySelectorAll('.footer .nav a').length
 
     container.querySelector('.left').onclick = function() {
       goTo(active - 1)
