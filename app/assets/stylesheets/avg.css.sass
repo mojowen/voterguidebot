@@ -591,14 +591,15 @@ body.front
               min-height: 150px
     &.code-open
       .code-box
-        width: 60%
-        width: 60%
-        margin: -30px auto -31px
-        z-index: 2
-        position: relative
-        background: white
-        textarea
-          border: 1px solid $lightgray
+        @include md
+          width: 60%
+          width: 60%
+          margin: -30px auto -31px
+          z-index: 2
+          position: relative
+          background: white
+          textarea
+            border: 1px solid $lightgray
 
 body.menu-overlay #header .mui-appbar .links #menu_overlay
   display: block
