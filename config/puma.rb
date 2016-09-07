@@ -17,5 +17,5 @@ before_fork do
 
   PumaWorkerKiller.ram = 1000
 
-  PumaWorkerKiller.enable_rolling_restart(2 * 3600)
+  PumaWorkerKiller.enable_rolling_restart(6 * 3600)
 end
