@@ -75,7 +75,7 @@ module Publisher
     end
 
     def clean_assets
-      FileUtils.remove_dir base_path
+      FileUtils.rm_r base_path
     end
 
     def s3

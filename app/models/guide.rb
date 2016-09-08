@@ -27,7 +27,7 @@ class Guide < ActiveRecord::Base
 
   def start_publishing
     update_attributes published_version: 'publishing'
-    delay.publish
+    Delayed::Job.enqueue PublishJob.new(self)
   end
 
   def slug

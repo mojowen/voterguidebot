@@ -20,7 +20,7 @@ class Export < ActiveRecord::Base
   def start_publishing
     self.status = :publishing
     save!
-    delay.publish
+    Delayed::Job.enqueue PublishJob.new(self)
   end
 
   def publish
@@ -40,7 +40,7 @@ class Export < ActiveRecord::Base
   private
 
   def abort_and_notify
-    UserMailer.export(user, self, failed: true).deliver_now
+    UserMailer.export(user, self, failed: true).deliver_now unless failed?
     update_attributes status: :failed
     clean
   end
@@ -61,16 +61,18 @@ class Export < ActiveRecord::Base
   def download_guides
     FileUtils.mkdir_p guides_path
 
-    export_guides.each do |export_guide|
-      guide = export_guide.guide
+    export_guides.each { |export_guide| download_guide(export_guide) }
+  end
 
-      export_guide.export_version = guide.published_version
-      guide_path = Rails.root.join(guides_path, "#{guide.slug}.pdf")
+  def download_guide(export_guide)
+    guide = export_guide.guide
+    export_guide.export_version = guide.published_version
 
-      s3.download_file guide_path, guide.s3_key
-    rescue Aws::S3::Errors::AccessDenied
-      export_guide.export_version = 'not-published'
-    end
+    pdf_path = Rails.root.join(guides_path, "#{guide.slug}.pdf")
+    s3.download_file pdf_path, guide.s3_key
+
+    rescue S3Wrapper::DownloadFailed
+    export_guide.export_version = 'not-published'
   end
 
   def zip_archive_folder

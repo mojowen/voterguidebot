@@ -27,9 +27,7 @@ RSpec.describe Export, type: :model do
     let(:export_path) { Rails.root.join(*%w(spec test_files export)) }
 
     before(:each) do
-      allow(s3_wrapper).to receive(:download_file) do |path_to_file, _|
-        FileUtils.touch path_to_file
-      end
+      allow(s3_wrapper).to receive(:download_file) { |path, _| FileUtils.touch path }
       allow(subject).to receive(:s3).and_return(s3_wrapper)
       allow(subject).to receive(:export_path).and_return(export_path)
     end
@@ -66,11 +64,26 @@ RSpec.describe Export, type: :model do
       subject.publish
     end
     it 'sends email if failed' do
-      allow(s3_wrapper).to receive(:upload_file).and_raise(StandardError.new)
+      allow(s3_wrapper).to receive(:upload_file).and_raise(StandardError)
       expect do
         expect(UserMailer).to receive(:export).with(subject.user, subject, failed: true).and_call_original
         subject.publish
       end.to raise_error
+    end
+
+    context 'when S3 cannot find the file' do
+      before(:each) do
+        allow(s3_wrapper).to receive(:download_file)
+          .and_raise(S3Wrapper::DownloadFailed)
+        allow(subject).to receive(:s3).and_return(s3_wrapper)
+        allow(subject).to receive(:export_path).and_return(export_path)
+      end
+
+      it 'does not stop publishing' do
+        subject.publish
+        expect(subject.published?).to be true
+        expect(subject.export_guides.first.export_version).to eq('not-published')
+      end
     end
   end
 

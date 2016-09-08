@@ -38,18 +38,29 @@ RSpec.describe UserMailer, type: :mailer do
     let(:user) { Fabricate :user, first_name: 'Blob' }
     let(:export) { Fabricate :export, user: user }
 
-    subject { described_class.export(user, export) }
 
-    before(:each) do
-      expect(export).to receive(:url).and_return('http://some-s3-route.org/thing.zip')
+    context 'without error' do
+      subject { described_class.export(user, export) }
+
+      before(:each) do
+        expect(export).to receive(:url).and_return('http://some-s3-route.org/thing.zip')
+      end
+
+      it 'renders invite template' do
+        expect(subject.body.encoded).to match(user.first_name)
+      end
+
+      it 'sends to user' do
+        expect(subject.to).to eq([user.email])
+      end
     end
 
-    it 'renders invite template' do
-      expect(subject.body.encoded).to match(user.first_name)
-    end
+    context 'with error' do
+      subject { described_class.export(user, export, failed: true) }
 
-    it 'sends to user' do
-      expect(subject.to).to eq([user.email])
+      it 'renders invite template' do
+        expect(subject.body.encoded).to match(user.first_name)
+      end
     end
   end
   describe '#welcome' do

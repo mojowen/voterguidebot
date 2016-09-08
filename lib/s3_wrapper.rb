@@ -2,6 +2,8 @@ require 'digest'
 require 'aws-sdk'
 
 class S3Wrapper
+  DownloadFailed = Class.new StandardError
+
   def initialize(bucket = nil)
     bucket(bucket)
   end
@@ -12,9 +14,10 @@ class S3Wrapper
   end
 
   def download_file(path_to_file, key=nil)
-    File.open(path_to_file, 'wb') do |file|
-      file.write( object(key || path_to_file).get.body.read )
-    end
+    key ||= path_to_file
+    File.open(path_to_file, 'wb') {  |file| file.write(object(key).get.body.read) }
+    rescue Aws::S3::Errors::AccessDenied
+    raise DownloadFailed, "Could not download #{key}"
   end
 
   def upload_directory(path_to_directory)

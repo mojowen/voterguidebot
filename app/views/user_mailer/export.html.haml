@@ -8,7 +8,9 @@
 
   %p Great job!
 - else
-  %p Uh oh - your export failed. Better tell Scott about it. I bet he'll be excited.
+  %p
+    Uh oh - your export failed.
+    = link_to 'Re-run it again here', exports_url
 
 %p
   %em - Your Friends at the Bus Federation
