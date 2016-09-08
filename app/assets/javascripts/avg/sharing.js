@@ -56,8 +56,10 @@ function sharingWidget(container, log_it) {
                                     document.location.hostname,
                                     link]
 
-  link += '?utm_source=share'
-  link += '&utm_campaign='+track
+  var link_pieces = link.split('?')
+  link = link_pieces.shift()
+  link_pieces.concat(['utm_source=share', 'utm_campaign='+track])
+  link += '?' + link_pieces.join('&')
 
   function escape_add_medium_and_hash(medium) {
     return escape(link+'&utm_medium='+medium+document_hash)
