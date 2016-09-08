@@ -72,7 +72,7 @@ class Export < ActiveRecord::Base
     s3.download_file pdf_path, guide.s3_key
 
     rescue S3Wrapper::DownloadFailed
-    export_guide.export_version = 'not-published'
+    export_guide.fail!
   end
 
   def zip_archive_folder

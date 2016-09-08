@@ -17,17 +17,19 @@
             %ul.mui-list--unstyled
               - export.export_guides.each do |export_guide|
                 %li
+                  - if export_guide.is_failed?
+                    %i.fa.fa-exclamation-triangle.mui--text-danger
                   = link_to export_guide.guide.name, guide_path(export_guide.guide)
-                  - if export_guide.export_version == 'not-published'
-                    %strong
-                      %i.fa.fa-exclamation-triangle
-                      Could Not Export!
+                  - if export_guide.is_failed?
+                    %em (Couldn't Export)
           %td
             - if export.published?
               - if export.is_synced?
+                %i.fa.fa-thumbs-up-o
                 Up to Date
               -else
-                Export out of date
+                %i.fa.fa-downn-up-o
+                Out of Date
             - else
               = export.status
           %td

@@ -17,6 +17,7 @@ class S3Wrapper
     key ||= path_to_file
     File.open(path_to_file, 'wb') {  |file| file.write(object(key).get.body.read) }
     rescue Aws::S3::Errors::AccessDenied
+    FileUtils.rm path_to_file
     raise DownloadFailed, "Could not download #{key}"
   end
 
