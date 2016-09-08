@@ -37,6 +37,10 @@ RSpec.describe ExportsController, type: :controller do
     describe '#index' do
       render_views
 
+      before(:each) do
+        allow_any_instance_of(Export).to receive(:url).and_return('http://some-s3-route.org/thing.zip')
+      end
+
       it 'renders sucessfully' do
         get :index
         expect(response).to be_success
