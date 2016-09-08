@@ -8,7 +8,7 @@
     <p><%= contest.description %></p>
     <div class="candidates count--<%= contest.candidates.count %>">
       <% contest.candidates.each do |candidate| %>
-        <div class="candidate">
+        <div class="candidate large">
           <div class="name">
             <h3><%= candidate.name %></h3>
             <span class="party"><%= candidate.party %></span>
