@@ -1,0 +1,70 @@
+<div class="page" >
+  <div class="title full">
+    <div class="box full">
+      <div class="inner full">
+        <h1><%= guide.name %></h1>
+        <h1 class="big">Voter<br />Guide</h1>
+        <h2>
+          Be sure to vote by
+          <%= guide.election_date.strftime("%B") %>
+          <%= guide.election_date.day.ordinalize %></h1>
+        <p><%= guide.field('title_page_blurb') %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="header">
+    <h2>About This Guide</h2>
+  </div>
+  <div class="content about-us">
+    <div class="section">
+      <h3>About Us</h3>
+      <p><%= guide.field('about_us_blurb') %></p>
+      <%= image_tag guide.field('about_us_logo'), class: 'logo' %>
+    </div>
+  </div>
+  <div class="footer <%= guide.field('about_us_page_footer') %>" ></div>
+</div>
+
+<% guide.contests.each do |contest| %>
+  <%= render guide.template.template_file_path(guide.field('contest_layout')), contest: contest, guide: guide %>
+<% end %>
+<% guide.measures.each do |measure| %>
+  <%= render guide.template.template_file_path('measure'), measure: measure, guide: guide  %>
+<% end %>
+
+<div class="page">
+  <div class="header">
+    <h4>all the info you need</h4>
+    <h2>How To Vote</h2>
+  </div>
+  <div class="content how-to">
+    <div class="section">
+      <h3>What you gotta bring</h3>
+      <p><%= guide.field('what_you_got_to_bring') %></p>
+    </div>
+    <div class="section">
+      <h3>Where you've gotta go</h3>
+      <p><%= guide.field('where_you_got_to_go') %></p>
+    </div>
+  </div>
+  <div class="footer footer_2"></div>
+</div>
+<div class="page back">
+  <div class="content">
+    <div class="section">
+      <h2>Find Out More</h2>
+      <p><%= guide.field('find_out_more') %></p>
+    </div>
+    <div class="section">
+      <p>Also a lot more good info at our website:</p>
+      <br />
+      <strong>www.americanvoterguide.org/<%= guide.location.state_slug %></strong>
+    </div>
+    <p>
+    <% unless guide.field('disclaimer').empty? %>
+      <div class="disclaimer"><%= guide.field('disclaimer') %></div>
+    <% end %>
+  </div>
+</div>
