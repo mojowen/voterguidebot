@@ -49,6 +49,8 @@
 
   #how_to_vote.mui-col-md-9
     %h2 How to Vote
+    - unless guide.field('how_to_vote').empty?
+      %p= guide.field('how_to_vote')
     %iframe{ width:"100%", height:"315", frameborder:"0", allowfullscreen: true, src: "https://www.youtube.com/embed/#{how_to_vote_video(guide)}"}
     %p= link_to 'Watch on Youtube', "https://www.youtube.com/watch?v=#{how_to_vote_video(guide)}"
 
