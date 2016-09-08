@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :permissions
   has_many :guides, through: :permissions
+  has_many :exports
 
   def self.from_omniauth(access_token)
       data = access_token.info

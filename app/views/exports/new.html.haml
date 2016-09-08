@@ -1,0 +1,16 @@
+= form_for(@export) do |form|
+  .mui-row
+    .mui-col-md-8.mui-col-md-offset-2
+      .mui--pull-right
+        %button.mui-btn.mui-btn--accent Start Export
+      %h3 Create an Export
+      %p Select guides to export
+  .mui-row
+    .mui-col-md-8.mui-col-md-offset-2
+      %ul{ style: 'margin: 0; padding: 0; column-count: 2;' }
+        - @guides.each do |guide|
+          %li.mui-checkbox{ style: 'line-height: 1em; margin: 0; text-indent: -16px; padding-left: 16px;' }
+            %label
+              .mui--text-left
+                = form.check_box :guides, name: "export[guides][#{guide.id}]"
+                = guide.name.humanize

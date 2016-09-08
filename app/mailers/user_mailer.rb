@@ -33,7 +33,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: "#{@user.first_name || @user.email} <#{@user.email}>",
-      subject: "Export Ready"
+      subject: failed ? "Exported Failed" : "Export Ready"
     )
   end
 end

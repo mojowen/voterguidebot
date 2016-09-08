@@ -20,11 +20,11 @@ RSpec.describe PhantomRenderer do
   end
 
   describe '#upload' do
-    let(:uploader) { instance_double(S3Uploader) }
+    let(:uploader) { instance_double(S3Wrapper) }
 
     before(:each) do
       expect(subject).to receive(:phantom)
-      class_double("S3Uploader", new: uploader).as_stubbed_const
+      class_double("S3Wrapper", new: uploader).as_stubbed_const
     end
 
     it 'calls s3' do
@@ -34,9 +34,9 @@ RSpec.describe PhantomRenderer do
   end
 
   describe '.render_and_upload' do
-    let(:uploader) { instance_double(S3Uploader) }
+    let(:uploader) { instance_double(S3Wrapper) }
     before(:each) do
-      class_double("S3Uploader", new: uploader).as_stubbed_const
+      class_double("S3Wrapper", new: uploader).as_stubbed_const
     end
     after(:each) do
       File.delete Rails.root.join('tmp', 'test.pdf')
@@ -55,7 +55,7 @@ RSpec.describe PhantomRenderer do
     end
 
     it 'uses specified bucket' do
-      expect(S3Uploader).to receive(:new).with('my-bucket')
+      expect(S3Wrapper).to receive(:new).with('my-bucket')
       allow(uploader).to receive(:upload_file_if_changed)
       described_class.render_and_upload(test_html_file, bucket: 'my-bucket')
     end

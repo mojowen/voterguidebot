@@ -1,0 +1,33 @@
+.mui-row
+  .mui-col-md-12
+    .mui--pull-right
+      = button_link_to 'New Export', new_export_path
+    %h2 Your Exports
+    %table.mui-table
+      %thead
+        %tr
+          %th Guides
+          %th Status
+          %th
+          %th
+      %tbody
+      - current_user.exports.each do |export|
+        %tr
+          %td
+            - export.guides.each.with_index do |guide, index|
+              = link_to guide.name, guide_path(guide)
+              - if index != export.guides.length - 1
+                ,
+          %td
+            - if export.published?
+              - if export.is_synced?
+                Up to Date
+              -else
+                Export out of date
+            - else
+              = export.status
+          %td
+            = button_link_to 'Download', export.url, btn: 'primary'
+          %td
+            - unless export.publishing?
+              = button_link_to 'Regenerate', export_path(export), data: { method: 'PUT' }

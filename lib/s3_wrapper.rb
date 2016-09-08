@@ -1,7 +1,7 @@
 require 'digest'
 require 'aws-sdk'
 
-class S3Uploader
+class S3Wrapper
   def initialize(bucket = nil)
     bucket(bucket)
   end
@@ -9,6 +9,12 @@ class S3Uploader
   def upload_file(path_to_file, key=nil)
     puts "Uploaded #{path_to_file}"
     object(key || path_to_file).upload_file(path_to_file)
+  end
+
+  def download_file(path_to_file, key=nil)
+    File.open(path_to_file, 'wb') do |file|
+      file.write( object(key || path_to_file).get.body.read )
+    end
   end
 
   def upload_directory(path_to_directory)

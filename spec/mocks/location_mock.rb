@@ -218,6 +218,10 @@ class LocationMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
+  def self.to_slug(name)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [name])
+  end
+
   def self.to_state_abv(name)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [name])
   end

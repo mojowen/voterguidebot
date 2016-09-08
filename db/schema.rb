@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831211026) do
+ActiveRecord::Schema.define(version: 20160907171208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,6 +144,21 @@ ActiveRecord::Schema.define(version: 20160831211026) do
 
   add_index "endorsements", ["endorsed_type", "endorsed_id"], name: "index_endorsements_on_endorsed_type_and_endorsed_id", using: :btree
   add_index "endorsements", ["stance"], name: "index_endorsements_on_stance", using: :btree
+
+  create_table "export_guides", force: :cascade do |t|
+    t.integer  "export_id",      null: false
+    t.integer  "guide_id",       null: false
+    t.string   "export_version"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "exports", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "field_translations", force: :cascade do |t|
     t.integer  "field_id",   null: false

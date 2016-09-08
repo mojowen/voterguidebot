@@ -1,0 +1,17 @@
+%h2 Hey relax #{@user.first_name},
+
+- unless @failed
+  %p
+    Your export is ready,
+    = link_to 'download it already', @export.url
+    \.
+
+  %p Great job!
+- else
+  %p Uh oh - your export failed. Better tell Scott about it. I bet he'll be excited.
+
+%p
+  %em - Your Friends at the Bus Federation
+
+- content_for :preview do
+  Your export is ready

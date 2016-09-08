@@ -19,7 +19,7 @@ class Guide < ActiveRecord::Base
   validates :election_date, presence: true
 
   delegate :publish, :published_resource, :is_publishing?, :is_failed?,
-           :is_published?, :is_synced?, to: :publisher
+           :is_published?, :is_synced?, :s3_key, to: :publisher
 
   def template
     @template ||= Template.new template_name

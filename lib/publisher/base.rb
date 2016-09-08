@@ -19,6 +19,10 @@ module Publisher
       nil
     end
 
+    def s3_key
+      nil
+    end
+
     def published_resource
       resource
     end

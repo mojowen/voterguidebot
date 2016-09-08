@@ -289,11 +289,19 @@ class GuideMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end
 
+  def s3_key(*args, &block)
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
+  end
+
   def slim_json
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
   def slug
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def start_publishing
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 

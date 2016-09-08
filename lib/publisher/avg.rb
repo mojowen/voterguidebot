@@ -79,7 +79,7 @@ module Publisher
     end
 
     def s3
-      @s3_uploader ||= S3Uploader.new bucket
+      @s3_uploader ||= S3Wrapper.new bucket
     end
 
     def bucket

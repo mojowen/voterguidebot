@@ -34,6 +34,20 @@ RSpec.describe UserMailer, type: :mailer do
       expect(subject.to).to eq([user.email])
     end
   end
+  describe '#export' do
+    let(:user) { Fabricate :user, first_name: 'Blob' }
+    let(:export) { Fabricate :export, user: user }
+
+    subject { described_class.export(user, export) }
+
+    it 'renders invite template' do
+      expect(subject.body.encoded).to match(user.first_name)
+    end
+
+    it 'sends to user' do
+      expect(subject.to).to eq([user.email])
+    end
+  end
   describe '#welcome' do
     let(:user) { Fabricate :user, first_name: 'Blob' }
     let(:admins) { [Fabricate(:user, admin: true), Fabricate(:user, admin: true)] }

@@ -16,15 +16,19 @@ module Publisher
       url
     end
 
+    def s3_key
+      "#{guide.slug}/#{template.publisher_resource}"
+    end
+
     private
 
     def url
-      @url ||= S3Uploader.new.object(guide_s3_key).presigned_url(:get, expires_in: 3600 * 24 * 7)
+      @url ||= S3Wrapper.new.object(s3_key).presigned_url(:get, expires_in: 3600 * 24 * 7)
     end
 
     def generate
       html
-      pdf.upload key: guide_s3_key
+      pdf.upload key: s3_key
     end
 
     def clean
@@ -38,10 +42,6 @@ module Publisher
 
     def guide_pdf_file
       Rails.root.join('tmp', "#{guide.slug}.pdf")
-    end
-
-    def guide_s3_key
-      "#{guide.slug}/#{template.publisher_resource}"
     end
   end
 end

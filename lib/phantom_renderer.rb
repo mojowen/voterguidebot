@@ -15,7 +15,7 @@ class PhantomRenderer
   end
 
   def upload(bucket: nil, key: nil)
-    S3Uploader.new(bucket).upload_file_if_changed(rendered_filepath, key)
+    S3Wrapper.new(bucket).upload_file_if_changed(rendered_filepath, key)
   end
 
   def self.render_and_upload(path_to_file, **kwargs)

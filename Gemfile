@@ -2,36 +2,41 @@ source 'https://rubygems.org'
 ruby "2.3.1"
 
 gem 'rails', '4.2.2'
+
 gem 'pg'
+
 gem 'sass-rails', '~> 5.0'
+gem 'mui-sass'
+
+gem 'haml'
 
 gem 'turbolinks', '~> 5.0'
 gem 'jbuilder', '~> 2.0'
-gem 'mui-sass'
 gem 'react-rails'
 gem 'vanilla-ujs'
 gem 'sweetalert-rails'
-gem 'haml'
+gem 'uglifier'
+gem 'phantomjs'
+
 gem 'audited', '~> 4.0'
 gem 'audited-activerecord', '~> 4.0'
 gem 'globalize'
+
 gem 'paperclip', '~> 5.0.0.beta1'
 gem 'aws-sdk'
-gem 'unicorn'
+
+gem 'delayed_job_active_record'
+
 gem 'devise', '< 3.5.6'
 gem 'omniauth-google-oauth2'
 gem 'exception_notification'
+
+gem 'rubyzip'
+
 gem 'puma'
-gem 'phantomjs'
-gem 'uglifier'
-gem 'delayed_job_active_record'
 gem 'puma_worker_killer'
 gem 'scout_apm'
 gem 'derailed', group: :development
-
-group :assets do
-  gem 'coffee-rails'
-end
 
 group :development do
   gem 'web-console', '~> 2.0'

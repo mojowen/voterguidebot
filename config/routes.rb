@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     post '/promote' => 'admin#promote', as: 'admin_promote'
     post '/impersonate' => 'admin#impersonate', as: 'admin_impersonate'
 
+    resources :exports, only: [:index, :new, :create, :update]
+
     resources :guides do
       member do
         get 'invite'
