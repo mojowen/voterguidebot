@@ -119,11 +119,13 @@ p, div
 
 .candidates
   margin: 10px 0
+  td
+    border: 1px solid transparent
 
 .candidate
   clear: both
   div
-    display: inline-block
+    float: left
     vertical-align: top
     margin: 4px 10px 4px 0
     height: 68px
@@ -196,8 +198,10 @@ p, div
 
 .candidates
   &.count--2
+    .desc
+      padding-bottom: 20px
     .candidate
-      margin-top: 40px
+      padding: 10px 0
     &.small
       .small
         margin-top: 0

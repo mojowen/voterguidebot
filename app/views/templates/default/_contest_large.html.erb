@@ -4,29 +4,39 @@
     <h2><%= contest.title %></h2>
   </div>
   <div class="content">
-    <h3 style="margin-top: 6px">What They Do</h3>
-    <p><%= contest.description %></p>
-    <div class="candidates count--<%= contest.candidates.count %>">
-      <% contest.candidates.each do |candidate| %>
-        <div class="candidate large">
-          <div class="name">
-            <h3><%= candidate.name %></h3>
-            <span class="party"><%= candidate.party %></span>
-          </div>
-          <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
-          <div class="third">
-            <% unless candidate.endorsements.empty? %>
-              <p><em>supported by...</em></p>
-              <ul class="endorsements">
-                <% candidate.endorsements.each do |endorsement| %>
-                  <li><%= endorsement.endorser %></li>
+    <table class="candidates count--<%= contest.candidates.count %>">
+      <tbody>
+        <tr>
+          <td><h3 style="margin-top: 6px">What They Do</h3></td>
+        </tr>
+        <tr>
+          <td class="desc"><p><%= contest.description %></p></td>
+        </tr>
+        <% contest.candidates.each do |candidate| %>
+          <tr>
+            <td class="candidate">
+              <div class="name">
+                <h3><%= candidate.name %></h3>
+                <span class="party"><%= candidate.party %></span>
+              </div>
+              <div class="photo">
+                <%= render guide.template.template_file_path('photo'), candidate: candidate %>
+              </div>
+              <div class="third">
+                <% unless candidate.endorsements.empty? %>
+                  <p><em>supported by...</em></p>
+                  <ul class="endorsements">
+                    <% candidate.endorsements.each do |endorsement| %>
+                      <li><%= endorsement.endorser %></li>
+                    <% end %>
+                  </ul>
                 <% end %>
-              </ul>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 <% unless contest.questions.empty? %>
