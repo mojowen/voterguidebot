@@ -14,10 +14,14 @@
       - current_user.exports.each do |export|
         %tr
           %td
-            - export.guides.each.with_index do |guide, index|
-              = link_to guide.name, guide_path(guide)
-              - if index != export.guides.length - 1
-                ,
+            %ul.mui-list--unstyled
+              - export.export_guides.each do |export_guide|
+                %li
+                  = link_to export_guide.guide.name, guide_path(export_guide.guide)
+                  - if export_guide.export_version == 'not-published'
+                    %strong
+                      %i.fa.fa-exclamation-triangle
+                      Could Not Export!
           %td
             - if export.published?
               - if export.is_synced?

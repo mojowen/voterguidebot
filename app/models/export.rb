@@ -68,6 +68,8 @@ class Export < ActiveRecord::Base
       guide_path = Rails.root.join(guides_path, "#{guide.slug}.pdf")
 
       s3.download_file guide_path, guide.s3_key
+    rescue Aws::S3::Errors::AccessDenied
+      export_guide.export_version = 'not-published'
     end
   end
 
