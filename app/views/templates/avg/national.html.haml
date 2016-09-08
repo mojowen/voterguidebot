@@ -29,14 +29,17 @@
 
 .mui-row.icons{ style: 'margin-bottom: 50px'}
   .mui-col-md-4
-    %img.left{ src: "data:image/png;base64,#{ to_asset_string('avg/about.png') }" }
-    %h4 Learn About The Issues
+    = link_to '/about' do
+      %img.left{ src: "data:image/png;base64,#{ to_asset_string('avg/about.png') }" }
+      %h4 Learn About The Issues
     %p Know where the candidates in your state stand on the issues you care about.
   .mui-col-md-4
-    %img.left{ src: "data:image/png;base64,#{ to_asset_string('avg/register.png') }" }
-    %h4 Register to Vote
+    = link_to '/register' do
+      %img.left{ src: "data:image/png;base64,#{ to_asset_string('avg/register.png') }" }
+      %h4 Register to Vote
     %p Take 2 minutes to make sure you are registered for this November’s election.
   .mui-col-md-4
-    %img.left{ src: "data:image/png;base64,#{ to_asset_string('avg/pollingplace.png') }" }
-    %h4 Find a Polling Place
+    = link_to '/polling-place' do
+      %img.left{ src: "data:image/png;base64,#{ to_asset_string('avg/pollingplace.png') }" }
+      %h4 Find a Polling Place
     %p Locate your nearest voting location.
