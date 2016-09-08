@@ -40,6 +40,7 @@ body
     margin: 4px 0 0 30px
     display: inline-block
     a
+      text-transform: capitalize
       opacity: 0.8
       display: inline-block
       position: relative
@@ -133,6 +134,19 @@ body
     a.mui-btn
       font-size: 12px
       font-weight: lighter
+
+#content
+  .mui-row
+    overflow-y: auto
+      max-width: auto
+
+@include sm
+  .mui-container
+    max-width: 100%
+
+td.guide
+  a
+    text-transform: capitalize
 
 #footer
   a

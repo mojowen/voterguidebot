@@ -1,12 +1,15 @@
 .mui-row
-  .mui-col-md-12
-    .mui--pull-right
-      = button_link_to 'New Export', new_export_path
+  .mui-col-md-6
     %h2
       = link_to 'Your Guides', root_url
       \/
       All Guides
+  .mui-col-md-6
+    .mui--pull-right
+      = button_link_to 'Your Exports', new_export_path, btn: :primary, class: 'mui-btn--small'
+      = button_link_to 'New Export', new_export_path, class: 'mui-btn--small'
 
+  .mui-col-md-12
     %table.mui-table
       %thead
         %tr
@@ -22,7 +25,7 @@
       - Guide.all.each do |guide|
         - next if guide.users.include? current_user
         %tr
-          %td
+          %td.guide
             .mui--pull-left
               = link_to guide_path(guide) do
                 %strong= guide.name.humanize

@@ -29,7 +29,7 @@
       %tbody
       - current_user.guides.each do |guide|
         %tr
-          %td
+          %td.guide
             .mui--pull-left.mui--text-left
               = link_to guide_path(guide) do
                 %h3= guide.name.humanize
