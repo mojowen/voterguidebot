@@ -140,7 +140,7 @@ body
     overflow-y: auto
       max-width: auto
 
-@include sm
+@media (min-width: #{$sm-width}) and (max-width: #{$md-width})
   .mui-container
     max-width: 100%
 

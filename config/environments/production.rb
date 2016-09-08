@@ -82,7 +82,8 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
     email: { email_prefix: "[VoterGuide🤖] ",
              sender_address: %{"notifier" <notifier@americanvoterguide.org> },
-             exception_recipients: %w{srduncombe@gmail.com} }
+             exception_recipients: %w{srduncombe@gmail.com noah.manger@gmail.com
+                                      stevie@busfederation.com matt@busfederation.com} }
 
   config.action_controller.asset_host = 'http://build.americanvoterguide.org'
   config.paperclip_defaults = {
