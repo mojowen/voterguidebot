@@ -122,7 +122,7 @@
                               closeOnCancel: true,
                               allowOutsideClick: true,
                               allowEscapeKey: true },
-                            function(isConfirm) { document.location.reload() })
+                            function(isConfirm) { Turbolinks.visit( document.location) })
                 })
 
       }
