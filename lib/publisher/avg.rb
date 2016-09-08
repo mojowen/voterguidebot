@@ -45,7 +45,7 @@ module Publisher
     end
 
     def render_assets
-      `bundle exec rake assets:clean`
+      `bundle exec rake assets:clobber`
       `RAILS_ENV=production SECRET=what bundle exec rake assets:precompile`
       `bundle exec rake render:subpages[true]`
     end
@@ -87,19 +87,19 @@ module Publisher
     end
 
     def base_path
-      @root_path ||= Rails.root.join('tmp', 'renders', Time.now.getutc.to_i.to_s)
+      @base_path ||= Rails.root.join('tmp', 'renders', Time.now.getutc.to_i.to_s)
     end
 
     def root_path
-      @root_path ||= Rails.root.join(base_path, 'avg')
+      Rails.root.join(base_path, 'avg')
     end
 
     def asset_path
-      @asset_path ||= Rails.root.join(root_path, 'assets')
+      Rails.root.join(root_path, 'assets')
     end
 
     def contests_path
-      @contests_path ||= Rails.root.join(root_path, 'contests')
+      Rails.root.join(root_path, 'contests')
     end
 
     def clean
