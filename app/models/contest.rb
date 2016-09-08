@@ -5,8 +5,8 @@ class Contest < ActiveRecord::Base
   translates :description, :title
 
   belongs_to :guide
-  has_many :candidates, -> { order(position: :asc) }, autosave: true
-  has_many :questions, -> { order(position: :asc) }, autosave: true
+  has_many :candidates, -> { order(position: :asc) },  dependent: :destroy, autosave: true
+  has_many :questions, -> { order(position: :asc) }, dependent: :destroy, autosave: true
   has_many :answers, through: :questions
   has_many :endorsements, through: :candidates
   has_many :tags, through: :questions

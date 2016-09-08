@@ -31,7 +31,7 @@
 
   .mui-select
     = form.label 'Template'
-    = form.select :template_name, options_for_select([['5x5 Guide', 'defualt'], ['6x4 Guide', 'mail']], selected: guide.template_name)
+    = form.select :template_name, options_for_select([['5x5 Guide', 'default'], ['6x4 Guide', 'mail']], selected: guide.template_name)
 
   - if guide.new_record? && !current_user.guides.empty?
     %h2
@@ -40,7 +40,7 @@
     .mui-select
       %p
         %em Will clone all measures, contests, and fields to your new guide.
-      = select_tag :cloned_id, options_for_select(current_user.guides.uniq.map{ |guide| [guide.name, guide.id] }), prompt: 'Select guide to clone'
+      = select_tag :cloned_id, options_for_select(current_user.guides.uniq.map{ |guide| [guide.name, guide.id] }, selected: params[:cloned_id]), prompt: 'Select guide to clone'
 
   %h2
     %i.fa.fa-map-marker
