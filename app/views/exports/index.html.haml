@@ -27,7 +27,8 @@
             - else
               = export.status
           %td
-            = button_link_to 'Download', export.url, btn: 'primary'
+            - if export.published?
+              = button_link_to 'Download', export.url, btn: 'primary'
           %td
             - unless export.publishing?
               = button_link_to 'Regenerate', export_path(export), data: { method: 'PUT' }
