@@ -5,8 +5,8 @@ class Guide < ActiveRecord::Base
   has_many :permissions, dependent: :destroy
   has_many :export_guides, dependent: :destroy
   has_many :users, through: :permissions
-  has_many :contests, -> { order(position: :asc) }
-  has_many :measures, -> { order(position: :asc) }
+  has_many :contests, -> { order(position: :asc) }, dependent: :destroy
+  has_many :measures, -> { order(position: :asc) }, dependent: :destroy
   has_many :languages
   has_many :uploads
   has_many :fields, autosave: true
