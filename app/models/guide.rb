@@ -61,6 +61,9 @@ class Guide < ActiveRecord::Base
     base
   end
 
+  def finished_field_values
+    template_fields.map { |field| field['value'] }.reject(&:nil?)
+  end
 
   def template_fields
     template.fields.map do |template_field|

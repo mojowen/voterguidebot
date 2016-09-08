@@ -335,8 +335,11 @@ fields:
       -
         text: Democracy Corps
         value: dcorps
+      -
+        text: A Whole Mess of Hands
+        value: hands
     name: about_us_page_footer
-    default: fed
+    default: feds
     example_elem: SelectImages
     example_attr: img
   -
