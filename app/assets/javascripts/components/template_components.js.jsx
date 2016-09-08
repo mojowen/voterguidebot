@@ -56,7 +56,7 @@ var ContestType = React.createClass({
 
 var SelectImages = React.createClass({
   getDefaultProps: function() {
-    return { img: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg' }
+    return { img: 'feds' }
   },
   render: function() {
     var images = {
