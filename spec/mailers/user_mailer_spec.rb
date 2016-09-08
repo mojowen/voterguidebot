@@ -40,6 +40,10 @@ RSpec.describe UserMailer, type: :mailer do
 
     subject { described_class.export(user, export) }
 
+    before(:each) do
+      expect(export).to receive(:url).and_return('http://some-s3-route.org/thing.zip')
+    end
+
     it 'renders invite template' do
       expect(subject.body.encoded).to match(user.first_name)
     end

@@ -14,7 +14,7 @@ class Export < ActiveRecord::Base
   end
 
   def url
-    @url ||= S3Wrapper.new.object(zip_key).presigned_url(:get, expires_in: 3600 * 24 * 7)
+    @url ||= s3.object(zip_key).presigned_url(:get, expires_in: 3600 * 24 * 7)
   end
 
   def start_publishing

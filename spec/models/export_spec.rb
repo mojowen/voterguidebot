@@ -20,8 +20,9 @@ RSpec.describe Export, type: :model do
 
   describe '#publish' do
     subject { Fabricate :export, guides: [guide] }
+    let(:s3_object) { double(presigned_url: 'http://some-s3-route.org/thing.zip') }
     let(:s3_wrapper) do
-      instance_double(S3Wrapper, upload_file: nil)
+      instance_double(S3Wrapper, upload_file: nil, object: s3_object)
     end
     let(:export_path) { Rails.root.join(*%w(spec test_files export)) }
 
@@ -38,7 +39,7 @@ RSpec.describe Export, type: :model do
         allow(subject).to receive(:clean)
         subject.publish
       end
-      after(:each) { FileUtils.rm_r export_path }
+      after(:each) { FileUtils.rm_r(export_path) if File.exists?(export_path) }
 
       it 'downloads all the guides into a tmp folder' do
         guide_path = Rails.root.join(export_path, 'guides', "#{guide.slug}.pdf")
