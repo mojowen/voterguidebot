@@ -55,7 +55,7 @@ class GuidesController < ApplicationController
   private
 
   def cloned_guide
-    return unless params[:cloned_id]
+    return unless params[:cloned_id].present?
     clone_source = Guide.find(params[:cloned_id])
     return unless clone_source && current_user.can_edit?(clone_source)
     @guide = clone_source.full_clone
