@@ -75,7 +75,7 @@ module Publisher
     end
 
     def clean_assets
-      FileUtils.remove_dir root_path
+      FileUtils.remove_dir base_path
     end
 
     def s3
@@ -86,8 +86,12 @@ module Publisher
       ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'
     end
 
+    def base_path
+      @root_path ||= Rails.root.join('tmp', 'renders', Time.now.getutc.to_i.to_s)
+    end
+
     def root_path
-      @root_path ||= Rails.root.join('tmp', 'renders', Time.now.getutc.to_i.to_s, 'avg')
+      @root_path ||= Rails.root.join(base_path, 'avg')
     end
 
     def asset_path
