@@ -2,7 +2,8 @@ class Guide < ActiveRecord::Base
   audited
   has_associated_audits
 
-  has_many :permissions
+  has_many :permissions, dependent: :destroy
+  has_many :export_guides, dependent: :destroy
   has_many :users, through: :permissions
   has_many :contests, -> { order(position: :asc) }
   has_many :measures, -> { order(position: :asc) }
