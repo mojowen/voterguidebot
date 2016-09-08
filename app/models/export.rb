@@ -40,7 +40,7 @@ class Export < ActiveRecord::Base
   private
 
   def abort_and_notify
-    UserMailer.export(user, self, failed: true).deliver_now unless failed?
+    UserMailer.export(user, self, failed: true).deliver_later
     update_attributes status: :failed
     clean
   end
@@ -52,7 +52,7 @@ class Export < ActiveRecord::Base
     zip_archive_folder
     upload_zip_arhive
     clean
-    UserMailer.export(user, self).deliver_now
+    UserMailer.export(user, self).deliver_later
 
     self.status = :published
     save!

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
                            email: data['email'],
                            password: Devise.friendly_token[0,20])
 
-        UserMailer.welcome(user).deliver_now
+        UserMailer.welcome(user).deliver_later
       end
       user
   end
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def promote!(promoter)
     return unless promoter.admin
     update_attributes admin: true
-    UserMailer.promote(self, promoter)
+    UserMailer.promote(self, promoter).deliver_later
     true
   end
 
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
     user.guides << guide
     user.save!
-    UserMailer.invite(user, guide, invitee).deliver_now
+    UserMailer.invite(user, guide, invitee).deliver_later
 
     user
   end

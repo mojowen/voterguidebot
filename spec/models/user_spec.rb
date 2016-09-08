@@ -37,7 +37,7 @@ RSpec.describe User, active_mocker: true do
       it 'sends a notice' do
         expect(UserMailer).to receive(:promote)
                               .with(subject, admin)
-                              .and_return(double(deliver_now: true))
+                              .and_return(double(deliver_later: true))
         subject.promote! admin
       end
     end
@@ -85,7 +85,7 @@ RSpec.describe User, active_mocker: true do
       it 'sends invite email' do
         expect(UserMailer).to receive(:invite)
                               .with(user, guide, 'Jimbo')
-                              .and_return(double(deliver_now: true))
+                              .and_return(double(deliver_later: true))
         described_class.invite(user.email, guide, 'Jimbo')
       end
     end
