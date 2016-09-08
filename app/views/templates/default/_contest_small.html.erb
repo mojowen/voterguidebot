@@ -1,32 +1,41 @@
-<div class="page" id="contest-<%= contest.id %>">
+<div class="page single" id="contest-<%= contest.id %>">
   <div class="header">
     <h4>candidates</h4>
     <h2><%= contest.title %></h2>
   </div>
   <div class="content">
-    <h3>What They Do</h3>
-    <p><%= contest.description %></p>
-    <div class="candidates small count--<%= contest.candidates.count %>">
-      <% contest.candidates.each do |candidate| %>
-        <div class="candidate small">
-          <div class="name">
-            <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
-            <h3><%= candidate.name %></h3>
-            <span class="party"><%= candidate.party %></span>
-            <p><%= candidate.bio %></p>
-          </div>
-          <% unless candidate.endorsements.empty? %>
-            <div class="endorse">
-              <em>supported by...</em>
-              <ul class="endorsements">
-                <% candidate.endorsements.each do |endorsement| %>
-                  <li><%= endorsement.endorser %></li>
+    <table class="candidates count--<%= contest.candidates.count %>">
+      <tbody>
+        <tr>
+          <td colspan="<%= contest.candidates.count %>"><h3>What They Do</h3></td>
+        </tr>
+        <tr>
+          <td colspan="<%= contest.candidates.count %>"><p><%= contest.description %></p></td>
+        </tr>
+        <tr>
+          <% contest.candidates.each do |candidate| %>
+              <td class="candidate small">
+                <div class="name">
+                  <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
+                  <h3><%= candidate.name %></h3>
+                  <span class="party"><%= candidate.party %></span>
+                  <p><%= candidate.bio %></p>
+                </div>
+                <% unless candidate.endorsements.empty? %>
+                  <div class="endorse">
+                    <em>supported by...</em>
+                    <ul class="endorsements">
+                      <% candidate.endorsements.each do |endorsement| %>
+                        <li><%= endorsement.endorser %></li>
+                      <% end %>
+                    </ul>
+                  </div>
                 <% end %>
-              </ul>
-            </div>
+              </td>
           <% end %>
-        </div>
-      <% end %>
+          </tr>
+        </tbody>
+      </table>
       <% unless contest.questions.empty? %>
         <div class="questions">
           <table>

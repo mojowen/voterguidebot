@@ -159,7 +159,6 @@ p, div
       line-height: 10px
 
   &.small
-    display: inline-block
     max-height: 80px
     vertical-align: top
     div
@@ -198,14 +197,25 @@ p, div
         font-size: 8px
         line-height: 9px
 
+
+.single
+  .candidates
+    margin: -10px 0 0
+  .questions
+    th
+      &.stance
+        vertical-align: bottom
+        font-size: 10px
+        padding: 0
+
 .candidates
   &.count--2
     .desc
       padding-bottom: 20px
     .candidate
       padding: 10px 0
-    &.small
-      .small
+      &.small
+        padding: 4px 0
         margin-top: 0
         width: 48%
         .name
