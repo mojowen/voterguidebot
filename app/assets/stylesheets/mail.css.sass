@@ -9,10 +9,26 @@ $margin: 60px
 @import 'lib/mixins'
 @import 'lib/pdf'
 
-.candidate div
-  height: 50px
+.candidate
+  div
+    height: 48px
+    &.name
+      width: 35%
+    &.photo
+      width: 60px
+    &.third
+      margin: 0
 
-.candidates.count--4 .large
-  height: 50px
+.candidates.count--4
+  div
+    height: 40px
+    &.third p
+      margin-top: -8px
   .img
-    @include frame(40px)
+    @include frame(35px)
+
+.candidates.count--3
+  div
+    height: 42px
+  .img
+    @include frame(38px)

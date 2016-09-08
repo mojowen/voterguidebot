@@ -137,6 +137,7 @@ p, div
     &.photo
       width: 20%
       text-align: center
+
     &.name
       text-align: right
       width: 26%
@@ -148,6 +149,7 @@ p, div
         line-height: 8px
   .img
     @include frame(50px)
+    float: none
   ul
     margin: 0
     padding-left: 20px
@@ -218,6 +220,8 @@ p, div
         @include frame(25px)
 
   &.count--4
+    div
+      height: 50px
     .small
       width: 24%
       .name
