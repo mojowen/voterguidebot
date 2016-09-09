@@ -1,0 +1,28 @@
+= content_for :outside do
+  :css
+    .robut {
+        -webkit-animation:spin 1s linear infinite;
+        -moz-animation:spin 1s linear infinite;
+        animation:spin 1s linear infinite;
+    }
+    @-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
+    @keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+    .big,
+    .mui-appbar img,
+    a img
+     {
+        -webkit-animation:spinslow 10s linear infinite;
+        -moz-animation:spinslow 10s linear infinite;
+        animation:spinslow 10s linear infinite;
+    }
+    @-moz-keyframes spinslow { 100% { -moz-transform: rotate(360deg); } }
+    @-webkit-keyframes spinslow { 100% { -webkit-transform: rotate(360deg); } }
+    @keyframes spinslow { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+  .mui--text-center{ style: 'max-width: 600px; margin: 15% auto 0;' }
+    %h1.big{ style: 'font-size: 100px; text-align: center'}
+      Voter Guide
+      = image_tag 'robot.png', class: 'robut'
+    .mui-panel
+      %p Oh no something's gone terribly wrong - the proper authorities have been notified.
+      %p But you can also tell us about it by using the little chat window in the left corner.

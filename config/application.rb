@@ -15,5 +15,6 @@ module VoterGuideBot
     config.i18n.enforce_available_locales = false
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.active_job.queue_adapter = :delayed_job
+    config.exceptions_app = self.routes
   end
 end

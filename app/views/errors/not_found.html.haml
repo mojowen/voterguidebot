@@ -1,0 +1,19 @@
+= content_for :outside do
+  :css
+    .robut {
+        -webkit-animation:spin 2s linear infinite;
+        -moz-animation:spin 2s linear infinite;
+        animation:spin 2s linear infinite;
+    }
+    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+  .mui--text-center{ style: 'max-width: 600px; margin: 15% auto 0;' }
+    %h1.big{ style: 'font-size: 100px; text-align: center'}
+      Voter Guide
+      = image_tag 'robot.png', class: 'robut'
+    .mui-panel
+      %p Bleep boop we can't find that page.
+      %p
+        = link_to 'Go back maybe?', :back
+        but you know, you gotta live your truth.
