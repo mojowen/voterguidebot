@@ -115,14 +115,17 @@
                 .set('Accept', 'application/json')
                 .end(function(err, resp) {
                   if( resp.body.publishing ) setTimeout(check_if_published, 50 * Math.pow(10, decay))
-                  else swal({ title: 'Your Guide has been Published',
+                  else {
+                    document.title += ' (Guide Published)'
+                    swal({ title: 'Your Guide has been Published',
                               text: 'Click to reload',
                               type: 'success',
                               closeOnConfirm: true,
                               closeOnCancel: true,
                               allowOutsideClick: true,
                               allowEscapeKey: true },
-                            function(isConfirm) { Turbolinks.visit( document.location) })
+                              function(isConfirm) { Turbolinks.visit( document.location) })
+                  }
                 })
 
       }
