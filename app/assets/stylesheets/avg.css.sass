@@ -18,7 +18,7 @@ $lightgray: #e8ecef
 body
   &.about #header.mui-appbar .links a.about-link
     color: $orange
-  min-width: 320px
+  min-width: 280px
 
 .mui-container
   max-width: 920px
@@ -140,6 +140,7 @@ h2
     img
       width: 100%
       max-width: 50%
+      min-width: 180px
       @include md
         max-width: 300px
   .header
@@ -233,7 +234,7 @@ h2
       padding:  0
       margin: 10px 0 0
       border-bottom: 2px solid white
-      min-width: 300px
+      min-width: 280px
       @include clear
       ul
         margin: 0 0 0 1.5em
@@ -478,10 +479,12 @@ body.front
       #statebox
         background-color: white
         padding: 30px 0
+        margin-top: 500px
         @include md
           position: relative
           z-index: 1
           height: 360px
+          margin-top: 0
           background-color: transparent
 
   #header .header
@@ -515,6 +518,7 @@ body.front
     h1
       color: white
       font-size: 22px
+      line-height: 23px
       @include md
         font-size: 32px
       font-weight: bold
