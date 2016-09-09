@@ -14,6 +14,5 @@
       = image_tag 'robot.png', class: 'robut'
     .mui-panel
       %p Bleep boop we can't find that page.
-      %p
-        = link_to 'Go back maybe?', :back
-        but you know, you gotta live your truth.
+      %p= button_link_to 'Go back maybe?', :back, btn: :primary
+      %p But you know what - do what you need to do. You gotta live your truth.
