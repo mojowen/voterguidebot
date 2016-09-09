@@ -29,8 +29,24 @@
   .mui-col-xs-12
     %p Study after study shows tens of millions of Americans – especially the Millennial Generation – care deeply about making change on their issues but may not vote because 1) they don’t see the difference between the candidates & 2) they can’t get easily digestible, trustworthy information. Have no fear. The American Voter Guide is here - a simple, user-friendly, independent guide with simple "Yes" or "No" answers from candidates on young people's biggest issues.
 
+    %p AmericanVoterGuide.org is a nonpartisan site designed to give young voters the tools they need to cast a confident and informed vote in this year’s elections. The American Voter Guide provides users with information on where to vote, how to vote, when to vote, the responsibilities of each elected office, and where candidates stand on key issues.
+
     %p
-      %href{ href: '/ '} AmericanVoterGuide.org
-      is a nonpartisan site designed to give young voters the tools they need to cast a confident and informed vote in this year’s elections. The American Voter Guide provides users with information on where to vote, how to vote, when to vote, the responsibilities of each elected office, and where candidates stand on key issues.
+      AmericanVoterGuide.org was built and is maintained by the
+      = link_to 'Bus Federation', 'http://busfedaction.org', target: '_blank'
+      , an organization that believes that young people drive most big changes in society, in politics, and in business. We empower young people to make change in their own communities and across the country by helping them build and run their own organizations and by supporting and scaling their work through projects like this one.
+
+    %p
+      This site would not exist without our incredible national and local partners who have helped establish issue questions, research candidates and ballot measures, and give invaluable support in promoting and distributing this website and similar print guides all over the country.
+
+    %h2 Local Partners
+    .mui--text-center
+      - ['ForwardMontana.png', 'MOVE San Antonio.png', 'MiFamiliaVota.png', 'OSA.png', 'Stand Up for Ohio.jpeg', 'Washington Bus.jpg', 'chicagovotes.jpg', 'engagemiami.jpg', 'georgiashift.png', 'newera.png', 'oregonbusproject.jpg', '0miv.png'].each do |image|
+        = image_tag "https://s3-us-west-2.amazonaws.com/voterguides/partners/#{image}"
+
+    %h2 National Partners
+    .mui--text-center
+      - ['BYP100_Logo.jpg', 'CPD JPEG Logo.jpg', 'Color_of_Change_logo.png', 'MTV.png', 'Patagonia Logo.jpg', 'Roosevelt-Forward.jpg', 'USW.jpg', 'afropunk.jpg', 'associationyoungamericans.png', 'genprogress.gif', 'put a price on it.png'].each do |image|
+        = image_tag "https://s3-us-west-2.amazonaws.com/voterguides/partners/#{image}"
 
 = render 'templates/avg/state_box', preview: preview
