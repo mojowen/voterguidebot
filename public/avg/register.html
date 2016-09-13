@@ -12,7 +12,7 @@
       :: The American Voter Guide
     </title>
     <meta content='Register to Vote&#x000A;:: The American Voter Guide' property='og:title'>
-    <meta content='http://preview.americanvoterguide.org/&lt;!-- register --&gt;' property='og:url'>
+    <meta content='http://americanvoterguide.org/&lt;!-- register --&gt;' property='og:url'>
     <meta content='Take 2 minutes to make sure you are registered to vote for the 2016 elections!' property='og:description'>
     <meta content='https://s3-us-west-2.amazonaws.com/voterguides/states/register.jpg' property='og:image'>
     <meta content='website' property='og:type'>
@@ -245,7 +245,7 @@
               .style("stroke-width", "1.5px");
           
           if( window.innerWidth >= 768 ) {
-            d3.json("/avg/us.json", function(error, us) {
+            d3.json("/us.json", function(error, us) {
           
              g.selectAll("path")
               .data(topojson.feature(us, us.objects.states).features)
