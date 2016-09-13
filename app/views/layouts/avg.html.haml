@@ -18,7 +18,7 @@
           %tr.mui--appbar-height
             %td
               = link_to 'http://americanvoterguide.org' do
-                %img{ src: "data:image/svg+xml;utf8,#{to_asset_string('avg/logo.svg')}" }
+                %img{ src: "data:image/svg+xml;utf8,#{to_url_encoded_string('avg/logo.svg')}" }
             %td
               .links
                 %a#open_menu_overlay.mui--visible-xs-block.mui--visible-sm-block ☰
@@ -46,7 +46,7 @@
         .mui-row
           .mui-col-md-4.mui--hidden-xs.mui--hidden-sm
             = link_to 'http://americanvoterguide.org' do
-              %img{ src: "data:image/svg+xml;utf8,#{to_asset_string('avg/logo.svg')}" }
+              %img{ src: "data:image/svg+xml;utf8,#{to_url_encoded_string('avg/logo.svg')}" }
           .mui-col-xs-12.mui-col-md-4
             = link_to 'Home', '/'
             = link_to 'About American Voter Guide', '/about'

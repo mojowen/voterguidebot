@@ -5,6 +5,11 @@ module GuideHelper
     asset.downcase.match(/jpg|jpeg|png|gif/) ? Base64.encode64(asset_string) : asset_string
   end
 
+  def to_url_encoded_string(asset)
+    asset_string = get_asset(asset)
+    asset.downcase.match(/svg/) ? URI.encode(asset_string) : asset_string
+  end
+  
   private
 
   def get_asset(asset)
