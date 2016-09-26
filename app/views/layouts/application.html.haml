@@ -9,8 +9,6 @@
     = favicon_link_tag 'logo.png'
 
     = csrf_meta_tags
-    - if current_user && Rails.env.production?
-      = javascript_include_tag "https://linked.chat/web/JaZDLg", async: true, 'data-turbolinks-track' => true
 
   %body
     - if current_user
@@ -44,9 +42,3 @@
       = link_to image_tag('logo.png'), 'http://busfedaction.org/'
 
     = render 'layouts/alert'
-
-    - if current_user && Rails.env.production?
-      :javascript
-        window.linkedchat = {}
-        linkedchat.name = '#{ current_user.first_name } #{ current_user.last_name }';
-        linkedchat.email = '#{ current_user.email }';
