@@ -71,7 +71,7 @@
           %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
       .code-box
         %textarea{ readonly: 'readonly' }
-          <script>!function(e,t){if("undefined"==typeof e){var i=t.createElement("script");i.setAttribute("src","http://#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js"),t.head.appendChild(i)}}(window._avg,document)</script><div class="avg--embed" data-contest="#{contest.id}"></div>
+          <script>!function(e,t){if("undefined"==typeof e){var i=t.createElement("script");i.setAttribute("src",t.location.protocol+"//#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js"),t.head.appendChild(i)}}(window._avg,document)</script><div class="avg--embed" data-contest="#{contest.id}"></div>
         %em Click to Copy - Paste Where You'd Like to Embed This Guide
 
 :javascript
