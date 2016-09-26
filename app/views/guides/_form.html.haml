@@ -29,9 +29,10 @@
     = form.label :election_date
     = form.date_field :election_date, value: guide.election_date || Date.new(2016, 11, 8)
 
-  .mui-select
-    = form.label 'Template'
-    = form.select :template_name, options_for_select([['5x5 Guide', 'default'], ['6x4 Guide', 'mail']], selected: guide.template_name)
+  - unless guide.template_name.match /state|national/
+    .mui-select
+      = form.label 'Template'
+      = form.select :template_name, options_for_select([['5x5 Guide', 'default'], ['6x4 Guide', 'mail']], selected: guide.template_name)
 
   - if guide.new_record? && !current_user.guides.empty?
     %h2
