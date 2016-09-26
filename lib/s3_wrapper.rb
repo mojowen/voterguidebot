@@ -10,7 +10,8 @@ class S3Wrapper
 
   def upload_file(path_to_file, key=nil)
     puts "Uploaded #{path_to_file}"
-    object(key || path_to_file).upload_file(path_to_file)
+    content_type = path_to_file.downcase.match(/css/) ? 'text/css' : nil
+    object(key || path_to_file).upload_file(path_to_file, content_type: content_type)
   end
 
   def download_file(path_to_file, key=nil)
@@ -41,7 +42,7 @@ class S3Wrapper
       puts "File not found - uploading #{path_to_file}"
     end
 
-    object.upload_file(path_to_file)
+    upload_file(path_to_file, key)
   end
 
   def object(object_key)
@@ -55,7 +56,7 @@ class S3Wrapper
   end
 
   def will_multipart?(path_to_file)
-    File.size(path_to_file) > 1024 * 1024 * 20
+    File.size(path_to_file) > 1024 * 1024 * 15
   end
 
   private

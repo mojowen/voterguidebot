@@ -4,7 +4,6 @@ class Upload < ActiveRecord::Base
     path: "#{Rails.env.test? ? ':rails_root/spec/test_files' : ''}/:guide/:id_:filename",
     s3_protocol: :https
 
-
   belongs_to :user
   belongs_to :guide
 
