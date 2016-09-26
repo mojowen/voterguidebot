@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
     user.password = Devise.friendly_token[0,20] if user.new_record?
 
     user.guides << guide
-    user.save!
+    user.save
     UserMailer.invite(user, guide, invitee).deliver_later
 
     user
