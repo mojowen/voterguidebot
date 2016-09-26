@@ -2,7 +2,7 @@ module Publisher
   class National < AVG
 
     def resource
-      "http://#{bucket}"
+      "https://#{bucket}"
     end
 
     private
