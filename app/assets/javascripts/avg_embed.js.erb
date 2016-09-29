@@ -4,18 +4,14 @@
 (function() {
   window._avg = window._avg || { rendered: false }
 
-  if( typeof window.iFrameResize === 'undefined') {
-    var s = document.createElement('script')
-    s.setAttribute('src', '//cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.3/iframeResizer.min.js')
-    document.head.appendChild(s)
-  }
-
   function createiFrame(url) {
     var frame = document.createElement('iframe')
 
     frame.setAttribute('scrolling','no')
     frame.setAttribute('allowTransparency','true')
     frame.setAttribute('frameBorder','0')
+
+    url =+ '?source=' + document.location.toString()
     frame.setAttribute('src', url)
 
     frame.style.border = 'none'
@@ -28,12 +24,6 @@
 
     frame.onload = function() {
       frame.parentNode.removeChild(frame.nextElementSibling)
-      iFrameResize({ log:false, checkOrigin:false })
-    }
-    frame.onerror = function() {
-      var comment = document.createComment('Could not create American Voter Guide embed for '+url)
-      frame.parentNode.insertBefore(comment, frame.nextElementSibling)
-      frame.parentNode.removeChild(frame)
     }
 
     return frame
@@ -42,7 +32,7 @@
   whenReady(function() {
     if( window._avg.rendered ) return
 
-    var base_url = 'http://<%= ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'  %>'
+    var base_url = 'https://<%= ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'  %>'
 
     Array.prototype.forEach.call(
       document.body.querySelectorAll('.avg--embed'),
