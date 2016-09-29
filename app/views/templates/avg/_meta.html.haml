@@ -1,7 +1,7 @@
 %title= (content_for(:title) ? yield(:title) + ":: The American Voter Guide" : "The American Voter Guide")
 
 %meta{ property:"og:title", content: content_for(:title) ? yield(:title) + ":: The American Voter Guide" : "The American Voter Guide" }
-%meta{ property:"og:url", content: "http://#{ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'}/#{yield(:url)}" }
+%meta{ property:"og:url", content: "https://#{ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'}/#{yield(:url)}" }
 %meta{ property:"og:description", content: yield(:meta_description) }
 %meta{ property:"og:image", content: yield(:meta_image) }
 %meta{ property:"og:type", content:"website" }
