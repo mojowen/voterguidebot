@@ -78,7 +78,8 @@ h2
           display: inline
           &.active, &:hover
             a
-              background: $lightblue
+              @include md
+                background: $lightblue
             ul
               display: block
           ul
