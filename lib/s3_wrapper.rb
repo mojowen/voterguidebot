@@ -9,6 +9,7 @@ class S3Wrapper
   end
 
   def upload_file(path_to_file, key=nil)
+    path_to_file = path_to_file.to_s
     puts "Uploaded #{path_to_file}"
     content_type = path_to_file.downcase.match(/css/) ? 'text/css' : nil
     object(key || path_to_file).upload_file(path_to_file, content_type: content_type)
