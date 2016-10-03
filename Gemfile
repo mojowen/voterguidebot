@@ -35,7 +35,6 @@ gem 'rubyzip'
 
 gem 'puma'
 gem 'puma_worker_killer'
-gem 'scout_apm'
 gem 'derailed', group: :development
 
 group :development do
