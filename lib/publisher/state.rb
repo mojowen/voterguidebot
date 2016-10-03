@@ -21,7 +21,7 @@ module Publisher
     end
 
     def render_share_image
-      render_image 'share', 'state_img', guide: guide
+      render_image Rails.root.join(state_path, "share").to_s, 'state_img', guide: guide
     end
   end
 end
