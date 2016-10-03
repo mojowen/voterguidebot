@@ -8,9 +8,9 @@ class PhantomRenderer
     @extension = extension || :pdf
   end
 
-  def render(path: nil, **render_kwargsons)
+  def render(path: nil, **render_kwargs)
     @rendered_filepath = path || tmp_filepath
-    phantom command(**render_kwargsons)
+    phantom command(**render_kwargs)
     self
   end
 

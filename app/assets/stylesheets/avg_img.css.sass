@@ -1,0 +1,57 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800,400italic,600)
+@import './lib/normalize'
+
+
+$width: 1200px
+$height: 620px
+
+html
+  height: 100%
+  width: 100%
+
+$lightblue: #319ad5
+$blue: #1470be
+$orange: #e34116
+$red: #ca2127
+$gray: #777
+$darkgray: #3c3c3c
+$lightgray: #e8ecef
+
+.container
+  height: $height
+  width: $width
+
+.state
+  .cover
+    background: rgba(7.8%, 43.9%, 74.5%, 0.8)
+    position: absolute
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    z-index: 0
+  .logo
+    z-index: 1
+    position: relative
+    width: 450px
+    background: $lightgray
+    margin-top: 30px
+    height: 128px
+    img
+      width: 400px
+      float: right
+    border-radius: 0px 0px 50px 0px
+  h1, h2
+    position: relative
+    z-index: 1
+    color: $lightgray
+    font-weight: 700
+    padding-left: 60px
+    margin: 0
+  h1
+    padding-top: 200px
+    font-size: 124px
+  h2
+    font-size: 45px
+    font-style: italic
+

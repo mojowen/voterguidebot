@@ -50,11 +50,25 @@ module Publisher
       `bundle exec rake render:subpages[true]`
     end
 
-    def render_static(rel_path_to_file)
+    def render_static(rel_path_to_file, layout: nil)
       StaticRenderer.render_file Rails.root.join(root_path, rel_path_to_file),
                                  template.template_file_path(template.view),
                                  { guide: guide, preview: false },
                                  'layouts/avg.html.haml'
+    end
+
+    def render_image(filename, view, params)
+      html_file = Rails.root.join(root_path, "#{filename}.html")
+      png_file = Rails.root.join(root_path, "#{filename}.png")
+
+      StaticRenderer.render_file html_file,
+                                 template.template_file_path(view),
+                                 params.update(preview: false),
+                                 'layouts/avg_img.html.haml'
+
+      phantom = PhantomRenderer.new html_file, extension: :png
+      phantom.render path: png_file, width: '1200px', height: '620px'
+      FileUtils.rm_r html_file
     end
 
     def render_contests

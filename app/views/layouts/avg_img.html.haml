@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    :css
+      #{ to_asset_string('avg_img.css') }
+    - if content_for :css
+      = yield(:css)
+
+  %body{ class: yield(:body_class) }
+    .container
+      = yield
