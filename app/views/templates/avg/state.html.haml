@@ -98,3 +98,5 @@
                     %li= endorsement.endorser
 
 = render 'templates/avg/state_box', preview: preview
+- unless guide.field('footer_script').empty?
+  = raw guide.field('footer_script')

@@ -30,6 +30,13 @@ fields:
     element: textarea
     limit: 500
     name: how_to_vote
+  -
+    label: Footer Script Embed
+    placeholder: ...
+    example: <script>alert('bad example')</script>
+    element: textarea
+    limit: 10000
+    name: footer_script
 
 states:
   AL:
