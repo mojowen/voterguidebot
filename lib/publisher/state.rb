@@ -9,6 +9,7 @@ module Publisher
 
     def generate
       render_state
+      render_share_image
       render_contests
       sync_assets
     end
@@ -17,6 +18,10 @@ module Publisher
       state_path = Rails.root.join(root_path, guide.location.state_slug)
       FileUtils.mkdir_p state_path
       render_static Rails.root.join(state_path, "index.html").to_s
+    end
+
+    def render_share_image
+      render_image 'share', 'state_img', guide: guide
     end
   end
 end
