@@ -2,11 +2,11 @@
   state #{guide.location.state_slug}
 
 - content_for :css do
-  :sass
-    body
-      background: url('https://s3-us-west-2.amazonaws.com/voterguides/states/#{state_pic(guide)}') center left no-repeat
-      background-size: cover
-
+  :css
+    body {
+      background: url('https://s3-us-west-2.amazonaws.com/voterguides/states/#{state_pic(guide)}') center left no-repeat;
+      background-size: cover;
+    }
 
 .cover
 .logo
