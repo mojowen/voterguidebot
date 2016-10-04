@@ -1,6 +1,6 @@
-%title= (content_for(:title) ? yield(:title) + ":: The American Voter Guide" : "The American Voter Guide")
+%title= (content_for(:title) ?  "#{yield(:title).strip} :: The American Voter Guide" : "The American Voter Guide")
 
-%meta{ property:"og:title", content: content_for(:title) ? yield(:title).strip + ":: The American Voter Guide" : "The American Voter Guide" }
+%meta{ property:"og:title", content: content_for(:title) ? "#{yield(:title).strip} :: The American Voter Guide" : "The American Voter Guide" }
 %meta{ property:"og:url", content: "https://#{ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'}/#{yield(:url).strip}" }
 %meta{ property:"og:description", content: yield(:meta_description).strip }
 %meta{ property:"og:image", content: yield(:meta_image).strip }
@@ -9,7 +9,7 @@
 %meta{ name:"twitter:card", content:"summary_large_image" }
 %meta{ name:"twitter:site", content:"@whywevote2016" }
 %meta{ name:"twitter:creator", content:"@whywevote2016" }
-%meta{ name:"twitter:title", content: content_for(:title) ? yield(:title).strip + ":: The American Voter Guide" : "The American Voter Guide" }
+%meta{ name:"twitter:title", content: content_for(:title) ? "#{yield(:title).strip} :: The American Voter Guide" : "The American Voter Guide" }
 %meta{ name:"twitter:description", content: yield(:meta_description).strip }
 %meta{ name:"twitter:image", content: yield(:meta_image).strip }
 
