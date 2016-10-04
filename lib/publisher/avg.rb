@@ -3,7 +3,6 @@ module Publisher
 
     def initialize(guide)
       super(guide)
-      FileUtils.mkdir_p asset_path
     end
 
     def self.assets_only
@@ -11,6 +10,7 @@ module Publisher
     end
 
     def collect_and_sync_assets
+      FileUtils.mkdir_p asset_path
       collect_assets
       sync_assets
       clean_assets
@@ -71,8 +71,32 @@ module Publisher
       FileUtils.rm_r html_file
     end
 
+    def render_redirect(html_file, view, params)
+      StaticRenderer.render_file html_file,
+                                 template.template_file_path(view),
+                                 params.update(preview: false),
+                                 'layouts/avg_redirect.html.haml'
+    end
+
+    def render_social(html_file, view, params)
+      render_image html_file, view, params
+      render_redirect "#{html_file}.html", view, params.update(redirect_url: resource)
+    end
+
     def render_contests
       guide.contests.each { |contest| render_contest(contest) }
+    end
+
+    def render_measures
+      FileUtils.mkdir_p measures_path
+
+      guide.measures.each do |measure|
+        render_social(
+          Rails.root.join(measures_path, "#{measure.id}-#{measure.slug}"),
+          "measure_info",
+          measure: measure, anchor: "measure_#{measure.id}"
+        )
+      end
     end
 
     def render_contest(contest)
@@ -82,6 +106,36 @@ module Publisher
       StaticRenderer.render_file Rails.root.join(contest_path, 'index.html'),
                                  'templates/avg/embed',
                                  { contest: contest, preview: false }
+
+      render_social(
+        Rails.root.join(contest_path, "info"),
+        "contest_info",
+        contest: contest, anchor: "contest_#{contest.id}"
+      )
+
+      contest.questions.each.with_index do |question, index|
+        render_social(
+          Rails.root.join(contest_path, "#{question.slug}"),
+          "contest_question",
+          question: question, anchor: "contest_#{contest.id}_#{index+1}"
+        )
+
+        contest.candidates.each do |candidate|
+          render_social(
+            Rails.root.join(contest_path, "#{question.slug}-#{candidate.slug}"),
+            "candidate_question",
+            candidate: candidate, question: question, anchor: "contest_#{contest.id}_#{index+1}"
+          )
+        end
+      end
+
+      contest.candidates.each do |candidate|
+        render_social(
+          Rails.root.join(contest_path, candidate.slug),
+          "candidate_info",
+          candidate: candidate, anchor: "contest_#{contest.id}"
+        )
+      end
     end
 
     def sync_assets
@@ -114,6 +168,10 @@ module Publisher
 
     def contests_path
       Rails.root.join(root_path, 'contests')
+    end
+
+    def measures_path
+      Rails.root.join(root_path, 'measures')
     end
 
     def clean

@@ -14,6 +14,10 @@ class Question < ActiveRecord::Base
     super attributes
   end
 
+  def slug
+    text.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
+  end
+
   private
 
   def create_answers!(attributes)

@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    = render 'templates/avg/meta'
+    :javascript
+      (function() {
+          var redirect = [
+                #{ redirect_url.to_json },
+                document.location.search,
+                "#",
+                #{ anchor.to_json }
+              ]
+          document.location = redirect.join('');
+      })();
+  %body
+    redirecting to #{redirect_url}

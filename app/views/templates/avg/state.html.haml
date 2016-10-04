@@ -70,7 +70,11 @@
       - guide.measures.each do |measure|
         .mui-row{ id: "measure_#{measure.id}" }
           .mui-col-md-9.ballot_measure
-            %h3= measure.title
+            .mui-row
+              %h3.mui-col-md-9= measure.title
+              .sharing.mui-col-md-3{ id: "measure_sharing_#{measure.id}", data: { link: "https://#{ENV['AVG_BUCKET']}/measures/#{measure.id}-#{measure.slug}.html", category: :measure, item: "#{measure.title}:heading" } }
+              :javascript
+                sharingWidget(measure_sharing_#{measure.id})
             %p= measure.description
             .mui-col-sm-1
               %i.fa.fa-thumbs-o-up.for

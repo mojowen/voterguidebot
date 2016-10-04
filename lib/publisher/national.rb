@@ -8,6 +8,7 @@ module Publisher
     private
 
     def generate
+      FileUtils.mkdir_p asset_path
       render_index
       render_contests
       sync_assets

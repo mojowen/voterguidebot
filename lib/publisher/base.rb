@@ -11,7 +11,7 @@ module Publisher
       generate
       complete
       rescue StandardError => error
-      abort
+      cancel
       raise error
     end
 
@@ -63,7 +63,7 @@ module Publisher
       clean
     end
 
-    def abort
+    def cancel
       guide.update_attributes published_version: 'publishing-failed'
       clean
     end

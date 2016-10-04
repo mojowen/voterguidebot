@@ -1,0 +1,22 @@
+- content_for :body_class do
+  candidate--question
+
+- content_for :title do
+  = candidate.name
+
+- content_for :url do
+  contests/#{candidate.contest.id}/candidate-#{candidate.id}-#{question.id}.html
+
+- content_for :meta_description do
+  This election will decide the fate of issues you care about. Learn where the candidates stand.
+
+- content_for :meta_image do
+  http://americanvoterguide.org/contests/#{candidate.contest.id}/candidate-#{candidate.id}-#{question.id}.png
+
+%h2.ask Do You Support
+.candidate
+  .question{ class: question.text.length > 80 ? 'long' : '' }= question.text
+  .photo{ style: "background-image: url(#{candidate.photo})" }
+  %h2= candidate.name
+  %h3= candidate.party
+  %h1.answer= question.answers.find{ |answer| candidate == answer.candidate }.try(:text) || 'N/A'

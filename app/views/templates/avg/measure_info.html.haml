@@ -1,0 +1,30 @@
+- content_for :body_class do
+  measure--info
+
+- content_for :title do
+  Ballot Measures - The Voters Decide
+
+- content_for :url do
+  measures/#{measure.id}/info.html
+
+- content_for :meta_description do
+  With ballot measures, voters decide what policies become law. You choose. So learn both sides & then vote.
+
+- content_for :meta_image do
+  http://americanvoterguide.org/measures/#{measure.id}/info.png
+
+
+.upper
+  %img{ src: "data:image/png;base64,#{to_asset_string('avg/logo.png')}" }
+  .top
+    %h2= measure.title
+.lower
+  .half
+    %p= measure.description
+  .half
+    %h3 Who Says Yes:
+    - measure.endorsements.for.each do |endorsement|
+      %p= endorsement.endorser
+    %h3 Who Says No:
+    - measure.endorsements.against.each do |endorsement|
+      %p= endorsement.endorser

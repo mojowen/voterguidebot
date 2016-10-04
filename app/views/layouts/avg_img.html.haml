@@ -1,11 +1,13 @@
 !!!
 %html
   %head
+    %meta{ charset:"UTF-8"}
+    %meta{ content:"text/html, charset:utf-8", 'http-equiv' => "Content-Type" }
     :css
       #{ to_asset_string('avg_img.css') }
     - if content_for :css
       = yield(:css)
 
-  %body{ class: yield(:body_class) }
+  %body{ class: yield(:body_class).strip + (preview ? ' preview' : '') }
     .container
       = yield

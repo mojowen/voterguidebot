@@ -12,4 +12,8 @@ class Candidate < ActiveRecord::Base
     create_endorsements!(attributes)
     super(attributes)
   end
+
+  def slug
+    name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
+  end
 end

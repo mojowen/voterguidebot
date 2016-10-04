@@ -3,6 +3,7 @@
 
 # Node Modules
 /node_modules
+.sass-cache/
 
 # Ignore all logfiles and tempfiles.
 /log/*

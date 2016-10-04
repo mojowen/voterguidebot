@@ -25,4 +25,8 @@ class Measure < ActiveRecord::Base
     cloned.tags = tags.map(&:dup)
     cloned
   end
+
+  def slug
+    title.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
+  end
 end

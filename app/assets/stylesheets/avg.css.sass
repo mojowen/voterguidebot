@@ -169,7 +169,9 @@ h2
       z-index: 1
       position: relative
     .sharing a
-      color: white
+      color: $darkgray
+      @include md
+        color: white
       font-size: 16px
       margin: 0 4px
       &, &:hover
@@ -451,6 +453,17 @@ h2
   ul
     margin-left: 0px
     padding-left: 1.5em
+  .sharing
+    margin: 0 0 10px
+    @include md
+      float: right
+      margin: 20px 0 0
+    a
+      text-decoration: none
+      color: $darkgray
+      margin-left: 4px
+      &:float
+        color: $orange
 
 .icons
   .mui-col-md-4

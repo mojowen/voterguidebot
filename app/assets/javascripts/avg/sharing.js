@@ -49,7 +49,7 @@ function sharingWidget(container, log_it) {
 
   var link_pieces = link.split('#')
   link = link_pieces[0]
-  document_hash = '#'+link_pieces[1]
+  document_hash = link_pieces.length > 1 ? '#'+link_pieces[1] : ''
 
   if( !link.match(/http/) ) link = [document.location.protocol,
                                     '//',

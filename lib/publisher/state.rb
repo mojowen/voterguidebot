@@ -12,6 +12,7 @@ module Publisher
       render_state
       render_share_image
       render_contests
+      render_measures
       sync_assets
     end
 
