@@ -49,5 +49,12 @@
       </div>
     </div>
     <hr>
+    <%- if measure.stance %>
+      <div class="section recommended">
+        <h3>Recommended:</h3>
+        <span class="recommendation"><%= measure.stance == 'against' ? 'No' : 'Yes' %></span>
+        <img src="data:image/png;base64,<%= to_asset_string((measure.stance == 'against' ? 'down' : 'up')+'.png') %>">
+      </div>
+    <% end %>
   </div>
 </div>

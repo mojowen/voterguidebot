@@ -319,7 +319,6 @@ p, div
     margin-top: 10px
   .section
     clear: both
-    padding-bottom: 10px
     margin: 0
     div
       display: inline-block
@@ -343,7 +342,17 @@ p, div
       ul
         margin: 4px 0 0 20px
         padding-left: 0
-
+    &.recommended
+      h3
+        margin-right: 20px
+      h3, span, img
+        display: inline-block
+      .recommendation
+        color: $blue
+        font-size: 16px
+      img
+        height: 20px
+        margin-bottom: -4px
 .about-us
   .logo
     max-width: 200px
