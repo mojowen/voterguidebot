@@ -20,7 +20,7 @@
       .photo{ style: "background-image: url(#{candidate.photo})" }
       %h1= candidate.name
     %h3= candidate.party
-    %p= candidate.bio
+    %p.bio= candidate.bio
     %p Supported by
     %ul
       - candidate.endorsements.each do |endorsement|

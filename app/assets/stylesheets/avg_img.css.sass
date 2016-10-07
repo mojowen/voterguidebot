@@ -2,7 +2,7 @@
 @import './lib/normalize'
 
 $width: 1200px
-$height: 620px
+$height: 630px
 
 html
   height: 100%
@@ -21,7 +21,7 @@ $darkgray: #3c3c3c
 $lightgray: #e8ecef
 
 .preview
-  background: #999
+  background-color: #999
 
 .preview .container
   margin: 30px
@@ -30,7 +30,10 @@ $lightgray: #e8ecef
 .container
   height: $height
   width: $width
+  overflow: hidden
   background: white
+  border: none
+  position: relative
 
 .contest--info
   h2
@@ -39,7 +42,12 @@ $lightgray: #e8ecef
     text-align: center
     padding: 10px
     background: $lightgray
+    letter-spacing: 1.5px
     margin: 0
+  h1
+    margin-bottom: 0
+  h3
+    margin-top: 0
   .candidate .photo
     height: 120px
     width: 120px
@@ -52,6 +60,8 @@ $lightgray: #e8ecef
   &.candidates--4 .candidate
     width: 264px
     margin-left: 18px
+  .bio
+    min-height: 82px
 
 .contest--question
   &.candidates--2 .candidate
@@ -317,8 +327,6 @@ h2.ask
     h5
       font-size: 20px
 .state
-  .container
-    background: none
   .cover
     background: rgba(7.8%, 43.9%, 74.5%, 0.8)
     position: absolute
@@ -345,7 +353,7 @@ h2.ask
     margin: 0
     padding-left: 60px
   h1
-    padding-top: 180px
+    padding-top: 100px
     font-size: 124px
     margin-bottom: 20px
   h2

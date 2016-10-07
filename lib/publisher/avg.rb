@@ -67,7 +67,7 @@ module Publisher
                                  'layouts/avg_img.html.haml'
 
       phantom = PhantomRenderer.new html_file, extension: :png
-      phantom.render path: png_file, width: '1200px', height: '620px'
+      phantom.render path: png_file, width: '1200px', height: '630px'
       FileUtils.rm_r html_file
     end
 
