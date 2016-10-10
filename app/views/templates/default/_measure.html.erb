@@ -4,57 +4,73 @@
     <h2><%= measure.title %></h2>
   </div>
   <div class="content">
-    <div class="section">
-      <h3>What it Does</h3>
-      <p><%= measure.description %></p>
-    </div>
-    <hr>
-    <div class="section">
-      <div class="hand">
-        <img src="data:image/png;base64,<%= to_asset_string('up.png') %>">
-      </div>
-      <div class="explain">
-          <h4>A <span>Yes</span> Vote Means...</h4>
-          <p><%= measure.yes_means %></p>
-      </div>
-      <div class="endorse">
-        <% unless measure.endorsements.against.empty? %>
-          <p>who says YES...</p>
-          <ul>
-            <% measure.endorsements.for.each do |endorsement| %>
-              <li><%= endorsement.endorser %></li>
-            <% end %>
-          </ul>
+    <table class="measure">
+      <tbody>
+        <tr>
+          <td>
+            <h3 style="margin-top: 6px">What it Does</h3>
+          </td>
+        </tr>
+        <tr>
+          <td class="desc">
+            <p><%= measure.description %></p>
+            <hr>
+          </td>
+        </tr>
+        <tr>
+          <td class="section">
+            <div class="hand">
+              <img src="data:image/png;base64,<%= to_asset_string('up.png') %>">
+            </div>
+            <div class="explain">
+              <h4>A <span>Yes</span> Vote Means...</h4>
+              <p><%= measure.yes_means %></p>
+            </div>
+            <div class="endorse">
+              <% unless measure.endorsements.against.empty? %>
+                <p>who says YES...</p>
+                <ul>
+                  <% measure.endorsements.for.each do |endorsement| %>
+                    <li><%= endorsement.endorser %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+            <hr>
+          </td>
+        </tr>
+        <tr>
+          <td class="section">
+            <div class="hand">
+              <img src="data:image/png;base64,<%= to_asset_string('down.png') %>">
+            </div>
+            <div class="explain">
+              <h4>A <span>No</span> Vote Means...</h4>
+              <p><%= measure.no_means %></p>
+            </div>
+            <div class="endorse">
+              <% unless measure.endorsements.against.empty? %>
+                <p>who says NO...</p>
+                <ul>
+                  <% measure.endorsements.against.each do |endorsement| %>
+                    <li><%= endorsement.endorser %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+            <hr>
+          </td>
+        </tr>
+        <%- if measure.stance %>
+          <tr>
+            <td class="section recommended">
+              <h3>Recommended:</h3>
+              <span class="recommendation"><%= measure.stance == 'against' ? 'No' : 'Yes' %></span>
+              <img src="data:image/png;base64,<%= to_asset_string((measure.stance == 'against' ? 'down' : 'up')+'.png') %>">
+            </td>
+          </tr>
         <% end %>
-      </div>
-    </div>
-    <hr>
-    <div class="section">
-      <div class="hand">
-        <img src="data:image/png;base64,<%= to_asset_string('down.png') %>">
-      </div>
-      <div class="explain">
-          <h4>A <span>No</span> Vote Means...</h4>
-          <p><%= measure.no_means %></p>
-      </div>
-      <div class="endorse">
-        <% unless measure.endorsements.against.empty? %>
-          <p>who says NO...</p>
-          <ul>
-            <% measure.endorsements.against.each do |endorsement| %>
-              <li><%= endorsement.endorser %></li>
-            <% end %>
-          </ul>
-        <% end %>
-      </div>
-    </div>
-    <hr>
-    <%- if measure.stance %>
-      <div class="section recommended">
-        <h3>Recommended:</h3>
-        <span class="recommendation"><%= measure.stance == 'against' ? 'No' : 'Yes' %></span>
-        <img src="data:image/png;base64,<%= to_asset_string((measure.stance == 'against' ? 'down' : 'up')+'.png') %>">
-      </div>
-    <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
