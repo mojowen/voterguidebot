@@ -12,53 +12,46 @@
           </td>
         </tr>
         <tr>
-          <td class="desc">
+          <td class="desc hr">
             <p><%= measure.description %></p>
-            <hr>
           </td>
         </tr>
-        <tr>
-          <td class="section">
-            <div class="hand">
-              <img src="data:image/png;base64,<%= to_asset_string('up.png') %>">
-            </div>
-            <div class="explain">
-              <h4>A <span>Yes</span> Vote Means...</h4>
-              <p><%= measure.yes_means %></p>
-            </div>
-            <div class="endorse">
-              <% unless measure.endorsements.against.empty? %>
-                <p>who says YES...</p>
-                <ul>
-                  <% measure.endorsements.for.each do |endorsement| %>
-                    <li><%= endorsement.endorser %></li>
-                  <% end %>
-                </ul>
-              <% end %>
-            </div>
-            <hr>
+        <tr class="section hr">
+          <td class="hand">
+            <img src="data:image/png;base64,<%= to_asset_string('up.png') %>">
+          </td>
+          <td class="explain">
+            <h4>A <span>Yes</span> Vote Means...</h4>
+            <p><%= measure.yes_means %></p>
+          </td>
+          <td class="endorse">
+            <% unless measure.endorsements.against.empty? %>
+              <p>who says YES...</p>
+              <ul>
+                <% measure.endorsements.for.each do |endorsement| %>
+                  <li><%= endorsement.endorser %></li>
+                <% end %>
+              </ul>
+            <% end %>
           </td>
         </tr>
-        <tr>
-          <td class="section">
-            <div class="hand">
-              <img src="data:image/png;base64,<%= to_asset_string('down.png') %>">
-            </div>
-            <div class="explain">
-              <h4>A <span>No</span> Vote Means...</h4>
-              <p><%= measure.no_means %></p>
-            </div>
-            <div class="endorse">
-              <% unless measure.endorsements.against.empty? %>
-                <p>who says NO...</p>
-                <ul>
-                  <% measure.endorsements.against.each do |endorsement| %>
-                    <li><%= endorsement.endorser %></li>
-                  <% end %>
-                </ul>
-              <% end %>
-            </div>
-            <hr>
+        <tr class="section hr">
+          <td class="hand">
+            <img src="data:image/png;base64,<%= to_asset_string('down.png') %>">
+          </td>
+          <td class="explain">
+            <h4>A <span>No</span> Vote Means...</h4>
+            <p><%= measure.no_means %></p>
+          </td>
+          <td class="endorse">
+            <% unless measure.endorsements.against.empty? %>
+              <p>who says NO...</p>
+              <ul>
+                <% measure.endorsements.against.each do |endorsement| %>
+                  <li><%= endorsement.endorser %></li>
+                <% end %>
+              </ul>
+            <% end %>
           </td>
         </tr>
         <%- if measure.stance %>

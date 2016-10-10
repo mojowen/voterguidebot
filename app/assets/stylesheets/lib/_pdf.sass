@@ -35,6 +35,9 @@ h3
 p, div
   font-size: 10px
 
+p
+  line-height: 13px
+
 .page
   height: $height
   width: $width
@@ -313,30 +316,45 @@ p, div
     color: #333
 
 .measure
-  hr
-    border: none
-    border-bottom: 5px $fuzzy_blue solid
-    margin-top: 10px
-  .section
-    clear: both
+  .content
+    position: relative
+    margin: 60px 20px 0
+    padding: 0
+    top: auto
+    left: auto
+    bottom: auto
+    right: auto
+  td
     margin: 0
-    div
-      display: inline-block
-      min-height: 60px
-      vertical-align: top
+    padding: 0
+    border: none
+  tr
+    margin: 0
+    padding: 0
+    border: none
+  .hr
+    border-bottom: 5px $fuzzy_blue solid
+    padding-bottom: 10px
+  .section
     .hand
       width: 14%
-      padding-top: 4px
+      border: 1px solid white
+      vertical-align: top
       img
         width: 40px
+        float: left
+        margin: 0
+        padding: 4px 0 0
     .explain
       width: 44%
+      padding: 0 10px
       h4
         color: $blue
         span
           color: #999
     .endorse
       width: 32%
+      padding: 0 10px
       ul, p
         font-size: 8px
       ul
