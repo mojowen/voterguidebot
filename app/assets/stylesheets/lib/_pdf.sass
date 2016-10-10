@@ -12,6 +12,9 @@ body
 html
   height: 100%
   width: 100%
+  line-height: 1.15
+  -ms-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%
 
 body, *
   box-sizing: border-box
@@ -31,6 +34,8 @@ h3
   font-size: 14px
   font-weight: normal
   word-break: break-word
+  margin-bottom: 0
+  padding-bottom: 0
 
 p, div
   font-size: 10px
@@ -38,13 +43,19 @@ p, div
 p
   line-height: 13px
 
+table tr td,
+p
+  white-space: normal
+
 .page
   height: $height
   width: $width
   background: white
   display: block
   position: relative
-  overflow: hidden
+  overflow: hidden !important
+  clear: both
+  white-space: nowrap
 
 .full
   position: absolute
@@ -54,33 +65,25 @@ p
   bottom: 0
 
 .content
-  top: $margin
-  left: $margin
-  right: $margin
-  bottom: $margin
-  position: absolute
-  padding: 20px 0
+  position: relative
+  margin-top: -1px
+  padding: 30px 20px
+  display: block
 
 .section
   margin: 20px 0
   position: relative
   width: 100%
   display: block
-  p
-    white-space: pre-wrap
 
 .header
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
+  position: relative
   height: $margin
   background-color: $blue
   color: white
   h2, h4
     position: absolute
-    left: $margin
-    right: $margin
+    margin-left: 20px
     white-space: nowrap
     overflow: hidden
   h2
@@ -92,7 +95,6 @@ p
     text-transform: lowercase
     font-style: italic
     top: 10px
-
 
 .footer
   position: absolute
@@ -124,6 +126,10 @@ p
   width: 100%
   td
     border: 1px solid transparent
+    vertical-align: top
+    &.cont_desc
+      vertical-align: top
+      line-height: 13px
 
 .candidate
   clear: both
@@ -316,14 +322,6 @@ p
     color: #333
 
 .measure
-  .content
-    position: relative
-    margin: 60px 20px 0
-    padding: 0
-    top: auto
-    left: auto
-    bottom: auto
-    right: auto
   td
     margin: 0
     padding: 0
@@ -346,6 +344,7 @@ p
         margin: 0
         padding: 4px 0 0
     .explain
+      vertical-align: top
       width: 44%
       padding: 0 10px
       h4
@@ -353,6 +352,7 @@ p
         span
           color: #999
     .endorse
+      vertical-align: top
       width: 32%
       padding: 0 10px
       ul, p
@@ -371,6 +371,7 @@ p
       img
         height: 20px
         margin-bottom: -4px
+
 .about-us
   .logo
     max-width: 200px
