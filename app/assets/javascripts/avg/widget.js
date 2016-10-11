@@ -46,7 +46,7 @@ function initWidget(selector) {
     })
   }
 
-  if( document.location.hash.match(RegExp(selector+'_\d+')) ) {
+  if( document.location.hash.match(RegExp(selector+'_\\d+')) ) {
     goTo(parseInt(document.location.hash.split('_').reverse()[0]))
   }
 
