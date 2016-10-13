@@ -28,10 +28,15 @@ function initWidget(selector) {
     if( active < 0 ) active = tabs - 1
     if( active >= tabs ) active = 0
 
+    container.className = container.className.replace(/widget__\d+/, 'widget__'+active)
+
     Array.prototype.forEach.call(
       container.querySelectorAll('.facts'),
       function(el) { deactivateNodeListExcept('.facts .fact', active, el) }
     )
+
+    document.location.hash = ''
+
     deactivateNodeListExcept('.footer .nav a', active)
     deactivateNodeListExcept('.titles .title', active)
   }
