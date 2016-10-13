@@ -11,6 +11,7 @@
 /tmp
 /public/assets/
 /public/system/
+/public/avg
 
 # Ignore env file
 .env
