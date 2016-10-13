@@ -1,4 +1,5 @@
 //= require when_ready.js
+//= require iframe_resizer.js
 //= require avg/sharing.js
 
 (function() {
@@ -21,10 +22,13 @@
     frame.style.minWidth = '360px'
     frame.style.maxWidth = '600px'
     frame.style.borderRadius = '3px'
+    frame.style.background = 'transparent'
 
     frame.onload = function() {
       frame.parentNode.removeChild(frame.nextElementSibling)
     }
+
+    iFrameResize({ log:false, checkOrigin:false }, frame)
 
     return frame
   }
