@@ -1,0 +1,78 @@
+.contest.national.widget__0{ id: "contest_#{contest.id}" }
+  .anchor{ id: "contest_#{contest.id}" }
+  - contest.questions.each.with_index do |question, index|
+    .anchor{ id: "contest_#{contest.id}_#{index + 1}" }
+
+  .vitals
+    %h3= contest.title
+    %p
+      %strong What They Do:
+      = contest.description
+
+  .inner
+    .header
+      %a.left{ href: '#' }
+        %i.fa.fa-angle-left
+      .titles
+        .title.active About the Candidates
+        - contest.questions.each.with_index do |question, index|
+          .title
+            .pre Do you support
+            = question.text
+
+      %a.right{ href: '#' }
+        %i.fa.fa-angle-right
+    - contest.candidates.each do |candidate|
+      .candidate
+        .inner
+          .info
+            .photo{ style: "background-image: url(#{candidate.photo})" }
+            .box
+              %p.name
+                %strong= candidate.name
+              %p.party= candidate.party
+              %p.links
+                - if candidate.website
+                  %a{ href: candidate.website, target: '_blank' }
+                    %i.fa.fa-globe
+                - if candidate.facebook
+                  %a{ href: candidate.facebook, target: '_blank' }
+                    %i.fa.fa-facebook
+                - if candidate.twitter
+                  %a{ href: candidate.twitter, target: '_blank' }
+                    %i.fa.fa-twitter
+          .facts
+            .fact.active.bio
+              %p= candidate.bio
+              - unless candidate.endorsements.empty?
+                %p
+                  %em Supported by
+                %ul
+                  - candidate.endorsements.each do |endorsement|
+                    %li= endorsement.endorser
+              .share{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/#{candidate.slug}.html", category: :contest, item: "#{candidate.name}:bio" } }
+                %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
+
+            - contest.questions.each.with_index do |question, index|
+              .fact
+                %h1.big= question.answers.find{ |answer| answer.candidate == candidate }.try(:text)
+                .share{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/#{question.slug}-#{candidate.slug}.html", category: :contest, item: "#{candidate.name}:#{question.text}" } }
+                  %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"'  }
+
+    .footer
+      .nav
+        %a.active{ href: '#' }
+        - contest.questions.each do
+          %a{ href: '#' }
+      .tools
+        %a.js-open-code-box
+          %i.fa.fa-code
+        .share-box{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/info.html", category: :contest, item: :bottom_box } }
+          %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
+      .code-box
+        %textarea{ readonly: 'readonly' }
+          <script>!function(e,t){if("undefined"==typeof e){var i=t.createElement("script");i.setAttribute("src",t.location.protocol+"//#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js"),t.head.appendChild(i)}}(window._avg,document)</script><div class="avg--embed" data-contest="#{contest.id}"></div>
+        %em Click to Copy - Paste Where You'd Like to Embed This Guide
+
+:javascript
+  initWidget("#contest_#{contest.id}")
