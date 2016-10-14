@@ -59,7 +59,7 @@
       #contests
       - guide.contests.each do |contest|
         .mui-row
-          .mui-col-md-9
+          .mui-col-md-12
             = render 'templates/avg/contest', contest: contest, preview: preview
 
     - unless guide.measures.empty?
@@ -68,37 +68,37 @@
           %h2 Statewide Ballot Measures
 
       - guide.measures.each do |measure|
-        .mui-row{ id: "measure_#{measure.id}" }
-          .mui-col-md-9.ballot_measure
+        .mui-row.ballot_measure{ id: "measure_#{measure.id}" }
+          .mui-col-md-12
             .mui-row
               %h3.mui-col-md-9= measure.title
               .sharing.mui-col-md-3{ id: "measure_sharing_#{measure.id}", data: { link: "https://#{ENV['AVG_BUCKET']}/measures/#{measure.id}-#{measure.slug}.html", category: :measure, item: "#{measure.title}:heading" } }
               :javascript
                 sharingWidget(measure_sharing_#{measure.id})
             %p= measure.description
-            .mui-col-sm-1
-              %i.fa.fa-thumbs-o-up.for
-            .mui-col-sm-11
-              %h4 A Yes Vote Means
-              %p= measure.yes_means
-              - unless measure.endorsements.for.empty?
-                %p
-                  %em Who Says Yes:
-                %ul
-                  - measure.endorsements.for.each do |endorsement|
-                    %li= endorsement.endorser
+          .mui-col-sm-12
+            %h4.for
+              %i.fa.fa-thumbs-up
+              A Yes Vote Means
+            %p= measure.yes_means
+            - unless measure.endorsements.for.empty?
+              %p
+                %strong Who Says Yes:
+              %ul
+                - measure.endorsements.for.each do |endorsement|
+                  %li= endorsement.endorser
 
-            .mui-col-sm-1
-              %i.fa.fa-thumbs-o-down.against
-            .mui-col-sm-11
-              %h4 A No Vote Means
-              %p= measure.no_means
-              - unless measure.endorsements.against.empty?
-                %p
-                  %em Who Says No:
-                %ul
-                  - measure.endorsements.against.each do |endorsement|
-                    %li= endorsement.endorser
+          .mui-col-sm-12
+            %h4.against
+              %i.fa.fa-thumbs-down
+              A No Vote Means
+            %p= measure.no_means
+            - unless measure.endorsements.against.empty?
+              %p
+                %strong Who Says No:
+              %ul
+                - measure.endorsements.against.each do |endorsement|
+                  %li= endorsement.endorser
 
 = render 'templates/avg/state_box', preview: preview
 - unless guide.field('footer_script').empty?

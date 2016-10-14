@@ -3,15 +3,25 @@ function initWidget(selector) {
       active = 0,
       tabs = container.querySelectorAll('.footer .nav a').length
 
-  container.querySelector('.left').onclick = function() {
-    goTo(active - 1)
-    return false
-  }
+  Array.prototype.forEach.call(
+    container.querySelectorAll('.right'),
+    function (el) {
+      el.onclick = function() {
+        goTo(active + 1)
+        return false
+      }
+    }
+  )
 
-  container.querySelector('.right').onclick = function() {
-    goTo(active + 1)
-    return false
-  }
+  Array.prototype.forEach.call(
+    container.querySelectorAll('.left'),
+    function (el) {
+      el.onclick = function() {
+        goTo(active - 1)
+        return false
+      }
+    }
+  )
 
   Array.prototype.forEach.call(
     container.querySelectorAll('.footer .nav a'),

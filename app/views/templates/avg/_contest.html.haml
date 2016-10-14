@@ -5,32 +5,32 @@
 
   .vitals
     %h3= contest.title
-    %p
-      %strong What They Do:
-      = contest.description
+    %h4 What They Do:
+    %p= contest.description
 
   .inner
     .header
-      %a.left{ href: '#' }
-        %i.fa.fa-angle-left
       .titles
-        .title.active About the Candidates
+        .title.active
+          %a.fa.fa-angle-left.left{ href: '#' }
+          %a.fa.fa-angle-right.right{ href: '#' }
+          About the Candidates
         - contest.questions.each.with_index do |question, index|
           .title
             .pre Do you support
+            %a.fa.fa-angle-left.left{ href: '#' }
+            %a.fa.fa-angle-right.right{ href: '#' }
             = question.text
-
-      %a.right{ href: '#' }
-        %i.fa.fa-angle-right
     - contest.candidates.each do |candidate|
       .candidate
         .inner
           .info
             .photo{ style: "background-image: url(#{candidate.photo})" }
             .box
-              %p.name
+              %h2.name
                 %strong= candidate.name
-              %p.party= candidate.party
+              %p
+                %strong.party= candidate.party
               %p.links
                 - if candidate.website
                   %a{ href: candidate.website, target: '_blank' }
@@ -45,8 +45,7 @@
             .fact.active.bio
               %p= candidate.bio
               - unless candidate.endorsements.empty?
-                %p
-                  %em Supported by
+                %p.supported Supported by
                 %ul
                   - candidate.endorsements.each do |endorsement|
                     %li= endorsement.endorser
@@ -65,8 +64,7 @@
         - contest.questions.each do
           %a{ href: '#' }
       .tools
-        %a.js-open-code-box
-          %i.fa.fa-code
+        %a.js-open-code-box.fa.fa-code
         .share-box{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/info.html", category: :contest, item: :bottom_box } }
           %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
       .code-box

@@ -1,12 +1,37 @@
 .embed
+  min-width: 280px
+  max-width: 540px
   .anchor
     margin-top: -2em
     position: absolute
   .vitals
     position: relative
     z-index: 1
-    h2
+    h3
+      font-weight: 800
+      color: $orange
+      margin: 0 0 0.25em
+      padding: 0
+    h4
+      color: $darkgray
+      text-transform: uppercase
       font-weight: bold
+      margin: 0
+      padding: 0
+      font-size: 12px
+  &.widget__0 .inner
+    margin-bottom: 18px
+    padding-top: 20px
+
+    .titles
+      background: $orange
+      text-align: center
+      font-weight: 800
+      padding-bottom: 40px
+      .left,
+      .right
+        margin-top: 30px
+
   .inner
     background: #e8ecef
     position: relative
@@ -34,80 +59,115 @@
         @include clear
       .info
         float: left
-        width: 90px
-        .box
-          background: $lightblue
-          color: white
-          font-size: 9px
-          line-height: 7px
-          padding: 4px
-          strong
-            font-weight: 600
-            font-size: 11px
-          p
-            margin-bottom: 6px
-          a
-            i
-              color: white
+        width: 220px
         .photo
-          height: 70px
+          height: 120px
           width: 90px
           background-size: cover
           background-position: center center
           background-repeat: no-repeat
+          float: left
+        .box
+          width: 120px
+          float: left
+          margin-left: 10px
+          p
+            font-size: 10px
+            text-transform: uppercase
+            font-style: italic
+            color: $darkgray
+            strong
+              font-weight: 800
+          h2
+            margin: 0
+            color: $lightblue
+            font-weight: 800
+            font-size: 20px
       .facts
         width: 100%
-        padding: 0 0 0 100px
-        font-size: 12px
+        padding: 0 0 0 230px
+        font-size: 11px
         color: $darkgray
         text-align: left
-        .bio
-          min-height: 180px
-          @include sm
-            min-height: auto
-          padding-bottom: 10px
         .fact
-          height: 30px
+          min-height: 120px
+          padding: 20px 100px 0 0
+          text-align: right
           .share
             position: absolute
-            bottom: 10px
+            bottom: -10px
             right: 10px
+          &.bio
+            min-height: 180px
+            @include sm
+              min-height: auto
+            padding: 0 0 10px 0
+            text-align: left
+            .supported
+              color: $orange
+              font-weight: 800
+              text-transform: uppercase
+            ul
+              padding-left: 20px
+              margin: -6px 0
 
     .left,
     .right
-      top: 28px
       position: absolute
       height: 44px
+      margin-top: -24px
 
-    .left,
-    .right
-      background: $orange
+      background: $darkgray
       color: white
-      padding:  0px 13px
-      font-size: 30px
+      width: 30px
+      padding: 0
+      height: 30px
+      border-radius: 30px
+      font-size: 23px
       font-weight: bold
+      text-align: center
       cursor: pointer
+      text-decoration: none
+      line-height: 27px
+      &:hover
+        background-color: $gray
     .left
-      left: 0
+      left: 10px
+      text-indent: -1px
     .right
-      right: 0
+      right: 10px
+      text-indent: 1px
 
     .titles
-      margin: -50px 12% 10px
+      margin: -32px 0 10px
       text-align: center
       color: white
-      background: $darkgray
+      background: $lightblue
       font-size: 20px
-      padding: 8px
+      padding: 30px
       .pre
-        left: 0
-        right: 0
-        border-bottom: 1px solid #9e9e9e
-        margin-bottom: 8px
-        padding-bottom: 8px
+        top: 0
+        left: 50%
+        right: 50%
+        top: 0
         text-transform: uppercase
         font-size: 14px
         font-weight: bold
+        background: $orange
+        width: 200px
+        margin: 0 0 0 -100px
+        display: block
+        padding: 14px 20px
+        text-transform: uppercase
+        position: absolute
+        border-radius: 0px 0px 50px 0px
+        &:before
+          content: ''
+          border-bottom: 30px solid transparent
+          border-left: 30px solid $orange
+          position: absolute
+          bottom: -20px
+          left: 0
 
     .title,
     .fact
@@ -121,10 +181,21 @@
     .tools,
     .share
       a
+        border: 1px solid $gray
+        padding: 4px
+        border-radius: 100%
+        width: 20px
+        height: 20px
+        font-weight: bold
+        text-align: center
         &:hover
           text-decoration: none
           color: $orange
+          border-color: $orange
         color: $gray
+        font-size: 10px
+        width: 20px
+        height: 20px
     .share
       a
         margin: 0 2px
