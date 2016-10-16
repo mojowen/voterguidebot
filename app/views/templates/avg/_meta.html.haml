@@ -13,6 +13,9 @@
 %meta{ name:"twitter:description", content: yield(:meta_description).strip }
 %meta{ name:"twitter:image", content: yield(:meta_image).strip }
 
+%meta{ name:"Description", content: content_for(:meta_description) ? yield(:meta_description).strip : "Your one stop shop for all you need for this election like what's on your ballot and where candidates, nationally and locally, stand on the issues" }
+
+
 :javascript
   var related = 'whywevote2016'
   var defaultTags = 'election 2016,2016,voting,election,whywevote'
