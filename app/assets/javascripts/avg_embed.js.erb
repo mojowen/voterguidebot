@@ -26,9 +26,8 @@
 
     frame.onload = function() {
       frame.parentNode.removeChild(frame.nextElementSibling)
+      iFrameResize({ log:false, checkOrigin:false }, frame)
     }
-
-    iFrameResize({ log:false, checkOrigin:false }, frame)
 
     return frame
   }
