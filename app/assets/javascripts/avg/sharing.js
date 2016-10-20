@@ -27,19 +27,19 @@ function sharingWidget(container, log_it) {
   email.className = "fa fa-envelope-o"
 
   facebook.onclick = function() {
-      log_share('facebook', category, name)
+      log_share('facebook', category, item)
       this.className += ' clicked'
   }
   twitter.onclick = function() {
-      log_share('twitter', category, name)
+      log_share('twitter', category, item)
       this.className += ' clicked'
   }
   tumblr.onclick = function() {
-      log_share('tumblr', category, name)
+      log_share('tumblr', category, item)
       this.className += ' clicked'
   }
   email.onclick = function() {
-      log_share('email', category, name)
+      log_share('email', category, item)
       this.className += ' clicked'
   }
 
