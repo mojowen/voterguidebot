@@ -65,8 +65,11 @@
           %a{ href: '#' }
       .tools
         %a.js-open-code-box.fa.fa-code
-        .share-box{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/info.html", category: :contest, item: :bottom_box } }
+        .share-box.active{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/info.html", category: :contest, item: :bottom_box } }
           %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
+        - contest.questions.each.with_index do |question, index|
+          .share-box{ data: { link: "https://#{ENV['AVG_BUCKET']}/contests/#{contest.id}/#{question.slug}.html", category: :contest, item: "bottom_box:#{question.text}" } }
+            %a.fa.fa-share{ onclick: 'sharingWidget(this.parentNode, true); this.style.display = "none"' }
       .code-box
         %textarea{ readonly: 'readonly' }
           <script>!function(e,t){if("undefined"==typeof e){var i=t.createElement("script");i.setAttribute("src",t.location.protocol+"//#{ ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org' }/assets/avg_embed.js"),t.head.appendChild(i)}}(window._avg,document)</script><div class="avg--embed" data-contest="#{contest.id}"></div>

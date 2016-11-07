@@ -45,10 +45,9 @@ function initWidget(selector) {
       function(el) { deactivateNodeListExcept('.facts .fact', active, el) }
     )
 
-    document.location.hash = ''
-
     deactivateNodeListExcept('.footer .nav a', active)
     deactivateNodeListExcept('.titles .title', active)
+    deactivateNodeListExcept('.tools .share-box', active)
   }
 
   function deactivateNodeListExcept(domQuery, except, elem) {
