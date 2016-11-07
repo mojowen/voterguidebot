@@ -5,13 +5,13 @@
   = question.contest.title
 
 - content_for :url do
-  contests/#{question.contest.id}/question-#{question.id}.html
+  contests/#{question.contest.id}/#{question.slug}.html
 
 - content_for :meta_description do
   There are real differences between the candidates on the issues. Learn what they are, then vote your values.
 
 - content_for :meta_image do
-  https://americanvoterguide.org/contests/#{question.contest.id}/question-#{question.id}.png
+  https://americanvoterguide.org/contests/#{question.contest.id}/#{question.slug}.png
 
 %h2.ask Do You Support
 %h3{ class: question.text.length > 80 ? 'long' : '' }= question.text

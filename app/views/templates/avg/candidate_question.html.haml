@@ -5,7 +5,7 @@
   = candidate.name
 
 - content_for :url do
-  contests/#{candidate.contest.id}/candidate-#{candidate.id}-#{question.id}.html
+  contests/#{candidate.contest.id}/#{question.slug}-#{candidate.slug}.html
 
 - content_for :meta_description do
   This election will decide the fate of issues you care about. Learn where the candidates stand.

@@ -5,7 +5,7 @@
   = candidate.name
 
 - content_for :url do
-  contests/#{candidate.contest.id}/candidate-#{candidate.id}.html
+  contests/#{candidate.contest.id}/#{candidate.slug}.html
 
 - content_for :meta_description do
   The supporters of the candidates this election could not be more different. Learn who they are. Then vote.
