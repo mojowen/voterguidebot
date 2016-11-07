@@ -44,9 +44,9 @@ class User < ActiveRecord::Base
 
     user.guides << guide
     return user unless user.valid?
+    user.save
 
     UserMailer.invite(user, guide, invitee).deliver_later
-    user.save
     user
   end
 end
