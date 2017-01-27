@@ -155,8 +155,8 @@ describe('Contest', function() {
       this.add_question = this.component.refs.questions.refs.add_question
       Utils.Simulate.click(this.dom.querySelectorAll('a.mui-btn--accent i.fa-plus-circle')[1])
     })
-
-    it('creates a select for template questions', function() {
+    // NOTE: Re-enable if question suggestions is re-enabled
+    xit('creates a select for template questions', function() {
       var tags = this.dom.querySelectorAll('.add--question select optgroup')
       expect(tags[0].label).toEqual(this.template_questions[0].tag)
       expect(tags[1].label).toEqual(this.template_questions[1].tag)
@@ -165,15 +165,21 @@ describe('Contest', function() {
       expect(sample_qs[1].innerText).toEqual('Do you support '+this.template_questions[0].text)
       expect(sample_qs[2].innerText).toEqual('Do you support '+this.template_questions[1].text)
     })
-
-    it('selects a template question and creaets a new question', function() {
+    // NOTE: Re-enable if question suggestions is re-enabled
+    xit('selects a template question and creates a new question', function() {
       this.dom.querySelector('.mui-select select').value = this.template_questions[0].text
       Utils.Simulate.change(this.dom.querySelector('.mui-select select'))
 
       expect(this.component.state.questions[0].text).toEqual(this.template_questions[0].text)
     })
-    it('selects blank question adds new blank question', function() {
+    // NOTE: Re-enable if question suggestions is re-enabled
+    xit('selects blank question adds new blank question', function() {
       Utils.Simulate.click(this.dom.querySelector('a.mui-btn--primary i.fa-plus-circle'))
+
+      expect(this.component.state.questions[0].text).toEqual()
+    })
+    // NOTE: Remove if question suggestions is re-enabled
+    it('opens a new blank question', function() {
 
       expect(this.component.state.questions[0].text).toEqual()
     })

@@ -13,12 +13,14 @@ var AddQuestion = React.createClass({
   },
   handleAddQuestionStart: function(event) {
     this.setState({ picking: true })
+     // NOTE: Remove to re-enable question selection
+    this.handleAddBlank()
     event.preventDefault()
   },
   handleAddBlank: function(event) {
     this.props.handleAdd(this.newObject('question'))
     this.setState({ picking: false })
-    event.preventDefault()
+    if( !!event ) event.preventDefault()
   },
   handleAddSelected: function(event) {
     var selected_question = _.find(this.template('questions.samples', []),
