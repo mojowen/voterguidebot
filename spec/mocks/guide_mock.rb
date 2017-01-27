@@ -5,19 +5,19 @@ class GuideMock < ActiveMocker::Base
   #_class_methods.erb
   class << self
     def attributes
-      @attributes ||= HashWithIndifferentAccess.new(id: nil, name: nil, created_at: nil, updated_at: nil, election_date: nil, template_name: "default", published_version: "unpublished", published_at: nil).merge(super)
+      @attributes ||= HashWithIndifferentAccess.new(id: nil, name: nil, created_at: nil, updated_at: nil, election_date: nil, template_name: "default", published_version: "unpublished", published_at: nil, active: true).merge(super)
     end
 
     def types
-      @types ||= ActiveMocker::HashProcess.new({ id: Integer, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date, template_name: String, published_version: String, published_at: DateTime }, method(:build_type)).merge(super)
+      @types ||= ActiveMocker::HashProcess.new({ id: Integer, name: String, created_at: DateTime, updated_at: DateTime, election_date: Date, template_name: String, published_version: String, published_at: DateTime, active: Axiom::Types::Boolean }, method(:build_type)).merge(super)
     end
 
     def associations
-      @associations ||= { location: nil, audits: nil, associated_audits: nil, permissions: nil, users: nil, contests: nil, measures: nil, languages: nil, uploads: nil, fields: nil }.merge(super)
+      @associations ||= { location: nil, audits: nil, associated_audits: nil, permissions: nil, export_guides: nil, users: nil, contests: nil, measures: nil, languages: nil, uploads: nil, fields: nil }.merge(super)
     end
 
     def associations_by_class
-      @associations_by_class ||= { "Location" => { has_one: [:location] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Measure" => { has_many: [:measures] }, "Language" => { has_many: [:languages] }, "Upload" => { has_many: [:uploads] }, "Field" => { has_many: [:fields] } }.merge(super)
+      @associations_by_class ||= { "Location" => { has_one: [:location] }, "Audited::Adapters::ActiveRecord::Audit" => { has_many: [:audits, :associated_audits] }, "Permission" => { has_many: [:permissions] }, "ExportGuide" => { has_many: [:export_guides] }, "User" => { has_many: [:users] }, "Contest" => { has_many: [:contests] }, "Measure" => { has_many: [:measures] }, "Language" => { has_many: [:languages] }, "Upload" => { has_many: [:uploads] }, "Field" => { has_many: [:fields] } }.merge(super)
     end
 
     def mocked_class
@@ -108,6 +108,14 @@ class GuideMock < ActiveMocker::Base
     write_attribute(:published_at, val)
   end
 
+  def active
+    read_attribute(:active)
+  end
+
+  def active=(val)
+    write_attribute(:active, val)
+  end
+
   # _associations.erb
   # has_one
   def location
@@ -163,6 +171,16 @@ class GuideMock < ActiveMocker::Base
 
   def permissions=(val)
     write_association(:permissions, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("Permission"), source: ""))
+  end
+
+  def export_guides
+    read_association(:export_guides, lambda do
+      ActiveMocker::HasMany.new([], foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("ExportGuide"), source: "")
+    end)
+  end
+
+  def export_guides=(val)
+    write_association(:export_guides, ActiveMocker::HasMany.new(val, foreign_key: "guide_id", foreign_id: self.id, relation_class: classes("ExportGuide"), source: ""))
   end
 
   def users
@@ -251,6 +269,10 @@ class GuideMock < ActiveMocker::Base
 
   def field(template_name)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [template_name])
+  end
+
+  def finished_field_values
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
   def full_clone

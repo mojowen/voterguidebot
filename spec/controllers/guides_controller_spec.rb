@@ -197,6 +197,18 @@ RSpec.describe GuidesController, active_mocker: true do
       end
     end
 
+    describe '#destroy' do
+      before(:each) { delete :destroy, { id: guide.id } }
+
+      it 'archives a guide' do
+        expect(guide.reload.active).to be(false)
+      end
+
+      it 'redirects to root path' do
+        expect(response).to redirect_to root_path(locale: :en)
+      end
+    end
+
     describe '#publish' do
       it 'sets the guide published_version to publishing' do
         post :publish, { id: guide.id }

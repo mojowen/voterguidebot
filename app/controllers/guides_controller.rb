@@ -47,6 +47,11 @@ class GuidesController < ApplicationController
     render **@guide.template.render.update( locals: { guide: @guide, preview: true } )
   end
 
+  def destroy
+    @guide.update_attributes active: false
+    redirect_to request.referer || root_path, notice: "#{@guide.name} is 🚮"
+  end
+
   def publish
     @guide.start_publishing
     redirect_to request.referer || guide_path(@guide), notice: 'Guide queued for publishing'

@@ -26,6 +26,7 @@
           %th Contests
           %th Measures
           %th Location
+          %th
       %tbody
       - current_user.guides.each do |guide|
         %tr
@@ -63,3 +64,6 @@
           %td
             .mui--pull-left.mui--text-left
               = render partial: 'layouts/location', locals: { location: guide.location }
+          %td
+            = button_link_to guide_path(guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
+              %i.fa-trash-o.fa

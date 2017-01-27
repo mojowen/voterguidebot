@@ -170,4 +170,12 @@ class ExportGuideMock < ActiveMocker::Base
     @attribute_aliases ||= {}.merge(super)
   end
 
+  def fail!
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
+  def is_failed?
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
 end

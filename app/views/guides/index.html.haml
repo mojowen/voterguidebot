@@ -21,8 +21,9 @@
           %th
           %th
           %th
+          %th
       %tbody
-      - Guide.all.each do |guide|
+      - Guide.where(active: true).each do |guide|
         - next if guide.users.include? current_user
         %tr
           %td.guide
@@ -67,3 +68,6 @@
             - if guide.is_published?
               = button_link_to guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary do
                 %i.fa-file-pdf-o.fa
+          %td
+            = button_link_to guide_path(guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
+              %i.fa-trash-o.fa

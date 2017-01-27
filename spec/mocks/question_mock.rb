@@ -221,4 +221,8 @@ class QuestionMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [attributes])
   end
 
+  def slug
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
 end

@@ -230,6 +230,10 @@ class MeasureMock < ActiveMocker::Base
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
   end
 
+  def slug
+    call_mock_method(method: __method__, caller: Kernel.caller, arguments: [])
+  end
+
   def template(*args, &block)
     call_mock_method(method: __method__, caller: Kernel.caller, arguments: [args, block])
   end

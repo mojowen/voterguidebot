@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :permissions
-  has_many :guides, through: :permissions
+  has_many :guides, -> { where(active: true) }, through: :permissions
   has_many :exports
 
   def self.from_omniauth(access_token)

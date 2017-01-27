@@ -12,6 +12,12 @@ RSpec.describe User, active_mocker: true do
         expect(subject.can_edit?(guide)).to be_truthy
       end
     end
+    context 'when guide is inactive' do
+      it 'returns false' do
+        guide.update_attributes active: false
+        expect(subject.can_edit?(guide)).to be_falsey
+      end
+    end
     context 'when user does not have permission' do
       it 'returns false' do
         expect(subject.can_edit?(guide)).to be_falsey
