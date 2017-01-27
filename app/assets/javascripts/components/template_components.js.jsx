@@ -54,16 +54,20 @@ var ContestType = React.createClass({
 })
 
 
-var SelectImages = React.createClass({
+var FooterImage = React.createClass({
   getDefaultProps: function() {
-    return { img: 'feds' }
+    return { img: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg' }
   },
   render: function() {
-    var images = {
-      feds: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg',
-      hands: 'https://s3-us-west-2.amazonaws.com/voterguides/hands.jpg',
-      dcorps:  'https://s3-us-west-2.amazonaws.com/voterguides/democracycorpsregistration.jpg'
+    var style = {
+      width: '100%',
+      height: '120px',
+      backgroundColor: 'transparent',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundImage: 'url('+this.props.img+')'
     }
-    return <img src={images[this.props.img]} style={{ width: '200px'}} />
+    return <div style={style} ></div>
   }
 })

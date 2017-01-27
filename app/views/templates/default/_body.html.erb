@@ -24,7 +24,7 @@
       <%= image_tag guide.field('about_us_logo'), class: 'logo' %>
     </div>
   </div>
-  <div class="footer <%= guide.field('about_us_page_footer') %>" ></div>
+  <div class="footer" style="background-image: url(<%= guide.field('about_us_page_footer_img') %>)" ></div>
 </div>
 
 <% guide.contests.each do |contest| %>
