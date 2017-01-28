@@ -26,6 +26,7 @@ gem 'paperclip', '~> 5.0.0.beta1'
 gem 'aws-sdk'
 
 gem 'delayed_job_active_record'
+gem 'workless'
 
 gem 'devise', '< 3.5.6'
 gem 'omniauth-google-oauth2'
