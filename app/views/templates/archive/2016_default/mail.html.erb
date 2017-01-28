@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    <%= to_asset_string('mail.css') %>
+  </style>
+  <%= render guide.template.template_file_path('header'), guide: guide, preview: preview %>
+</head>
+<body>
+  <%= render guide.template.template_file_path('body'), guide: guide, preview: preview %>
+</body>
+</html>

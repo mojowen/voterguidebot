@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" >
+  <url>
+    <loc>https://americanvoterguide.org/</loc>
+    <image:image>
+       <image:loc>https://americanvoterguide.org/assets/homepage_og.png</image:loc>
+       <image:caption>Election Day is Nov. 8th. Here's everything you need to vote, including where people running for office stand on issues you care about the most.</image:caption>
+    </image:image>
+  </url>
+
+<% Location::STATES.each do |state_abv, state| %>
+  <url>
+    <loc>https://americanvoterguide.org/<%= Location.to_slug(state) %></loc>
+    <image:image>
+       <image:loc>https://americanvoterguide.org/<%= Location.to_slug(state) %>/share.png</image:loc>
+       <image:caption>On Nov. 8 we're not just electing a President. Learn more about the candidates in <%= state %> and where they stand on the issues you care about.</image:caption>
+    </image:image>
+  </url>
+<% end %>
+</urlset>

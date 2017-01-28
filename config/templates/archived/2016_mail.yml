@@ -13,4 +13,4 @@ render_options:
   width: 6.25in
   margin: 0.125in
 
-inherits: 2016_default
+inherits: archived/2016_default

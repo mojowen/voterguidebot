@@ -1,0 +1,5 @@
+<% if candidate.photo %>
+  <div style="background-image: url('<%= candidate.photo %>')" class="img"></div>
+<% else %>
+  <div style="background-image: url('<%= asset_url 'unknown.png' %>')" class="img"></div>
+<% end %>

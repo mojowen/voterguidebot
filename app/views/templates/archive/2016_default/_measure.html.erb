@@ -1,0 +1,69 @@
+<div class="page measure" id="measure-<%= measure.id %>">
+  <div class="header">
+    <h4>ballot measures</h4>
+    <h2><%= measure.title %></h2>
+  </div>
+  <div class="content">
+    <table class="measure">
+      <tbody>
+        <tr>
+          <td>
+            <h3 style="margin-top: 6px">What it Does</h3>
+          </td>
+        </tr>
+        <tr>
+          <td class="desc hr">
+            <p><%= measure.description %></p>
+          </td>
+        </tr>
+        <tr class="section hr">
+          <td class="hand">
+            <img src="data:image/png;base64,<%= to_asset_string('up.png') %>">
+          </td>
+          <td class="explain">
+            <h4>A <span>Yes</span> Vote Means...</h4>
+            <p><%= measure.yes_means %></p>
+          </td>
+          <td class="endorse">
+            <% unless measure.endorsements.against.empty? %>
+              <p>who says YES...</p>
+              <ul>
+                <% measure.endorsements.for.each do |endorsement| %>
+                  <li><%= endorsement.endorser %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </td>
+        </tr>
+        <tr class="section hr">
+          <td class="hand">
+            <img src="data:image/png;base64,<%= to_asset_string('down.png') %>">
+          </td>
+          <td class="explain">
+            <h4>A <span>No</span> Vote Means...</h4>
+            <p><%= measure.no_means %></p>
+          </td>
+          <td class="endorse">
+            <% unless measure.endorsements.against.empty? %>
+              <p>who says NO...</p>
+              <ul>
+                <% measure.endorsements.against.each do |endorsement| %>
+                  <li><%= endorsement.endorser %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </td>
+        </tr>
+        <%- if measure.stance %>
+          <tr>
+            <td class="section recommended">
+              <h3>Recommended:</h3>
+              <span class="recommendation"><%= measure.stance == 'against' ? 'No' : 'Yes' %></span>
+              <img src="data:image/png;base64,<%= to_asset_string((measure.stance == 'against' ? 'down' : 'up')+'.png') %>">
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
