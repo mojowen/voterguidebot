@@ -1,4 +1,5 @@
 var ContestDetails = React.createClass({
+  mixins: [Template],
   getDefaultProps: function() {
     return { title: '',
              description: '',
@@ -15,14 +16,16 @@ var ContestDetails = React.createClass({
                       placeholder="Mayor of Gotham City"
                       ref='title'
                       value={ this.props.title }
-                      onChange={ this.handleChange } />
+                      onChange={ this.handleChange }
+                      limit={this.template('contests.title.limit')} />
       <InputComponent name="description"
                       element="textarea"
                       ref='description'
                       label="Description"
                       placeholder="Responsible for running the city of Gotham - avoiding capture, etc."
                       value={ this.props.description }
-                      onChange={ this.handleChange } />
+                      onChange={ this.handleChange }
+                      limit={this.template('contests.description.limit')} />
     </div>
   }
 })

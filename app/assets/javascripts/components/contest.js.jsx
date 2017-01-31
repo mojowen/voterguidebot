@@ -30,6 +30,7 @@ var Contest = React.createClass({
       <ContestDetails ref="details"
                       title={this.state.title}
                       description={this.state.description}
+                      template={this.props.template}
                       handleChange={this.handleChange} />
       <Candidates ref="candidates"
                   candidates={this.state.candidates}

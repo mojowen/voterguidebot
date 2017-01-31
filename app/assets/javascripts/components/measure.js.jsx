@@ -68,15 +68,8 @@ var Measure = React.createClass({
                           label="Description of Measure"
                           placeholder="This will finally legalize..."
                           value={ this.state.description }
-                          onChange={ this.onChange } />
-      </div>
-      <div className="mui-row">
-        <Taggable tags={this.state.tags}
-                  id={this.props.id}
-                  tagged_type='Ballot Measure'
-                  available_tags={this.template('tags', [])}
-                  removeTag={this.removeTag}
-                  addTag={this.addTag} />
+                          onChange={ this.onChange }
+                          limit={this.template('measures.description.limit')}/>
       </div>
       <div className="mui-row mui-panel for--block">
         <h4>In Favor</h4>
@@ -86,7 +79,8 @@ var Measure = React.createClass({
                         placeholder="Everything changes!"
                         element="textarea"
                         value={this.state.yes_means}
-                        onChange={this.onChange} />
+                        onChange={this.onChange}
+                        limit={this.template('measures.argument.limit')} />
         <Endorsements ref="yes_endorsements"
                       className="mui-col-md-5"
                       template={this.props.template}
@@ -94,6 +88,8 @@ var Measure = React.createClass({
                       handleChange={this.handleChange}
                       endorsed_type='measure'
                       endorsed_id={this.props.id}
+                      limit={this.template('measures.endorsements.limit')}
+                      max={this.template('measures.endorsements.max', 3)}
                       stance="for" />
         { this.recommender('for') }
       </div>
@@ -105,7 +101,8 @@ var Measure = React.createClass({
                         placeholder="Everything stays the same!"
                         element="textarea"
                         value={this.state.no_means}
-                        onChange={this.onChange} />
+                        onChange={this.onChange}
+                        limit={this.template('measures.argument.limit')} />
         <Endorsements ref="no_endorsements"
                       className="mui-col-md-5"
                       template={this.props.template}
@@ -113,6 +110,8 @@ var Measure = React.createClass({
                       handleChange={this.handleChange}
                       endorsed_type='measure'
                       endorsed_id={this.props.id}
+                      limit={this.template('measures.endorsements.limit')}
+                      max={this.template('measures.endorsements.max', 3)}
                       stance="against" />
         { this.recommender('against') }
       </div>

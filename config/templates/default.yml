@@ -18,6 +18,12 @@ render_options:
 
 contests:
   partial: contest_large
+
+  title:
+    limit: 100
+  description:
+    limit: 75
+
   per_page:
     key: contest_layout
     values:
@@ -26,14 +32,27 @@ contests:
 
 candidates:
   max: 4
+  name:
+    limit: 50
+  party:
+    limit: 25
+  bio:
+    limit: 75
+  supporters:
+    limit: 35
+    max: 3
 
 measures:
   per_page: 1
   title:
-    limit: 104
-
-endorsements:
-  max: 3
+    limit: 60
+  description:
+    limit: 105
+  argument:
+    limit: 170
+  endorsements:
+    limit: 35
+    max: 3
 
 questions:
   max: 7
@@ -47,7 +66,7 @@ fields:
     element: input
     example: 2016 Chicago Voter Guide
     example_elem: h1
-    limit: 40
+    limit: 22
     name: title_page_header
   -
     label: Title Page Subheader
@@ -70,7 +89,7 @@ fields:
     placeholder: A note about your organization and what you do
     example: New Era Colorado Action Fund is a local non-partisan, non-profit organization reinventing politics for our generation through innovative social and political action. We inspire young Coloradans to move our state forward, engaging our generation in our city- and state-level democracy. New Era Colorado Action Fund is a 501(c)4 non-profit organization. You can learn more or sign up to volunteer at NewEraColoradoAction.org.
     element: textarea
-    limit: 320
+    limit: 302
     name: about_us_blurb
   -
     label: Logo

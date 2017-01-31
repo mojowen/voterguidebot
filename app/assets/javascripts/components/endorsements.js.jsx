@@ -5,6 +5,8 @@ var Endorsements = React.createClass({
              stance: 'for',
              endorsed_id: false,
              endorsment_type: 'false',
+             limit: null,
+             max: 3,
              className: '',
              handleChange: function() { } }
   },
@@ -15,7 +17,7 @@ var Endorsements = React.createClass({
   },
   addEndorsement: function(event) {
     var endorsements = this.props.endorsements
-    if( this.qualifyingEndorsements().length < this.template('endorsements.max', 3) ) {
+    if( this.qualifyingEndorsements().length < this.props.max ) {
       endorsements.push({
         endorser: '',
         endorsed_type: this.props.endorsed_type,
@@ -56,12 +58,13 @@ var Endorsements = React.createClass({
                                   name={'endorsement_'+index}
                                   data-index={index}
                                   onChange={this.handleChange}
-                                  after={after} />
+                                  after={after}
+                                  limit={this.props.limit} />
                  </li>
         }, this),
         addEndorsement = ''
 
-    if( this.qualifyingEndorsements().length < this.template('endorsements.max', 3) ) {
+    if( this.qualifyingEndorsements().length < parseInt(this.props.max) ) {
       addEndorsement = <a className="add--endorsements"
                           onClick={this.addEndorsement}>
                           <i className="fa fa-plus-square" /></a>
