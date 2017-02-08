@@ -3,7 +3,7 @@ name: Great American Voter Guide National
 view: national
 folder: avg
 layout: avg
-publisher_class: National
+publisher_class: Innactive
 publisher_resource: nil
 publisher_type: web
 
