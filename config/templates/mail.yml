@@ -3,7 +3,7 @@ name: Mail Voter Guide
 
 screenshot: mail.png
 view: mail
-folder: default
+folder: archive/2016_default
 
 available_pages: 10
 filler_pages: 4
