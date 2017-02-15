@@ -84,12 +84,26 @@ describe('Candidate', function() {
   })
 
   it('initializes photo', function() {
-    expect(this.dom.querySelector('img').getAttribute('src')).toEqual(this.props.photo)
+    expect(this.dom.querySelector('div.img').style.backgroundImage).toMatch(this.props.photo)
   })
   it('handles change to photo', function() {
     this.component.handleChange({ target: { name: 'photo', value: '/new/photo' } })
     expect(this.component.props.handleChange).toHaveBeenCalledWith(
       'candidates', [_.defaults(this.candidate, { photo: '/new/photo' })])
+  })
+  it('hold open disables button to close', function() {
+    this.component.holdOpen()
+    expect(this.component.state.disable_close).toEqual(true)
+    expect(this.dom.querySelector('button').getAttribute('disabled')).toEqual('')
+  })
+  it('release hold on handleUpload', function() {
+    var event = { target: { name: 'photo', value: '/new/photo' } }
+    this.component.setState({ disable_close: true })
+    spyOn(this.component, 'handleChange')
+    this.component.handleUpload(event)
+    expect(this.component.state.disable_close).toEqual(false)
+    expect(this.dom.querySelector('button').getAttribute('disabled')).toEqual(null)
+    expect(this.component.handleChange).toHaveBeenCalledWith(event)
   })
 
   it('handles adding endorsers', function() {

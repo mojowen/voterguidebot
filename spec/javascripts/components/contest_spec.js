@@ -44,7 +44,7 @@ describe('Contest', function() {
     })
 
     it('updates when changed', function() {
-      Utils.Simulate.click(this.dom.querySelector('.candidate--form a'))
+      Utils.Simulate.click(this.dom.querySelector('.candidate--form button'))
       this.dom.querySelector('.candidate--form [name=name]').value = 'Seth Rogan'
       Utils.Simulate.change(this.dom.querySelector('.candidate--form [name=name]'))
       expect(this.component.state.candidates[0].name).toEqual('Seth Rogan')

@@ -4,16 +4,22 @@ var ImageComponent = React.createClass({
       name: '',
       maxFiles: 1,
       onChange: function() { return true },
+      onStart: function() { return true },
       preview: false,
       value: null
     }
   },
   getInitialState: function() {
-    return { value: this.props.value }
+    return { value: this.props.value,
+             previousValue: null }
   },
-  handleError: function() {
-    alert('Somethings gone wrong')
-    this.handleChange(null)
+  handleError: function(file) {
+    var message = JSON.parse(file.xhr.response).error || 'Could not save that image'
+    swal({ title: 'Uh Oh!', text: message })
+
+    this.handleChange(this.state.previousValue)
+    this.setState({ value: this.state.previousValue,
+                    previousValue: null })
   },
   handleThumbnail: function(file, dataURL) {
     this.setState({ value: dataURL })
@@ -26,8 +32,18 @@ var ImageComponent = React.createClass({
     this.setState({ value: url })
   },
   handleClear: function(event) {
-    this.handleChange(null)
+    vgConfirm('Are you sure you want to remove this image?', function(confirmed) {
+      if( !confirmed ) return
+
+      this.handleChange(null)
+      this.setState({ value: null })
+    }, this)
+
     event.preventDefault()
+  },
+  handleStart: function(event) {
+    this.setState({ previousValue: this.state.value })
+    this.props.onStart()
   },
   pathname: function() {
     return document.location.pathname.toString()
@@ -54,21 +70,22 @@ var ImageComponent = React.createClass({
     this.dropzone.on('thumbnail', this.handleThumbnail)
     this.dropzone.on('success', this.handleSuccess)
     this.dropzone.on('error', this.handleError)
+    this.dropzone.on('addedfile', this.handleStart)
   },
   render: function() {
     var preview =  '',
         clear = ''
-    if( this.props.preview && this.state.value ) {
-      preview = <img src={this.state.value} />
-    }
 
+    if( this.props.preview && this.state.value ) {
+      preview = <div style={{ backgroundImage: "url("+this.state.value+")" }}
+                     className="img profile"></div>
+    }
     if( this.state.value ) {
       var text = this.props.preview ? '' : ' Clear Image'
       clear = <a href="#" className='remove' onClick={this.handleClear}>
                 <i className="fa fa-times" />{ text }
               </a>
     }
-
     return <div ref="dropzone" className='drop--zone image--field'>
       { clear }
       { preview }

@@ -27,5 +27,9 @@ RSpec.describe UploadsController, active_mocker: true do
       post :create, upload_params
       expect(response).to be_success
     end
+    it 'returns success' do
+      post :create, upload_params
+      expect(response).to be_success
+    end
   end
 end

@@ -25,7 +25,6 @@ describe('ImageComponent', function() {
         preview: true,
         onChange: function() { }
       }
-
       spyOn(this.props, 'onChange')
       this.setUpComponent(ImageComponent, this.props)
       this.dropzone = this.component.dropzone
@@ -33,11 +32,13 @@ describe('ImageComponent', function() {
 
     it('loads image', function() {
       expect(this.component.state.value).toEqual(transparentGif)
-      expect(this.dom.querySelector('img').src).toEqual(transparentGif)
+      swalSpy.confirmLast(true)
+      expect(this.dom.querySelector('div.img').style.backgroundImage).toMatch(transparentGif)
     })
 
     it('can clear the current image', function() {
       this.component.handleClear({ preventDefault: function() {} })
+      swalSpy.confirmLast(true)
       expect(this.component.state.value).toEqual(null)
       expect(this.props.onChange).toHaveBeenCalledWith({ target: { value: null, name: ''}})
     })
@@ -45,21 +46,29 @@ describe('ImageComponent', function() {
 
   describe('with a callback', function() {
     beforeEach(function() {
-      this.callback = function() {}
-      spyOn(this, 'callback')
-      this.setUpComponent(ImageComponent, { onChange: this.callback })
+      this.onChange = function() {}
+      spyOn(this, 'onChange')
+      this.onStart = function() {}
+      spyOn(this, 'onStart')
+      this.setUpComponent(ImageComponent, { onChange: this.onChange,
+                                            onStart: this.onStart })
       this.dropzone = this.component.dropzone
     })
 
     it('does not propagate values with thumbnail', function() {
       this.dropzone._callbacks.thumbnail[1].call(this.dropzone, fakeFile, transparentGif)
-      expect(this.callback).not.toHaveBeenCalled()
+      expect(this.onChange).not.toHaveBeenCalled()
     })
 
     it('does propagate values with thumbnail', function() {
       var fake_response = { xhr: { response: '{"path":"some-remote"}' }}
       this.dropzone._callbacks.success[1].call(this.dropzone, fake_response)
-      expect(this.callback).toHaveBeenCalledWith({ target: { value: "some-remote", name: '' } })
+      expect(this.onChange).toHaveBeenCalledWith({ target: { value: "some-remote", name: '' } })
+    })
+
+    it('calls onStart when the process begins', function() {
+      this.dropzone._callbacks.addedfile[1].call(this.dropzone)
+      expect(this.onStart).toHaveBeenCalled()
     })
   })
 
@@ -75,6 +84,32 @@ describe('ImageComponent', function() {
 
     it('propagates values with an onChange', function() {
       expect(this.dropzone.options.url).toEqual('/uploads?guide_id=5')
+    })
+  })
+
+  describe('with a failed response', function() {
+    beforeEach(function() {
+      this.setUpComponent(ImageComponent, {})
+      this.dropzone = this.component.dropzone
+      this.component.setState({ value: 'yaba-daba-do' })
+
+      this.error_message = "some-error"
+      this.fake_response = { xhr: { response: JSON.stringify({ error: this.error_message }) }}
+    })
+
+    it('reverts value to null if not set', function() {
+      this.dropzone._callbacks.error[1].call(this.dropzone, this.fake_response)
+      expect(this.component.state.value).toEqual(null)
+    })
+    it('reverts to previousValue if set', function() {
+      var old_value = 'meet-the-flintstones'
+      this.component.setState({ previousValue: old_value })
+      this.dropzone._callbacks.error[1].call(this.dropzone, this.fake_response)
+      expect(this.component.state.value).toEqual(old_value)
+    })
+    it('notifies the user', function() {
+      this.dropzone._callbacks.error[1].call(this.dropzone, this.fake_response)
+      expect(swalSpy).toHaveBeenCalledWith({ title: 'Uh Oh!', text: this.error_message })
     })
   })
 })

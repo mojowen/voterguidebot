@@ -8,6 +8,7 @@ var Candidate = React.createClass({
              id: '',
              endorsements: [],
              start_open: false,
+             disable_close: false,
              candidates: [],
              handleChange: function() {} }
   },
@@ -52,6 +53,13 @@ var Candidate = React.createClass({
     this.setState({ open: !this.state.open })
     event.preventDefault()
   },
+  holdOpen: function() {
+    this.setState({ disable_close: true })
+  },
+  handleUpload: function(event) {
+    this.handleChange(event)
+    this.setState({ disable_close: false })
+  },
   render: function() {
     var candidateClassNames = ['candidate--form',
                                'mui-col-md-5',
@@ -74,7 +82,8 @@ var Candidate = React.createClass({
                             value={this.props.photo}
                             name="photo"
                             preview={true}
-                            onChange={this.handleChange} />
+                            onStart={this.holdOpen}
+                            onChange={this.handleUpload} />
             <InputComponent label="Party"
                             placeholder="Working Families Party"
                             value={this.props.party}
@@ -109,10 +118,14 @@ var Candidate = React.createClass({
                           limit={this.template('candidates.supporters.limit')}
                           limit={this.template('candidates.supporters.max')} />
           </div>
+      if( this.state.disable_close ) {
+        icon = 'save fa-pulse',
+        button = ' Saving'
+      }
     } else {
-        guts = <SmallCandidate {...this.props} />
-        icon = 'pencil',
-        button = 'Edit'
+      guts = <SmallCandidate {...this.props} />
+      icon = 'pencil',
+      button = 'Edit'
     }
 
     return <div className={candidateClassNames.join(' ')} {...this.draggable_props()} >
@@ -120,12 +133,12 @@ var Candidate = React.createClass({
       { this.draggable() }
       { guts }
       <div className="edit--wrap">
-        <a href="#"
-           className="mui-btn mui-btn--small mui-btn--primary"
+        <button className="mui-btn mui-btn--small mui-btn--primary"
+           disabled={this.state.disable_close}
            onClick={this.openCandidate} >
             <i className={"fa fa-"+icon} />
             { button }
-        </a>
+        </button>
       </div>
     </div>
   }
