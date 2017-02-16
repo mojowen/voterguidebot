@@ -14,6 +14,7 @@ module Publisher
       collect_assets
       sync_assets
       clean_assets
+      invalidate_assets
     end
 
     private
@@ -26,11 +27,17 @@ module Publisher
       make_subpages Rails.root.join(*%w{public avg *.html})
     end
 
+    def invalidate_assets
+      cloudfront.invalidate!
+    end
+
     def move_files(files, dest)
       Dir[files].each do |file|
         filename = File.basename(file)
         next if filename.include? '.gz'
         FileUtils.cp file, Rails.root.join(dest, filename.gsub(/\-.+\./, '.'))
+
+        cloudfront.add_path("/assets/#{file}")
       end
     end
 
@@ -41,6 +48,8 @@ module Publisher
         dir_path = Rails.root.join(root_path, filename.split('.html').first)
         FileUtils.mkdir dir_path
         FileUtils.cp subpage, Rails.root.join(dir_path, 'index.html')
+
+        cloudfront.add_path("/#{subpage}/index.html")
       end
     end
 
@@ -97,6 +106,8 @@ module Publisher
           measure: measure, anchor: "measure_#{measure.id}"
         )
       end
+
+      cloudfront.add_path("/measures/#{measure.id}-#{measure.slug}.*")
     end
 
     def render_contest(contest)
@@ -136,6 +147,8 @@ module Publisher
           candidate: candidate, anchor: "contest_#{contest.id}"
         )
       end
+
+      cloudfront.add_path("/contests/#{contest.id}/*")
     end
 
     def sync_assets
@@ -154,8 +167,15 @@ module Publisher
       ENV['AVG_BUCKET'] || 'preview.americanvoterguide.org'
     end
 
+    def cloudfront
+      @cloudfront ||= CloudfrontWrapper.new(
+        ENV['AVG_DISTRIBUTION'],
+        guide.version
+      )
+    end
+
     def base_path
-      @base_path ||= Rails.root.join('tmp', 'renders', Time.now.getutc.to_i.to_s)
+      @base_path ||= Rails.root.join('tmp', 'renders', "avg_#{Time.now.getutc.to_i}")
     end
 
     def root_path

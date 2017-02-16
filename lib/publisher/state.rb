@@ -2,7 +2,7 @@ module Publisher
   class State < AVG
 
     def resource
-      "http://#{bucket}/#{guide.location.state_slug}"
+      "http://#{bucket}/#{slug}"
     end
 
     private
@@ -14,18 +14,25 @@ module Publisher
       render_contests
       render_measures
       sync_assets
+      invalidate_assets
     end
 
     def render_state
       render_static Rails.root.join(state_path, "index.html").to_s
+      cloudfront.add_path("/#{slug}/index.html")
     end
 
     def state_path
-      Rails.root.join(root_path, guide.location.state_slug)
+      Rails.root.join(root_path, slug)
     end
 
     def render_share_image
       render_image Rails.root.join(state_path, "share").to_s, 'state_img', guide: guide
+      cloudfront.add_path("/#{slug}/share.png")
+    end
+
+    def slug
+      @slug ||= guide.location.state_slug
     end
   end
 end

@@ -12,10 +12,12 @@ module Publisher
       render_index
       render_contests
       sync_assets
+      invalidate_assets
     end
 
     def render_index
       render_static 'index.html'
+      cloudfront.add_path("/index.html")
     end
   end
 end
