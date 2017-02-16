@@ -11,18 +11,22 @@ var ImageComponent = React.createClass({
   },
   getInitialState: function() {
     return { value: this.props.value,
-             previousValue: null }
+             previousValue: null,
+             is_saving: false }
   },
   handleError: function(file) {
-    var message = JSON.parse(file.xhr.response).error || 'Could not save that image'
+    var message = 'Could not save that image'
+    if( file.xhr ) message = JSON.parse(file.xhr.response).error
     swal({ title: 'Uh Oh!', text: message })
 
     this.handleChange(this.state.previousValue)
     this.setState({ value: this.state.previousValue,
-                    previousValue: null })
+                    previousValue: null,
+                    is_saving: false })
+    this.dropzone.removeAllFiles()
   },
   handleThumbnail: function(file, dataURL) {
-    this.setState({ value: dataURL })
+    if( this.state.is_saving ) this.setState({ value: dataURL })
   },
   handleSuccess: function(file) {
     this.handleChange(JSON.parse(file.xhr.response).path)
@@ -42,7 +46,7 @@ var ImageComponent = React.createClass({
     event.preventDefault()
   },
   handleStart: function(event) {
-    this.setState({ previousValue: this.state.value })
+    this.setState({ previousValue: this.state.value, is_saving: true })
     this.props.onStart()
   },
   pathname: function() {
@@ -53,7 +57,7 @@ var ImageComponent = React.createClass({
     if( match && match.length > 1 ) return '?guide_id='+match[1]
     return ''
   },
-  componentDidMount: function() {
+  initDropZone: function() {
     var domNode = ReactDOM.findDOMNode(this.refs.dropzone),
         config = {
           headers: {
@@ -71,6 +75,9 @@ var ImageComponent = React.createClass({
     this.dropzone.on('success', this.handleSuccess)
     this.dropzone.on('error', this.handleError)
     this.dropzone.on('addedfile', this.handleStart)
+  },
+  componentDidMount: function() {
+    this.initDropZone()
   },
   render: function() {
     var preview =  '',
