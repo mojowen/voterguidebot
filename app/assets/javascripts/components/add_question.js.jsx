@@ -13,8 +13,7 @@ var AddQuestion = React.createClass({
   },
   handleAddQuestionStart: function(event) {
     this.setState({ picking: true })
-     // NOTE: Remove to re-enable question selection
-    this.handleAddBlank()
+    this.handleAddBlank() // NOTE: Remove to re-enable question selection
     event.preventDefault()
   },
   handleAddBlank: function(event) {

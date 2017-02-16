@@ -32,7 +32,7 @@
   - unless guide.template_name.match /state|national/
     .mui-select
       = form.label 'Template'
-      = form.select :template_name, options_for_select([['5x5 Guide', 'default'], ['6x4 Guide', 'mail']], selected: guide.template_name)
+      = form.select :template_name, options_for_select([ ['6x4 Guide', 'default']], selected: guide.template_name)
 
   - if guide.new_record? && !current_user.guides.empty?
     %h2

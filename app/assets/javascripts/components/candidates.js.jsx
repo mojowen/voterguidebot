@@ -21,7 +21,8 @@ var Candidates = React.createClass({
                             key={candidate.id}
                             index={index}
                             handleChange={this.props.handleChange} />
-        }, this)
+        }, this),
+      add_display = this.props.candidates.length >= this.template('candidates.max') ? 'none' : 'block'
 
     return <div>
       <div className="mui-row"><h3>Candidates</h3></div>
@@ -29,6 +30,7 @@ var Candidates = React.createClass({
       <div className="mui-row">
         <div className="mui--pull-right">
           <a onClick={ this.handleAdd }
+              style={{ display: add_display }}
               className="mui-btn mui-btn--accent">
             <i className="fa fa-plus-circle" /> Add Candidate
           </a>
