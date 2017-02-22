@@ -7,10 +7,10 @@ class Guide < ActiveRecord::Base
   has_many :users, through: :permissions
   has_many :contests, -> { order(position: :asc) }, dependent: :destroy
   has_many :measures, -> { order(position: :asc) }, dependent: :destroy
-  has_many :languages
   has_many :uploads
   has_many :fields, autosave: true
   has_one :location
+  has_many :languages
 
   accepts_nested_attributes_for :location
 

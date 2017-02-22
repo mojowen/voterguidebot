@@ -1,13 +1,13 @@
 <div class="page" id="contest-<%= contest.id %>">
   <div class="header">
-    <h4>candidates</h4>
+    <h4><%= guide.field('candidates_title') %></h4>
     <h2><%= contest.title %></h2>
   </div>
   <div class="content">
     <table class="candidates count--<%= contest.candidates.count %>">
       <tbody>
         <tr>
-          <td><h3 style="margin-top: 6px">What They Do</h3></td>
+          <td><h3 style="margin-top: 6px"><%= guide.field('what_they_do') %></h3></td>
         </tr>
         <tr>
           <td class="desc"><p><%= contest.description %></p></td>
@@ -24,7 +24,7 @@
               </div>
               <div class="third">
                 <% unless candidate.endorsements.empty? %>
-                  <p><em>supported by...</em></p>
+                  <p><em><%= guide.field('supported_by') %></em></p>
                   <ul class="endorsements">
                     <% candidate.endorsements.each do |endorsement| %>
                       <li><%= endorsement.endorser %></li>
@@ -42,14 +42,14 @@
 <% unless contest.questions.empty? %>
   <div class="page">
     <div class="header">
-      <h4>candidates</h4>
+      <h4><%= guide.field('candidates_title') %></h4>
       <h2><%= contest.title %></h2>
     </div>
     <div class="content questions">
       <table>
         <thead>
           <tr>
-            <th class="stance">Do you support</th>
+            <th class="stance"><%= guide.fied('you_support') %></th>
             <% contest.candidates.each do |candidate| %>
               <th>
                 <%= render guide.template.template_file_path('photo'), candidate: candidate %>

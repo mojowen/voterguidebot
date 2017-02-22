@@ -2,4 +2,4 @@
 
 .mui-row
   .mui-col-md-10.mui-col-md-offset-2{ style: 'margin-top: 30px' }
-    = react_component :FieldsForm, { languages: @guide.languages, url: guide_path(@guide), fields: @guide.template_fields }
+    = react_component :FieldsForm, { url: guide_path(@guide), fields: @guide.template_fields }

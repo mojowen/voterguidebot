@@ -61,7 +61,7 @@ questions:
 
 fields:
   -
-    label: Title Page Header
+    label: Title Page - Header
     placeholder: The title that will appear on the front page of your guide
     element: input
     example: 2016 Chicago Voter Guide
@@ -69,7 +69,15 @@ fields:
     limit: 22
     name: title_page_header
   -
-    label: Title Page Subheader
+    label: Title Page - Voter Guide
+    placeholder: The phrase that appears below your title
+    element: input
+    example_elem: h1
+    limit: 12
+    name: title_page_voter_guide
+    default: Voter Guide
+  -
+    label: Title Page - Subheader
     placeholder: The line right below the title, usually reminds people to vote
     example: Be Sure to Vote By November 8th
     element: input
@@ -77,7 +85,15 @@ fields:
     limit: 40
     name: title_page_subheader
   -
-    label: Title Page Blurb
+    label: Title Page - Be Sure To Vote By
+    placeholder: Text that appears before the election date
+    example: Be sure to vote by
+    element: input
+    limit: 20
+    name: title_be_sure_to_vote_by
+    default: Be sure to vote by
+  -
+    label: Title Page - Blurb
     placeholder: A little bit about voting and the guide
     example: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
     element: textarea
@@ -85,14 +101,28 @@ fields:
     name: title_page_blurb
     default: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
   -
-    label: About Us Blurb
+    label: About Us - Title
+    placeholder: The title of the About Us Page
+    element: input
+    limit: 18
+    name: about_us_title
+    default: About This Guide
+  -
+    label: About Us - Subtitle
+    placeholder: The subtitle of the About Us Page
+    element: input
+    limit: 18
+    name: about_us_subtitle
+    default: About Us
+  -
+    label: About Us - Blurb
     placeholder: A note about your organization and what you do
     example: New Era Colorado Action Fund is a local non-partisan, non-profit organization reinventing politics for our generation through innovative social and political action. We inspire young Coloradans to move our state forward, engaging our generation in our city- and state-level democracy. New Era Colorado Action Fund is a 501(c)4 non-profit organization. You can learn more or sign up to volunteer at NewEraColoradoAction.org.
     element: textarea
     limit: 302
     name: about_us_blurb
   -
-    label: Logo
+    label: About Us - Logo
     placeholder: Your logo - will need to work up to 200px
     example: /example_logo.png
     example_elem: img
@@ -102,13 +132,37 @@ fields:
     element: ImageComponent
     name: about_us_logo
   -
-    label: About Us Footer
+    label: About Us - Footer
     placeholder: About Us Footer - will need to work up to 500px
     default: https://s3-us-west-2.amazonaws.com/voterguides/hands.jpg
     example_elem: FooterImage
     element: ImageComponent
     example_attr: img
     name: about_us_page_footer_img
+  -
+    label: How To Vote - Title
+    placeholder: The title of the How to Vote page
+    element: input
+    example_elem: h2
+    limit: 20
+    name: how_to_vote_title
+    default: How To Vote
+  -
+    label: How To Vote - Subtitle
+    placeholder: The subtitle of the How to Vote page
+    element: input
+    example_elem: h4
+    limit: 24
+    name: how_to_vote_subtitle
+    default: all the info you need
+  -
+    label: How To Vote - What You Gotta Bring Title
+    placeholder: The title of the What You Gotta Bring section
+    element: input
+    example_elem: h3
+    limit: 24
+    name: what_you_got_to_bring_title
+    default: What you gotta bring
   -
     label: What You've Got to Bring To Vote
     placeholder: A paragraph explaining what you need to bring to vote
@@ -117,12 +171,28 @@ fields:
     limit: 230
     name: what_you_got_to_bring
   -
+    label: How To Vote - Where You've Gotta Go Title
+    placeholder: The title of the Where You've Gotta Go section
+    element: input
+    example_elem: h3
+    limit: 24
+    name: where_you_got_to_go_title
+    default: Where you've gotta go
+  -
     label: Where You've Got To Go
     placeholder: A paragraph explaining where you need to go to vote
     example: From February 29 through March 12, all 51 Early Voting sites will be open Monday through Saturday from 9am - 5pm. Go to chicagoelections.com to find a location near you. Please bring a government photo ID during early voting. For both “Grace Period” and “Early Voting” you will register and vote in the same day. To find polling locations for Election Day or early voting go to chicagoelections.com
     element: textarea
     limit: 450
     name: where_you_got_to_go
+  -
+    label: Find Out More - Title
+    placeholder: The title of Find Out More section
+    element: input
+    example_elem: h2
+    limit: 20
+    name: find_out_more_title
+    default: Find Out More
   -
     label: Find Out More
     placeholder: A paragraph explaining the guide and pointing to more information
@@ -131,12 +201,12 @@ fields:
     limit: 350
     name: find_out_more
   -
-    label: Partners
-    placeholder: Thank the people and organizations the made this happen
-    example: Also, lots more good info from our partners
+    label: Also On Our Website...
+    placeholder: The link to your website
     element: input
-    limit: 50
-    name: partners_list
+    limit: 45
+    name: also_on_our_website
+    default: 'Also a lot more good info at our website:'
   -
     label: Disclaimer
     placeholder: Disclaimer that will go on the back of the voter guide.
@@ -144,6 +214,86 @@ fields:
     element: input
     limit: 150
     name: disclaimer
+  -
+    label: Contest - Title
+    placeholder: Title for the contest page
+    element: input
+    limit: 20
+    name: candidates_title
+    default: candidates
+  -
+    label: Contest - What They Do
+    placeholder: The text shown above the contest description
+    element: input
+    limit: 20
+    name: what_they_do
+    default: What They Do
+  -
+    label: Contest - Supported By
+    placeholder: The text shown above the supports
+    element: input
+    limit: 20
+    name: supported_by
+    default: Supported by...
+  -
+    label: Contest - Do You Support
+    placeholder: The text shown above the questions
+    element: input
+    limit: 20
+    name: you_support
+    default: Do you support
+  -
+    label: Measure - Title
+    placeholder: Title for the measure page
+    element: input
+    limit: 20
+    name: measures_title
+    default: ballot measures
+  -
+    label: Measure - What it Does
+    placeholder: The text above the measure description
+    element: input
+    limit: 20
+    name: measures_what_it_does
+    default: What it Does
+  -
+    label: Measure - A Yes Vote
+    placeholder: What happens if it passes
+    element: input
+    example_elem: h4
+    limit: 20
+    name: measures_yes
+    default: A Yes Vote Means
+  -
+    label: Measure - No Vote
+    placeholder: What happens if it fails
+    element: input
+    example_elem: h4
+    limit: 20
+    name: measures_no
+    default: A No Vote Means
+  -
+    label: Measure - Who Says Yes
+    placeholder: Will appear above the supporters of yes
+    element: input
+    limit: 20
+    name: measures_who_says_yes
+    default: who says YES...
+  -
+    label: Measure - Who Says No
+    placeholder: Will appear above the supporters of no
+    element: input
+    limit: 20
+    name: measures_who_says_no
+    default: who says NO...
+  -
+    label: Measure - Recommended
+    placeholder: Will appear above the recommendation
+    element: input
+    example_elem: h4
+    limit: 20
+    name: measure_recommended
+    default: 'Recommended:'
   -
     label: Primary Color
     element: input
@@ -174,15 +324,3 @@ fields:
     default: contest_large
     example_elem: ContestType
     example_attr: partial
-
-tags:
-  - Climate
-  - Criminal Justice Reform
-  - Drug Policy
-  - Economy
-  - Education
-  - Healthcare
-  - Immigration
-  - LGBT
-  - Reproduction Rights
-  - Voting Rights

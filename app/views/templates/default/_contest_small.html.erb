@@ -1,6 +1,6 @@
 <div class="page single" id="contest-<%= contest.id %>">
   <div class="header">
-    <h4>candidates</h4>
+    <h4><%= guide.field('candidates_title') %></h4>
     <h2><%= contest.title %></h2>
   </div>
   <div class="content">
@@ -23,7 +23,7 @@
                 </div>
                 <% unless candidate.endorsements.empty? %>
                   <div class="endorse">
-                    <em>supported by...</em>
+                    <em><%= guide.field('supported_by') %></em>
                     <ul class="endorsements">
                       <% candidate.endorsements.each do |endorsement| %>
                         <li><%= endorsement.endorser %></li>
@@ -41,7 +41,7 @@
           <table>
             <thead>
               <tr>
-                <th class="stance">Do you support</th>
+                <th class="stance"><%= guide.fied('you_support') %></th>
                 <% contest.candidates.each do |candidate| %>
                   <th>
                     <h3><%= (candidate.try(:name) || '').split(' ').last %></h3>

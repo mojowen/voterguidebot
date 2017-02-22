@@ -8,12 +8,12 @@
       = button_link_to edit_guide_path(@guide), class: 'mui-btn--small' do
         %i.fa.fa-gears.settings
         Adjust Settings
-      = button_link_to guide_languages_path(@guide), class: 'mui-btn--small' do
-        %i.fa.fa-language.languages
-        Add Languages
       = button_link_to invite_guide_path(@guide), class: 'mui-btn--small' do
         %i.fa.fa-user-plus.users
         Invite Collaborators
+      = button_link_to guide_path(@guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{@guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
+        %i.fa-trash-o.fa
+        Delete this Guide
   .mui-row{ style: 'margin-top: 0px' }
     .mui-col-md-12.mui--text-right.menu.slide--menu
       = button_link_to preview_guide_path(@guide), class: 'mui-btn--small', target: '_blank', btn: :primary do
@@ -106,11 +106,6 @@
       %p
         %em List the ballot measures that voters will get to decide on election day.
 
-  .mui-row
-    .mui-col-md-12.mui--text-left.menu.slide--menu
-      = button_link_to guide_path(@guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{@guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
-        %i.fa-trash-o.fa
-        Delete this Guide
 
 - if @guide.is_publishing?
   :javascript
