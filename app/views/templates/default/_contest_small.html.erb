@@ -41,7 +41,7 @@
           <table>
             <thead>
               <tr>
-                <th class="stance"><%= guide.fied('you_support') %></th>
+                <th class="stance"><%= guide.field('you_support') %></th>
                 <% contest.candidates.each do |candidate| %>
                   <th>
                     <h3><%= (candidate.try(:name) || '').split(' ').last %></h3>
