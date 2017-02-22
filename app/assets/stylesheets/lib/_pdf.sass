@@ -135,7 +135,7 @@ p
         font-style: italic
         line-height: 8px
   .img
-    @include frame(50px)
+    @include frame(74px)
     float: none
   ul
     margin: 0
@@ -176,7 +176,7 @@ p
       height: auto
       padding: 0 4px 4px
       .img
-        @include frame(40px)
+        @include frame(80px)
     .endorse
       width: 100%
       margin-top: 4px
@@ -211,14 +211,18 @@ p
             line-height: 8px
 
   &.count--3
+    .img
+      @include frame(64px)
     .small
       width: 31%
       .img
-        @include frame(25px)
+        @include frame(50px)
 
   &.count--4
     div
       height: 50px
+      .img
+        @include frame(50px)
     .small
       width: 24%
       .name
@@ -230,7 +234,7 @@ p
           line-height: 7px
       .photo
         .img
-          @include frame(22px)
+          @include frame(40px)
       .endorse
         em, li
           font-size: 6px

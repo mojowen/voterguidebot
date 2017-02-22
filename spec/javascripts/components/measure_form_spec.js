@@ -82,4 +82,6 @@ describe('MeasureForm', function() {
     expect(this.component.state.changed).toEqual(false)
     expect(this.component.state.url).toEqual(response.url)
   })
+
+  it('failse to save')
 })
