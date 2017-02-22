@@ -26,8 +26,13 @@ class Template < OpenStruct
   attr_reader :template_name
 
   def config_file(name, inheritable = true)
-    config = YAML.load_file Rails.root.join('config', 'templates', "#{name}.yml")
+    return {} unless File.exist? template_file(name)
+    config = YAML.load_file template_file(name)
     return config unless config['inherits'] && inheritable
     config_file(config['inherits'], false).merge(config)
+  end
+
+  def template_file(name)
+    Rails.root.join('config', 'templates', "#{name}.yml")
   end
 end
