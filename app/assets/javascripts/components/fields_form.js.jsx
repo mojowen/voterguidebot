@@ -15,7 +15,7 @@ var FieldsForm = React.createClass({
           elem = this.refs[name]
 
       if( !elem.isValid() ) {
-        return this.handleError('not all fields are valid')
+        return this.handleError({ error: 'Not All Fields Are Valid' })
       }
 
       fields_request[name] =  elem.state.value

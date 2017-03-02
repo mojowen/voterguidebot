@@ -15,7 +15,7 @@ class Question < ActiveRecord::Base
   end
 
   def slug
-    text.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
+    (text || "#{id}").gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
   end
 
   private

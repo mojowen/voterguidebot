@@ -20,7 +20,7 @@ class Guide < ActiveRecord::Base
   validates :election_date, presence: true
 
   delegate :publish, :published_resource, :is_publishing?, :is_failed?,
-           :is_published?, :is_synced?, :s3_key, to: :publisher
+           :is_published?, :is_synced?, :s3_key, :namespace, to: :publisher
 
   def template
     @template ||= Template.new template_name
@@ -32,7 +32,7 @@ class Guide < ActiveRecord::Base
   end
 
   def slug
-    [id,  name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
+    [id, name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
   end
 
   def slim_json

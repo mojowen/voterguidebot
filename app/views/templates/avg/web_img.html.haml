@@ -1,0 +1,19 @@
+- content_for :body_class do
+  state
+
+- content_for :css do
+  :css
+    body .container {
+      background: transparent url('https://s3-us-west-2.amazonaws.com/voterguides/states/#{state_pic(guide)}') center left no-repeat;
+      background-size: cover;
+    }
+
+.cover
+.logo
+  %img{ src: "data:image/png;base64,#{to_asset_string('avg/logo.png')}" }
+
+%h1= guide.location.state_name
+%h2
+  Get independent info on the
+  %br
+  candidates & issues.

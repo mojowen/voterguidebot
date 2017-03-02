@@ -6,7 +6,7 @@ folder: avg
 layout: avg
 publisher_class: Innactive
 publisher_resource: nil
-publisher_type: web
+publisher_type: web-innactive
 
 inherits: archived/2016_default
 

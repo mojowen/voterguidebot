@@ -1,5 +1,5 @@
 class GuidesController < ApplicationController
-  before_filter :find_guide, except: [:create, :new, :index]
+  before_filter :find_guide, except: [:create, :new, :index, :validate]
   before_filter :init_guide, only: [:create, :new]
   before_filter :guide_params, only: [:create, :update]
   before_filter :invite_params, only: :users
@@ -55,6 +55,22 @@ class GuidesController < ApplicationController
   def publish
     @guide.start_publishing
     redirect_to request.referer || guide_path(@guide), notice: 'Guide queued for publishing'
+  end
+
+  def validate
+    path = params.fetch(:url, '').split('americanvoterguide.org/')
+    return render(nothing: true, status: 409) unless path.length > 1
+    is_not_taken = Guide.select(%w(name id template_name))
+                        .joins(:fields)
+                        .where(template_name: Template.web_templates)
+                        .map { |guide| guide.namespace }
+                        .flatten
+                        .index(path.last)
+                        .nil?
+    render(
+      nothing: true,
+      status: is_not_taken ? 200 : 409
+    )
   end
 
   private

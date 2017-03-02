@@ -14,6 +14,6 @@ class Candidate < ActiveRecord::Base
   end
 
   def slug
-    name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
+    (name || "#{id}").gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '')
   end
 end

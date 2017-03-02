@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resources :exports, only: [:index, :new, :create, :update]
 
     resources :guides do
+      collection do
+        get 'validate'
+      end
       member do
         get 'invite'
         get 'fields'

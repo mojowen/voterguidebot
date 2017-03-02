@@ -1,0 +1,220 @@
+
+name: Great American Online Voter Guide
+
+view: web
+folder: avg
+layout: avg
+publisher_class: Web
+publisher_resource: nil
+publisher_type: web
+
+inherits: default
+
+available_pages: 30
+filler_pages: 0
+
+contests:
+  per_page: 1
+
+measures:
+  per_page: 1
+
+candidates:
+  max: 4
+
+fields:
+  -
+    label: Voter Guide URL
+    example: http://americanvoterguide.org/your-url
+    element: LookupComponent
+    url: '/guides/validate'
+    param: url
+    error_message: 'This URL is invalid'
+    validate: true
+    name: voter_guide_url
+    example_elem: a
+    example_attr: href
+  -
+    label: How to Vote
+    placeholder: A paragraph explaining how to vote - will appear above the How to Vote Video
+    example: Hey let's talk about how to vote and whether we want text above the how to vote video.
+    element: textarea
+    limit: 500
+    name: how_to_vote
+  -
+    label: How to Vote Video
+    default: ragLSjBiGIc
+    name: how_to_vote_video
+    element: SelectComponent
+    example_elem: YouTubeVideo
+    example_attr: video
+    options:
+      -
+        value: ragLSjBiGIc
+        text: Alabama
+      -
+        value: RZd7Rp4m8gs
+        text: Alaska
+      -
+        value: _1fKol8tBV8
+        text: Arizona
+      -
+        value: gfCrwRUQJ3Q
+        text: arkansas
+      -
+        value: uTF5o-Ma1Yg
+        text: California
+      -
+        value: -YbN3aXcz98
+        text: Colorado
+      -
+        value: Yj3UgguB9Nc
+        text: Connecticut
+      -
+        value: caPj8bMmC1Y
+        text: Washington DC
+      -
+        value: s8wwn3LA9uk
+        text: Delaware
+      -
+        value: UlNCOrYkQBI
+        text: Florida
+      -
+        value: Ap0e_O2RiLw
+        text: Georgia
+      -
+        value: 6n6xAo2T-6o
+        text: Hawaii.
+      -
+        value: c9RguBn58Iw
+        text: Idaho
+      -
+        value: 8msQE61eREE
+        text: Illinois
+      -
+        value: 2E2Whkw6wJw
+        text: Indiana
+      -
+        value: nEN3Wuo2RmI
+        text: Iowa
+      -
+        value: YwsELW1L0nM
+        text: Kansas
+      -
+        value: SLarfndxNAg
+        text: Kentucky
+      -
+        value: XtPU67RznWQ
+        text: Louisiana
+      -
+        value: g1gdYGvoXEA
+        text: Maine
+      -
+        value: ClBtYKEt5FU
+        text: Maryland
+      -
+        value: 8uZywLgUWr0
+        text: Massachusetts
+      -
+        value: w_pk22R6O7w
+        text: Michigan
+      -
+        value: UtXybSbIOMc
+        text: Minnesota
+      -
+        value: qOUNGL5mdDI
+        text: Mississippi
+      -
+        value: YU-IlCoBi-8
+        text: missouri
+      -
+        value: NLAUFj-4zXY
+        text: Montana
+      -
+        value: P8Y562yAbyo
+        text: Nebraska
+      -
+        value: x2_lHK93f8s
+        text: Nevada
+      -
+        value: G8nJ95oCPU0
+        text: New Hampshire
+      -
+        value: XDEaYHbGieo
+        text: New Jersey
+      -
+        value: 6RKCG5_Uq_Q
+        text: New Mexico
+      -
+        value: 2K5a_NmSoYE
+        text: New York
+      -
+        value: 14AJJjXjknQ
+        text: North Carolina
+      -
+        value: gFJ5qeT-Jzk
+        text: North Dakota
+      -
+        value: qCvdjNnT0Qc
+        text: Ohio
+      -
+        value: nPY6d-BUClc
+        text: Oklahoma
+      -
+        value: mI8D_eWAWPo
+        text: Oregon
+      -
+        value: AMJQ5pqiRNA
+        text: Pennsylvania
+      -
+        value: NN5NLNqyWD0
+        text: Rhode Island
+      -
+        value: 83XBcxZQaiM
+        text: South Carolina
+      -
+        value: pduL3Yyx410
+        text: South Dakota
+      -
+        value: K6fYHqrS5FA
+        text: Tennessee
+      -
+        value: BWas4N2d-0E
+        text: Texas
+      -
+        value: xpFw9EvEjWY
+        text: Utah
+      -
+        value: kdVjzsLbrpU
+        text: Vermont
+      -
+        value: Ogth3fmIaME
+        text: Virginia
+      -
+        value: ju1maRPLz8Y
+        text: Washington
+      -
+        value: GidAHJ8O8Gw
+        text: West Virginia
+      -
+        value: T8Uek3S1BUs
+        text: Wisconsin
+      -
+        value: ZropUXblV8I
+        text: Wyoming
+  -
+    label: Header Pic
+    placeholder: Your logo - will need to work up to 200px
+    example: https://s3-us-west-2.amazonaws.com/voterguides/states/California.jpg
+    example_elem: HeaderImage
+    example_attr: img
+    element: ImageComponent
+    name: header_pic
+  -
+    label: Footer Script Embed
+    placeholder: ...
+    example: <script>alert('bad example')</script>
+    element: textarea
+    limit: 10000
+    name: footer_script
+

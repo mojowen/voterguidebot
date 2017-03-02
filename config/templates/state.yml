@@ -1,7 +1,7 @@
 
 name: Great American Voter Guide State
 
-view: state
+view: web
 folder: avg
 layout: avg
 publisher_class: State

@@ -5,6 +5,8 @@ var ImageComponent = React.createClass({
       maxFiles: 1,
       onChange: function() { return true },
       onStart: function() { return true },
+      onValidate: function() { return true },
+      error_message: 'Invalid image - please try again',
       preview: false,
       value: null
     }
@@ -24,12 +26,14 @@ var ImageComponent = React.createClass({
                     previousValue: null,
                     is_saving: false })
     this.dropzone.removeAllFiles()
+    this.props.onValidate(false, this.props.error_message)
   },
   handleThumbnail: function(file, dataURL) {
     if( this.state.is_saving ) this.setState({ value: dataURL })
   },
   handleSuccess: function(file) {
     this.handleChange(JSON.parse(file.xhr.response).path)
+    this.props.onValidate(true)
   },
   handleChange: function(url) {
     this.props.onChange({ target: { value: url, name: this.props.name } })

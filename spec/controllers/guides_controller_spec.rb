@@ -226,5 +226,10 @@ RSpec.describe GuidesController, active_mocker: true do
         end.to change(Delayed::Job, :count).by(1)
       end
     end
+
+    describe "#validate" do
+      xit "returns 200 if valid submission"
+      xit "returns 405 if not valid submission"
+    end
   end
 end

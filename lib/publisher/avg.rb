@@ -17,6 +17,14 @@ module Publisher
       invalidate_assets
     end
 
+    def namespace
+      raise 'Invalid method'
+    end
+
+    def slug
+      raise 'Invalid method'
+    end
+
     private
 
     def collect_assets
@@ -153,6 +161,7 @@ module Publisher
 
     def sync_assets
       s3.upload_directory root_path
+      cloudfront.add_path('/assets/*')
     end
 
     def clean_assets
@@ -170,7 +179,7 @@ module Publisher
     def cloudfront
       @cloudfront ||= CloudfrontWrapper.new(
         ENV['AVG_DISTRIBUTION'],
-        guide.version
+        guide.version+"#{Time.now.getutc.to_i}"
       )
     end
 

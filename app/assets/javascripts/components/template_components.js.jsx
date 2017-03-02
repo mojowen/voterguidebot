@@ -53,6 +53,18 @@ var ContestType = React.createClass({
   }
 })
 
+var YouTubeVideo = React.createClass({
+  getDefaultProps: function() {
+    return { video: 'dQw4w9WgXcQ' }
+  },
+  render: function() {
+    return <iframe
+      width="240"
+      src={"https://www.youtube.com/embed/" + this.props.video}
+      frameBorder="0"></iframe>
+  }
+})
+
 var SelectImages = React.createClass({
   getDefaultProps: function() {
     return { img: 'feds' }
@@ -66,7 +78,6 @@ var SelectImages = React.createClass({
     return <img src={images[this.props.img]} style={{ width: '200px'}} />
   }
 })
-
 
 var FooterImage = React.createClass({
   getDefaultProps: function() {
@@ -83,5 +94,40 @@ var FooterImage = React.createClass({
       backgroundImage: 'url('+this.props.img+')'
     }
     return <div style={style} ></div>
+  }
+})
+
+var HeaderImage = React.createClass({
+  getDefaultProps: function() {
+    return { img: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg' }
+  },
+  render: function() {
+    var style = {
+      width: '100%',
+      height: '120px',
+      backgroundColor: 'transparent',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundImage: 'url('+this.props.img+')',
+      opacity: 0.4
+    },
+    header_style = {
+      position: 'absolute',
+      bottom: '-20px',
+      left: '4px',
+      fontSize: '20px',
+      color: 'white',
+      textShadow: 'none',
+      textAlign: 'left',
+      textTransform: 'none',
+    }
+
+    return <div style={{ backgroundColor: '#1470be' }}>
+      <div style={style} ></div>
+      <h1 style={header_style}>
+        Your Title Here
+      </h1>
+    </div>
   }
 })

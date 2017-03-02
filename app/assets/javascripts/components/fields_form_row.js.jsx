@@ -19,18 +19,19 @@ var FieldFormRow = React.createClass({
     this.setChangedState({ value: event.target.value })
   },
   render: function() {
-    if( this.props.example_attr ) {
-      var example_props = this.props.example_props || {},
-          ExampleElem = to_react_class(this.props.example_elem)
-      example_props[this.props.example_attr] = this.getPreview()
-      var preview = <ExampleElem {...example_props} ref="preview"/>
-    } else {
-      var preview = <this.props.example_elem {...this.props.example_props}
-                                             ref="preview">
-        { this.getPreview() }
-      </this.props.example_elem>
-    }
+    var example_props = this.props.example_props || {},
+        ExampleElem = to_react_class(this.props.example_elem)
 
+    example_props[this.props.example_attr] = this.getPreview()
+    delete example_props['false']
+
+    if( ExampleElem === 'img' ) {
+      var preview = <ExampleElem {...example_props} ref="preview" />
+    } else {
+      var preview = <ExampleElem {...example_props} ref="preview">
+        { this.getPreview() }
+      </ExampleElem>
+    }
     return <div className='mui-row form--row' >
       <div className='mui-col-md-6'>
         <InputComponent limit={this.props.limit}

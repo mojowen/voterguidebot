@@ -1,5 +1,5 @@
 module Publisher
-  class State < AVG
+  class Web < AVG
 
     def resource
       "http://#{bucket}/#{slug}"
@@ -16,7 +16,7 @@ module Publisher
     private
 
     def generate
-      FileUtils.mkdir_p state_path
+      FileUtils.mkdir_p web_path
       render_state
       render_share_image
       render_contests
@@ -26,16 +26,16 @@ module Publisher
     end
 
     def render_state
-      render_static Rails.root.join(state_path, "index.html").to_s
+      render_static Rails.root.join(web_path, "index.html").to_s
       cloudfront.add_path("/#{slug}/index.html")
     end
 
-    def state_path
+    def web_path
       Rails.root.join(root_path, slug)
     end
 
     def render_share_image
-      render_image Rails.root.join(state_path, "share").to_s, 'state_img', guide: guide
+      render_image Rails.root.join(web_path, "share").to_s, 'web_img', guide: guide
       cloudfront.add_path("/#{slug}/share.png")
     end
   end

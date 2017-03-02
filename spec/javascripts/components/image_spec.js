@@ -51,8 +51,11 @@ describe('ImageComponent', function() {
       spyOn(this, 'onChange')
       this.onStart = function() {}
       spyOn(this, 'onStart')
+      this.onValidate = function() {}
+      spyOn(this, 'onValidate')
       this.setUpComponent(ImageComponent, { onChange: this.onChange,
-                                            onStart: this.onStart })
+                                            onStart: this.onStart,
+                                            onValidate: this.onValidate })
       this.dropzone = this.component.dropzone
     })
 
@@ -65,6 +68,7 @@ describe('ImageComponent', function() {
       var fake_response = { xhr: { response: '{"path":"some-remote"}' }}
       this.dropzone._callbacks.success[1].call(this.dropzone, fake_response)
       expect(this.onChange).toHaveBeenCalledWith({ target: { value: "some-remote", name: '' } })
+      expect(this.onValidate).toHaveBeenCalledWith(true)
     })
 
     it('calls onStart when the process begins', function() {
@@ -90,7 +94,13 @@ describe('ImageComponent', function() {
 
   describe('with a failed response', function() {
     beforeEach(function() {
-      this.setUpComponent(ImageComponent, {})
+      this.onValidate = function() {}
+      spyOn(this, 'onValidate')
+      this.invalid_message = 'my_error_message'
+      this.setUpComponent(ImageComponent, {
+        onValidate: this.onValidate,
+        error_message: this.invalid_message
+      })
       this.dropzone = this.component.dropzone
       this.component.setState({ value: 'yaba-daba-do' })
 
@@ -111,6 +121,10 @@ describe('ImageComponent', function() {
     it('notifies the user', function() {
       this.dropzone._callbacks.error[1].call(this.dropzone, this.fake_response)
       expect(swalSpy).toHaveBeenCalledWith({ title: 'Uh Oh!', text: this.error_message })
+    })
+    it('calls onvalidate', function() {
+      this.dropzone._callbacks.error[1].call(this.dropzone, this.fake_response)
+      expect(this.onValidate).toHaveBeenCalledWith(false, this.invalid_message)
     })
   })
 })

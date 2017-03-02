@@ -5,6 +5,11 @@ module Publisher
       "https://#{bucket}"
     end
 
+    def namespace
+      Dir.glob("app/views/templates/avg/subpages/*.html.haml")
+         .map { |f| f.split('/').last.split('.').first } + %w(assets index.html)
+    end
+
     private
 
     def generate

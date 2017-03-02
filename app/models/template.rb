@@ -21,6 +21,24 @@ class Template < OpenStruct
     new(:default)
   end
 
+  class << self
+    def web_templates
+      all_templates
+        .select { |tf| YAML.load_file(tf)['publisher_type'] == 'web' }
+        .map { |tf| tf.split(template_path.to_s).last.split('.').first.sub('/', '') }
+    end
+
+    def template_path
+      Rails.root.join('config', 'templates')
+    end
+
+    private
+
+    def all_templates
+      @all_templates ||= Dir.glob(Rails.root.join(template_path, '**/*.yml'))
+    end
+  end
+
   private
 
   attr_reader :template_name
@@ -33,6 +51,6 @@ class Template < OpenStruct
   end
 
   def template_file(name)
-    Rails.root.join('config', 'templates', "#{name}.yml")
+    Rails.root.join(self.class.template_path, "#{name}.yml")
   end
 end

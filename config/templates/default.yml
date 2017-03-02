@@ -201,8 +201,15 @@ fields:
     limit: 350
     name: find_out_more
   -
+    label: Our Website
+    placeholder: guide
+    element: input
+    default: americanvoterguide.org
+    limit: 100
+    name: The URL of your website
+  -
     label: Also On Our Website...
-    placeholder: The link to your website
+    placeholder: The text before the link to your website
     element: input
     limit: 45
     name: also_on_our_website

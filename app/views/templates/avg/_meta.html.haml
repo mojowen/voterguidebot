@@ -18,6 +18,7 @@
 
 :javascript
   var related = 'whywevote2016'
-  var defaultTags = 'election 2016,2016,voting,election,whywevote'
-  var defaultMessage = "Election Day is Nov. 8th. Here's everything you need to vote, incl where people running for office stand on issues"
+  var election_date = #{ (content_for(:election_date) ? yield(:election_date).strip : "Nov. 16th").to_json }
+  var defaultTags = 'voting,election,whywevote'
+  var defaultMessage = "Election Day is "+election_date+". Here's everything you need to vote, incl where people running for office stand on issues"
   var hashtag = 'whywevote'
