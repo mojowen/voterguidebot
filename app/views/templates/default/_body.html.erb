@@ -3,7 +3,7 @@
     <div class="box full">
       <div class="inner full">
         <h1><%= guide.name %></h1>
-        <h1 class="big" style="white-space: pre-wrap"><%= guide.field('title_page_voter_guide').gsub(' ', "\n") %></h1>
+        <h1 class="big" style="white-space: pre-wrap"><%= (guide.field('title_page_voter_guide') || '').gsub(' ', "\n") %></h1>
         <h2>
           <%= guide.field('title_be_sure_to_vote_by') %>
           <%= guide.election_date.strftime("%B") %>
