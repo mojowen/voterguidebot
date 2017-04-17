@@ -20,11 +20,15 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.after(:suite) do
-    FileUtils.rm_rf(Dir[@test_tmp])
+  def test_tmp
+    Rails.root.join(*%w(spec test_files))
   end
+
+  config.after(:suite) do
+    FileUtils.rm_rf(Dir[test_tmp])
+  end
+
   config.before(:suite) do
-    @test_tmp = Rails.root.join(*%w(spec test_files))
-    FileUtils.mkdir_p(@test_tmp) unless File.directory? @test_tmp
+    FileUtils.mkdir_p(test_tmp) unless File.directory? test_tmp
   end
 end
