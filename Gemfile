@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby "2.3.4"
 
 gem 'rails', '4.2.2'
 
@@ -24,6 +24,7 @@ gem 'globalize'
 
 gem 'paperclip', '~> 5.0.0.beta1'
 gem 'aws-sdk'
+gem 'nokogiri', '>= 1.7.1'
 
 gem 'delayed_job_active_record'
 gem 'workless'
