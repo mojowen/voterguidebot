@@ -113,9 +113,9 @@ module Publisher
           "measure_info",
           measure: measure, anchor: "measure_#{measure.id}"
         )
-      end
 
-      cloudfront.add_path("/measures/#{measure.id}-#{measure.slug}.*")
+        cloudfront.add_path("/measures/#{measure.id}-#{measure.slug}.*")
+      end
     end
 
     def render_contest(contest)
