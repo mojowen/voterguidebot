@@ -114,7 +114,8 @@ module Publisher
           measure: measure, anchor: "measure_#{measure.id}"
         )
 
-        cloudfront.add_path("/measures/#{measure.id}-#{measure.slug}.*")
+        cloudfront.add_path("/measures/#{measure.id}-#{measure.slug}.html")
+        cloudfront.add_path("/measures/#{measure.id}-#{measure.slug}.png")
       end
     end
 
@@ -131,6 +132,8 @@ module Publisher
         "contest_info",
         contest: contest, anchor: "contest_#{contest.id}"
       )
+      cloudfront.add_path("/contests/#{contest.id}/info.html")
+      cloudfront.add_path("/contests/#{contest.id}/info.png")
 
       contest.questions.each.with_index do |question, index|
         render_social(
@@ -139,12 +142,19 @@ module Publisher
           question: question, anchor: "contest_#{contest.id}_#{index+1}"
         )
 
+        cloudfront.add_path("/contests/#{contest.id}/#{question.slug}.html")
+        cloudfront.add_path("/contests/#{contest.id}/#{question.slug}.png")
+
         contest.candidates.each do |candidate|
+          resource = "#{question.slug}-#{candidate.slug}"
           render_social(
-            Rails.root.join(contest_path, "#{question.slug}-#{candidate.slug}"),
+            Rails.root.join(contest_path, resource),
             "candidate_question",
             candidate: candidate, question: question, anchor: "contest_#{contest.id}_#{index+1}"
           )
+
+          cloudfront.add_path("/contests/#{contest.id}/#{resource}.html")
+          cloudfront.add_path("/contests/#{contest.id}/#{resource}.png")
         end
       end
 
@@ -154,14 +164,14 @@ module Publisher
           "candidate_info",
           candidate: candidate, anchor: "contest_#{contest.id}"
         )
-      end
 
-      cloudfront.add_path("/contests/#{contest.id}/*")
+        cloudfront.add_path("/contests/#{contest.id}/#{candidate.slug}.html")
+        cloudfront.add_path("/contests/#{contest.id}/#{candidate.slug}.png")
+      end
     end
 
     def sync_assets
       s3.upload_directory root_path
-      cloudfront.add_path('/assets/*')
     end
 
     def clean_assets
