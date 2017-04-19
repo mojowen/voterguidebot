@@ -32,7 +32,7 @@ class Guide < ActiveRecord::Base
   end
 
   def slug
-    [id, name.gsub(/\s/, '-').downcase.gsub(/[^\w-]/, '').downcase].join('-')
+    [id, name.strip.downcase.gsub(/\s/, '-').gsub(/[^\w-]/, '')].join('-')
   end
 
   def slim_json

@@ -10,7 +10,7 @@ module Publisher
     end
 
     def slug
-      @slug ||= guide.field('url') || guide.slug
+      @slug ||= guide.field('url').try!(:strip) || guide.slug
     end
 
     private
@@ -28,6 +28,7 @@ module Publisher
     def render_state
       render_static Rails.root.join(web_path, "index.html").to_s
       cloudfront.add_path("/#{slug}/index.html")
+      cloudfront.add_path("/#{slug}/")
     end
 
     def web_path
