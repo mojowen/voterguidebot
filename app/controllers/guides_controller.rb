@@ -60,7 +60,7 @@ class GuidesController < ApplicationController
   def validate
     path = params.fetch(:url, '').split('americanvoterguide.org/')
     return render(nothing: true, status: 409) unless path.length > 1
-    is_not_taken = Guide.eager_load(fields: [:translations])
+    is_not_taken = Guide.eager_load(:location, fields: [:translations])
                         .select(%w(name id template_name))
                         .where(template_name: Template.web_templates)
                         .map { |guide| guide.namespace }
