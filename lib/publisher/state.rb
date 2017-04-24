@@ -10,7 +10,7 @@ module Publisher
     end
 
     def slug
-      @slug ||= guide.field('url') || guide.slug
+      @slug ||= guide.location.state_slug
     end
 
     private

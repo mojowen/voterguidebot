@@ -10,7 +10,7 @@ module Publisher
     end
 
     def slug
-      @slug ||= guide.field('url').try!(:strip) || guide.slug
+      @slug ||= guide.field('voter_guide_url').try!(:strip) || guide.slug
     end
 
     private
