@@ -62,7 +62,7 @@ class GuidesController < ApplicationController
     return render(nothing: true, status: 409) if path.length < 5 || path.match(/[^A-Za-z0-9\-]/)
     is_not_taken = Guide.eager_load(:location, fields: [:translations])
                         .select(%w(name id template_name))
-                        .where(template_name: Template.web_templates)
+                        .where(template_name: Template.web_templates, active: true)
                         .map { |guide| guide.namespace }
                         .flatten
                         .index(path)
