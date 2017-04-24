@@ -70,7 +70,7 @@ var LinkPreview = React.createClass({
     return { path: 'your-url', domain: 'http://example.org' }
   },
   url: function() {
-    return [this.prosp.domain, this.prosp.path].join('/')
+    return [this.props.domain, this.props.path].join('/')
   },
   render: function() {
     return <a href={this.url()}>{ this.url() }</a>
