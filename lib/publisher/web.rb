@@ -2,7 +2,10 @@ module Publisher
   class Web < AVG
 
     def resource
-      "http://#{bucket}/#{slug}"
+      @resource ||= begin
+        url = guide.field('voter_guide_url').try!(:strip)
+        url.empty? ? "http://#{bucket}/#{guide.slug}" : url
+      end
     end
 
     def namespace
