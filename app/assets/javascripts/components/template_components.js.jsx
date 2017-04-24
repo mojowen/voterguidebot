@@ -65,6 +65,18 @@ var YouTubeVideo = React.createClass({
   }
 })
 
+var LinkPreview = React.createClass({
+  getDefaultProps: function() {
+    return { path: 'your-url', domain: 'http://example.org' }
+  },
+  url: function() {
+    return [this.prosp.domain, this.prosp.path].join('/')
+  },
+  render: function() {
+    return <a href={this.url()}>{ this.url() }</a>
+  }
+})
+
 var SelectImages = React.createClass({
   getDefaultProps: function() {
     return { img: 'feds' }

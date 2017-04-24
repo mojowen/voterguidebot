@@ -25,15 +25,17 @@ candidates:
 fields:
   -
     label: Voter Guide URL
-    example: http://americanvoterguide.org/your-url
+    example: your-url
     element: LookupComponent
     url: '/guides/validate'
     param: url
     error_message: 'This URL is invalid'
     validate: true
     name: voter_guide_url
-    example_elem: a
-    example_attr: href
+    example_elem: LinkPreview
+    example_attr: path
+    example_props:
+      domain: https://americanvoterguide.org
   -
     label: How to Vote
     placeholder: A paragraph explaining how to vote - will appear above the How to Vote Video

@@ -231,12 +231,17 @@ RSpec.describe GuidesController, active_mocker: true do
       let(:guide) { Fabricate :guide, template_name: :web }
 
       it "returns 200 if valid submission" do
-        get :validate, url: 'americanvoterguide.org/something'
+        get :validate, url: 'something'
         expect(response).to be_success
       end
 
-      it "returns 405 if not valid submission" do
-        get :validate, url: "americanvoterguide.org/#{guide.slug}"
+      it "returns not success if not valid submission" do
+        get :validate, url: "#{guide.slug}"
+        expect(response).to_not be_success
+      end
+
+      it "returns not success if not valid submission" do
+        get :validate, url: "http://bad-url.here"
         expect(response).to_not be_success
       end
     end
