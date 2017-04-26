@@ -28,6 +28,7 @@ module Publisher
     def render_state
       render_static Rails.root.join(state_path, "index.html").to_s
       cloudfront.add_path("/#{slug}/index.html")
+      cloudfront.add_path("/#{slug}/")
     end
 
     def state_path
