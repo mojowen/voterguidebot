@@ -1,37 +1,30 @@
 language: ruby
 rvm:
-  - 2.3.4
-
+- 2.3.4
 cache:
-  - bundler: true
-  - directories:
-    - /home/travis/.phantomjs
-
+- bundler: true
+- directories:
+  - "/home/travis/.phantomjs"
 before_script:
-  - createdb test_vgbot
-  - bundle exec rake db:migrate
-
+- createdb test_vgbot
+- bundle exec rake db:migrate
 script:
-  - bundle exec rake spec
-  - bundle exec rake jasmine:ci[random]
-
+- bundle exec rake spec
+- bundle exec rake jasmine:ci[random]
 env:
   global:
     RAILS_ENV: test
     TRAVIS: true
-
 addons:
   postgresql: 9.3
-
 sudo: false
-
 deploy:
   provider: heroku
   api_key:
-    secure: M7lazRDwITsgCNfZOGJELnp59ZwTUAxEELfTc6gT5VF2JSBrFgi075CIkjP37gfS34DnpxMpC8ZsGwGCBKJJUbzkC3y9RStwjsVWoGCBcRZSZznLT9epZePEGeqFTt4qymXZMxVEsN65pDj9Z7Yds7JEXm5tPsM5DGA+k6I43O+G3EPws1PzI1xxMkkuglSL+nPoYAHBBmmuAH1oup288ioA4eD7y3wi5h0ctJDb9qJEGD9FvDOFwhDSJEy3IKfQGHVCuDynuf5nJ5unSG1n9LL4z/FY4IqoSlJTBUAwb0G2u3zEIyVkKTVyZK2kgshMZofmnFC9+y+igewzf4RF9T0o4lw0zRMUc8UFmqZli9M88HIzgxuOTORMXo52ClkO7blNo7EUaXZp6NCE9SfIJ1K+Wme1pUD8wZfRc/DaefFDYoPf0ZJByHwy9cuOLn/1elNSAvkKb79RyU8rO0Lhij55NXeBrpv7w5TxA4I1KvsxcLvqAAjp8UzVlMCvWnvs3A8wp6V68vbu8vYJk8dw2JdizkjSiUwtmoNNtrItUEZ5Au+Wc7+CdvAD6j5dbyOtpmgENWOd7wElDTSNbL2KwK8H6tnCZ7mOZNpyVKSHPhRZTAgHY122WqIdEEfDH8FRgnc+8AbS4LCbMB4whMWf/UTnwwMUTmmdV9peOeu4qus=
+    secure: w74E+NcvARAWmEAKw1o9NQEiPenjpt1X6M2XAmDESuOD0B9SR/gPAJcYJ3ofPpyW9Q+hDA5JbgRpDb/IQJgoT0BtnybkQtTOW3E5YcSTJOUiiFSsrzhyEYWFmAXogiCBsTGCDUxWIJaQiLgbxe0ELno7uPWMkPnnM6UxIbsW0X+VM6OC+jZ3i1twQ/6MQMLA/ssqVYvm1K9Qtj/PYQwXd9KjI6iyqvBiuKA1yASexsbo5fL5KITiwELPRopyxEbII2mTzG6ZE6OXAWoSI2TVy3nFwqg0lwJ7cCA0En7cjruNbjSHyH8eE4/bTlbOB0z4iEJwEfh81hZpBZRYpUcC4BDbOgBDrunGcLRrOsDca7LPmH6GNFWE7m3poW5VmiQitdw3s46VOAHakPwrv4yIa6ppiTyc+I/Gtbng+X09gXhJaVxMjI/mgrBjjQxsjvbk8dDLuz5Cqxq8IjhviWowDKt2SUn+lsVpci0Em/HAZmnWYeRnY7xTbymXN/ZDi0HKYUu1TAKtRTuJDIpih0tGr36xgdIbg9NC5eUw35rLAma11EOumnLIgRkpuP3vCHUC97Hs2lEYHuQDwCqe2Tzd62H1T3vF5zYmZKUyp8uYMUcQvarwqkOAd0HPXHq4hDx5r4HOEzTbkoO0t6FqXEn9XSPYaAiHWclBVUmDqV/1JxE=
   app: voterguidebot
   run:
-    - rake db:migrate
-    - bundle exec rake render:assets
+  - rake db:migrate
+  - bundle exec rake render:assets
   on:
     repo: mojowen/voterguidebot
