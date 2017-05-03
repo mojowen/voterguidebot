@@ -24,7 +24,6 @@ module Publisher
       render_share_image
       render_contests
       render_measures
-      sync_assets
       invalidate_assets
     end
 
