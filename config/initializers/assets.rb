@@ -1,9 +1,12 @@
 
 Rails.application.config.assets.version = '1.0'
 
+def get_file_names(path, extension)
+  assets_base = Rails.root.join('app', 'assets')
+  Dir.glob(File.join(assets_base, path, "*.#{extension}*")).map do |file|
+    "#{file.split('/').last.split('.').first}.#{extension}"
+  end.reject { |file| file.match /application/ }
+end
 
-Rails.application.config.assets.precompile += %w{
-  2016_guide.css guide.css mail.css avg.css avg_img.css
-  avg.js avg_embed.js avg_widget.js
-  emoji.css emoji.min.js
-}
+Rails.application.config.assets.precompile += get_file_names("javascripts", "js")
+Rails.application.config.assets.precompile += get_file_names("stylesheets", "css")
