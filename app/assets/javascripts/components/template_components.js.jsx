@@ -58,7 +58,7 @@ var YouTubeVideo = React.createClass({
     return { video: 'dQw4w9WgXcQ' }
   },
   render: function() {
-    if( !this.props.video === 'no_video' ) return
+    if( this.props.video === 'no_video' ) return null
     return <iframe
       width="240"
       src={"https://www.youtube.com/embed/" + this.props.video}

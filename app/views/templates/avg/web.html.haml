@@ -32,8 +32,9 @@
 .mui-row
   .mui-col-md-3.subnav
     %ul
-      %li
-        %a{ href: '#how_to_vote' } How to Vote
+      - if !guide.field('how_to_vote').empty? && how_to_vote_video(guide)
+        %li
+          %a{ href: '#how_to_vote' } How to Vote
       - unless guide.contests.empty?
         %li
           %a{ href: '#contests' } Offices
@@ -50,13 +51,14 @@
                 %a{ href: "#measure_#{measure.id}" }= measure.title
 
   .mui-col-md-9
-    #how_to_vote
-      %h2 How to Vote
-      - unless guide.field('how_to_vote').empty?
-        %p{ style: 'word-wrap: pre' }= guide.field('how_to_vote')
-      - unless how_to_vote_video(guide)
-        %iframe{ width:"100%", height:"315", frameborder:"0", allowfullscreen: true, src: "https://www.youtube.com/embed/#{how_to_vote_video(guide)}"}
-        %p= link_to 'Watch on Youtube', "https://www.youtube.com/watch?v=#{how_to_vote_video(guide)}"
+    - if !guide.field('how_to_vote').empty? && how_to_vote_video(guide)
+      #how_to_vote
+        %h2 How to Vote
+        - unless guide.field('how_to_vote').empty?
+          %p{ style: 'word-wrap: pre' }= guide.field('how_to_vote')
+        - unless how_to_vote_video(guide)
+          %iframe{ width:"100%", height:"315", frameborder:"0", allowfullscreen: true, src: "https://www.youtube.com/embed/#{how_to_vote_video(guide)}"}
+          %p= link_to 'Watch on Youtube', "https://www.youtube.com/watch?v=#{how_to_vote_video(guide)}"
 
 
     - unless guide.contests.empty?

@@ -4,7 +4,8 @@ module AvgHelper
     if guide.template_name == 'state'
       state_config(guide)['video']
     else
-      guide.field('how_to_vote_video')
+      video = guide.field('how_to_vote_video')
+      video == 'no_video' ? nil : video
     end
   end
 
@@ -12,8 +13,7 @@ module AvgHelper
     if guide.template_name == 'state'
       "https://s3-us-west-2.amazonaws.com/voterguides/states/#{state_config(guide)['pic']}"
     else
-      video = guide.field('header_pic')
-      video == 'no_video' ? nil : video
+      guide.field('header_pic')
     end
   end
 
