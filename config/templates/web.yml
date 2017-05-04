@@ -205,7 +205,7 @@ fields:
         value: ZropUXblV8I
         text: Wyoming
       -
-        value:
+        value: no_video
         text: No video
   -
     label: Header Pic
