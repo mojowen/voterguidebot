@@ -204,6 +204,9 @@ fields:
       -
         value: ZropUXblV8I
         text: Wyoming
+      -
+        value:
+        text: No video
   -
     label: Header Pic
     placeholder: Your logo - will need to work up to 200px
