@@ -206,7 +206,7 @@ fields:
     element: input
     default: americanvoterguide.org
     limit: 100
-    name: The URL of your website
+    name: our_website
   -
     label: Also On Our Website...
     placeholder: The text before the link to your website

@@ -37,9 +37,9 @@ gem 'rubyzip'
 
 gem 'puma'
 gem 'puma_worker_killer'
-gem 'derailed', group: :development
 
 group :development do
+  gem 'derailed'
   gem 'web-console', '~> 2.0'
 end
 

@@ -10,7 +10,7 @@ module Publisher
     def publish
       generate
       complete
-      rescue StandardError => error
+    rescue StandardError => error
       cancel
       raise error
     end
