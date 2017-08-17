@@ -23,7 +23,7 @@
           %th
           %th
       %tbody
-      - Guide.where(active: true).each do |guide|
+      - Guide.full_scoped.where(active: true).each do |guide|
         - next if guide.users.include? current_user
         %tr
           %td.guide

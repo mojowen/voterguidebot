@@ -28,7 +28,7 @@
           %th Location
           %th
       %tbody
-      - current_user.guides.each do |guide|
+      - current_user.guides_included.each do |guide|
         %tr
           %td.guide
             .mui--pull-left.mui--text-left

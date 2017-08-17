@@ -44,6 +44,7 @@ class GuidesController < ApplicationController
   end
 
   def preview
+    @guide = Guide.full_scoped.find(@guide.id)
     render **@guide.template.render.update( locals: { guide: @guide, preview: true } )
   end
 
@@ -104,7 +105,7 @@ class GuidesController < ApplicationController
   end
 
   def find_guide
-    @guide = Guide.find params[:id]
+    @guide = Guide.find(params[:id])
     return redirect_to guides_path unless current_user.can_edit?(@guide)
   end
 end

@@ -4,7 +4,6 @@ class Question < ActiveRecord::Base
   translates :text
   belongs_to :contest
   has_one :guide, through: :contest
-
   has_many :answers, dependent: :destroy, autosave: true
   include Tags
 

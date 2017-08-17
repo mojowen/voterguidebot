@@ -32,17 +32,17 @@ var QuestionsTable = React.createClass({
         <div className="questions--form">
           <h3>Questions</h3>
           <div className="questions--wrap" >
-            <table className="questions" style={{ display: table_display }}>
-              <thead><tr><th></th><th></th>{ questions_headers }</tr></thead>
-              <tbody>{ questions }</tbody>
+            <table className="questions" style={{display: table_display}}>
+              <thead><tr><th></th><th></th>{questions_headers}</tr></thead>
+              <tbody>{questions}</tbody>
             </table>
           </div>
         </div>
       </div>
       <div className="mui-row" >
-        <div className="mui--pull-right" style={{ display: add_display }}>
+        <div className="mui--pull-right" style={{display: add_display}}>
           <AddQuestion ref="add_question"
-                       handleAdd={ this.handleAdd }
+                       handleAdd={this.handleAdd}
                        template={this.props.template} />
         </div>
       </div>

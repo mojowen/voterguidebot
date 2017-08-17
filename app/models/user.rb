@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
       user
   end
 
+  def guides_included
+    guides.index_scoped
+  end
+
   def name
     [first_name, last_name].join(' ')
   end

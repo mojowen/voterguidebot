@@ -26,6 +26,33 @@ class Guide < ActiveRecord::Base
     @template ||= Template.new template_name
   end
 
+  scope :full_scoped, -> () {
+    includes(
+      fields: [:translations],
+      measures: {
+        translations: nil,
+        endorsements: [:translations]
+      },
+      contests: {
+        translations: nil,
+        answers: [:translations],
+        candidates: [:translations],
+        questions: [:translations],
+        endorsements: [:translations]
+      }
+    )
+  }
+
+  scope :index_scoped, -> () {
+    includes(:location,
+              fields: [:translations])
+    .joins(:contests, :measures)
+    .group("guides.id")
+    .select('count(measures.id) as measures_count,
+             count(contests.id) as contests_count,
+             guides.*')
+  }
+
   def start_publishing
     update_attributes published_version: 'publishing'
     Delayed::Job.enqueue PublishJob.new(self)
@@ -90,7 +117,7 @@ class Guide < ActiveRecord::Base
   end
 
   def pages_for(type, check_size: 0)
-    count = send(type).count + check_size
+    count = (respond_to?("#{type}_count") ? send("#{type}_count") : send(type).count) + check_size
     options = template.send(type)['per_page']
     per_page = options.is_a?(Integer) ? options : options['values'][field(options['key'])]
     count * per_page
