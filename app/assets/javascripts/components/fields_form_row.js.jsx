@@ -6,7 +6,7 @@ var FieldFormRow = React.createClass({
              limit: false }
   },
   getInitialState: function() {
-    return { value: this.props.value || '' }
+    return { value: this.props.value }
   },
   getPreview: function() {
     if(!!this.state.value && this.state.value.length ) return this.state.value

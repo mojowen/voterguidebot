@@ -118,7 +118,7 @@ var Candidate = React.createClass({
                           endorsed_type='candidate'
                           endorsed_id={this.props.id}
                           limit={this.template('candidates.supporters.limit')}
-                          limit={this.template('candidates.supporters.max')} />
+                          max={this.template('candidates.supporters.max')} />
           </div>
       if( this.state.disable_close ) {
         icon = 'save fa-pulse',

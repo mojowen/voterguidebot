@@ -20,7 +20,8 @@ var InputComponent = React.createClass({
     autosize(document.querySelectorAll('textarea'))
   },
   value: function() {
-    return this.props.value || this.props.default || ''
+    if( !!!this.props.value ) return this.props.default || ''
+    else return this.props.value || ''
   },
   isValid: function() {
     var valid = this.state.is_valid

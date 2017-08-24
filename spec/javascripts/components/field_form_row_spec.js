@@ -16,7 +16,7 @@ describe('FieldFormRow', function() {
 
   it('empty if no value passed', function() {
     expect(this.dom.querySelector('textarea').value).toEqual('')
-    expect(this.component.state.value).toEqual('')
+    expect(this.component.state.value).toEqual(undefined)
   })
 
   it('shows remaining characters', function() {
