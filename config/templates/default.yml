@@ -77,14 +77,6 @@ fields:
     name: title_page_voter_guide
     default: Voter Guide
   -
-    label: Title Page - Subheader
-    placeholder: The line right below the title, usually reminds people to vote
-    example: Be Sure to Vote By November 8th
-    element: input
-    example_elem: h2
-    limit: 40
-    name: title_page_subheader
-  -
     label: Title Page - Be Sure To Vote By
     placeholder: Text that appears before the election date
     example: Be sure to vote by
@@ -104,14 +96,14 @@ fields:
     label: About Us - Title
     placeholder: The title of the About Us Page
     element: input
-    limit: 18
+    limit: 40
     name: about_us_title
     default: About This Guide
   -
     label: About Us - Subtitle
     placeholder: The subtitle of the About Us Page
     element: input
-    limit: 18
+    limit: 60
     name: about_us_subtitle
     default: About Us
   -
