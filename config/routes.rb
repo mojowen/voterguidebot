@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :guides do
       collection do
         get 'validate'
+        get 'archived'
       end
       member do
         get 'invite'
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
         patch 'users'
         get 'preview'
         post 'publish'
+        delete 'restore'
       end
       resources :languages, only: [:index, :create, :destroy, :show]
       resources :contests, :measures, except: :show do

@@ -1,8 +1,6 @@
 = render 'guides/breadcrumb'
 
 .dashboard
-  - unless @guide.active
-    %h1 GUIDE IS DELETED BUT YOU ARE AN ADMIN SO YOU CAN SEE IT
   .mui-row
     .mui-col-md-12.mui--text-right.menu.slide--menu
       = button_link_to edit_guide_path(@guide), class: 'mui-btn--small' do
@@ -11,7 +9,7 @@
       = button_link_to invite_guide_path(@guide), class: 'mui-btn--small' do
         %i.fa.fa-user-plus.users
         Invite Collaborators
-      = button_link_to guide_path(@guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{@guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
+      = button_link_to guide_path(@guide), { data: { method: :delete, confirm: "Are you sure you want to archive #{@guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
         %i.fa-trash-o.fa
         Delete this Guide
   .mui-row{ style: 'margin-top: 0px' }

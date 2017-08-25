@@ -209,6 +209,19 @@ RSpec.describe GuidesController, active_mocker: true do
       end
     end
 
+    describe '#restore' do
+      let(:guide) { Fabricate :guide, users: [user], active: false }
+      before(:each) { delete :restore, { id: guide.id } }
+
+      it 'archives a guide' do
+        expect(guide.reload.active).to be(true)
+      end
+
+      it 'redirects to guide path' do
+        expect(response).to redirect_to guide_path(guide, locale: :en)
+      end
+    end
+
     describe '#publish' do
       it 'sets the guide published_version to publishing' do
         post :publish, { id: guide.id }
@@ -224,6 +237,14 @@ RSpec.describe GuidesController, active_mocker: true do
         expect do
           post :publish, { id: guide.id }
         end.to change(Delayed::Job, :count).by(1)
+      end
+    end
+
+    describe '#archived' do
+      render_views
+      it 'returns successfully' do
+        get :archived
+        expect(response).to be_success
       end
     end
 

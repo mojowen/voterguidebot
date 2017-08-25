@@ -4,6 +4,9 @@
       = link_to 'Your Guides', root_url
       \/
       All Guides
+      \/
+      = link_to 'Archived Guides', archived_guides_path
+
   .mui-col-md-6
     .mui--pull-right
       = button_link_to 'Your Exports', new_export_path, btn: :primary, class: 'mui-btn--small'
@@ -69,5 +72,5 @@
               = button_link_to guide.published_resource, class: 'mui-btn--small', target: '_blank', btn: :primary do
                 %i.fa-file-pdf-o.fa
           %td
-            = button_link_to guide_path(guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
+            = button_link_to guide_path(guide), { data: { method: :delete, confirm: "Are you sure you want to archive #{guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
               %i.fa-trash-o.fa

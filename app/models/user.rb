@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :permissions
   has_many :guides, -> { where(active: true) }, through: :permissions
+  has_many :archived_guides, -> { where(active: false) }, through: :permissions, source: :guide
   has_many :exports
 
   def self.from_omniauth(access_token)
@@ -23,8 +24,8 @@ class User < ActiveRecord::Base
       user
   end
 
-  def guides_included
-    guides.index_scoped
+  def guides_included(archived: false)
+    archived ? archived_guides : guides.index_scoped
   end
 
   def name
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def can_edit?(guide)
-    admin? || guides.include?(guide)
+    admin? || guides.include?(guide) || archived_guides.include?(guide)
   end
 
   def promote!(promoter)

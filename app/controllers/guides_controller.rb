@@ -1,5 +1,5 @@
 class GuidesController < ApplicationController
-  before_filter :find_guide, except: [:create, :new, :index, :validate]
+  before_filter :find_guide, except: [:create, :new, :index, :validate, :archived]
   before_filter :init_guide, only: [:create, :new]
   before_filter :guide_params, only: [:create, :update]
   before_filter :invite_params, only: :users
@@ -51,6 +51,11 @@ class GuidesController < ApplicationController
   def destroy
     @guide.update_attributes active: false
     redirect_to request.referer || root_path, notice: "#{@guide.name} is 🚮"
+  end
+
+  def restore
+    @guide.update_attributes active: true
+    redirect_to guide_path(@guide), notice: "#{@guide.name} is 🔋"
   end
 
   def publish

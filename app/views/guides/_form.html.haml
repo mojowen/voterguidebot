@@ -27,7 +27,7 @@
 
   .mui-textfield
     = form.label :election_date
-    = form.date_field :election_date, value: guide.election_date || Date.new(2016, 11, 8)
+    = form.date_field :election_date, value: guide.election_date || Date.new(Time.current.year, 11, 8)
 
   - unless guide.template_name.match /state|national/
     .mui-select
@@ -41,7 +41,10 @@
     .mui-select
       %p
         %em Will clone all measures, contests, and fields to your new guide.
-      = select_tag :cloned_id, options_for_select(current_user.guides.uniq.map{ |guide| [guide.name, guide.id] }, selected: params[:cloned_id]), prompt: 'Select guide to clone'
+      - if current_user.admin?
+        = select_tag :cloned_id, grouped_options_for_select({"Active Guides" => Guide.where(active: true).map{ |guide| [guide.name, guide.id] }, "Archived Guides" => Guide.where(active: false).map{ |guide| [guide.name, guide.id] } }, selected: params[:cloned_id]), prompt: 'Select guide to clone'
+      - else
+        = select_tag :cloned_id, grouped_options_for_select({"Active Guides" => current_user.guides.uniq.map{ |guide| [guide.name, guide.id] }, "Archived Guides" => current_user.archived_guides.uniq.map{ |guide| [guide.name, guide.id] } }, selected: params[:cloned_id]), prompt: 'Select guide to clone'
 
   %h2
     %i.fa.fa-map-marker

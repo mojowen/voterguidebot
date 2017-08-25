@@ -1,0 +1,29 @@
+.mui-row
+  .mui-col-md-8.mui-col-md-offset-2
+    %h2
+      = link_to 'Your Guides', root_url
+      - if current_user.admin
+        \/
+        = link_to 'All Guides', guides_path
+      \/
+      Archived Guides
+
+    %table.mui-table{ style: 'font-size: 90%'}
+      %thead
+        %tr
+          %th Guide
+          %th Election Date
+          %th
+      %tbody
+      - (current_user.admin ? Guide.where(active: false) : current_user.guides_included).each do |guide|
+        %tr
+          %td.guide
+            .mui--pull-left.mui--text-left
+              %h4= guide.name.humanize
+          %td.guide
+            = guide.election_date
+          %td
+            = button_link_to restore_guide_path(guide), { data: { method: :delete }, class: 'mui-btn--small', btn: :danger } do
+              %i.fa-rocket.fa
+            = button_link_to new_guide_path(guide, cloned_id: guide.id), { class: 'mui-btn--small', btn: :primary } do
+              %i.fa-clone.fa

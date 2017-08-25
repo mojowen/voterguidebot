@@ -16,7 +16,13 @@
       - if current_user.admin
         \/
         = link_to 'All Guides', guides_path
+      \/
+      = link_to 'Archived Guides', archived_guides_path
 
+    %p
+      Are you missing a guide? It was probably
+      = link_to 'archived', archived_guides_path
+      \- all guides are archived six months after their last election date.
 
     %table.mui-table{ style: 'font-size: 90%'}
       %thead
@@ -65,5 +71,5 @@
             .mui--pull-left.mui--text-left
               = render partial: 'layouts/location', locals: { location: guide.location }
           %td
-            = button_link_to guide_path(guide), { data: { method: :delete, confirm: "Are you sure you want to delete #{guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
+            = button_link_to guide_path(guide), { data: { method: :delete, confirm: "Are you sure you want to archive #{guide.name}?" }, class: 'mui-btn--small', btn: :danger } do
               %i.fa-trash-o.fa
