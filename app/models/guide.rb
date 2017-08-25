@@ -46,7 +46,8 @@ class Guide < ActiveRecord::Base
   scope :index_scoped, -> () {
     includes(:location,
               fields: [:translations])
-    .joins(:contests, :measures)
+    .joins("LEFT JOIN contests ON contests.guide_id = guides.id")
+    .joins("LEFT JOIN measures ON measures.guide_id = guides.id")
     .group("guides.id")
     .select('count(measures.id) as measures_count,
              count(contests.id) as contests_count,
