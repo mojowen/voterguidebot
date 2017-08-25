@@ -3,7 +3,7 @@ var InputComponent = React.createClass({
     return {
       element: 'input',
       type: 'text',
-      value: '',
+      value: null,
       default: null,
       placeholder: null,
       className: '',
