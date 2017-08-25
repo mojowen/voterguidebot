@@ -27,7 +27,6 @@ gem 'aws-sdk'
 gem 'nokogiri', '>= 1.7.1'
 
 gem 'delayed_job_active_record'
-gem 'workless'
 
 gem 'devise', '< 3.5.6'
 gem 'omniauth-google-oauth2'
