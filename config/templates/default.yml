@@ -66,7 +66,7 @@ fields:
     element: input
     example: 2016 Chicago Voter Guide
     example_elem: h1
-    limit: 22
+    limit: 36
     name: title_page_header
   -
     label: Title Page - Voter Guide

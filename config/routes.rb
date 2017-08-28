@@ -45,4 +45,4 @@ Rails.application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 end
 
-Rails.application.routes.default_url_options[:host] = 'http://build.americanvoterguide.org'
+Rails.application.routes.default_url_options[:host] = 'https://build.americanvoterguide.org'

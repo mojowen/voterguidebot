@@ -2,7 +2,7 @@ module Publisher
   class State < AVG
 
     def resource
-      "http://#{bucket}/#{slug}"
+      "https://#{bucket}/#{slug}"
     end
 
     def namespace

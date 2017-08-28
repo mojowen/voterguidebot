@@ -63,8 +63,8 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: 'http://build.americanvoterguide.org' }
-  config.action_mailer.asset_host = 'http://build.americanvoterguide.org'
+  config.action_mailer.default_url_options = { host: 'https://build.americanvoterguide.org' }
+  config.action_mailer.asset_host = 'https://build.americanvoterguide.org'
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -84,7 +84,7 @@ Rails.application.configure do
              sender_address: %{"notifier" <notifier@americanvoterguide.org> },
              exception_recipients: %w{srduncombe@gmail.com} }
 
-  config.action_controller.asset_host = 'http://build.americanvoterguide.org'
+  config.action_controller.asset_host = 'https://build.americanvoterguide.org'
   config.paperclip_defaults = {
     storage: :s3,
     s3_host_name: "s3-#{ENV.fetch('AWS_REGION')}.amazonaws.com",
