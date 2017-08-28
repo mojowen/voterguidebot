@@ -129,7 +129,7 @@ p
       text-align: center
 
     &.name
-      text-align: right
+      text-align: left
       width: 26%
       p
         font-size: 10px
@@ -201,11 +201,18 @@ p
         font-size: 10px
 
 .candidates
+  .desc
+    height: 2rem
+    vertical-align: text-bottom
+
   &.count--2
-    .desc
-      padding-bottom: 4px
     .candidate
       padding: 0 0 16px
+      div
+        height: 84px
+        .img
+          @include frame(90px)
+
       &.small
         padding: 4px 0
         margin-top: 0
