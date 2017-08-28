@@ -111,7 +111,7 @@ fields:
     placeholder: A note about your organization and what you do
     example: New Era Colorado Action Fund is a local non-partisan, non-profit organization reinventing politics for our generation through innovative social and political action. We inspire young Coloradans to move our state forward, engaging our generation in our city- and state-level democracy. New Era Colorado Action Fund is a 501(c)4 non-profit organization. You can learn more or sign up to volunteer at NewEraColoradoAction.org.
     element: textarea
-    limit: 302
+    limit: 500
     name: about_us_blurb
   -
     label: About Us - Logo
@@ -160,7 +160,7 @@ fields:
     placeholder: A paragraph explaining what you need to bring to vote
     example: To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some form of identification. Options for what you can bring to prove identity and residency.
     element: textarea
-    limit: 230
+    limit: 480
     name: what_you_got_to_bring
   -
     label: How To Vote - Where You've Gotta Go Title
