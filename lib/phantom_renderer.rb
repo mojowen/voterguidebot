@@ -31,7 +31,7 @@ class PhantomRenderer
     raise "Could not render #{rendered_filepath} #{phantom}" if $?.exitstatus != 0
   end
 
-  def command(height: nil, width: nil, margin: 0)
+  def command(height: nil, width: nil, margin: nil)
     [render_script, path_to_file, rendered_filepath, width, height, margin].join(' ')
   end
 

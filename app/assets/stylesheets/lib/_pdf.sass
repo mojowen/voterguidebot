@@ -19,9 +19,11 @@ p, h1, h2, h3, h4, h5
 h1, h2, h3, h4
   text-transform: uppercase
   font-weight: lighter
+  font-family: Spinnaker, sans-serif
 
 h3
   color: $pink
+  font-family: Spinnaker, sans-serif
   text-transform: uppercase
   font-size: 16px
   font-weight: normal
@@ -58,6 +60,7 @@ p
 .contest .content
   top: 40px
   bottom: 0px
+  padding: 10px 0 0
 
 .section
   margin: 20px 0
@@ -81,10 +84,13 @@ p
     right: $margin
     white-space: nowrap
     overflow: hidden
+    font-family: Spinnaker, sans-serif
   h2
-    top: 26px
+    top: 18px
     font-size: 18px
     color: white
+  h4 + h2
+    top: 26px
   h4
     font-size: 12px
     text-transform: lowercase
@@ -103,8 +109,9 @@ p
 
   &.footer_2
     height: $margin
-    background-image: asset-data-url('guide/vote_here.png')
-    background-position: center middle
+    background-image: asset-url('vote_here.jpg')
+    background-position: 100% 44%
+    background-size: 100% 350%
 
 .candidates
   margin: 0
@@ -119,6 +126,14 @@ p
     vertical-align: top
     margin: 4px 10px 4px 0
     height: 68px
+    &.name, &.third
+      flex-direction: column
+      justify-content: center
+      display: flex
+      table, td
+        vertical-align: middle
+        height: 100%
+
     &.third
       max-width: 44%
       p
@@ -134,7 +149,7 @@ p
       p
         font-size: 10px
       h3
-        line-height: 14px
+        line-height: 1.2em
       .party
         font-size: 10px
         font-style: italic
@@ -288,7 +303,7 @@ p
   right: 40px
   th
     h3
-      font-size: 6px
+      font-size: 9px
       white-space: nowrap
     padding: 0 4px 10px
     &.stance
@@ -298,7 +313,7 @@ p
       text-align: left
       vertical-align: bottom
     .img
-      @include frame(26px)
+      @include frame(32px)
       vertical-align: top
     text-align: center
     font-size: 12px
@@ -308,6 +323,7 @@ p
       background: $fuzzy_blue
   td
     min-width: 44px
+    padding: 0 4px
     &.question
       min-width: 140px
       text-align: left
@@ -392,12 +408,13 @@ p
         width: 40px
 
 .title
-  background: transparent asset-data-url('guide/vote_here.png') center center no-repeat
-  background-size: cover
+  // background: transparent asset-url('guide/vote_here.png') center center no-repeat
+  background: transparent asset-url('vote_here.jpg') bottom right no-repeat
+  background-size: 140%
   .box
-    border: 40px solid rgba(white, 0.75)
+    border: 40px solid rgba(white, 0.9)
   .inner
-    background: rgba($blue, 0.75)
+    background: rgba($blue, 0.9)
     padding: 20px 0
     color: white
     text-align: center
@@ -410,13 +427,21 @@ p
     h1, h2
       padding-bottom: 10px
       font-size: 18px
+      font-family: Spinnaker, sans-serif
     h1
       font-size: 20px
-      &.big
+      margin-bottom: 10px
+      &.big, &.center
         font-size: 90px
         line-height: 80px
         font-weight: normal
-        text-shadow: $pink -2px 2px 0px
+      &.center
+        font-family: Mensch-inline, sans-serif
+        margin: -1.93em 0 0 0.1em
+      &.big
+        font-family: Mensch-bold, sans-serif
+        color: $pink
+        margin-bottom: 0
 
 .back
   border: 30px rgba(255, 255, 255, 0.5) solid

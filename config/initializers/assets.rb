@@ -10,3 +10,4 @@ end
 
 Rails.application.config.assets.precompile += get_file_names("javascripts", "js")
 Rails.application.config.assets.precompile += get_file_names("stylesheets", "css")
+Rails.application.config.assets.precompile += %w(emoji.min.js)

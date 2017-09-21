@@ -3,6 +3,24 @@
 <title>Preview</title>
 
 <style type="text/css">
+  @font-face {
+    font-family: "Mensch-bold";
+    src: url("https://s3-us-west-2.amazonaws.com/americanvoterguide.org/fonts/mensch-bold.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Mensch-inline";
+    src: url("https://s3-us-west-2.amazonaws.com/americanvoterguide.org/fonts/mensch-inline.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Spinnaker";
+    src: url("https://s3-us-west-2.amazonaws.com/americanvoterguide.org/fonts/Spinnaker-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
   h3 {
     color: <%= guide.field('secondary_color') %>;
   }
@@ -46,4 +64,4 @@
     }
   </style>
 <% end %>
-<%= render 'templates/emoji' %>
+<%= render 'templates/emoji', preview: preview %>

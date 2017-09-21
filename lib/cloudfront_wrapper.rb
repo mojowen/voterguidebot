@@ -14,6 +14,7 @@ class CloudfrontWrapper
   end
 
   def invalidate!
+    return false if paths.empty?
     cloudfront.create_invalidation({
       distribution_id: distribution,
       invalidation_batch: {

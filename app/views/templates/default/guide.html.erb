@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style type="text/css">
-    <%= to_asset_string('guide.css') %>
-  </style>
+  <% if preview %>
+    <link rel="stylesheet" type="text/css" href="<%= asset_path('guide.css') %>">
+  <% else %>
+    <style type="text/css">
+      <%= to_asset_string('guide.css') %>
+    </style>
+  <% end %>
   <%= render guide.template.template_file_path('header'), guide: guide, preview: preview %>
 </head>
 <body>

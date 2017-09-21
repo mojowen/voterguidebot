@@ -16,22 +16,38 @@
           <tr>
             <td class="candidate">
               <div class="name">
-                <h3><%= candidate.name %></h3>
-                <span class="party"><%= candidate.party %></span>
-                <p><%= candidate.bio %></p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h3><%= candidate.name %></h3>
+                        <span class="party"><%= candidate.party %></span>
+                        <p><%= candidate.bio %></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div class="photo">
                 <%= render guide.template.template_file_path('photo'), candidate: candidate %>
               </div>
               <div class="third">
-                <% unless candidate.endorsements.empty? %>
-                  <p><em><%= guide.field('supported_by') %></em></p>
-                  <ul class="endorsements">
-                    <% candidate.endorsements.each do |endorsement| %>
-                      <li><%= endorsement.endorser %></li>
-                    <% end %>
-                  </ul>
-                <% end %>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <% unless candidate.endorsements.empty? %>
+                          <p><em><%= guide.field('supported_by') %></em></p>
+                          <ul class="endorsements">
+                            <% candidate.endorsements.each do |endorsement| %>
+                              <li><%= endorsement.endorser %></li>
+                            <% end %>
+                          </ul>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </td>
           </tr>
