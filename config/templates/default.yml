@@ -40,7 +40,7 @@ candidates:
     limit: 75
   supporters:
     limit: 35
-    max: 3
+    max: 4
 
 measures:
   per_page: 1
