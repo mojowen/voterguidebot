@@ -40,7 +40,7 @@ candidates:
     limit: 75
   supporters:
     limit: 35
-    max: 3
+    max: 4
 
 measures:
   per_page: 1
@@ -211,7 +211,7 @@ fields:
     placeholder: Disclaimer that will go on the back of the voter guide.
     example: Paid for by Forward Montana, Rachel Huff-Doria, Treasurer. 136 E Broadway, Missoula, MT 59802
     element: input
-    limit: 150
+    limit: 400
     name: disclaimer
   -
     label: Contest - Title
