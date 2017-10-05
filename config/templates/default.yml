@@ -89,8 +89,6 @@ fields:
     placeholder: A little bit about voting and the guide
     example: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
     element: textarea
-    example_elem: MarkdownBlob
-    example_attr: markdown
     limit: 120
     name: title_page_blurb
     default: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
@@ -112,7 +110,7 @@ fields:
     label: About Us - Blurb
     placeholder: A note about your organization and what you do
     example: New Era Colorado Action Fund is a local non-partisan, non-profit organization reinventing politics for our generation through innovative social and political action. We inspire young Coloradans to move our state forward, engaging our generation in our city- and state-level democracy. New Era Colorado Action Fund is a 501(c)4 non-profit organization. You can learn more or sign up to volunteer at NewEraColoradoAction.org.
-    element: textarea
+    element: MarkdownTextarea
     example_elem: MarkdownBlob
     example_attr: markdown
     limit: 500
@@ -163,7 +161,7 @@ fields:
     label: What You've Got to Bring To Vote
     placeholder: A paragraph explaining what you need to bring to vote
     example: To avoid issues on Election Day, or if you are a first time voter, we recommend you bring some form of identification. Options for what you can bring to prove identity and residency.
-    element: textarea
+    element: MarkdownTextarea
     example_elem: MarkdownBlob
     example_attr: markdown
     limit: 480
@@ -180,7 +178,7 @@ fields:
     label: Where You've Got To Go
     placeholder: A paragraph explaining where you need to go to vote
     example: From February 29 through March 12, all 51 Early Voting sites will be open Monday through Saturday from 9am - 5pm. Go to chicagoelections.com to find a location near you. Please bring a government photo ID during early voting. For both “Grace Period” and “Early Voting” you will register and vote in the same day. To find polling locations for Election Day or early voting go to chicagoelections.com
-    element: textarea
+    element: MarkdownTextarea
     example_elem: MarkdownBlob
     example_attr: markdown
     limit: 450
@@ -197,7 +195,7 @@ fields:
     label: Find Out More
     placeholder: A paragraph explaining the guide and pointing to more information
     example: This independent voter guide is designed to give you the quickest, most important information on what you’re facing on your ballot and why it’s important to vote. But obviously there’s a lot more  information out there. If you’re looking to read more, we highly encourage checking out our bigger, online guide
-    element: textarea
+    element: MarkdownTextarea
     example_elem: MarkdownBlob
     example_attr: markdown
     limit: 350

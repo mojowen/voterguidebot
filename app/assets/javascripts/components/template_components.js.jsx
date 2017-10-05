@@ -110,6 +110,28 @@ var FooterImage = React.createClass({
   }
 })
 
+var MarkdownTextarea = React.createClass({
+  getDefaultProps: function() {
+    return { onChange: function() { } }
+  },
+  render: function() {
+    console.log(this.props)
+    return <div className="mui-textfield" style={{ paddingTop: '0px' }}>
+      <p style={{ fontSize: '8px' }}>
+        <em>
+          <strong>Pro-Tip</strong>:
+          This field now supports Markdown - check out this
+          &nbsp;<a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">cheatsheet</a> and
+          &nbsp;<a target="_blank" href="https://www.markdowntutorial.com/">tutorial</a>
+        </em>
+      </p>
+      <textarea onChange={this.props.onChange}
+                value={this.props.value}
+                placeholder={this.props.placeholder}
+                className={this.props.className} />
+    </div>
+  }
+})
 var MarkdownBlob = React.createClass({
   getDefaultProps: function() {
     return { markdown: '',
@@ -119,18 +141,8 @@ var MarkdownBlob = React.createClass({
     return this.props.showdown.makeHtml(this.props.markdown)
   },
   render: function() {
-    return <div>
-      <div className="markdown-preview"
-           dangerouslySetInnerHTML={{ __html: this.getHTML() }}></div>
-      <p style={{ fontSize: '8px' }}>
-        <em>
-          <strong>Pro-Tip</strong>:
-          This field now supports Markdown - check out this
-          &nbsp;<a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">cheatsheet</a> and
-          &nbsp;<a target="_blank" href="https://www.markdowntutorial.com/">tutorial</a>
-        </em>
-      </p>
-    </div>
+    return <div className="markdown-preview"
+                dangerouslySetInnerHTML={{ __html: this.getHTML() }}></div>
   }
 })
 
