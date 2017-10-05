@@ -110,6 +110,30 @@ var FooterImage = React.createClass({
   }
 })
 
+var MarkdownBlob = React.createClass({
+  getDefaultProps: function() {
+    return { markdown: '',
+             showdown: new showdown.Converter() }
+  },
+  getHTML: function() {
+    return this.props.showdown.makeHtml(this.props.markdown)
+  },
+  render: function() {
+    return <div>
+      <div className="markdown-preview"
+           dangerouslySetInnerHTML={{ __html: this.getHTML() }}></div>
+      <p style={{ fontSize: '8px' }}>
+        <em>
+          <strong>Pro-Tip</strong>:
+          This field now supports Markdown - check out this
+          &nbsp;<a target="_blank" href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">cheatsheet</a> and
+          &nbsp;<a target="_blank" href="https://www.markdowntutorial.com/">tutorial</a>
+        </em>
+      </p>
+    </div>
+  }
+})
+
 var HeaderImage = React.createClass({
   getDefaultProps: function() {
     return { img: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg' }

@@ -36,6 +36,7 @@ gem 'rubyzip'
 
 gem 'puma'
 gem 'puma_worker_killer'
+gem 'redcarpet'
 
 group :development do
   gem 'derailed'

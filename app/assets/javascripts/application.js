@@ -2,6 +2,7 @@
 //= require react
 //= require react_ujs
 //= require vanilla-ujs
+//= require showdown
 //= require underscore
 //= require superagent
 //= require dropzone

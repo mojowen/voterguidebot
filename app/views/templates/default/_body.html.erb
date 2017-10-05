@@ -21,7 +21,7 @@
   <div class="content about-us">
     <div class="section">
       <h3><%= guide.field('about_us_subtitle') %></h3>
-      <p><%= guide.field('about_us_blurb') %></p>
+      <%= raw markdown(guide.field('about_us_blurb')) %>
       <%= image_tag guide.field('about_us_logo'), class: 'logo' %>
     </div>
   </div>
@@ -43,11 +43,11 @@
   <div class="content how-to">
     <div class="section">
       <h3><%= guide.field('what_you_got_to_bring_title') %></h3>
-      <p><%= guide.field('what_you_got_to_bring') %></p>
+      <%= raw markdown(guide.field('what_you_got_to_bring')) %>
     </div>
     <div class="section">
       <h3><%= guide.field('where_you_got_to_go_title') %></h3>
-      <p><%= guide.field('where_you_got_to_go') %></p>
+      <%= raw markdown(guide.field('where_you_got_to_go')) %>
     </div>
   </div>
   <div class="footer footer_2"></div>

@@ -314,6 +314,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    redcarpet (3.4.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     reverse_parameters (0.4.0)
@@ -428,6 +429,7 @@ DEPENDENCIES
   puma_worker_killer
   rails (= 4.2.2)
   react-rails
+  redcarpet
   rspec-rails
   rubyzip
   sass-rails (~> 5.0)

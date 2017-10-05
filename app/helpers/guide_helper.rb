@@ -9,7 +9,17 @@ module GuideHelper
     asset_string = get_asset(asset)
     asset.downcase.match(/svg/) ? URI.encode(asset_string) : asset_string
   end
-  
+
+  def markdown(blurb)
+    renderer = Redcarpet::Render::HTML.new(
+      no_links: true,
+      filter_html: true,
+      hard_wrap: true
+    )
+    markdown = Redcarpet::Markdown.new(renderer)
+    markdown.render(blurb)
+  end
+
   private
 
   def get_asset(asset)
