@@ -302,7 +302,23 @@ fields:
     example_elem: h4
     limit: 20
     name: measure_recommended
-    default: 'Recommended:'
+    default: 'Recommended Vote:'
+  -
+    label: Measure - Recommend Yes
+    placeholder: Will appear if recommending Yes
+    element: input
+    example_elem: h5
+    limit: 5
+    name: measure_recommended_afirm
+    default: 'Yes'
+  -
+    label: Measure - Recommend No
+    placeholder: Will appear if recommending No
+    element: input
+    example_elem: h5
+    limit: 5
+    name: measure_recommended_neg
+    default: 'No'
   -
     label: Primary Color
     element: input

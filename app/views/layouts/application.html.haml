@@ -27,8 +27,8 @@
                 %span{ style: 'margin: 10px' }
                   Hey
                   = current_user.first_name
-                = image_tag current_user.pic
-                = link_to 'log out', destroy_user_session_path, method: :delete, style: 'font-size: 8px; display: block; margin-right: 46px; margin-top: -8px;'
+                = image_tag current_user.pic, style: 'margin-bottom: -20px'
+                = link_to 'log out', destroy_user_session_path, method: :delete, style: 'font-size: 8px; display: block; margin-right: 46px; margin-top: -2px;'
     #content
       .mui-container
         - if content_for :outside
