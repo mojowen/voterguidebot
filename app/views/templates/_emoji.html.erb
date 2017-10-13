@@ -17,7 +17,7 @@
   window.onload = function() {
     Array.prototype.forEach.call(
       document.body.querySelectorAll('p'),
-      function(el) { el.innerHTML = emoji.replace_unified(el.innerText) }
+      function(el) { el.innerHTML = emoji.replace_unified(el.innerHTML) }
     )
   }
 </script>
