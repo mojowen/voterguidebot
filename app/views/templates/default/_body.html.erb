@@ -53,26 +53,15 @@
   <div class="footer footer_2"></div>
 </div>
 <div class="page back">
+  <div class="header"></div>
   <div class="content">
     <div class="section">
-      <h2><%= guide.field('find_out_more_title') %></h2>
-      <p><%= guide.field('find_out_more') %></p>
-      <p>
+      <h2 style="white-space: pre"><%= guide.field('mailing_address') %></h2>
     </div>
-    <div class="section">
-      <p><%= guide.field('also_on_our_website') %></p>
-      <br />
-      <strong>
-        <% if guide.field('our_website') %>
-          <%= guide.field('our_website') %>
-        <% else %>
-          www.americanvoterguide.org/<%= guide.location.state_slug %>
-        <% end %>
-      </strong>
-    </div>
-    <p>
+  </div>
+  <div class="footer">
     <% unless guide.field('disclaimer').empty? %>
-      <div class="disclaimer"><%= guide.field('disclaimer') %></div>
+      <%= guide.field('disclaimer') %>
     <% end %>
   </div>
 </div>

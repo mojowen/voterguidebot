@@ -41,7 +41,38 @@ p
   background: white
   display: block
   position: relative
-  overflow: hidden
+//   overflow: hidden
+//   margin: $bleed
+//   .marks
+//     content: ''
+//     display: block
+//     position: absolute
+//     height: $bleed
+//     width: $bleed
+//     border: 1px solid transparent
+//     &.marks--0
+//       left: -$bleed
+//       top: -$bleed
+//       border-right-color: black
+//       border-bottom-color: black
+//     &.marks--1
+//       left: -$bleed
+//       bottom: -$bleed
+//       border-right-color: black
+//       border-top-color: black
+//     &.marks--2
+//       right: -$bleed
+//       top: -$bleed
+//       border-left-color: black
+//       border-bottom-color: black
+//     &.marks--3
+//       right: -$bleed
+//       bottom: -$bleed
+//       border-left-color: black
+//       border-top-color: black
+
+// .page + .page
+//   margin-top: $bleed * 2
 
 .full
   position: absolute
@@ -114,7 +145,7 @@ p
     background-size: 100% 350%
 
 .candidates
-  margin: 0
+  margin: 0.5rem 0 0
   width: 100%
   td
     border: 1px solid transparent
@@ -160,10 +191,22 @@ p
   ul
     margin: 0
     padding-left: 20px
+    list-style: none
     li
       margin: 0
       font-size: 11px
       line-height: 12px
+      position: relative
+      &:before
+        border-radius: 3px
+        height: 3px
+        width: 3px
+        background-color: black
+        content: ''
+        display: block
+        top: 50%
+        left: -10px
+        position: absolute
 
   &.small
     max-height: 80px
@@ -217,7 +260,7 @@ p
 
 .candidates
   .desc
-    height: 2rem
+    height: 3rem
     vertical-align: text-bottom
 
   &.count--2
@@ -238,6 +281,8 @@ p
             line-height: 8px
 
   &.count--3
+    .desc
+      height: 2rem
     .img
       @include frame(64px)
     .small
@@ -246,10 +291,18 @@ p
         @include frame(50px)
 
   &.count--4
+    .desc
+      height: 1.5rem
     div
       height: 50px
       .img
         @include frame(50px)
+    .third
+      p
+        margin-top: -10px
+      li
+        font-size: 8px
+        line-height: 9px
     .small
       width: 24%
       .name
@@ -276,7 +329,7 @@ p
           font-size: 9px
           padding: 1px 2px
           &.question
-            min-width: 80px
+            min-width: 320px
 
   .questions
     left: auto
@@ -326,7 +379,7 @@ p
     min-width: 44px
     padding: 0 4px
     &.question
-      min-width: 140px
+      min-width: 280px
       text-align: left
       padding: 4px
     text-align: center
@@ -336,9 +389,11 @@ p
   table
     width: $width - $margin * 2
     margin: 0 auto
+  .header
+    position: relative
   .content
     position: relative
-    margin: 60px 20px 0
+    margin: 0 20px 0
     padding: 0
     top: auto
     left: auto
@@ -376,23 +431,40 @@ p
       min-width: 196px
       vertical-align: top
       padding: 0 10px
-      ul, p
-        font-size: 10px
+      p
+        font-size: 12px
+        font-weight: bold
       ul
+        font-size: 11px
         margin: 4px 0 0 20px
         padding-left: 0
+        list-style: none
+        position: relative
+        li
+          position: relative
+          &:before
+            border-radius: 3px
+            height: 3px
+            width: 3px
+            background-color: black
+            content: ''
+            display: block
+            top: 50%
+            left: -10px
+            position: absolute
     &.recommended
+      margin-top: 16px
       h3
-        margin-right: 20px
+        margin-right: 40px
       h3, span, img
         display: inline-block
       .recommendation
         color: $blue
-        font-size: 16px
+        font-size: 18px
         padding-top: 10px
       img
-        height: 20px
-        margin-bottom: -4px
+        height: 34px
+        margin-bottom: -10px
 .about-us
   .logo
     max-width: 200px
@@ -417,7 +489,7 @@ p
   .box
     border: 40px solid rgba(white, 0.9)
   .inner
-    background: rgba($blue, 0.9)
+    background: rgba($blue, 0.9) // Overwritten by _header
     padding: 20px 0
     color: white
     text-align: center
@@ -425,8 +497,9 @@ p
     p
       font-size: 14px
       padding: 0 70px
+      font-weight: 600
     h2
-      font-weight: bold
+      font-weight: 800
     h1, h2
       padding-bottom: 10px
       font-size: 18px
@@ -434,6 +507,7 @@ p
     h1
       font-size: 20px
       margin-bottom: 10px
+      font-weight: bold
       &.big, &.center
         font-size: 90px
         line-height: 80px
@@ -447,19 +521,18 @@ p
         margin-bottom: 0
 
 .back
-  border: 30px rgba(255, 255, 255, 0.5) solid
-  background: $blue
-  color: white
-  .content
-    top: 20px
-  .disclaimer
+  .footer
+    background-color: $pink
     position: absolute
-    bottom: -$margin/1.5
+    bottom: 0
     left: 0
-    width: 100%
-    border: 1px solid black
-    background: white
-    font-size: 9px
-    padding: 4px
-    color: black
+    right: 0
+    height: $margin * 2
+    text-align: center
+    font-size: 16px
+    color: white
+    padding: 2rem 1rem
+  h2
+    font-weight: bold
+    white-space: pre
 

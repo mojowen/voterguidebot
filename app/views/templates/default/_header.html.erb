@@ -31,7 +31,7 @@
     background-color: <%= guide.field('primary_color') %>;
   }
   .title .inner {
-    background: <%= to_rgba(guide.field('primary_color'), 0.75) %>;
+    background: <%= to_rgba(guide.field('primary_color'), 0.85) %>;
   }
   .questions tbody tr:nth-child(odd) {
     background: <%= to_rgba(guide.field('primary_color'), 0.20) %>;
@@ -46,8 +46,9 @@
   .measure .section .recommendation {
     color: <%= guide.field('primary_color') %>;
   }
-  .back {
-    background: <%= guide.field('primary_color') %>;
+  .back h2 { color: <%= guide.field('primary_color') %>; }
+  .back .footer {
+    background-color: <%= guide.field('secondary_color') %>;
   }
 </style>
 <% if preview %>
@@ -57,6 +58,7 @@
     }
     body {
       background: #999;
+      margin-bottom: 50px
     }
     .page {
         margin: 20px auto 0;
@@ -65,3 +67,24 @@
   </style>
 <% end %>
 <%= render 'templates/emoji', preview: preview %>
+
+<script type="text/javascript">
+  window.onload = function() {
+    Array.prototype.forEach.call(
+      document.body.querySelectorAll('p'),
+      function(el) { if( emoji ) el.innerHTML = emoji.replace_unified(el.innerHTML) }
+    )
+    <% unless true || preview %>
+      Array.prototype.forEach.call(
+        document.body.querySelectorAll('.page'),
+        function(el) {
+          for(var i = 0; i < 4; i++) {
+            var marks = document.createElement('i')
+            marks.className = 'marks marks--'+i
+            el.appendChild(marks)
+          }
+        }
+      )
+    <% end %>
+  }
+</script>

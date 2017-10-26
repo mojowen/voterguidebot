@@ -7,17 +7,11 @@
 <% if preview %>
   <script type="text/javascript" src="<%= asset_path('emoji.min.js') %>"></script>
 <% end %>
+
 <script type="text/javascript">
   <% unless preview %>
     <%= raw to_asset_string('emoji.min.js') %>
   <% end %>
   var emoji = new EmojiConvertor()
   emoji.img_sets.apple.path = 'https://s3-us-west-2.amazonaws.com/voterguides/img-apple-64/'
-
-  window.onload = function() {
-    Array.prototype.forEach.call(
-      document.body.querySelectorAll('p'),
-      function(el) { el.innerHTML = emoji.replace_unified(el.innerHTML) }
-    )
-  }
 </script>

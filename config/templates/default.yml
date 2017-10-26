@@ -12,9 +12,9 @@ publisher_resource: voter-guide.pdf
 publisher_type: pdf
 
 render_options:
-  height: 4.25in
-  width: 6.25in
-  margin: 0.125in
+  height: 4.75in
+  width: 6.75in
+  margin: 0.25in
 
 contests:
   partial: contest_large
@@ -184,36 +184,12 @@ fields:
     limit: 450
     name: where_you_got_to_go
   -
-    label: Find Out More - Title
-    placeholder: The title of Find Out More section
-    element: input
-    example_elem: h2
-    limit: 20
-    name: find_out_more_title
-    default: Find Out More
-  -
-    label: Find Out More
-    placeholder: A paragraph explaining the guide and pointing to more information
-    example: This independent voter guide is designed to give you the quickest, most important information on what you’re facing on your ballot and why it’s important to vote. But obviously there’s a lot more  information out there. If you’re looking to read more, we highly encourage checking out our bigger, online guide
-    element: MarkdownTextarea
-    example_elem: MarkdownBlob
-    example_attr: markdown
-    limit: 350
-    name: find_out_more
-  -
-    label: Our Website
-    placeholder: guide
-    element: input
-    default: americanvoterguide.org
-    limit: 100
-    name: our_website
-  -
-    label: Also On Our Website...
-    placeholder: The text before the link to your website
-    element: input
-    limit: 45
-    name: also_on_our_website
-    default: 'Also a lot more good info at our website:'
+    label: Mailing Address
+    placeholder: The mailing address on the back of the guide
+    example: "My Organization\n1234 Sesame St\nNew York, NY 010203"
+    element: textarea
+    limit: 500
+    name: mailing_address
   -
     label: Disclaimer
     placeholder: Disclaimer that will go on the back of the voter guide.
