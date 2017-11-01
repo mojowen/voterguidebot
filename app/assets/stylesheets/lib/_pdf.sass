@@ -35,44 +35,71 @@ p, div
 p
   line-height: 14px
 
+.full-page
+  height: $height + $bleed * 2
+  width: $width + $bleed * 2
+  padding: $bleed
+  position: relative
+  .marks
+    content: ''
+    display: block
+    position: absolute
+    height: $bleed
+    width: $bleed
+    border: 1px solid transparent
+    &.marks--0
+      &.up
+        left: 0
+        top: 0
+        border-right-color: #333
+        border-bottom-color: #333
+      &.down
+        left: $bleed - 1px
+        top: $bleed - 1px
+        border-left-color: #333
+        border-top-color: #333
+    &.marks--1
+      &.up
+        left: 0
+        bottom: 0
+        border-right-color: #333
+        border-top-color: #333
+      &.down
+        left: $bleed - 1px
+        bottom: $bleed - 1px
+        border-left-color: #333
+        border-bottom-color: #333
+    &.marks--2
+      &.up
+        right: 0
+        top: 0
+        border-left-color: #333
+        border-bottom-color: #333
+      &.down
+        right: $bleed - 1px
+        top: $bleed - 1px
+        border-right-color: #333
+        border-top-color: #333
+    &.marks--3
+      &.up
+        right: 0
+        bottom: 0
+        border-left-color: #333
+        border-top-color: #333
+      &.down
+        right: $bleed - 1px
+        bottom: $bleed - 1px
+        border-right-color: #333
+        border-bottom-color: #333
+
+
 .page
   height: $height
   width: $width
   background: white
   display: block
   position: relative
-//   overflow: hidden
-//   margin: $bleed
-//   .marks
-//     content: ''
-//     display: block
-//     position: absolute
-//     height: $bleed
-//     width: $bleed
-//     border: 1px solid transparent
-//     &.marks--0
-//       left: -$bleed
-//       top: -$bleed
-//       border-right-color: black
-//       border-bottom-color: black
-//     &.marks--1
-//       left: -$bleed
-//       bottom: -$bleed
-//       border-right-color: black
-//       border-top-color: black
-//     &.marks--2
-//       right: -$bleed
-//       top: -$bleed
-//       border-left-color: black
-//       border-bottom-color: black
-//     &.marks--3
-//       right: -$bleed
-//       bottom: -$bleed
-//       border-left-color: black
-//       border-top-color: black
-
-// .page + .page
-//   margin-top: $bleed * 2
+  overflow: hidden
 
 .full
   position: absolute
@@ -191,22 +218,11 @@ p
   ul
     margin: 0
     padding-left: 20px
-    list-style: none
     li
       margin: 0
-      font-size: 11px
+      font-size: 6px
       line-height: 12px
       position: relative
-      &:before
-        border-radius: 3px
-        height: 3px
-        width: 3px
-        background-color: black
-        content: ''
-        display: block
-        top: 50%
-        left: -10px
-        position: absolute
 
   &.small
     max-height: 80px
@@ -301,8 +317,11 @@ p
       p
         margin-top: -10px
       li
-        font-size: 8px
+        font-size: 6px
         line-height: 9px
+        span
+          font-size: 8px
+
     .small
       width: 24%
       .name

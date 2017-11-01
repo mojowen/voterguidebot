@@ -14,7 +14,7 @@ publisher_type: pdf
 render_options:
   height: 4.75in
   width: 6.75in
-  margin: 0.25in
+  margin: 0in
 
 contests:
   partial: contest_large

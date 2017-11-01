@@ -74,14 +74,25 @@
       document.body.querySelectorAll('p'),
       function(el) { if( emoji ) el.innerHTML = emoji.replace_unified(el.innerHTML) }
     )
-    <% unless true || preview %>
+
+    <% unless preview %>
       Array.prototype.forEach.call(
         document.body.querySelectorAll('.page'),
         function(el) {
+          var parent = el.parentElement,
+              container = document.createElement('div')
+
+          container.className = 'full-page'
+          parent.insertBefore(container, el)
+          container.appendChild(el)
+
           for(var i = 0; i < 4; i++) {
-            var marks = document.createElement('i')
-            marks.className = 'marks marks--'+i
-            el.appendChild(marks)
+            var marks_up = document.createElement('i'),
+                marks_down = document.createElement('i')
+            marks_up.className = 'marks up marks--'+i
+            marks_down.className = 'marks down marks--'+i
+            container.appendChild(marks_up)
+            container.appendChild(marks_down)
           }
         }
       )

@@ -27,8 +27,12 @@ module Publisher
     end
 
     def generate
+      make.upload key: s3_key
+    end
+
+    def make
       html
-      pdf.upload key: s3_key
+      pdf
     end
 
     def clean
