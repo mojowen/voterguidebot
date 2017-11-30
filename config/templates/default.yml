@@ -87,11 +87,11 @@ fields:
   -
     label: Title Page - Blurb
     placeholder: A little bit about voting and the guide
-    example: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
+    example: Your secret ballot means your vote is your choice. But hopefully this independent, nonprofit info helps.
     element: textarea
     limit: 120
     name: title_page_blurb
-    default: Your secret ballot means it’s all yours to decide. But hopefully this independent local nonprofit-prepared info helps.
+    default: Your secret ballot means your vote is your choice. But hopefully this independent, nonprofit info helps.
   -
     label: About Us - Title
     placeholder: The title of the About Us Page

@@ -26,7 +26,10 @@
                     <em><%= guide.field('supported_by') %></em>
                     <ul class="endorsements">
                       <% candidate.endorsements.each do |endorsement| %>
-                        <li><%= endorsement.endorser %></li>
+                        <li>
+                          <div class="before"></div>
+                          <%= endorsement.endorser %>
+                        </li>
                       <% end %>
                     </ul>
                   </div>

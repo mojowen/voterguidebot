@@ -29,7 +29,10 @@
               <p><%= guide.field('measures_who_says_yes') %></p>
               <ul>
                 <% measure.endorsements.for.each do |endorsement| %>
-                  <li><%= endorsement.endorser %></li>
+                  <li>
+                    <div class="before"></div>
+                    <%= endorsement.endorser %>
+                  </li>
                 <% end %>
               </ul>
             <% end %>
@@ -48,7 +51,10 @@
               <p><%= guide.field('measures_who_says_no') %></p>
               <ul>
                 <% measure.endorsements.against.each do |endorsement| %>
-                  <li><%= endorsement.endorser %></li>
+                  <li>
+                    <div class="before"></div>
+                    <%= endorsement.endorser %>
+                  </li>
                 <% end %>
               </ul>
             <% end %>

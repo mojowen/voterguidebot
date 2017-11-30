@@ -40,7 +40,10 @@
                           <p><em><%= guide.field('supported_by') %></em></p>
                           <ul class="endorsements">
                             <% candidate.endorsements.each do |endorsement| %>
-                              <li><%= endorsement.endorser %></li>
+                              <li>
+                                <div class="before"></div>
+                                <%= endorsement.endorser %>
+                              </li>
                             <% end %>
                           </ul>
                         <% end %>
@@ -63,7 +66,7 @@
       <h2><%= contest.title %></h2>
     </div>
     <div class="content questions count--<%= contest.candidates.count %>">
-      <table>
+      <table style="width: 100%" width="100%">
         <thead>
           <tr>
             <th class="stance"><%= guide.field('you_support') %></th>

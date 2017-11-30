@@ -40,3 +40,19 @@ $xl-width: 1200px
     content: ''
     clear: both
     display: block
+
+@mixin dot
+  list-style: none
+  position: relative
+  .before
+    $size: 2.5px
+    border-radius: $size
+    height: $size
+    width: $size
+    background-color: black
+    content: ''
+    display: block
+    top: 0
+    bottom: 0
+    left: -10px
+    position: absolute
