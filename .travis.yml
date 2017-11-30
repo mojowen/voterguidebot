@@ -1,6 +1,4 @@
 language: ruby
-rvm:
-- 2.3.4
 cache:
 - bundler: true
 - directories:
