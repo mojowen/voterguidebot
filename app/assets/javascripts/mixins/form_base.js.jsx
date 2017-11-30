@@ -117,14 +117,13 @@ var FormBase = {
               onClick={this.handleSubmit} >
         <i className={'fa ' + this.saveIcon()} />&nbsp;{ this.saveText() }
       </button>
-      <button className="preview mui-btn mui-btn--primary"
-               disabled={this.state.changed || this.state.errored || this.state.loading } >
-        <a href={ this.preview_guide_url() } target="_blank">
-          <i className="fa-newspaper-o fa" />
-          &nbsp;
-          Preview
-        </a>
-      </button>
+      <a className="preview mui-btn mui-btn--primary"
+         disabled={this.state.changed || this.state.errored || this.state.loading }
+         href={ this.preview_guide_url() } target="_blank">
+        <i className="fa-newspaper-o fa" />
+        &nbsp;
+        Preview
+      </a>
       { options.after }
     </div>
   }

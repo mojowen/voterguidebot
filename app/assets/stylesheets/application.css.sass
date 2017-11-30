@@ -20,6 +20,9 @@
 @import 'lib/type'
 @import 'lib/form'
 
+*
+  box-sizing: border-box
+
 .turbolinks-progress-bar
   background-color: $emphasis
 
@@ -115,6 +118,7 @@ body
       padding-top: 15px
     button, .preview, .expropriator
       width: 170px
+      max-width: 170px
       &, i
         font-size: 14px
     .expropriator.mui-select
