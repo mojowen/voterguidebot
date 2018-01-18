@@ -10,6 +10,11 @@ module GuideHelper
     asset.downcase.match(/svg/) ? URI.encode(asset_string) : asset_string
   end
 
+  def stance_image(stance)
+    return "neutral.png" unless stance
+    { "for" => "up.png", "against" => "down.png" }.fetch(stance)
+  end
+
   def markdown(blurb)
     renderer = Redcarpet::Render::HTML.new(
       no_links: true,

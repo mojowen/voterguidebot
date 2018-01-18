@@ -25,7 +25,7 @@
             <p><%= measure.yes_means %></p>
           </td>
           <td class="endorse">
-            <% unless measure.endorsements.against.empty? %>
+            <% unless measure.endorsements.for.empty? %>
               <p><%= guide.field('measures_who_says_yes') %></p>
               <ul>
                 <% measure.endorsements.for.each do |endorsement| %>
@@ -64,7 +64,7 @@
           <tr>
             <td class="section recommended">
               <h3><%= guide.field('measure_recommended') %></h3>
-              <span class="recommendation"><%= measure.stance == 'against' ? guide.field('measure_recommended_neg') : guide.field('measure_recommended_afirm') %></span>
+              <span class="recommendation"><%= measure.stance == 'against' ? guide.field('measure_recommended_neg') : guide.field('measure_recommended_affirm') %></span>
               <img src="data:image/png;base64,<%= to_asset_string((measure.stance == 'against' ? 'down' : 'up')+'.png') %>">
             </td>
           </tr>

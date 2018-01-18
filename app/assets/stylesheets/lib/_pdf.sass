@@ -407,10 +407,34 @@ p
     text-align: center
     color: #333
 
+
 .measure
   table
     width: $width - $margin * 2
     margin: 0 auto
+
+    &.measure--compact
+      width: 100%
+      margin: 10px 0
+      .measure_name
+        h2
+          color: white
+      .section td
+        vertical-align: top
+        padding-top: 10px
+        h4
+          text-transform: uppercase
+          strong
+            font-weight: bold
+            color: #999
+      .endorse
+        p
+          font-style: italic
+          white-space: normal
+          font-weight: normal
+          color: #999
+          strong
+            font-weight: bold
   .header
     position: relative
   .content

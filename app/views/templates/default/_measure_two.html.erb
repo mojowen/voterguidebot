@@ -1,0 +1,102 @@
+<div class="page measure">
+  <div class="header">
+    <h4><%= guide.field('measures_title') %></h4>
+  </div>
+  <div class="content">
+    <% measures.each do |measure| %>
+      <table id="measure-<%= measure.id %>" class="measure measure--compact">
+        <tbody>
+          <tr>
+            <td colspan="3" class="measure_name">
+              <h2><%= measure.title %></h2>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="desc">
+              <h3 style="margin-top: 6px"><%= guide.field('measures_what_it_does_in_15') %></h3>
+              <p><%= measure.description %></p>
+            </td>
+          </tr>
+          <tr class="section">
+            <td class="hand">
+              <img src="data:image/png;base64,<%= to_asset_string(stance_image(measure.stance)) %>">
+            </td>
+            <td class="explain">
+              <% if measure.stance %>
+                <h4>
+                  <%= guide.field('measure_recommended_vote_because').split('{').first %>
+                  <strong>
+                    <%= measure.stance == 'for' ? guide.field('measure_recommended_affirm') : guide.field('measure_recommended_neg') %>
+                  </strong>
+                  <%= guide.field('measure_recommended_vote_because').split('}').last %>
+                </h4>
+              <% else %>
+                  <h4>
+                    <%= guide.field('measure_recommended_neutral_because').split('{').first %>
+                    <strong>
+                      <%= guide.field('measure_recommended_neutral_because').split('{').last.split('}').first %>
+                    </strong>
+                    <%= guide.field('measure_recommended_neutral_because').split('}').last %>
+                  </h4>
+                </h4>
+              <% end %>
+              <p><%= measure.yes_means %></p>
+            </td>
+            <td class="endorse">
+              <% unless measure.endorsements.for.empty? %>
+                <p>
+                  <% if measure.stance %>
+                    <%= guide.field('measures_who_says_agree').split('{').first %>
+                    <strong>
+                      <%= guide.field('measure_recommended_affirm') %>
+                      <%= guide.field('measures_who_says_agree').split('}').last %>
+                    </strong>
+                  <% else %>
+                    <%= guide.field('measures_who_says').split('{').first %>
+                    <strong>
+                      <%= guide.field('measure_recommended_affirm') %>
+                      <%= guide.field('measures_who_says').split('}').last %>
+                    </strong>
+                  <% end %>
+                </p>
+                <ul>
+                  <% measure.endorsements.for.each do |endorsement| %>
+                    <li>
+                      <div class="before"></div>
+                      <%= endorsement.endorser %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+              <% unless measure.endorsements.against.empty? %>
+                <% if measure.stance %>
+                    <%= guide.field('measures_who_says_agree').split('{').first %>
+                    <strong>
+                      <%= guide.field('measure_recommended_neg') %>
+                      <%= guide.field('measures_who_says_agree').split('}').last %>
+                    </strong>
+                <% else %>
+                  <p>
+                    <%= guide.field('measures_who_says').split('{').first %>
+                    <strong>
+                      <%= guide.field('measure_recommended_neg') %>
+                      <%= guide.field('measures_who_says').split('}').last %>
+                    </strong>
+                  </p>
+                <% end %>
+                <ul>
+                  <% measure.endorsements.against.each do |endorsement| %>
+                    <li>
+                      <div class="before"></div>
+                      <%= endorsement.endorser %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

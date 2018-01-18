@@ -31,8 +31,14 @@
 <% guide.contests.each do |contest| %>
   <%= render guide.template.template_file_path(guide.field('contest_layout')), contest: contest, guide: guide %>
 <% end %>
-<% guide.measures.each do |measure| %>
-  <%= render guide.template.template_file_path('measure'), measure: measure, guide: guide  %>
+<% if guide.field('measure_layout') == 'half_page' %>
+  <% guide.measures.each_slice(2) do |measures| %>
+    <%= render guide.template.template_file_path('measure_two'), measures: measures, guide: guide  %>
+  <% end %>
+<% else %>
+  <% guide.measures.each do |measure| %>
+    <%= render guide.template.template_file_path('measure'), measure: measure, guide: guide  %>
+  <% end %>
 <% end %>
 
 <div class="page">

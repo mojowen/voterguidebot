@@ -41,8 +41,6 @@ Rails.application.routes.draw do
 
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
-
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 end
 
 Rails.application.routes.default_url_options[:host] = 'https://build.americanvoterguide.org'

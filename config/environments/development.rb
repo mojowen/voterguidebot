@@ -49,4 +49,6 @@ Rails.application.configure do
       secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY')
     }
   }
+  config.react.variant = :development
+  config.react.addons  = true
 end

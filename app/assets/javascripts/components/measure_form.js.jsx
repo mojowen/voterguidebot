@@ -38,9 +38,11 @@ var MeasureForm = React.createClass({
     )
   },
   render: function() {
+    var elem_class = this.props.measure_layout === 'one_page' ? 'Measure' : 'HalfMeasure'
+        MeasureElem = to_react_class(elem_class)
     return <div>
       <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
-        <Measure ref="measure"
+        <MeasureElem ref="measure"
                  template_tags={this.props.template_tags}
                  changeNotifier={this.changeNotifer}
                  {...this.props.measure} />

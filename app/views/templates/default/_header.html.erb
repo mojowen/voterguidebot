@@ -27,7 +27,8 @@
   title h1.big {
     text-shadow: <%= guide.field('secondary_color') %> -2px 2px 0px;
   }
-  .header {
+  .header,
+  .measure--compact .measure_name {
     background-color: <%= guide.field('primary_color') %>;
   }
   .title .inner {
@@ -43,7 +44,8 @@
     border-bottom-color: <%= to_rgba(guide.field('primary_color'), 0.20) %>;
   }
   .measure .section .explain h4,
-  .measure .section .recommendation {
+  .measure .section .recommendation,
+  .measure.measure--compact .section .endorse ul li {
     color: <%= guide.field('primary_color') %>;
   }
   .back h2 { color: <%= guide.field('primary_color') %>; }

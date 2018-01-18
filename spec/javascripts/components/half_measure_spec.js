@@ -1,15 +1,14 @@
-describe('Measure', function() {
+describe('HalfMeasure', function() {
   beforeEach(function() {
     this.props = {
       id: 5,
       title: 'This Contest',
       description: 'Mike Well Made It',
+      yes_means: 'Vote for this cause',
       stance: 'against',
-      yes_means: 'Free cake',
-      no_means: 'Paid cake',
       tags: [{ name: 'LGBTQ' }, { name: 'Climate Change' }],
     }
-    this.setUpComponent(Measure, this.props)
+    this.setUpComponent(HalfMeasure, this.props)
   })
 
   it('title set by props', function() {
@@ -22,12 +21,24 @@ describe('Measure', function() {
   })
 
   it('stance set by props', function() {
-    var against_button = this.dom.querySelector('.recommendation button[data-stance=against]')
-    expect(against_button.className).toMatch('accent')
+    var stance_select = this.dom.querySelector('select')
+    expect(stance_select.value).toEqual('against')
   })
-  it('stance updates when click', function() {
-    Utils.Simulate.click(this.dom.querySelector('.recommendation button'))
+  it('stance updates when changed', function() {
+    Utils.Simulate.change(
+      this.dom.querySelectorAll('.measure select option')[1],
+    )
     expect(this.component.state.stance).toEqual('for')
+  })
+  it('stance limits allowed endorsements number - does not show opposite endorsements', function() {
+    expect(!this.dom.find('.for--block'))
+    expect(this.dom.find('.against--block'))
+  })
+  it('stance limits allowed endorsements number', function() {
+    Utils.Simulate.change(
+      this.dom.querySelectorAll('.measure select option')[1],
+    )
+    expect(this.component.maxEndorsements()).toEqual(2)
   })
 
   it('yes_means set by props', function() {
@@ -38,16 +49,6 @@ describe('Measure', function() {
     Utils.Simulate.change(this.dom.querySelector('[name=yes_means]'))
 
     expect(this.component.state.yes_means).toEqual('New description')
-  })
-
-  it('no_means set by props', function() {
-    expect(this.dom.querySelector('[name=no_means]').value).toEqual(this.props.no_means)
-  })
-  it('no_means updates when changed', function() {
-    this.dom.querySelector('[name=no_means]').value = 'New description'
-    Utils.Simulate.change(this.dom.querySelector('[name=no_means]'))
-
-    expect(this.component.state.no_means).toEqual('New description')
   })
 
   describe('tracks endorsements', function(){
@@ -96,32 +97,6 @@ describe('Measure', function() {
     })
   })
 
-  xit('displays tags', function() {
-    expect(this.dom.querySelectorAll('.tag').length).toEqual(2)
-    expect(this.dom.querySelector('.tag span').innerText).toEqual('LGBTQ')
-  })
-  xit('adds tags', function() {
-    this.component.addTag('Diff')
-    expect(this.component.state.tags).toEqual([
-      { name: 'LGBTQ' }, { name: 'Climate Change'},
-      { tagged_id: 5, name: 'Diff', tagged_type: 'measure' } ])
-  })
-  xit('removes tags', function() {
-    this.component.removeTag('LGBTQ')
-    expect(this.component.state.tags).toEqual([{ name: 'Climate Change'}])
-  })
-
-  describe('with no tags', function() {
-    beforeEach(function() {
-      this.props.tags = []
-      this.setUpComponent(Measure, this.props)
-    })
-
-    it('adds tags', function() {
-    this.component.addTag('Diff')
-    expect(this.component.state.tags).toEqual([{ tagged_id: 5, name: 'Diff', tagged_type: 'measure' }])
-    })
-  })
 
 })
 

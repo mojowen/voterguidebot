@@ -23,6 +23,8 @@ contests:
     limit: 100
   description:
     limit: 75
+  description_15_words:
+    limit: 60
 
   per_page:
     key: contest_layout
@@ -43,7 +45,12 @@ candidates:
     max: 4
 
 measures:
-  per_page: 1
+  per_page:
+    key: measure_layout
+    values:
+      one_page: 1
+      half_page: 0.5
+
   title:
     limit: 60
   description:
@@ -240,6 +247,13 @@ fields:
     name: measures_what_it_does
     default: What it Does
   -
+    label: Measure Compact - What it Does In 15 Words
+    placeholder: The text above the recommendation
+    element: input
+    limit: 24
+    name: measures_what_it_does_in_15
+    default: What it Does In 15 Words
+  -
     label: Measure - A Yes Vote
     placeholder: What happens if it passes
     element: input
@@ -270,6 +284,20 @@ fields:
     name: measures_who_says_no
     default: who says NO...
   -
+    label: Measure Compact - Who Else Says...
+    placeholder: Will appear above the supporters of yes - everything in between {} will be replaced
+    element: input
+    limit: 20
+    name: measures_who_says_agree
+    default: who else says {NO/YES}...
+  -
+    label: Measure Compact - Who Says...
+    placeholder: Will appear above the supporters of no - everything in between {} will be replaced
+    element: input
+    limit: 20
+    name: measures_who_says
+    default: who says {NO/YES}...
+  -
     label: Measure - Recommended
     placeholder: Will appear above the recommendation
     element: input
@@ -283,7 +311,7 @@ fields:
     element: input
     example_elem: h5
     limit: 5
-    name: measure_recommended_afirm
+    name: measure_recommended_affirm
     default: 'Yes'
   -
     label: Measure - Recommend No
@@ -293,6 +321,22 @@ fields:
     limit: 5
     name: measure_recommended_neg
     default: 'No'
+  -
+    label: Measure Compact - Recommended Vote
+    placeholder: Explanation for voting recommendation - everything in {} will be bolded and replaced with appropriate word specified in "Measure - Recommend Yes", "Measure - Recommend No"
+    element: input
+    example_elem: h5
+    limit: 10
+    name: measure_recommended_vote_because
+    default: We Are Voting {Yes/No} Because...
+  -
+    label: Measure Compact - Recommended Vote Neutral
+    placeholder: Explanation for neutral recommendation - everything in {} will be bolded
+    element: input
+    example_elem: h5
+    limit: 10
+    name: measure_recommended_neutral_because
+    default: We Are {Neutral} Because...
   -
     label: Primary Color
     element: input
@@ -310,7 +354,7 @@ fields:
     example_elem: ColorText
     example_attr: color
   -
-    label: Contest Layout
+    label: Contest Page Layout
     element: SelectComponent
     options:
       -
@@ -322,4 +366,18 @@ fields:
     name: contest_layout
     default: contest_large
     example_elem: ContestType
+    example_attr: partial
+  -
+    label: Ballot Measure Page Layout
+    element: SelectComponent
+    options:
+      -
+        text: One Page Ballot Measure
+        value: one_page
+      -
+        text: Compact Ballot Measure
+        value: half_page
+    name: measure_layout
+    default: one_page
+    example_elem: BallotMeasureType
     example_attr: partial

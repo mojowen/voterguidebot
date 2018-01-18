@@ -46,7 +46,23 @@ var ContestType = React.createClass({
       contest_large: 'Four candididates and six questions on two pages per contest',
       contest_small: 'Three candididates and three questions on one pages per contest',
     }
-    return <div className="contest--type">
+    return <div className="contest--type select--preview">
+      <div className={this.props.partial + ' thumbnail'} />
+      <p>{ copy[this.props.partial] }</p>
+    </div>
+  }
+})
+
+var BallotMeasureType = React.createClass({
+  getDefaultProps: function() {
+    return { partial: 'one_page' }
+  },
+  render: function() {
+    var copy = {
+      one_page: 'One Ballot Measure per page - including description of the impact of yes and no',
+      half_page: 'Two Ballot Measures per page - with explanation',
+    }
+    return <div className="measure--type select--preview">
       <div className={this.props.partial + ' thumbnail'} />
       <p>{ copy[this.props.partial] }</p>
     </div>
