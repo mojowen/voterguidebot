@@ -22,7 +22,7 @@ gem 'audited', '~> 4.0'
 gem 'audited-activerecord', '~> 4.0'
 gem 'globalize'
 
-gem 'paperclip', '~> 5.0.0.beta1'
+gem 'paperclip', '>= 5.1.0'
 gem 'aws-sdk'
 gem 'nokogiri', '>= 1.7.1'
 
