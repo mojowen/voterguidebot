@@ -76,18 +76,18 @@ describe('Question', function() {
     })
   })
 
-  it('displays tags', function() {
+  xit('displays tags', function() {
     expect(this.dom.querySelectorAll('.tag').length).toEqual(2)
     expect(this.dom.querySelector('.tag span').innerText).toEqual('LGBTQ')
   })
-  it('adds tags', function() {
+  xit('adds tags', function() {
     this.component.addTag('Diff')
     expect(this.component.props.handleChange).toHaveBeenCalledWith(
       { questions: [_.defaults(this.question, { tags: [
         { name: 'LGBTQ' }, { name: 'Climate Change'},
         { tagged_id: 5, name: 'Diff', tagged_type: 'question' } ] })] })
   })
-  it('removes tags', function() {
+  xit('removes tags', function() {
     this.component.removeTag('LGBTQ')
     expect(this.component.props.handleChange).toHaveBeenCalledWith(
       { questions: [_.defaults(this.question, { tags: [{ name: 'Climate Change'}] })] })
