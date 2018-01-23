@@ -170,7 +170,7 @@ RSpec.describe GuidesController, active_mocker: true do
     describe '#index' do
       it 'redirects to root' do
         get :index
-        expect(response).to redirect_to root_path(locale: :en)
+        expect(response).to redirect_to root_path
       end
 
       context 'as admin' do
@@ -205,7 +205,7 @@ RSpec.describe GuidesController, active_mocker: true do
       end
 
       it 'redirects to root path' do
-        expect(response).to redirect_to root_path(locale: :en)
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -218,7 +218,7 @@ RSpec.describe GuidesController, active_mocker: true do
       end
 
       it 'redirects to guide path' do
-        expect(response).to redirect_to guide_path(guide, locale: :en)
+        expect(response).to redirect_to guide_path(guide)
       end
     end
 
@@ -230,7 +230,7 @@ RSpec.describe GuidesController, active_mocker: true do
 
       it 'redirects to guide path' do
         post :publish, { id: guide.id }
-        expect(response).to redirect_to guide_path(guide, locale: :en)
+        expect(response).to redirect_to guide_path(guide)
       end
 
       it 'creates a delayed job' do

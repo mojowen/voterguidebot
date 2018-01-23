@@ -170,7 +170,7 @@ RSpec.describe MeasuresController, active_mocker: true do
 
         it 'redirects to all measures for cloned to guide' do
           post :expropriate, { guide_id: user_guide.id, expropriator_id: measure.id }
-          expect(response).to redirect_to guide_measures_path(user_guide, locale: :en)
+          expect(response).to redirect_to guide_measures_path(user_guide)
         end
       end
     end

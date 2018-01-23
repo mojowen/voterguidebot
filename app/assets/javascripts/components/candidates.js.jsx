@@ -22,7 +22,8 @@ var Candidates = React.createClass({
                             index={index}
                             handleChange={this.props.handleChange} />
         }, this),
-      add_display = this.props.candidates.length >= this.template('candidates.max') ? 'none' : 'block'
+      max_key = 'candidates.max'+(this.props.contest_layout === 'contest_small' ? '_small' : '')
+      add_display = this.props.candidates.length >= this.template(max_key) ? 'none' : 'block'
 
     return <div>
       <div className="mui-row"><h3>Candidates</h3></div>

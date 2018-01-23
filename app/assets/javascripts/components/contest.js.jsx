@@ -31,16 +31,19 @@ var Contest = React.createClass({
                       title={this.state.title}
                       description={this.state.description}
                       template={this.props.template}
-                      handleChange={this.handleChange} />
+                      handleChange={this.handleChange}
+                      contest_layout={this.props.contest_layout} />
       <Candidates ref="candidates"
                   candidates={this.state.candidates}
                   template={this.props.template}
-                  handleChange={this.handleChange} />
+                  handleChange={this.handleChange}
+                  contest_layout={this.props.contest_layout} />
       <QuestionsTable ref="questions"
                       candidates={this.state.candidates}
                       questions={this.state.questions}
                       template={this.props.template}
-                      handleChange={this.handleChange}  />
+                      handleChange={this.handleChange}
+                      contest_layout={this.props.contest_layout} />
 
     </div>
   }

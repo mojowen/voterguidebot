@@ -263,16 +263,43 @@ p
         font-size: 8px
         line-height: 9px
 
-
-.single
+.single-page--contest
   .candidates
-    margin: -10px 0 0
-  .questions
-    th
-      vertical-align: bottom
-      padding: 0
-      &.stance
-        font-size: 10px
+    .candidate
+      padding: 10px 14px 0 0
+      .name, .endorse
+        display: block
+        h3
+          font-size: 13px
+        p, .party, em, ul li
+          font-size: 11px
+          line-height: 14px
+          font-weight: normal
+          font-style: normal
+        em, .party
+          color: #999
+      ul
+        padding-left: 0
+
+      .photo
+        $size: 88px
+        float: right
+        width: $size
+        clear: none
+        .img
+          @include frame($size)
+
+      &, *, h3, .name
+        text-align: left
+      width: 50%
+
+      &:last-child
+        padding-right: 0
+        padding-left: 14px
+        .photo
+          float: left
+        &, *, h3, .name
+          text-align: right
 
 .candidates
   .desc
@@ -342,6 +369,7 @@ p
     .questions
       table
         width: 100%
+        border-collapse: collapse
         th
           font-size: 6px
           width: 20px
@@ -377,6 +405,7 @@ p
   padding: 10px 0 0
   table
     width: 100%
+    border-collapse: collapse
   th
     h3
       font-size: 9px

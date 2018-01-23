@@ -34,6 +34,7 @@ contests:
 
 candidates:
   max: 4
+  max_small: 2
   name:
     limit: 50
   party:
@@ -55,6 +56,8 @@ measures:
     limit: 60
   description:
     limit: 105
+  description_15_words:
+    limit: 60
   argument:
     limit: 170
   endorsements:
@@ -63,8 +66,11 @@ measures:
 
 questions:
   max: 7
+  max_small: 3
   text:
     limit: 140
+  answer:
+    limit: 10
 
 fields:
   -
@@ -219,12 +225,26 @@ fields:
     name: what_they_do
     default: What They Do
   -
+    label: One Page Contests - What They Do in
+    placeholder: The text shown above the contest description
+    element: input
+    limit: 20
+    name: what_they_do_15_words
+    default: What This Office Does In 15 Words
+  -
     label: Contest - Supported By
     placeholder: The text shown above the supports
     element: input
     limit: 20
     name: supported_by
     default: Supported by...
+  -
+    label: One Page Contests - Supported By
+    placeholder: The text shown above the supports
+    element: input
+    limit: 20
+    name: supported_by_one_page
+    default: Supporters
   -
     label: Contest - Do You Support
     placeholder: The text shown above the questions
@@ -290,6 +310,7 @@ fields:
     limit: 20
     name: measures_who_says_agree
     default: who else says {NO/YES}...
+    clear_brackets: Yes
   -
     label: Measure Compact - Who Says...
     placeholder: Will appear above the supporters of no - everything in between {} will be replaced
@@ -297,6 +318,7 @@ fields:
     limit: 20
     name: measures_who_says
     default: who says {NO/YES}...
+    clear_brackets: Yes
   -
     label: Measure - Recommended
     placeholder: Will appear above the recommendation
@@ -326,17 +348,19 @@ fields:
     placeholder: Explanation for voting recommendation - everything in {} will be bolded and replaced with appropriate word specified in "Measure - Recommend Yes", "Measure - Recommend No"
     element: input
     example_elem: h5
-    limit: 10
+    limit: 30
     name: measure_recommended_vote_because
     default: We Are Voting {Yes/No} Because...
+    clear_brackets: Yes
   -
     label: Measure Compact - Recommended Vote Neutral
     placeholder: Explanation for neutral recommendation - everything in {} will be bolded
     element: input
     example_elem: h5
-    limit: 10
+    limit: 30
     name: measure_recommended_neutral_because
     default: We Are {Neutral} Because...
+    clear_brackets: Neutral
   -
     label: Primary Color
     element: input

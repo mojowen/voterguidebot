@@ -1,33 +1,32 @@
-<div class="page single contest" id="contest-<%= contest.id %>">
+<div class="page single-page--contest contest" id="contest-<%= contest.id %>">
   <div class="header">
     <h4><%= guide.field('candidates_title') %></h4>
     <h2><%= contest.title %></h2>
   </div>
   <div class="content">
-    <table class="candidates count--<%= contest.candidates.count %>">
+    <table class="candidates">
       <tbody>
         <tr>
-          <td colspan="<%= contest.candidates.count %>"><h3>What They Do</h3></td>
+          <td colspan="<%= contest.candidates.slice(0, 2).length %>">
+            <h3><%= guide.field('what_they_do_15_words') %></h3>
+            <p><%= contest.description %></p>
+          </td>
         </tr>
         <tr>
-          <td colspan="<%= contest.candidates.count %>"><p><%= contest.description %></p></td>
-        </tr>
-        <tr>
-          <% contest.candidates.each do |candidate| %>
+          <% contest.candidates.slice(0, 2).each do |candidate| %>
               <td class="candidate small">
                 <div class="name">
-                  <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
                   <h3><%= candidate.name %></h3>
-                  <span class="party"><%= candidate.party %></span>
+                  <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
+                  <p><span class="party"><%= candidate.party %></span></p>
                   <p><%= candidate.bio %></p>
                 </div>
                 <% unless candidate.endorsements.empty? %>
                   <div class="endorse">
-                    <em><%= guide.field('supported_by') %></em>
+                    <p><em><%= guide.field('supported_by_one_page') %></em></p>
                     <ul class="endorsements">
                       <% candidate.endorsements.each do |endorsement| %>
                         <li>
-                          <div class="before"></div>
                           <%= endorsement.endorser %>
                         </li>
                       <% end %>
@@ -45,9 +44,9 @@
             <thead>
               <tr>
                 <th class="stance"><%= guide.field('you_support') %></th>
-                <% contest.candidates.each do |candidate| %>
+                <% contest.candidates.slice(0, 2).each do |candidate| %>
                   <th>
-                    <h3><%= (candidate.try(:name) || '').split(' ').last %></h3>
+                    <h3><%= candidate.try(:name) %></h3>
                   </th>
                 <% end %>
               </tr>
@@ -56,7 +55,7 @@
               <% contest.questions.each do |question| %>
                 <tr>
                   <td class="question"><%= question.text %></td>
-                  <% contest.candidates.each do |candidate| %>
+                  <% contest.candidates.slice(0, 2).each do |candidate| %>
                     <td>
                       <%= question.answers.find{ |answer| answer.candidate_id == candidate.id }.try(:text) || 'N/A' %>
                     </td>

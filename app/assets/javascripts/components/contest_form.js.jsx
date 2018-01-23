@@ -36,6 +36,7 @@ var ContestForm = React.createClass({
       <form autoComplete="off" ref="form_wrapper" onSubmit={this.handleSubmit}>
         <Contest ref='contest'
                  changeNotifier={this.changeNotifer}
+                 contest_layout={this.props.contest_layout}
                  {...this.props.contest} />
       </form>
       { this.menuComponent({ after: this.expropriator(this.props.contest.id) }) }

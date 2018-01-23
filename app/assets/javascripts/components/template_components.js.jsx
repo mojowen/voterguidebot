@@ -44,7 +44,7 @@ var ContestType = React.createClass({
   render: function() {
     var copy = {
       contest_large: 'Four candididates and six questions on two pages per contest',
-      contest_small: 'Three candididates and three questions on one pages per contest',
+      contest_small: 'Two candididates and three questions on one pages per contest',
     }
     return <div className="contest--type select--preview">
       <div className={this.props.partial + ' thumbnail'} />
@@ -131,7 +131,6 @@ var MarkdownTextarea = React.createClass({
     return { onChange: function() { } }
   },
   render: function() {
-    console.log(this.props)
     return <div className="mui-textfield" style={{ paddingTop: '0px' }}>
       <p style={{ fontSize: '8px' }}>
         <em>

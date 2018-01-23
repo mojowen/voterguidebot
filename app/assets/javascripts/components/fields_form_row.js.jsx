@@ -9,8 +9,10 @@ var FieldFormRow = React.createClass({
     return { value: this.props.value }
   },
   getPreview: function() {
-    if(!!this.state.value && this.state.value.length ) return this.state.value
-    return this.props.example || this.props.default
+    var value = this.state.value
+    if( !!!value && (value || '').length < 1 ) value = this.props.example || this.props.default
+    if( this.props.clear_brackets ) value = value.replace(/\{.*\}/, this.props.clear_brackets)
+    return value
   },
   isValid: function() {
     return this.refs.input.isValid()

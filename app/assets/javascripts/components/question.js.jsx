@@ -80,7 +80,8 @@ var Question = React.createClass({
                               <InputComponent name={'candidate_'+index}
                                               value={answer ? answer.text : ''}
                                               onChange={this.handleAnswerChange}
-                                              placeholder="..." />
+                                              placeholder="..."
+                                              limit={this.template('questions.answer.limit', 10)} />
                             </td>
                     }, this)
 

@@ -24,8 +24,9 @@ var QuestionsTable = React.createClass({
                            template={this.props.template}
                            handleChange={this.props.handleChange} />
         }, this),
-      table_display = this.props.questions.length < 1 ? 'none' : 'table'
-      add_display = this.props.questions.length >= this.template('questions.max', 7) ? 'none' : 'block'
+      table_display = this.props.questions.length < 1 ? 'none' : 'table',
+      max_key = 'questions.max'+(this.props.contest_layout === 'contest_small' ? '_small' : ''),
+      add_display = this.props.questions.length >= this.template(max_key, 7) ? 'none' : 'block'
 
     return <div>
       <div className="mui-row">

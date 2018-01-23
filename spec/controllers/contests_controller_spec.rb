@@ -205,7 +205,7 @@ RSpec.describe ContestsController, active_mocker: true do
 
         it 'redirects to all contests for cloned to guide' do
           post :expropriate, { guide_id: user_guide.id, expropriator_id: contest.id }
-          expect(response).to redirect_to guide_contests_path(user_guide, locale: :en)
+          expect(response).to redirect_to guide_contests_path(user_guide)
         end
       end
     end

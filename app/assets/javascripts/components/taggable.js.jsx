@@ -14,6 +14,8 @@ var Taggable = React.createClass({
     if( val ) this.props.addTag(val)
   },
   render: function() {
+    if( this.props.available_tags.length < 1 ) return null
+
     var add_tags = '',
         tags = _.map(this.props.tags, function(tag) {
             var key = ['tag', tag.name, this.props.id].join('_')
@@ -26,18 +28,16 @@ var Taggable = React.createClass({
         tag_options = _.difference(this.props.available_tags,
                                    _.map(this.props.tags, 'name'))
 
-    if( tag_options.length > 0 ) {
-      tag_options = _.map(tag_options, function(tag) {
-                          var key = ['option', tag, this.props.id].join('_')
-                          return <option key={key}>{ tag }</option> }, this)
+    tag_options = _.map(tag_options, function(tag) {
+                        var key = ['option', tag, this.props.id].join('_')
+                        return <option key={key}>{ tag }</option> }, this)
 
-      var add_tags = <div className="tags--select mui-select">
-        <select onChange={this.handleChange}>
-          <option>{['Tag',this.props.tagged_type,String.fromCharCode(187)].join(' ')}</option>
-          { tag_options }
-        </select>
-      </div>
-    }
+    var add_tags = <div className="tags--select mui-select">
+      <select onChange={this.handleChange}>
+        <option>{['Tag',this.props.tagged_type,String.fromCharCode(187)].join(' ')}</option>
+        { tag_options }
+      </select>
+    </div>
 
     return <div className="taggable--form">
       <strong>Tags:</strong>

@@ -10,6 +10,7 @@ var InputComponent = React.createClass({
       limit: false,
       validate: false,
       fa: null,
+      clear_brackets: false,
       onChange: function() { }
     }
   },
@@ -23,9 +24,17 @@ var InputComponent = React.createClass({
     if( typeof this.props.value === 'string' ) return this.props.value
     return this.props.default || ''
   },
+  valueLength: function() {
+    var value = this.value()
+    if( this.props.clear_brackets ) {
+      value = value.split('{')[0] + value.split('}').reverse()[0]
+    }
+    return value.length
+  },
   isValid: function() {
     var valid = this.state.is_valid
-    if( this.props.limit ) valid = valid && this.value().length <= this.props.limit
+    if( this.props.limit ) valid = valid && this.valueLength() <= this.props.limit
+    if( this.props.clear_brackets ) valid = valid && this.value().search(/\{*\}/) > 0
     return valid
   },
   setValid: function(is_valid, error_message) {
@@ -33,14 +42,15 @@ var InputComponent = React.createClass({
   },
   errorClass: function() {
     if( !this.state.is_valid ) return "mui--text-danger"
-    var remaining = this.props.limit - this.value().length
-    if( this.isValid() && remaining > 15 ) return 'mui--text-primary-hint'
-    if( remaining >= 15 && remaining >= 0 ) return 'mui--text-accent-hint'
+    var remaining = this.props.limit - this.value().length,
+        trouble = this.props.limit / 3 < 15 ? Math.floor(this.props.limit / 3) : 15
+    if( this.isValid() && remaining > trouble ) return 'mui--text-primary-hint'
+    if( remaining >= trouble && remaining >= 0 ) return 'mui--text-accent-hint'
     return 'mui--text-danger'
   },
   errorMessage: function() {
     if( this.state.error_message ) return this.state.error_message
-    if( this.props.limit ) return this.props.limit - (this.value()).length
+    if( this.props.limit ) return this.props.limit - this.valueLength()
   },
   does_validate: function() {
     return this.props.validate || this.props.limit
