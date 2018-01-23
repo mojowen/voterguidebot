@@ -228,7 +228,7 @@ fields:
     label: One Page Contests - What They Do in
     placeholder: The text shown above the contest description
     element: input
-    limit: 20
+    limit: 40
     name: what_they_do_15_words
     default: What This Office Does In 15 Words
   -
@@ -270,7 +270,7 @@ fields:
     label: Measure Compact - What it Does In 15 Words
     placeholder: The text above the recommendation
     element: input
-    limit: 24
+    limit: 30
     name: measures_what_it_does_in_15
     default: What it Does In 15 Words
   -
