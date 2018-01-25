@@ -120,7 +120,11 @@ class Guide < ActiveRecord::Base
   def pages_for(type, check_size: 0)
     count = (respond_to?("#{type}_count") ? send("#{type}_count") : send(type).count) + check_size
     options = template.send(type)['per_page']
-    per_page = options.is_a?(Object) ? options['values'][field(options['key'])] : options
+    if options.is_a?(Float) || options.is_a?(Integer)
+      per_page = options
+    else
+      per_page = options['values'][field(options['key'])]
+    end
     (count * per_page).ceil
   end
 
