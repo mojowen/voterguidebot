@@ -1,6 +1,6 @@
 <div class="page measure">
   <div class="header">
-    <h4><%= guide.field('measures_title') %></h4>
+    <h2><%= guide.field('measures_title') %></h2>
   </div>
   <div class="content">
     <% measures.each do |measure| %>
@@ -13,7 +13,7 @@
           </tr>
           <tr>
             <td colspan="3" class="desc">
-              <h3 style="margin-top: 6px"><%= guide.field('measures_what_it_does_in_15') %></h3>
+              <h3 style="margin-top: 6px"><%= guide.field('measures_what_it_does') %></h3>
               <p><%= measure.description %></p>
             </td>
           </tr>

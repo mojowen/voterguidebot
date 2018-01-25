@@ -113,11 +113,11 @@ var HalfMeasure = React.createClass({
           <InputComponent name="description"
                           element="textarea"
                           ref="description"
-                          label="What it Does In 15 Words"
+                          label="What it Does"
                           placeholder="This law outlaws ferrets OMG!"
                           value={ this.state.description }
                           onChange={ this.onChange }
-                          limit={this.template('measures.description_15_words.limit')}/>
+                          limit={this.template('measures.description.limit')}/>
           <h3>Recommendation</h3>
           { this.recommender() }
           <InputComponent name="yes_means"
