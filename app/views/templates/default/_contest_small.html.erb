@@ -19,6 +19,7 @@
                   <h3><%= candidate.name %></h3>
                   <div class="photo"><%= render guide.template.template_file_path('photo'), candidate: candidate %></div>
                   <p><span class="party"><%= candidate.party %></span></p>
+                  <br />
                   <p><%= candidate.bio %></p>
                 </div>
                 <% unless candidate.endorsements.empty? %>
