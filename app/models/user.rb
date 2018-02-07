@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
       user = User.where(email: data['email']).first
 
       unless user
-        user = User.create(first_name: data['first_name'],
-                           last_name: data['last_name'],
-                           pic: data['image'],
-                           email: data['email'],
-                           password: Devise.friendly_token[0,20])
+        user = User.create!(first_name: data['first_name'],
+                            last_name: data['last_name'],
+                            pic: data['image'],
+                            email: data['email'],
+                            password: Devise.friendly_token[0,20])
 
         UserMailer.welcome(user).deliver_later
       end
