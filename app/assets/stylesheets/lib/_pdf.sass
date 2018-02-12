@@ -328,30 +328,28 @@ p
             line-height: 8px
 
   &.count--3
-    .desc
-      height: 2rem
-    .img
-      @include frame(64px)
-    .small
-      width: 31%
+    .candidate
       .img
-        @include frame(50px)
+        @include frame(64px)
+      .small
+        width: 31%
+        .img
+          @include frame(50px)
 
   &.count--4
-    .desc
-      height: 1.5rem
-    > div
-      height: 50px
-      .img
-        @include frame(50px)
-    .third
-      p
-        margin-top: -10px
-      li
-        font-size: 8px
-        line-height: 9px
-        span
+    .candidate
+      > div
+        height: 50px
+        .img
+          @include frame(50px)
+      .third
+        p
+          margin-top: -10px
+        li
           font-size: 8px
+          line-height: 9px
+          span
+            font-size: 8px
 
     .small
       width: 24%
