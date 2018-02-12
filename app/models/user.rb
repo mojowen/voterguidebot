@@ -45,10 +45,10 @@ class User < ActiveRecord::Base
 
   def self.invite(email, guide, invitee)
     user = find_or_initialize_by email: email
-    user.password = Devise.friendly_token[0,20] if user.new_record?
+    return user if user.guides.include?(guide)
 
+    user.password = Devise.friendly_token[0,20] if user.new_record?
     user.guides << guide
-    return user unless user.valid?
     user.save
 
     UserMailer.invite(user, guide, invitee).deliver_later
