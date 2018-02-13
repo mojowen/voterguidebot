@@ -15,7 +15,7 @@
         <% contest.candidates.each do |candidate| %>
           <tr>
             <td class="candidate">
-              <div class="name">
+              <div class="name candidate--section">
                 <table>
                   <tbody>
                     <tr>
@@ -28,10 +28,10 @@
                   </tbody>
                 </table>
               </div>
-              <div class="photo">
+              <div class="photo candidate--section">
                 <%= render guide.template.template_file_path('photo'), candidate: candidate %>
               </div>
-              <div class="third">
+              <div class="third candidate--section">
                 <table>
                   <tbody>
                     <tr>
