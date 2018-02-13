@@ -6,10 +6,9 @@ cache:
 before_script:
 - createdb test_vgbot
 - bundle exec rake db:migrate
--
 script:
 - bundle exec rake spec
-# - export DISPLAY=:99.0 && bundle exec rake jasmine:ci[random]
+- export DISPLAY=:99.0 && bundle exec rake jasmine:ci[random]
 env:
   global:
     RAILS_ENV: test
@@ -20,7 +19,7 @@ sudo: false
 deploy:
   provider: heroku
   api_key:
-    secure: w74E+NcvARAWmEAKw1o9NQEiPenjpt1X6M2XAmDESuOD0B9SR/gPAJcYJ3ofPpyW9Q+hDA5JbgRpDb/IQJgoT0BtnybkQtTOW3E5YcSTJOUiiFSsrzhyEYWFmAXogiCBsTGCDUxWIJaQiLgbxe0ELno7uPWMkPnnM6UxIbsW0X+VM6OC+jZ3i1twQ/6MQMLA/ssqVYvm1K9Qtj/PYQwXd9KjI6iyqvBiuKA1yASexsbo5fL5KITiwELPRopyxEbII2mTzG6ZE6OXAWoSI2TVy3nFwqg0lwJ7cCA0En7cjruNbjSHyH8eE4/bTlbOB0z4iEJwEfh81hZpBZRYpUcC4BDbOgBDrunGcLRrOsDca7LPmH6GNFWE7m3poW5VmiQitdw3s46VOAHakPwrv4yIa6ppiTyc+I/Gtbng+X09gXhJaVxMjI/mgrBjjQxsjvbk8dDLuz5Cqxq8IjhviWowDKt2SUn+lsVpci0Em/HAZmnWYeRnY7xTbymXN/ZDi0HKYUu1TAKtRTuJDIpih0tGr36xgdIbg9NC5eUw35rLAma11EOumnLIgRkpuP3vCHUC97Hs2lEYHuQDwCqe2Tzd62H1T3vF5zYmZKUyp8uYMUcQvarwqkOAd0HPXHq4hDx5r4HOEzTbkoO0t6FqXEn9XSPYaAiHWclBVUmDqV/1JxE=
+    secure: QldFh8JP8dZYnKTsZUU8mYlqVxzg13SvlqAKoZIqE2JRhHSawXUh+82V/3OCYmZX3eIDsHdtua4tYwqvXgjDBzmpbz8qRZJrflOU6kszsoEpBa5wjzIPw5OWqNhS5crSqF9Czh58CFqoO1umIbbGJzAHHloEvMM6Z5i4WghDoZkyr/U0ao1790UWJZTCZbSij2/+COlgpwntXaZAtIeKwUmm4G9ln9ntW0DBtN1n+yosIJcSTzYVf2CcNLro4Z5A3nJn6gE4wKTTULj1mhuO77f+7R+Yxv0mHUSSpqKIZ0SiwNT/JxsU5XkYK3XR5Vy4lUb5YBfA9NmVN2rRILmPhfEJ2RyiE71/EYlqzf/GgjO3e6MqfCETGhOaCdbkvB8/EVMkx5AbfNyISwI2cC6YW0Y2MEyrOLktPggNtyoIH9WIE6BDsWoI4UcNknfLzF6YSUUOhGo/oKBEnkeG4bHBHQZEOZ05p76SDu4oPyDHwjm/xtsw9CgD+gNuYYm9OEgDQSh3ZAnjdNTK0gol13zzZOLh3IPDy3VlWdnAfd9m04otLE3ZZMLOoxMfAh4s0AfWS2q0jDBFbBJqDWJ8epXa7HyO4Z/2i0Uj6s+VIypHxSY0yjLG5Fc8te7gUu4ZdM/l/YztplyYYlX945qwp9fpL8j2y4XGnog5e1gqiCqIii8=
   app: voterguidebot
   run:
   - rake db:migrate
