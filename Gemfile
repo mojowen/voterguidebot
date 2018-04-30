@@ -23,6 +23,7 @@ gem 'globalize'
 
 gem 'paperclip', '>= 5.1.0'
 gem 'aws-sdk'
+gem 'aws-sdk-s3'
 gem 'nokogiri', '>= 1.7.1'
 
 gem 'delayed_job_active_record'
