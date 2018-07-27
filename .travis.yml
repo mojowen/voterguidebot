@@ -11,7 +11,7 @@ script:
 - export DISPLAY=:99.0 && bundle exec rake jasmine:ci[random]
 env:
   global:
-    RAILS_ENV: test
+  - RAILS_ENV: test
     TRAVIS: true
 addons:
   postgresql: 9.3
@@ -19,7 +19,7 @@ sudo: false
 deploy:
   provider: heroku
   api_key:
-    secure: QldFh8JP8dZYnKTsZUU8mYlqVxzg13SvlqAKoZIqE2JRhHSawXUh+82V/3OCYmZX3eIDsHdtua4tYwqvXgjDBzmpbz8qRZJrflOU6kszsoEpBa5wjzIPw5OWqNhS5crSqF9Czh58CFqoO1umIbbGJzAHHloEvMM6Z5i4WghDoZkyr/U0ao1790UWJZTCZbSij2/+COlgpwntXaZAtIeKwUmm4G9ln9ntW0DBtN1n+yosIJcSTzYVf2CcNLro4Z5A3nJn6gE4wKTTULj1mhuO77f+7R+Yxv0mHUSSpqKIZ0SiwNT/JxsU5XkYK3XR5Vy4lUb5YBfA9NmVN2rRILmPhfEJ2RyiE71/EYlqzf/GgjO3e6MqfCETGhOaCdbkvB8/EVMkx5AbfNyISwI2cC6YW0Y2MEyrOLktPggNtyoIH9WIE6BDsWoI4UcNknfLzF6YSUUOhGo/oKBEnkeG4bHBHQZEOZ05p76SDu4oPyDHwjm/xtsw9CgD+gNuYYm9OEgDQSh3ZAnjdNTK0gol13zzZOLh3IPDy3VlWdnAfd9m04otLE3ZZMLOoxMfAh4s0AfWS2q0jDBFbBJqDWJ8epXa7HyO4Z/2i0Uj6s+VIypHxSY0yjLG5Fc8te7gUu4ZdM/l/YztplyYYlX945qwp9fpL8j2y4XGnog5e1gqiCqIii8=
+    secure: ouaJoU6kEv3kERgmYDjvbD3/ETyaSdmFsiJEypE8a46/DlIZ+88/M+Tc7+Xd6QbWJCb2EVleZUFHNWsMgds7dJ9L9ApKHAXHWif9doeppDZ7WnMnJSMs0+BFdZP4G4Y5cb6RTGA93K+V/6Km8/lm92DLpEWCinoscEZTgObv+H8F0NgqbZvXz/t62QmbMce+EFmvAd+H0paO8JfL57m+adKTNz7dgKhnYnEwXkXK2ouE/Owth1MvFkUq9BG04v+s5piKa4k+1I+N1mo9P8oVYtURmNfc70ES3nQ/LoPz+shybQ+nDd8qh3E7bH6FXA8Chb9nyiwiT4e/p3CWxqiQMcLjyESc70IOLumLEtgMIPnS8MxMmRTFFX+Xdnsm3VgiX9JRXt9o375YtNKa9vDtlE52p6vl6pCAvOREfJ4eEgOB2a+Bx4jVPh4CXEQshE7/kMw0grQmpwal7mtkguhoyHzOibWz6RWM4hJOtOlCJ+jwzti626PvMCktgCibqR2ZPhbr4hY8dqYF+8BD/tJgJgxHMqteKa+tdTTgkJwGZGfP47OVJXoxU9cccVTAGTltTIgS/+KMAglx/ZY4gukuC/74ZUkxI4UrZPjRavlWazhfK4q67RtAfbifLsX2uFt78Vvd4/9Lu2JMAPtz7fiiwgEW93dyCSlkHStRORrNp5A=
   app: voterguidebot
   run:
   - rake db:migrate
