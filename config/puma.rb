@@ -12,8 +12,12 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection
 end
 
+require 'barnes'
+
 before_fork do
   require 'puma_worker_killer'
+
+  Barnes.start
 
   PumaWorkerKiller.ram = 512
 

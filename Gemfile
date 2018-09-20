@@ -17,6 +17,7 @@ gem 'sweetalert-rails'
 gem 'uglifier'
 gem 'phantomjs'
 
+
 gem 'audited', '~> 4.0'
 gem 'audited-activerecord', '~> 4.0'
 gem 'globalize'
@@ -35,6 +36,7 @@ gem 'exception_notification'
 
 gem 'rubyzip'
 
+gem 'barnes'
 gem 'puma'
 gem 'puma_worker_killer'
 gem 'redcarpet'
