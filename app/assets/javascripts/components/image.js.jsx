@@ -97,9 +97,12 @@ var ImageComponent = React.createClass({
                 <i className="fa fa-times" />{ text }
               </a>
     }
-    return <div ref="dropzone" className='drop--zone image--field'>
-      { clear }
-      { preview }
+    return <div>
+      <div ref="dropzone" className='drop--zone image--field'>
+        { clear }
+        { preview }
+      </div>
+      <span>{ this.props.placeholder }</span>
     </div>
   }
 })

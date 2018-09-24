@@ -126,7 +126,7 @@ fields:
     name: about_us_blurb
   -
     label: About Us - Logo
-    placeholder: Your logo - will need to work up to 200px
+    placeholder: Image need to scale up to 200px
     example: /example_logo.png
     example_elem: img
     example_attr: src
@@ -135,8 +135,8 @@ fields:
     element: ImageComponent
     name: about_us_logo
   -
-    label: About Us - Footer
-    placeholder: About Us Footer - will need to work up to 500px
+    label: About Us - Footer Image
+    placeholder: "Image dimensions 5 : 1, need to scale up to 600px"
     default: https://s3-us-west-2.amazonaws.com/voterguides/hands.jpg
     example_elem: FooterImage
     element: ImageComponent
