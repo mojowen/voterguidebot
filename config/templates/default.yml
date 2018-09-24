@@ -103,7 +103,7 @@ fields:
     default: Your secret ballot means your vote is your choice. But hopefully this independent, nonprofit info helps.
   -
     label: Title Page - Background Image
-    placeholder: "Dimension of 3 wide x 2 tall with minimum width of 600px"
+    placeholder: "Dimension should be 3 wide x 2 tall with minimum width of 600px"
     default: https://s3-us-west-2.amazonaws.com/voterguides/vote_here.jpg
     example_elem: TitleImage
     element: ImageComponent
@@ -146,7 +146,7 @@ fields:
     name: about_us_logo
   -
     label: About Us - Footer Image
-    placeholder: "Dimension of 5 wide x 1 tall with minimum width of 600px"
+    placeholder: "Dimension should be 5 wide x 1 tall with minimum width of 600px"
     default: https://s3-us-west-2.amazonaws.com/voterguides/hands.jpg
     example_elem: FooterImage
     element: ImageComponent
