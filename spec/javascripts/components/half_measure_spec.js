@@ -31,12 +31,13 @@ describe('HalfMeasure', function() {
     expect(this.component.state.stance).toEqual('for')
   })
   it('stance limits allowed endorsements number - does not show opposite endorsements', function() {
-    expect(!this.dom.find('.for--block'))
-    expect(this.dom.find('.against--block'))
+    expect(!this.dom.querySelector('.for--block'))
+    expect(this.dom.querySelector('.against--block'))
   })
   it('stance limits allowed endorsements number', function() {
+    expect(this.component.maxEndorsements()).toEqual(3)
     Utils.Simulate.change(
-      this.dom.querySelectorAll('.measure select option')[1],
+      this.dom.querySelectorAll('.measure select option')[0],
     )
     expect(this.component.maxEndorsements()).toEqual(2)
   })

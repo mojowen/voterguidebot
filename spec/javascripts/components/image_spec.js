@@ -10,7 +10,12 @@ describe('ImageComponent', function() {
   })
 
   it('it renders successfully', function() {
-    expect(this.dom.className.search('.dz-clickable')).not.toEqual(-1)
+    expect(this.dom.childNodes[0].className.search('.dz-clickable')).not.toEqual(-1)
+  })
+
+  it('shows placeholder', function() {
+    this.setUpComponent(ImageComponent, { placeholder: 'the placeholder'})
+    expect(this.dom.childNodes[1].textContent).toEqual('the placeholder')
   })
 
   it('handles thumbnail by processing data', function() {
