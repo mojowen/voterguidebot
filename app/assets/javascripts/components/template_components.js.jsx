@@ -108,6 +108,30 @@ var SelectImages = React.createClass({
   }
 })
 
+
+var TitleImage = React.createClass({
+  getDefaultProps: function() {
+    return { img: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg' }
+  },
+  render: function() {
+    var style = {
+      width: '100%',
+      height: '230px',
+      backgroundColor: 'transparent',
+      backgroundPosition: 'bottom right',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '140%',
+      backgroundImage: 'url('+this.props.img+')'
+    }
+    return <div style={style}>
+      <div style={{ height: '100%', border: '23px solid rgba(255, 255, 255, 0.9)' }}>
+        <div style={{ height: '100%', backgroundColor: 'rgba(38, 170, 198, 0.9)' }}>
+        </div>
+      </div>
+    </div>
+  }
+})
+
 var FooterImage = React.createClass({
   getDefaultProps: function() {
     return { img: 'https://s3-us-west-2.amazonaws.com/voterguides/feds.jpg' }
@@ -132,7 +156,7 @@ var MarkdownTextarea = React.createClass({
   },
   render: function() {
     return <div className="mui-textfield" style={{ paddingTop: '0px' }}>
-      <p style={{ fontSize: '8px' }}>
+      <p className="help--text">
         <em>
           <strong>Pro-Tip</strong>:
           This field now supports Markdown - check out this

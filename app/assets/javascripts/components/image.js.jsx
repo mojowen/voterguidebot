@@ -102,7 +102,9 @@ var ImageComponent = React.createClass({
         { clear }
         { preview }
       </div>
-      <span>{ this.props.placeholder }</span>
+      {this.props.placeholder && (
+        <span className="help--text">{ this.props.placeholder }</span>
+      )}
     </div>
   }
 })
