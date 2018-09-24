@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
                             email: data['email'].downcase,
                             password: Devise.friendly_token[0,20])
 
-        UserMailer.welcome(user).deliver_later
+        UserMailer.elcome(user).deliver_later
       end
       user
   end
