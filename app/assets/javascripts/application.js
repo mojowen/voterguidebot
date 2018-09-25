@@ -1,7 +1,11 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
-//= require vanilla-ujs
+//= require vanilla-ujs/csrf
+//= require vanilla-ujs/form
+//= require vanilla-ujs/confirm
+//= require vanilla-ujs/method
+//= require vanilla-ujs/polyfills
 //= require showdown
 //= require underscore
 //= require superagent
