@@ -108,9 +108,15 @@ RSpec.describe GuidesController, active_mocker: true do
             Fabricate :field, guide: guide, value: 'Nope', field_template: 'title_page_header'
           end
 
-          it 'creates a field that is missing' do
+          it 'overwrites the field value' do
             post :update, guide_params
             expect(guide.fields.first.value).to eq('what')
+          end
+
+          it 'sets the field value to nil if nil' do
+            guide_params[:guide][:fields][:title_page_header] = nil
+            post :update, guide_params
+            expect(guide.fields.first.value).to be nil
           end
         end
       end

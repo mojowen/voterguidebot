@@ -109,7 +109,6 @@ class Guide < ActiveRecord::Base
   def template_fields=(fields_obj)
     template.fields.each do |template_field|
       value = fields_obj[template_field['name']]
-      next if value.nil? || value.empty?
 
       field = find_field(template_field['name'])
       field ||= fields.new(field_template: template_field['name'])
