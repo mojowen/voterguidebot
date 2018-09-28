@@ -27,7 +27,7 @@
 
   .mui-textfield
     = form.label :election_date
-    = form.date_field :election_date, value: guide.election_date || Date.new(Time.current.year, 11, 8)
+    = form.date_field :election_date, value: guide.election_date || Date.new(Time.current.year, 11, 6)
 
   - unless guide.template_name.match /state|national/
     .mui-select
