@@ -16,7 +16,7 @@ gem 'vanilla-ujs'
 gem 'sweetalert-rails'
 gem 'uglifier'
 gem 'phantomjs'
-
+gem 'chronic'
 
 gem 'audited', '~> 4.0'
 gem 'audited-activerecord', '~> 4.0'
