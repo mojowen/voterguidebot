@@ -397,3 +397,11 @@ fields:
     default: one_page
     example_elem: BallotMeasureType
     example_attr: partial
+  -
+    label: Custom CSS
+    element: textarea
+    placeholder: CSS that will be injected into your guide. Be careful!
+    limit: 1000
+    name: css_for_guide
+    example_elem: CSSPreview
+    default: ''

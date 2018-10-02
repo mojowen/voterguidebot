@@ -69,6 +69,12 @@ var BallotMeasureType = React.createClass({
   }
 })
 
+var CSSPreview = React.createClass({
+  render: function() {
+    return <div>Check preview</div>
+  }
+})
+
 var YouTubeVideo = React.createClass({
   getDefaultProps: function() {
     return { video: 'dQw4w9WgXcQ' }
