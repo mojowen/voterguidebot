@@ -143,6 +143,25 @@ RSpec.describe ContestsController, active_mocker: true do
           expect(contest.reload.questions.first.answers.empty?).to be true
         end
       end
+
+      context 'with nil questions params' do
+        let!(:candidate) { Fabricate :candidate, contest: contest }
+        let!(:question) { Fabricate :question, contest: contest }
+
+        let(:contest_params) do
+          { guide_id: guide.id,
+            id: contest.id,
+            contest: {
+              candidates: [{ id: candidate.id }],
+            } }
+        end
+
+        it 'removes empty association' do
+          expect(contest.reload.questions.empty?).to be false
+          put :update, contest_params
+          expect(contest.reload.questions.empty?).to be true
+        end
+      end
     end
     describe '#destroy' do
       it 'returns successful' do

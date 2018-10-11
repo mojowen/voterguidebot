@@ -62,17 +62,19 @@ class ContestsController < ApplicationController
                    :twitter, :website, :party,
         endorsements: [:endorser, :endorsed_id, :endorsed_type, :stance]])
 
+    attrs[:candidates] ||= []
     attrs[:candidates].map! do |candidate|
       candidate[:endorsements] ||= []
       candidate[:endorsements] ||= []
       candidate
-    end if attrs[:candidates]
+    end
 
+    attrs[:questions] ||= []
     attrs[:questions].map! do |questin|
       questin[:answers] ||= []
       questin[:tags] ||= []
       questin
-    end if attrs[:questions]
+    end
 
     attrs
   end
